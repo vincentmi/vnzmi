@@ -4,7 +4,7 @@ SEOTitle: 我的乐与怒 | Vincent Mi
 header-img: img/home-bg1.jpg
 email: miwenshu@gmail.com
 description: "关于生活和code | Vincent Mi"
-keyword: "PHP,Java,框架,Linux"
+keyword: "PHP,Java,框架,Linux,Arduino"
 url: "http://vnzmi.com"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
@@ -82,10 +82,7 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 
 # Friends
 friends: [
-    {
-        title: "GitBook",
-        href: "https://www.gitbook.com/@vincentmi/dashboard"
-    },{
+   {
         title: "spring-security-reference",
         href: "https://www.gitbook.com/book/vincentmi/spring-security-reference-zh/details"
     },
