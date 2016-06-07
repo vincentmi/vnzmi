@@ -7,6 +7,8 @@ header-img:  "img/post-bg.jpg"
 catalog: true
 tags:
     - RD
+    - MySQL 
+    - MSSQL
 ---
 
    

@@ -175,11 +175,11 @@
 <div class="post-preview">
     <a href="/2016/06/02/hello-2016/">
         <h2 class="post-title">
-            Hello 2016
+            换到Github
         </h2>
         
         <h3 class="post-subtitle">
-             "Hello World"
+             "build by Jekyll "
         </h3>
         
         <div class="post-content-preview">
@@ -215,200 +215,233 @@
 <hr>
 
 <div class="post-preview">
-    <a href="/2015/06/11/docker-issue/">
+    <a href="/2016/02/18/iterm2-zmodem-support/">
         <h2 class="post-title">
-            CentOS 6.5 docker 错误
+            PHP 文件写性能比较
         </h2>
         
         <div class="post-content-preview">
-            Docker 在centos6.5中安装因为 device-mapper 不正确会报这个错
+            安装lrzsz 支持
 
-    \n三  6月 10 16:46:56 CST 2015\n
-    time="2015-06-10T16:46:56+08:00" level="info" msg="+job serveapi(unix:///var/run/docker.sock)" 
-    time="2015-...
+使用brew安装
+
+brew install lrzsz
+
+
+
+如果brew下载可能会被墙。如果可以手动进行下载。可以这样处理
+
+查看brew的缓存路径
+
+VincentdeMacBook-Air:bin vincentmi$ brew --cache
+/Library/Caches/Homebrew
+
+
+
+然后将你下载好的文件拷贝到这个目录。再执行一次安装，brew...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Vincent on June 11, 2015
+        Posted by Vincent on February 18, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2015/06/10/centos-pptp/">
+    <a href="/2015/12/04/eclipse-occurrence-color-change/">
         <h2 class="post-title">
-            在CentOS下安装PPTP的VPN
+            Eclipse 相同方法变量颜色修改
         </h2>
         
         <div class="post-content-preview">
-            http://www.black-xstar.com/blog/691.html
+            Eclipse 选择Dark主题会出现白底白字高亮的情况 基本看不到.
 
-最近买了个基于xen的VPS玩玩，安装LAMP没啥意思。国内网络环境不好，干脆安装个VPN试试。
 
-对于Linux其实我什么都不会的，在google老师的帮助下，总算给我安装好了，记录下来以便查阅。
 
-VPN常用有两种，一种是openvpn，另一种PPTP。前者开源跨平台功能强大，后者简单方便Windows下...
+
+
+与当前选择匹配的方法和变量会被高亮成白色.
+
+修改颜色 如下
+
+菜单 Window/Preferences
+
+General - Editors - Text Editors - Annotations
+
+PHP 代码修改 以下两项
+
+
+修改后如下效果
+
+
+
         </div>
     </a>
     <p class="post-meta">
-        Posted by Vincent on June 10, 2015
+        Posted by Vincent on December 4, 2015
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2015/05/11/cxf-header/">
+    <a href="/2015/08/25/vagrant-file-permission-issue-on-mac/">
         <h2 class="post-title">
-            CXF添加Header
+            Vagrant Mac 权限问题
         </h2>
         
         <div class="post-content-preview">
-            CXF的header处理了半天。。。
+            Vagrant在windows下加载的文件全部是777，但是在Mac 下会是644
+这样会导致文件权限问题。
 
-添加拦截器
+解决方法如下：
 
-    
-public class HotelHeaderInterceptor extends AbstractSoapInterceptor {
-public void handleMessage(SoapMessage message) throws Fault {
-		    
-		    List&lt;Header&gt; h...
+    config.vm.synced_folder "/Users/vincent/www","/vagrant",:mount_options =&gt; ["dmode=777","fmode=777"]
+
+
+
+
         </div>
     </a>
     <p class="post-meta">
-        Posted by Vincent on May 11, 2015
+        Posted by Vincent on August 25, 2015
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2015/05/11/rf24network-for-wireless-sensor-networking/">
+    <a href="/2015/07/24/extending-thymeleaf-part-4/">
         <h2 class="post-title">
-            ENC28J60接线
+            扩展Thymeleaf-4 创建我们自己的方言
         </h2>
         
         <div class="post-content-preview">
-            英文原版 [https://maniacbug.wordpress.com/2012/03/30/rf24network/][https://maniacbug.wordpress.com/2012/03/30/rf24network/]
-翻译: Vincent Mi [http://vnzmi.com/rf24network-for-wireless-sensor-networking.h...
+            [http://vincentmi.gitbooks.io/extendingthymeleaf/][http://vincentmi.gitbooks.io/extendingthymeleaf/]
+
+足球是麝香草大陆最流行的运动。每个赛季有10对参加联赛，主办方请为我们为它创建一个叫做”Extrathyme”的网站。
+
+这个网站将非常简单，就是一个表格。
+
+
+  队名
+  胜平负的场次，...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Vincent on May 11, 2015
+        Posted by Vincent on July 24, 2015
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2015/05/09/ENC28J60/">
+    <a href="/2015/07/24/extending-thymeleaf-part-3/">
         <h2 class="post-title">
-            ENC28J60接线
+            扩展Thymeleaf 3 - 模板模式
         </h2>
         
         <div class="post-content-preview">
-            [drivers.rar][/img/in-post/1847276214.rar]
+            [http://vincentmi.gitbooks.io/extendingthymeleaf/content/][http://vincentmi.gitbooks.io/extendingthymeleaf/content/]
 
-HanRun HR911105A 14/20
-
-CLKOUTINT 
-WOLSO 
-SISCK 
-CSRESET
-VCCGND
-
-
-接线
-
-
-
-ENC28J60&lt;/td&gt;Arduino Due/UNOArduino Mega&lt;/tr&gt;
-VCC3V33V3
-CLKOUT  
-ENC-...
+模板模式或许是Thymeleaf最强大的扩展点，模板模式实际上定义了什么可以被认为是一个“模板”。创建定制化的模板模式允许我们处理不同于默认的XML,XHTM...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Vincent on May 9, 2015
+        Posted by Vincent on July 24, 2015
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2015/05/08/arduino-wireless-transmission-solution/">
+    <a href="/2015/07/23/extending-thymeleaf-part-2/">
         <h2 class="post-title">
-            Arduino－各种无线方案的对比
+            扩展Thymeleaf-2  方言和处理器
         </h2>
         
         <div class="post-content-preview">
-            电磁波
-初中物理
-振荡的电场和磁场在空间中以波的形式传播就形成了电磁波，gamma射线、X光、紫外光、可见光、红外光、微波、无线电波和长波无线电，这些都是电磁波。电磁波具有波粒二象性，光子就是量子化的电磁波，是电磁波能量的最小单位。光子的能量和电磁波的波长成反比，比如说，波长最短的gamma射线光子能量高达百万甚至数亿电子伏，医疗和安检用的x光光子能量一般在数百到上万电子伏，紫外光的能量一般...
+            gitbook [http://vincentmi.gitbooks.io/extendingthymeleaf/content/][1]
+
+如果你读过Thymeleaf的入门教程（你应该已经读完了）。你应该知道你之前学的准确的说不是Thymeleaf，而是Thymeleaf的标准方言。（或者，如果你读过Thymeleaf+Spring教程的话就是Spring标准方言）。
+
+这是什么意思？意...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Vincent on May 8, 2015
+        Posted by Vincent on July 23, 2015
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2015/05/08/arduino-power-save/">
+    <a href="/2015/07/23/extending-thymeleaf-part-1/">
         <h2 class="post-title">
-            外置采集温度_让arduino用2颗5号电池运行1年以上 
+            扩展Thymeleaf-1 为什么需要扩展Thymeleaf
         </h2>
         
         <div class="post-content-preview">
-            文章来自极客工坊，因此加密了只自己能看纯收藏
-http://www.geek-workshop.com/thread-12261-1-1.html
-作者：mylife1213
+            gitbook [http://vincentmi.gitbooks.io/extendingthymeleaf/content/][http://vincentmi.gitbooks.io/extendingthymeleaf/content/]
 
-这次讲功耗.
-
-如果你想把arduino avr类的开发项目用来便携式设置上,不管商业还是个人DIY,那么你头一个要对付的问题就是设备功耗!
-
-我测试atmega328p(大部分arduino 都是基于这个处理器) ...
+Thymeleaf是一个很容易扩展的库。他的关键在于，大部分面向用户的功能不是直接构建在他的核心中，而是通过打包和组件化到一个称为Dialec...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Vincent on May 8, 2015
+        Posted by Vincent on July 23, 2015
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2015/05/04/speech-signal-processing/">
+    <a href="/2015/07/01/exception-handling-in-spring-mvc/">
         <h2 class="post-title">
-            几个常见的语音交互平台的简介和比较
+            Spring MVC 的错误处理
         </h2>
         
         <div class="post-content-preview">
-            转自 http://ibillxia.github.io/blog/2012/11/24/several-plantforms-on-audio-and-speech-signal-processing/
+            Spring MVC 提供多种异常处理方式，但是当我在进行Spring MVC培训时，我发现我的学院经常会感到困惑或者不太适应。
 
-1.概述
-最近做了两个与语音识别相关的项目，两个项目的主要任务虽然都是语音识别，或者更确切的说是关键字识别，但开发的平台不同， 一个是windows下的，另一个是android平台的，于...
+今天我将为你展示多种可能的选项。我们的目标是如果可能的话不在Controller的方法里显式的处理异常。作为横切关注点分别在专用代码里处理更好。
+
+
+
+这里有三个选项：按异常,按控制器或者全局处理
+
+可以在 http://github.com/paulc4/mv...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Vincent on May 4, 2015
+        Posted by Vincent on July 1, 2015
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2015/05/04/matrix/">
+    <a href="/2015/06/25/use-spring-create-a-restful-service/">
         <h2 class="post-title">
-            关于矩阵
+            用Spring创建RESTful 服务
         </h2>
         
         <div class="post-content-preview">
-            转的啊
+            这个指南将引导你使用创建一个”hello world” RESTFul 服务。
 
-人总是会为自己找捷径，而往往捷径是要付出不一般的代价。
-呵呵—说说矩阵的事：
-通过坐标变换将3D空间的图元转换成2D图元的过程：主要为世界变换-&gt;视图变换-&gt;投影变换-&gt;视口变换
-3D场景中的任何物体，都是由一个一个三角形组成的。而三角形位置信息的就是其各个顶点的三维坐标。这是用来在模型中存储的，而要把物体显示在屏幕上，还需要将它们转换成显示器上的二维坐标。这就需...
+
+
+我们将创建
+
+我们创建一个服务 ,接收 HTTP GET 请求在:
+
+http://localhost:8080/greeting
+
+
+
+返回一个Json格式的祝福语 :
+
+{"id":1,"content":"Hello, World!"}
+
+
+
+你可以自定义一个请求，通过在QueryString添加一个...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Vincent on May 4, 2015
+        Posted by Vincent on June 25, 2015
     </p>
 </div>
 <hr>
@@ -443,7 +476,7 @@ http://www.geek-workshop.com/thread-12261-1-1.html
                     <div class="tags">
                         
                             
-                                <a href="/tags/#运维" title="运维" rel="7">
+                                <a href="/tags/#运维" title="运维" rel="8">
                                     运维
                                 </a>
                             
@@ -451,15 +484,93 @@ http://www.geek-workshop.com/thread-12261-1-1.html
                             
                         
                             
-                                <a href="/tags/#RD" title="RD" rel="8">
+                        
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#RD" title="RD" rel="15">
                                     RD
                                 </a>
+                            
+                        
+                            
+                                <a href="/tags/#CGI" title="CGI" rel="2">
+                                    CGI
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#MySQL" title="MySQL" rel="2">
+                                    MySQL
+                                </a>
+                            
+                        
+                            
+                        
                             
                         
                             
                                 <a href="/tags/#HW" title="HW" rel="4">
                                     HW
                                 </a>
+                            
+                        
+                            
+                                <a href="/tags/#Arduino" title="Arduino" rel="3">
+                                    Arduino
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#Docker" title="Docker" rel="3">
+                                    Docker
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#Spring" title="Spring" rel="6">
+                                    Spring
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Java" title="Java" rel="2">
+                                    Java
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Thymeleaf" title="Thymeleaf" rel="4">
+                                    Thymeleaf
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#OP" title="OP" rel="2">
+                                    OP
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                        
                             
                         
                             

@@ -7,6 +7,7 @@ header-img:  "img/post-bg.jpg"
 catalog: true
 tags:
     - 运维
+    - Docker
 ---
 Docker 在centos6.5中安装因为 device-mapper 不正确会报这个错
 

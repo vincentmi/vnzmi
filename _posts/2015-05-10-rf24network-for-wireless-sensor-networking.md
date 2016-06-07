@@ -1,12 +1,14 @@
 ---
 layout:     post
-title:      "ENC28J60接线"
+title:      "用RF24创建无线传感器网络"
 date:       2015-05-10 23:16:00
 author:     "Vincent"
 header-img:  "img/post-bg.jpg"
 catalog: true
 tags:
     - HW
+    - Arduino
+    - nRF24L01
 ---
 
 英文原版 [https://maniacbug.wordpress.com/2012/03/30/rf24network/][https://maniacbug.wordpress.com/2012/03/30/rf24network/]

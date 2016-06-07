@@ -7,6 +7,7 @@ header-img:  "img/post-bg.jpg"
 catalog: true
 tags:
     - 运维
+    - MySQL
 ---
 
 今天又经历了一起MYSQL错误，系统日志中是“服务 mysql 意外停止” Mysql日志中则是：“Plugin 'FEDERATED' is disabled”

@@ -7,6 +7,8 @@ header-img:  "img/post-bg.jpg"
 catalog: true
 tags:
     - RD
+    - WS
+    - CXF
 ---
 
 CXF的header处理了半天。。。

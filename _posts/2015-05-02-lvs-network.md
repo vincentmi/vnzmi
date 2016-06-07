@@ -7,6 +7,7 @@ header-img:  "img/post-bg.jpg"
 catalog: true
 tags:
     - 运维
+    - LVS
 ---
 
 DirectorServer

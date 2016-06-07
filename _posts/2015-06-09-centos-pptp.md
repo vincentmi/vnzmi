@@ -7,6 +7,7 @@ header-img:  "img/post-bg.jpg"
 catalog: true
 tags:
     - RD
+    - pptp
 ---
 
 http://www.black-xstar.com/blog/691.html
