@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "PHP 文件写性能比较"
+title:      "让iTerm2支持rz sz命令"
 date:       2016-02-17 21:30:00
 author:     "Vincent"
 header-img:  "img/post-bg.jpg"
