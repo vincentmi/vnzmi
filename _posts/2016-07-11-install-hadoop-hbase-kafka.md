@@ -3,7 +3,7 @@ layout:     post
 title:      "集群安装Hadoop系列组件"
 date:       2016-07-11 18:44:00
 author:     "Vincent"
-header-img:  "img/post-bg-sea.jpg"
+header-img:  "img/post-bg-line.jpg"
 catalog: true
 tags:
     - Hadoop
