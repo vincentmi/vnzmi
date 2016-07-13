@@ -4,7 +4,7 @@ title:      "Golang:错误即值 Errors are values"
 subtitle:   "来自Rob Pike的博客翻译"
 date:       2016-06-22 14:15:00
 author:     "Vincent"
-header-img: "img/post-bg.jpg"
+header-img: "img/post-bg-dot.jpg"
 catalog: true
 tags:
     - RD
