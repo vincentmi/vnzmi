@@ -338,6 +338,31 @@ yarn-site.xml
 </configuration>
 ```
 
+
+**ulimit配置**
+HBase运行时会打卡很多句柄,因此需要修改可打开的最大句柄数量和最大进程数量,修改文件```/etc/security/limits.conf ``` ,原始内容如下
+
+```sh
+#<domain>      <type>  <item>         <value>
+#*               soft    core            0
+#*               hard    rss             10000
+#@student        hard    nproc           20
+#@faculty        soft    nproc           20
+#@faculty        hard    nproc           50
+#ftp             hard    nproc           0
+#@student        -       maxlogins       4
+```
+修改对Hadoop的限制
+
+```sh
+# 以下内容添加到 /etc/security/limits.conf  文件后面
+* hard nofile 10000
+* soft nofile 10000 
+* hard nproc 10000
+* soft nproc 10000
+```
+然后重启所有机器 让配置生效,```*``` 可以换成你运行Hadoop的用户名.
+
 将配置好的文件拷贝到所有机器
 
 ##### 4.2 格式化
@@ -358,6 +383,32 @@ yarn-site.xml
 [http://hadoop1:50070/](HDFS)
 
 [http://hadoop1:8088/](RM)
+
+
+#### TIPS
+
+- 执行控制台时可能会出现这个错误
+
+```sh
+WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+```
+
+原因是因为Hadoop编译好的Native库有一个依赖库版本和操作系统的不一致.解决方法是自己重新编译. 可以使用``ldd```命令查看依赖库的情况.
+
+```sh
+[root@hdp1 hadoop-2.5.2]# ldd lib/native/libhadoop.so.1.0.0
+lib/native/libhadoop.so.1.0.0: /lib64/libc.so.6: version `GLIBC_2.14' not found (required by lib/native/libhadoop.so.1.0.0)
+	linux-vdso.so.1 =>  (0x00007fffdcb29000)
+	libdl.so.2 => /lib64/libdl.so.2 (0x00007f07ef2b5000)
+	libc.so.6 => /lib64/libc.so.6 (0x00007f07eef20000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007f07ef6db000)
+```
+
+修改 ```/opt/hdp/hadoop-2.5.2/etc/hadoop/log4j.properties```增加下面一行可以屏蔽掉这个错误.
+
+```
+log4j.logger.org.apache.hadoop.util.NativeCodeLoader=DEBUG
+```
 
 
 ### 5.HBase 配置
@@ -404,6 +455,7 @@ export JAVA_HOME=/usr/lib/jdk
 </configuration>
 ```
 
+
 启动HBase
 
 ```sh
@@ -446,6 +498,14 @@ export JAVA_HOME=/usr/lib/jdk
 
 访问 [http://p1:16010/](http://p1:16010/)查看HBase运行情况
 
+也可以启动REST API 玩玩. 
+
+```sh 
+/opt/hdp/hbase-1.1.5/bin/hbase rest start -p 8888
+# 可以通过 http://p1:8888/test/schema访问 test表的schema
+```
+
+
 
 ##### 5.2 错误问题
 
@@ -465,7 +525,8 @@ java.net.NoRouteToHostException: 没有到主机的路由
 出现该错误是因为端口没打开,关闭```service iptables stop``` 防火墙即可.
 
 
-待续
+# 6 安装Kafka
+
 
 
 
