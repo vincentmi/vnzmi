@@ -6,6 +6,7 @@ author:     "Vincent"
 header-img:  "img/post-bg-line.jpg"
 catalog: true
 tags:
+    - 大数据
     - Hadoop
     - HBase
     - Kafka
@@ -526,6 +527,8 @@ java.net.NoRouteToHostException: 没有到主机的路由
 
 
 # 6 安装Kafka
+
+Kafka的安装非常简单,解压后修改配置文件
 
 
 
