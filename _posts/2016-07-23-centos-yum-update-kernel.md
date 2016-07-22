@@ -19,7 +19,7 @@ tags:
 
 # 使用Yum快速升级CentOS6.6内核
 
-##导入public key
+## 导入public key
 
 ```sh
 rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
