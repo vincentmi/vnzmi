@@ -3,7 +3,7 @@ layout:     post
 title:      "使用Mesos和Docker构建你的私有云平台"
 date:       2015-06-12 23:11:00
 author:     "Vincent"
-header-img:  "img/post-bg.jpg"
+header-img:  "img/post-bg-line.jpg"
 catalog: true
 tags:
     - 运维
@@ -155,30 +155,32 @@ tags:
 
 Marathon在8080端口
 ![2015-06-14_002056.png](/img/in-post/1713485223.png)
+
 ## 配置Slave
+
 先禁用掉Slave上的mesos-master服务
 
     systemctl stop mesos-master.service
     systemctl disable mesos-master.service
 
 
-配置ZooKeeper
+#### 配置ZooKeeper
 
     echo zk://192.168.1.198:2181,192.168.1.196:2181,192.168.1.195:2181/mesos > /etc/mesos/zk
 
-设置IP和Hostname
+#### 设置IP和Hostname
 
     echo 192.168.1.201 > /etc/mesos-slave/ip
     echo 192.168.1.201 > /etc/mesos-slave/hostname
-启动Slave服务
+#### 启动Slave服务
 
     systemctl stop mesos-slave.service
 
 
-参考文档
+## 参考文档
 
-[How To Configure a Production-Ready Mesosphere Cluster on Ubuntu 14.04][https://www.digitalocean.com/community/tutorials/how-to-configure-a-production-ready-mesosphere-cluster-on-ubuntu-14-04]
-[下一代云计算平台Apache Mesos定制自己的PaaS-1(Apache Mesos安装部署)][http://wiselyman.iteye.com/blog/2200267]
+- [How To Configure a Production-Ready Mesosphere Cluster on Ubuntu 14.04](https://www.digitalocean.com/community/tutorials/how-to-configure-a-production-ready-mesosphere-cluster-on-ubuntu-14-04)
+- [下一代云计算平台Apache Mesos定制自己的PaaS-1(Apache Mesos安装部署)](http://wiselyman.iteye.com/blog/2200267)
 
 
 
