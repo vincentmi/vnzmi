@@ -150,11 +150,11 @@ tags:
     http://192.168.1.198:5050/
 
 如下图,如果你不是访问的Leader会被自动跳转到其他Leader服务器。
-![2015-06-14_001124.png][/img/in-post/55670412.png]
+![/img/in-post/55670412.png](/img/in-post/55670412.png)
+
 
 Marathon在8080端口
-![2015-06-14_002056.png][/img/in-post/1713485223.png]
-
+![2015-06-14_002056.png](/img/in-post/1713485223.png)
 ## 配置Slave
 先禁用掉Slave上的mesos-master服务
 
