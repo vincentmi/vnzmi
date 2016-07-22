@@ -19,8 +19,11 @@ curl -L get.rvm.io | bash -s stable
 
 ```
 # root用户安装执行
+
 source /usr/local/rvm/rvm.sh
+
 # 其他用户安装
+
 source ~/.rvm/rvm.sh
 ```
 安装Ruby
