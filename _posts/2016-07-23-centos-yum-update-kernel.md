@@ -13,11 +13,10 @@ tags:
 ---
 
 >
-> 因为要装Docker所以需要升级下Linux内核
+> 因为要装Docker所以需要升级下Linux内核  
 > 记录下命令备忘
 >
 
-# 使用Yum快速升级CentOS6.6内核
 
 ## 导入public key
 
