@@ -3,7 +3,7 @@ layout:     post
 title:      "Git index-pack failed 问题解决"
 date:       2017-01-08 18:43:00
 author:     "Vincent"
-header-img:  "img/post-bg-dot.jpg"
+header-img:  "img/post-bg-water.jpg"
 catalog: true
 tags:
     - Git
