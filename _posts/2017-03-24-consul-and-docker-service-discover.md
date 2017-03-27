@@ -120,7 +120,7 @@ docker run -p 5000:5000 --restart=always --name registry1  -v /var/lib/registry/
 ## 安装Registrator
 
 
-### Register启动命令
+### Registrator启动命令
 
 ```sh
 docker run [docker options] gliderlabs/registrator[:tag] [options] <registry uri>
