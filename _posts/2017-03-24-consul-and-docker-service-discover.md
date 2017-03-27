@@ -53,6 +53,10 @@ vim /etc/grub.conf
 DOCKER_OPTS="$DOCKER_OPTS --registry-mirror=http://hub-mirror.c.163.com"
 ```
 
+## Consul集群安装 
+
+- [服务发现,Consul入门](http://vnzmi.com/2016/08/16/consul-quick-guide/)
+
 ## 安装私有 Registry
 
 Registry 是无状态、高可用的服务端应用。可以帮助我们进行Docker镜像的分发。使用Registry可以
@@ -112,6 +116,141 @@ docker run -p 5000:5000 --restart=always --name registry1  -v /var/lib/registry/
 docker run -p 5000:5000 --restart=always --name registry1  -v /var/lib/registry/data:/var/lib/registry registry:2
 
 ```
+
+## 安装Registrator
+
+
+### Register启动命令
+
+```sh
+docker run [docker options] gliderlabs/registrator[:tag] [options] <registry uri>
+```
+
+###### DOCKER参数
+```--net=host``` 共用了宿主机的网络，使registrator可以获取到主机的名字IP等，也可以不使用Host模式使用-h $HOSTNAME来指定主机名，在Registrator选项中指定IP地址。
+
+```--volume=/var/run/docker.sock:/tmp/docker.sock```  允许Registrator访问Docker的 API。
+``` -e CONSUL_HTTP_TOKEN=<your acl token>``` 如果Consul使用了ACL则需要制定ACL_TOKEN
+
+###### Registrator参数
+```internal``` ,在registrator内部进行注册，注册docker内部映射的端口.而不是宿主机映射给docker的端口
+```deregister <mode>```,是否注销所有服务,```always```,或者 ```on-success```,默认```always```
+```ip <ip addr``` 强制registrator使用指定的IP地址来注册服务
+```tags <tags>``` 使用逗号分割的tag来标记注册的服务
+```-ttl <seconds>``` （后台运行时使用）服务存活期
+```-ttl-refresh <seconds>``` （后台运行时使用）服务存活期
+```resync <second>``` 控制registrator查询docker的容器并重新注册服务的时间间隔。每次注册均会使监控consul的进程得到通知。因此太过频繁可能会造成一些问题。默认值，0 不进行重新注册。
+
+#### 启动命令
+
+```sh
+docker run -d --name=registrator   --net=host  --volume=/var/run/docker.sock:/tmp/docker.sock  gliderlabs/registrator:latest -tags=" `hostname`,`head /etc/issue -n 1`" --deregister=always consul://127.0.0.1:8500 
+```
+
+#### 运行Docker镜像
+
+```sh
+docker run -d -P --name=redis redis
+```
+
+运行之后我们即可在Consul里看到启动好的服务。这样注册的服务没有健康检测，仅有少量的Meta数据
+
+#### 服务的Meta数据
+
+Registrator 定义了如下类型：
+
+```go
+type Service struct {
+    ID    string               // unique service instance ID
+    Name  string               // 服务名称
+    IP    string               // 服务的IP地址
+    Port  int                  // 服务监听的端口
+    Tags  []string             // 服务的标签
+    Attrs map[string]string    // 额外的属性metadata
+}
+```
+
+```Name```,```Tags```,```Attrs```,```ID```,可以通过用户定义的容器Meta数据来进行覆盖。使用前缀```SERVICE_```或者```SERVICE_x_```来设置,x是暴露的端口号码。例如 ```SERVICE_NAME=db``` ,```SERVICE_80_NAME=api``` ,```Attrs```保存余下的数据,目前Consul还不支持Attrs但是这些设置的Attrs可以用于健康检查。这些数据读取的是环境变量所以可以将默认值保存到 ```Dockerfile```里，后续也可以在```run```命令里覆盖默认设置。 
+
+##### 注册单个服务
+
+上面的redis注册为这样
+
+```sh 
+docker run -d -P --name=redis \
+-e "SERVICE_NAME=redis1" \
+-e "SERVICE_TAGS=master,session" \
+-e "SERVICE_OWNER=med" \
+ redis
+```
+
+#####注册多个服务端口
+
+```sh 
+
+docker run -d -P --name=nginx \
+-e "SERVICE_80_NAME=med-svr-case-http" \
+-e "SERVICE_80_TAGS=med,http,api" \
+-e "SERVICE_80_OWNER=med" \
+-e "SERVICE_443_NAME=med-svr-case-https" \
+-e "SERVICE_443_TAGS=med,https,api" \
+-e "SERVICE_443_OWNER=med" \
+ nginx
+ 
+```
+
+#### 健康检查
+
+##### HTTPS 检查
+
+给容器指定额外的metadata数据
+
+```ini
+SERVICE_443_CHECK_HTTPS=/health/endpoint/path
+SERVICE_443_CHECK_INTERVAL=15s
+SERVICE_443_CHECK_TIMEOUT=1s  #不指定则使用Consul的默认
+```
+
+##### TCP检查
+
+```ini
+SERVICE_443_CHECK_TCP=true
+SERVICE_443_CHECK_INTERVAL=15s
+SERVICE_443_CHECK_TIMEOUT=3s  #不指定则使用Consul的默认
+```
+
+##### 脚本检查
+
+脚本检查允许你在Consul里运行一个检查脚本。所以你需要确定consul的运行环境中可以正确执行这些脚本。示例：
+
+```ini
+SERVICE_CHECK_SCRIPT=curl --silent --fail example.com
+```
+
+##### TTL检查时间
+
+```ini
+SERVICE_CHECK_TTL=30s
+```
+
+##### 服务默认状态
+
+服务被注册时默认状态是 ```critical```如果你希望设置为```passing```设置
+
+```ini
+SERVICE_CHECK_INITIAL_STATUS=passing
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
 
