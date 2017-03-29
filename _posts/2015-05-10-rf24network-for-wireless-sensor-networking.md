@@ -11,8 +11,8 @@ tags:
     - nRF24L01
 ---
 
-英文原版 [https://maniacbug.wordpress.com/2012/03/30/rf24network/][https://maniacbug.wordpress.com/2012/03/30/rf24network/]
-翻译: Vincent Mi [http://vnzmi.com/rf24network-for-wireless-sensor-networking.html][http://vnzmi.com/rf24network-for-wireless-sensor-networking.html]
+英文原版 [https://maniacbug.wordpress.com/2012/03/30/rf24network/][https://maniacbug.wordpress.com/2012/03/30/rf24network/] 
+翻译: Vincent Mi [http://vnzmi.com/rf24network-for-wireless-sensor-networking.html][http://vnzmi.com/rf24network-for-wireless-sensor-networking.html] 
 
 ![7013108743_416996c44c_z.jpg][/img/in-post/3153790176.jpg]
 

@@ -53,6 +53,11 @@ vim /etc/grub.conf
 DOCKER_OPTS="$DOCKER_OPTS --registry-mirror=http://hub-mirror.c.163.com"
 ```
 
+## 服务器配置图
+
+![consul](/img/in-post/consul.png)
+
+
 ## Consul集群安装 
 
 - [服务发现,Consul入门](http://vnzmi.com/2016/08/16/consul-quick-guide/)
@@ -144,7 +149,13 @@ docker run [docker options] gliderlabs/registrator[:tag] [options] <registry uri
 #### 启动命令
 
 ```sh
-docker run -d --name=registrator   --net=host  --volume=/var/run/docker.sock:/tmp/docker.sock  gliderlabs/registrator:latest -tags=" `hostname`,`head /etc/issue -n 1`" --deregister=always consul://127.0.0.1:8500 
+docker run -d --name=registrator   \
+--net=host  \
+--volume=/var/run/docker.sock:/tmp/docker.sock  \
+gliderlabs/registrator:latest \
+-tags=" `hostname`,`head /etc/issue -n 1`" \
+ --deregister=always \
+ consul://127.0.0.1:8500 
 ```
 
 #### 运行Docker镜像
@@ -201,14 +212,23 @@ docker run -d -P --name=nginx \
 
 #### 健康检查
 
-##### HTTPS 检查
+##### HTTP 检查
 
 给容器指定额外的metadata数据
 
 ```ini
+SERVICE_80_CHECK_HTTPS=/ping
+SERVICE_80_CHECK_INTERVAL=15s
+SERVICE_80_CHECK_TIMEOUT=1s  #不指定则使用Consul的默认
+```
+
+##### HTTPS 检查
+
+
+```ini
 SERVICE_443_CHECK_HTTPS=/health/endpoint/path
 SERVICE_443_CHECK_INTERVAL=15s
-SERVICE_443_CHECK_TIMEOUT=1s  #不指定则使用Consul的默认
+SERVICE_443_CHECK_TIMEOUT=1s  
 ```
 
 ##### TCP检查
@@ -240,6 +260,58 @@ SERVICE_CHECK_TTL=30s
 ```ini
 SERVICE_CHECK_INITIAL_STATUS=passing
 ```
+
+#### Redis服务我们可以注册
+
+###### 先创建进行健康检查的脚本 ```/usr/redis_health.sh```
+
+```sh
+#!/bin/sh
+result=`/usr/bin/redis-cli -p $SERVICE_PORT  ping 2>/dev/null`
+if [ "$result" = "PONG" ] ; then
+   echo 0
+else
+    echo 1
+fi
+
+
+```
+
+##### 启动Redis服务
+
+```sh
+docker run -d -P  \
+-e "SERVICE_NAME=redis" \
+-e "SERVICE_TAGS=db,session" \
+-e "SERVICE_OWNER=med" \
+-e "SERVICE_CHECK_TCP=true" \
+-e "SERVICE_CHECK_INTERVALL=10s" \
+ redis
+```
+
+我们可以看到Redis已经正常注册。关闭后自动注销。
+
+
+##### 启动我们自己的服务
+
+```sh
+
+docker run -d -P -v /var/log/svr/mb-post-svr:/var/log  \
+-e "SERVICE_TAGS=micro-blog,go" \
+-e "SERVICE_OWNER=vincent" \
+-e "SERVICE_CHECK_HTTP=/ping" \
+-e "SERVICE_CHECK_INTERVALL=10s" \
+registry.medlinker.com:5000/mb-post-svr:1.0a
+
+```
+
+
+## 负载均衡配置
+
+
+## Consul Template
+
+## 将组件迁移到Docker
 
 
 
