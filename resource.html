@@ -1,0 +1,52 @@
+---
+title: 资源
+layout: default
+description: 
+header-img: "img/post-bg-rice.jpg"
+---
+
+<!-- Page Header -->
+<header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading" id="tag-heading">
+                    <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
+                    <span class="subheading">{{ page.description }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+         
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="{{ tag[0] }}">
+                    <span class="tag-text">资源</span>
+                </span>
+				
+				 <div class="post-preview">
+				    <a href="https://github.com/vincentmi/vnzmi/tree/gh-pages/attach/region.sql">
+				        <h2 class="post-title">
+                            中国省市区数据库
+				        </h2>
+				        
+				        <h3 class="post-subtitle">
+				            数据来自国家统计局20160731 http://www.stats.gov.cn/tjsj/tjbz/xzqhdm/
+				        </h3>
+				    </a>
+				    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+				</div>
+				<hr>
+				{% endfor %}
+			</div>
+			{% endfor %}
+
+		</div>
+	</div>
+</div>
