@@ -296,23 +296,93 @@ docker run -d -P  \
 
 ```sh
 
-docker run -d -P -v /var/log/svr/mb-post-svr:/var/log  \
+docker run -d -P -v --restart=always /var/log/svr/mb-post-svr:/var/log  \
 -e "SERVICE_TAGS=micro-blog,go" \
 -e "SERVICE_OWNER=vincent" \
 -e "SERVICE_CHECK_HTTP=/ping" \
 -e "SERVICE_CHECK_INTERVALL=10s" \
-registry.medlinker.com:5000/mb-post-svr:1.0a
+registry.medlinker.com:5000/mb_post_svr:1.0a
 
 ```
 
 
-## 负载均衡配置
-
-
 ## Consul Template
+
+Consul Template 可以订阅consul的服务状态变化。从kv存储中读取数据根据指定的模板生成配置
+文件。可以通过consul-template来生成负载均衡的配置并reload nginx 。从而将失效的服务从列表
+冲移除。
+
+
+### 负载均衡配置
+
+
+
 
 ## 将组件迁移到Docker
 
+启动Consul Server
+
+```sh
+
+docker run -d  -p 8500:8500 -p 8600:8600 -p 8400:8600 -p 8301:8301 \
+ --net=host --restart=always --name=consul_server \
+ -e SERVICE_IGNORE=anything \
+ -v /var/consul/data:/var/consul/data  -v /var/consul/conf:/var/consul/conf \
+ registry.medlinker.com:5000/consul:0.7.5  \
+consul server \
+ -bootstrap-expect=2 \
+ -join=192.168.1.51 \
+ -bind=192.168.1.63 \
+ -data-dir=/var/consul/data \
+ -node=`hostname` \
+ -config-dir=/var/consul/conf 
+```
+
+
+
+启动Consul Agent
+
+```sh
+
+docker run -d  -p 8500:8500 -p 8600:8600 -p 8400:8600 -p 8301:8301 \
+ --net=host --restart=always --name=consul_agent \
+ -e SERVICE_IGNORE=anything \
+ -v /var/consul/data:/var/consul/data  -v /var/consul/conf:/var/consul/conf \
+ registry.medlinker.com:5000/consul:0.7.5  \
+consul agent \
+ -join=192.168.1.51 \
+ -bind=192.168.1.63 \
+ -data-dir=/var/consul/data \
+ -node=`hostname` \
+ -config-dir=/var/consul/conf 
+```
+ 
+启动Registrator
+ 
+ ```sh
+ docker run -d --name=registrator   \
+--net=host  \
+--volume=/var/run/docker.sock:/tmp/docker.sock  \
+registry.medlinker.com:5000/registrator \
+-tags=" `hostname`,`head /etc/issue -n 1`" \
+ --deregister=always \
+ consul://127.0.0.1:8500 
+ ```
+ 
+ 
+## 其他组件
+
+启动 MySQL
+
+```sh
+ docker run -d  --name=db1 -v /opt/mysql:/var/lib/mysql --restart=always -e MYSQL_ROOT_PASSWORD=root -e SERVICE_NAME=db1 \
+-e "SERVICE_NAME=db1" \
+-e "SERVICE_TAGS=db,mysql,mb-post" \
+-e "SERVICE_OWNER=med" \
+-e "SERVICE_CHECK_TCP=true" \
+-e "SERVICE_CHECK_INTERVALL=10s" \
+-p 3306:3306 registry.medlinker.com:5000/mysql:5.7
+```
 
 
 
