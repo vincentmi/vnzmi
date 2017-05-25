@@ -82,6 +82,10 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 
 # Friends
 friends: [
+  {
+        title: "中国省市区数据库",
+        href: "https://github.com/vincentmi/vnzmi/tree/gh-pages/attach/region.sql"
+    },
    {
         title: "spring-security-reference",
         href: "https://www.gitbook.com/book/vincentmi/spring-security-reference-zh/details"
