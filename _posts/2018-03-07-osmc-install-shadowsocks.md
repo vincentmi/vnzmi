@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      "树莓派OSMC 安装ShadowSocks"
+title:      "树莓派OSMC使用Shadowsocks提供安全的代理"
 date:       2018-03-07 10:07:00
 author:     "Vincent"
-header-img:  "img/post-bg-line.jpg"
+header-img:  "img/post-bg-gfw2.jpg"
 catalog: true
 tags:
     - HW
@@ -99,12 +99,12 @@ chmod a+x ss/ss
 
 ```json
 {
- "server":"Shadowsocks服务器IP地址",
-  "server_port":Shadowsocks服务器端口,
- "local_port":本地代理服务端口,
- "method":"加密方式",
- "password":"密码",
- "timeout":30
+ "server":"Shadowsocks服务器IP地址", 
+  "server_port":Shadowsocks服务器端口, 
+ "local_port":本地代理服务端口, 
+ "method":"加密方式", 
+ "password":"密码", 
+ "timeout":30 
 }
 ```
 安装完成
@@ -124,7 +124,7 @@ osmc@osmc:~/ss$ ./ss
 sudo ln -s /home/osmc/ss/ss /usr/bin/shadowsocks
 ```
 
-在来个启动脚本 ``` sudo vi /etc/systemd/system/shadowsocks.service ```
+配置Systemd 服务资源 ``` sudo vi /etc/systemd/system/shadowsocks.service ```
 
 ```sh 
 [Unit]
@@ -136,6 +136,7 @@ StandardOutput=syslog
 StandardError=inherit
 [Install]
 WantedBy=multi-user.target
+Alias=shadowsocks.service
 ```
 设置执行权限
 
@@ -160,7 +161,7 @@ osmc@osmc:~/ss$ sudo systemctl status shadowsocks.service
 3月 07 12:08:36 osmc shadowsocks[7387]: 2018/03/07 12:08:36 starting local socks5 server at :xxxx ...
  
 ```
- 
+这样服务以及配置完成,会在树莓派启动时自动运行. 下一步只需要配置OSMC中的代理服务器即可.
  
 ## 设置 OSMC
  
