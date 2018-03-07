@@ -13,9 +13,7 @@ tags:
     
 ---
 
-## 背景
-
-最近买了一台QNAP NAS.
+最近购买了一台NAS.电影和家庭录像都保存到了NAS.也可以使用NAS的APP进行电影下载.电视或手机通过DLNA进行播放.但是存在一个问题,电视的视频解码可能由于专利之类的原因,无法对大部分下载的电影的音频进行解码.手头有个闲置的树莓派,安装OSMC进行视频的解码.然后顺便配置了下Shadowsocks.
 
 ## 安装
 
@@ -23,7 +21,10 @@ tags:
 
 #### 安装Git
 
+
+
 ```sh 
+sudo apt-get update
 sudo  apt-get install git-core
 ```
 
