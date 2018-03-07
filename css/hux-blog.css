@@ -539,6 +539,8 @@ pre code {
 .intro-header .page-heading h1 {
   margin-top: 0;
   font-size: 50px;
+
+  font-weight: 100;
 }
 .intro-header .site-heading .subheading,
 .intro-header .page-heading .subheading {
@@ -558,11 +560,13 @@ pre code {
   .intro-header .site-heading h1,
   .intro-header .page-heading h1 {
     font-size: 80px;
+    font-weight: 100;
   }
 }
 .intro-header .post-heading h1 {
   font-size: 30px;
   margin-bottom: 24px;
+  font-weight: 100;
 }
 .intro-header .post-heading .subheading,
 .intro-header .post-heading .meta {
@@ -583,9 +587,9 @@ pre code {
   margin-top: -5px;
 }
 .intro-header .post-heading .meta {
-  font-family: 'Lora', 'Times New Roman', serif;
-  font-style: italic;
-  font-weight: 300;
+ font-family: -apple-system, "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+  font-style: normal;
+  font-weight: 100;
   font-size: 18px;
 }
 .intro-header .post-heading .meta a {
@@ -594,6 +598,7 @@ pre code {
 @media only screen and (min-width: 768px) {
   .intro-header .post-heading h1 {
     font-size: 55px;
+    font-weight: 100;
   }
   .intro-header .post-heading .subheading {
     font-size: 30px;
@@ -624,10 +629,10 @@ pre code {
   margin-bottom: 10px;
 }
 .post-preview > .post-meta {
-  font-family: 'Verdana', 'Times New Roman', serif;
   color: #808080;
-  font-size: 12px;
-  font-style: normal;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 100;
   margin-top: 0;
 }
 .post-preview > .post-meta > a {
@@ -650,11 +655,13 @@ pre code {
   }
   .post-preview .post-meta {
     font-size: 12px;
+    font-weight: 100;
   }
 }
 .post-content-preview {
-  font-size: 13px;
+  font-size: 14px;
   font-style: normal;
+  font-weight:100;
   color: #a3a3a3;
 }
 .post-content-preview:hover {
@@ -662,7 +669,8 @@ pre code {
 }
 @media only screen and (min-width: 768px) {
   .post-content-preview {
-    font-size: 14px;
+    font-size: 16px;
+    font-weight:100;
   }
 }
 .section-heading {
@@ -856,6 +864,7 @@ img::-moz-selection {
   text-decoration: none;
   margin: 0 1px;
   margin-bottom: 6px;
+  font-weight: 100;
 }
 .tags a:hover,
 .tags .tag:hover,
