@@ -11,7 +11,7 @@ tags:
 ---
 
 文章来自极客工坊，因此加密了只自己能看纯收藏
-http://www.geek-workshop.com/thread-12261-1-1.html
+[http://www.geek-workshop.com/thread-12261-1-1.html](http://www.geek-workshop.com/thread-12261-1-1.html)
 作者：mylife1213
 
 这次讲功耗.
@@ -80,6 +80,7 @@ INT0 或INT1，或外部中断INT2 可以将MCU 从ADC 噪声抑制模式唤醒�
 
 
 下图是各个模式下关闭的模块
+
 ![184547gceyoeqota2y277m.png][/img/in-post/3108120046.png]
 
 那么我们正常使用的是掉电模式,在掉电模式下328p测试耗电1ua,这是什么概念,2颗5号电池在处理器没有进行其他操作的情况下可以工作79年!
@@ -167,7 +168,8 @@ if(data>=7)
 使用休眠模式制作了一个外置气象站，使用amtega328P用nrf24l01发送ds18b20采集的数据，每2分钟发生一次，平时待机功耗控制在10ua左右，设计可以使用2颗南孚电池工作超过1年时间
 
 实物图
-![211541geoqq8wodddzdqhw.png][/img/in-post/338645405.png]
+
+![211541geoqq8wodddzdqhw.png](/img/in-post/338645405.png)
 
 
 外置发送硬件先按照328P最小系统搭建，然后连接nrf24l01p与ds1820b.
@@ -201,7 +203,7 @@ arduino     nrf24l01p
 注意nrf24l01电源要接3.3v
 ```
 提供代码下载
-  [nrf24l01P.rar][/img/in-post/931264314.rar]
+[nrf24l01P.rar](/img/in-post/931264314.rar)
 
 read_WDT是接收机
 WDT_2是室外机
