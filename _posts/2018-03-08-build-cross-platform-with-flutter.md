@@ -15,7 +15,7 @@ tags:
 
 ## 简介
 
-![Flutter](/img/in_post/flutter.png)
+![Flutter](/img/in-post/flutter.png)
 
 Flutter是Google使用Dart语言开发的开源移动应用开发框架，, 可同时快速的在Android和iOS平台运行,性能无限接近原生。 目前还是Beta版本.Flutter可以理解为一种类似ReactiveNative的框架.但是自己实现了底层的控件绘制.因此性能会有一些优势.提供IOS和安卓原生风格的组件.更多的组件可以从组件库中查看.
 
