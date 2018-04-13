@@ -83,7 +83,7 @@ server {
 
 #mysql
 
-docker run --name mysql-primary -v /alidata/mysqldb:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=uiQH6zWzXQ  -d mysql:5.7
+docker run --name mysql-primary -v /alidata/mysqldb:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=xxx  -d mysql:5.7
 
 #registry
 
