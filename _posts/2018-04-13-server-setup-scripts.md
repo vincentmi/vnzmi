@@ -47,34 +47,31 @@ sudo apt-get install docker-ce=<VERSION>
 
 ```
 server {
-        listen 80 default_server;
-        listen [::]:80 default_server ipv6only=on;
-
-        root /usr/share/nginx/html;
-        index index.html index.htm;
-
-        # Make site accessible from http://localhost/
-        server_name localhost;
-
-        location / {
-					proxy_pass  http://127.0.0.1:8009;
-			        proxy_redirect     off;
-			        proxy_set_header   Host             $host;
-			        proxy_set_header   X-Real-IP        $remote_addr;
-			        proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
-			        proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
-			        proxy_max_temp_file_size 0;
-			        proxy_connect_timeout      90;
-			        proxy_send_timeout         90;
-			        proxy_read_timeout         90;
-			        proxy_buffer_size          4k;
-			        proxy_buffers              4 32k;
-			        proxy_busy_buffers_size    64k;
-			        proxy_temp_file_write_size 64k;
-        }
-        }
-        
-        
+	listen 80 default_server;
+	listen [::]:80 default_server ipv6only=on;
+	
+	root /usr/share/nginx/html;
+	index index.html index.htm;
+	    
+	server_name localhost;
+	
+	location / {
+		proxy_pass  http://127.0.0.1:8009;
+		proxy_redirect     off;
+		proxy_set_header   Host             $host;
+		proxy_set_header   X-Real-IP        $remote_addr;
+		proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+		proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+		proxy_max_temp_file_size 0;
+		proxy_connect_timeout      90;
+		proxy_send_timeout         90;
+		proxy_read_timeout         90;
+		proxy_buffer_size          4k;
+		proxy_buffers              4 32k;
+		proxy_busy_buffers_size    64k;
+		proxy_temp_file_write_size 64k;
+	}
+}         
 ```
 
 ## 容器
@@ -83,11 +80,16 @@ server {
 
 #mysql
 
-docker run --name mysql-primary -v /alidata/mysqldb:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=xxx  -d mysql:5.7
+docker run --name mysql-primary \
+  -v /alidata/mysqldb:/var/lib/mysql -p 3306:3306 \
+  -e MYSQL_ROOT_PASSWORD=xxx  -d mysql:5.7
 
 #registry
 
-sudo docker run   -d   -e ENV_DOCKER_REGISTRY_HOST=registry   -e ENV_DOCKER_REGISTRY_PORT=5000   -p 9080:80   --name drf
+sudo docker run   -d   \
+ -e ENV_DOCKER_REGISTRY_HOST=registry   \
+ -e ENV_DOCKER_REGISTRY_PORT=5000   -p 9080:80   \
+ --name drf
 
 # Register
 docker run -d -p 5000:5000 --restart always  \
