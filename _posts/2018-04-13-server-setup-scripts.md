@@ -95,8 +95,20 @@ docker run -d -p 5000:5000 --restart always  \
  --name registry -e "REGISTRY_AUTH=htpasswd" \
  -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" \
  -e "REGISTRY_AUTH_HTPASSWD_PATH=/var/lib/registry/auth/passwd" registry:2
+ 
+# Consul
 
-#[prtainera
+docker run -d --name=consul_server  --restart=always \
+ -p 8300:8300 -p 8301:8301  -p 8301:8302 \
+ -p 8500:8500 -p 8600:8600 \
+ -v /alidata/consul01:/consul/data \
+ -ip 172.18.0.3 \
+ consul:latest \
+consul agent -server -ui --data-dir=/consul/data \
+-bootstrap-expect=1 -node=consul_master -bind=0.0.0.0 \
+-client=0.0.0.0
+
+#Portainer
 docker run -d -p 8002:9000 \
     --name=portainer \
     -e "SERVICE_NAME=port.vnzmi.com" \
