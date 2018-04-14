@@ -89,10 +89,10 @@ friends: [
   },
 
   {
-    title: "着睡衣dE忍者",
+    title: "Caffeine Park",
     href: "http://blog.sina.com.cn/yoshikilau"
   },
-  
+
   {
         title: "中国省市区数据库",
         href: "https://github.com/vincentmi/vnzmi/tree/gh-pages/attach/region.sql"
@@ -104,6 +104,6 @@ friends: [
     {
         title: "Theme From Hux",
         href: "http://huxpro.github.io"
-    }
+    },
   }
 ]
