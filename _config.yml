@@ -70,7 +70,7 @@ ga_domain: vnzmi.com
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "音乐和啤酒才是你永恒的朋友。"
+sidebar-about-description: "In Code We Trust"
 sidebar-avatar: /img/avatar.png      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
@@ -84,6 +84,16 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 # Friends
 friends: [
   {
+    title: "青鸟翅膀",
+    href: "http://blog.sina.com.cn/vegas"
+  },
+
+  {
+    title: "着睡衣dE忍者",
+    href: "http://blog.sina.com.cn/yoshikilau"
+  },
+  
+  {
         title: "中国省市区数据库",
         href: "https://github.com/vincentmi/vnzmi/tree/gh-pages/attach/region.sql"
     },
@@ -95,4 +105,5 @@ friends: [
         title: "Theme From Hux",
         href: "http://huxpro.github.io"
     }
+  }
 ]
