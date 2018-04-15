@@ -33,9 +33,12 @@ anchorjs: true                          # if you want to customize anchor. check
 
 # Gems
 # from PR#40, to support local preview for Jekyll 3.0
-plugins: [jekyll-paginate]
+plugins: [jekyll-paginate , jekyll-algolia]
 
 
+algolia:
+  application_id: UM7AYDDDO7
+  index_name: VNZMI_BLOG
 
 # Markdown settings
 # replace redcarpet to kramdown,
