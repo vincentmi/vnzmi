@@ -80,41 +80,36 @@ server {
 
 #mysql
 
-docker run --name mysql-primary \
-  -v /alidata/mysqldb:/var/lib/mysql -p 3306:3306 \
-  -e MYSQL_ROOT_PASSWORD=xxx  -d mysql:5.7
+docker run  \
+ --name mysql-primary \
+-v /alidata/mysqldb:/var/lib/mysql \
+ -p 3306:3306 \
+ -e MYSQL_ROOT_PASSWORD=xxxx \
+ -e "SERVICE_NAME=mysql_promary" \
+ -e "SERVICE_CHECK_TCP=true" \
+ -e "SERVICE_CHECK_INTERVAL=15s" \
+ -d  mysql:5.7
 
 #registry
 
-sudo docker run   -d   \
- -e ENV_DOCKER_REGISTRY_HOST=registry   \
- -e ENV_DOCKER_REGISTRY_PORT=5000   -p 9080:80   \
- --name drf
+sudo docker run   -d   -e ENV_DOCKER_REGISTRY_HOST=registry   -e ENV_DOCKER_REGISTRY_PORT=5000   -p 9080:80   --name drf
 
 # Register
 docker run -d -p 5000:5000 --restart always  \
 -v /alidata/registry:/var/lib/registry \
- --name registry -e "REGISTRY_AUTH=htpasswd" \
+ --name registry \
+ -e "REGISTRY_AUTH=htpasswd" \
  -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" \
- -e "REGISTRY_AUTH_HTPASSWD_PATH=/var/lib/registry/auth/passwd" registry:2
- 
-# Consul
+ -e "REGISTRY_AUTH_HTPASSWD_PATH=/var/lib/registry/auth/passwd" \
+registry:2
 
-docker run -d --name=consul_server  --restart=always \
- -p 8300:8300 -p 8301:8301  -p 8301:8302 \
- -p 8500:8500 -p 8600:8600 \
- -v /alidata/consul01:/consul/data \
- -ip 172.18.0.3 \
- consul:latest \
-consul agent -server -ui --data-dir=/consul/data \
--bootstrap-expect=1 -node=consul_master -bind=0.0.0.0 \
--client=0.0.0.0
-
-#Portainer
+#[prtainera
 docker run -d -p 8002:9000 \
     --name=portainer \
-    -e "SERVICE_NAME=port.vnzmi.com" \
+    -e "SERVICE_NAME=port_vnzmi_com" \
     -e "SERVICE_TAGS=lb-nginx" \
+    -e "SERVICE_CHECK_TCP=true" \
+    -e "SERVICE_CHECK_INTERVAL=15s" \
     -v  /var/run/docker.sock:/var/run/docker.sock \
     -v /var/portainer_data:/data \
      portainer/portainer
@@ -131,21 +126,21 @@ docker run -d \
 # lb-nginx
 docker run -d --name=lb-nginx \
   -e "CONSUL_ADDR=172.18.0.3:8500" \
+    -e "SERVICE_CHECK_TCP=true" \
+    -e "SERVICE_CHECK_INTERVAL=15s" \
   -p 8009:80 \
- lb-nginx:latest
+ vincentmi/lb-nginx:latest
 
 # SERVICE
-docker run  --name ssq -d -P  \n
-  -v /alidata/www/ssq:/var/www \n
+docker run  --name ssq_fanqieku_com -d -P  \
+  -v /alidata/www/ssq:/var/www \
   -v /alidata/www/ssq/log:/var/log/nginx \
   -v /alidata/www/ssq/backup:/var/log/backup \
-  -e "SERVICE_NAME=ssq_vnzmi_com" \
+  -e "SERVICE_NAME=ssq_fanqieku_com" \
   -e "SERVICE_TAGS=lb-nginx" \
   -e "SERVICE_CHECK_TCP=true" \
   -e "SERVICE_CHECK_INTERVAL=15s" \
-  -e "SERVICE_CHECK_TIMEOUT=3s" \
   vincentmi/php5
-
 
 ```
     
