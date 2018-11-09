@@ -21,7 +21,7 @@ https://youtu.be/p2HzZkd2A40
 
 #### 特性检查
 
-只需要检查```navigator.mediaDevices.getUserMedia``对象是否存在就可以了
+只需要检查```navigator.mediaDevices.getUserMedia```对象是否存在就可以了
 
 ```js
 function hasGetUserMedia() {
@@ -54,7 +54,7 @@ navigator.mediaDevices.getUserMedia(constraints).
 </script>
 ```
 
-媒体捕捉可以与H5对象``` <video>```和```<audio>```进行连接.注意,我们直接设置了一个 ```MediaStream``` 对象给  ``` video```对象,没有设置 ```src```或者```source```属性.
+媒体捕捉可以与H5对象 ```<video>```和```<audio>```进行连接.注意,我们直接设置了一个 ```MediaStream``` 对象给  ```video```对象,没有设置 ```src```或者```source```属性.
 
 #### 设置媒体参数
 
@@ -85,10 +85,11 @@ navigator.mediaDevices.getUserMedia(vgaConstraints).
 
 #### 选择媒体源
 
-```navigator.mediaDevices.enumerateDevices()```可以列举当前设备的可用媒体设备.
-代码略长 //_-,但是还是很简单的
+```navigator.mediaDevices.enumerateDevices()``` 可以列举当前设备的可用媒体设备.
+
 
 ```js
+
 const videoElement = document.querySelector('video');
 const audioSelect = document.querySelector('select#audioSource');
 const videoSelect = document.querySelector('select#videoSource');
