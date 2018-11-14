@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "WebRTC技术简介"
+title:      "WebRTC技术简介-获取媒体"
 date:       2018-11-09 15:31:00
 author:     "Vincent"
 header-img:  "img/post-bg-webrtc.jpg"
@@ -199,15 +199,6 @@ function handleSuccess(stream) {
 ```
 
 [更复杂的应用](https://www.html5rocks.com/zh/tutorials/getusermedia/intro/)
-
-## 2 使用```RTCPeerConnection```建立连接
-
-
-## 3 使用 ```RTCDataChannel``` 传递数据
-
-
-
-
 
 
 
