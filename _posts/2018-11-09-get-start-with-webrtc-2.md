@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "WebRTC技术简介-数据连接"
-date:       2018-11-09 15:31:00
+date:       2018-11-14 15:31:00
 author:     "Vincent"
 header-img:  "img/post-bg-webrtc.jpg"
 catalog: true
@@ -180,7 +180,7 @@ WebRTC 客户端(比如:Bob Alice) 也需要探明和交换本地以及远端的
 > 如果不使用 ```RTCPeerConnection```了要调用```close()```进行关闭.不然会占用较多资源
 >
 
-```RTCSessionDescription```对象是符合SDP规格的序列号二进制对象.SDP对象可能类似如下的内容:
+```RTCSessionDescription``` 对象是符合SDP规格的序列号二进制对象.SDP对象可能类似如下的内容:
 
 ```sh
 v=0
@@ -189,9 +189,7 @@ s=
 t=0 0
 a=group:BUNDLE audio video
 m=audio 1 RTP/SAVPF 103 104 0 8 106 105 13 126
-
-// ...
-
+...
 a=ssrc:2223794119 label:H4fjnMzxy3dPIgQ7HxuCTLb4wLLLeRHnFxh810
 ```
 
@@ -200,7 +198,7 @@ a=ssrc:2223794119 label:H4fjnMzxy3dPIgQ7HxuCTLb4wLLLeRHnFxh810
 
 上面描述的 offer/answer架构被叫做 [JESP](http://tools.ietf.org/html/draft-ietf-rtcweb-jsep-00)  JavaScript Session Establishment Protocol .
 
-![JESP架构图](https://www.html5rocks.com/en/tutorials/webrtc/basics/jsep.png)
+![JESP架构图](/img/in-post/jsep.png)
 
 一旦信号处理流程成功,数据可以直接在点到点的在调用和被调用者之间进行传输.如果这样操作失败了则通过一个中介服务器进行传输.流的传输是```RPCPeerConnection```的主要工作. 
 
