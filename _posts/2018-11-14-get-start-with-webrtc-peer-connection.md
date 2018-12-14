@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "WebRTC技术简介-数据连接"
+title:      "WebRTC技术简介-RTCPeerConnection"
 date:       2018-11-14 15:31:00
 author:     "Vincent"
 header-img:  "img/post-bg-webrtc.jpg"
@@ -202,10 +202,118 @@ a=ssrc:2223794119 label:H4fjnMzxy3dPIgQ7HxuCTLb4wLLLeRHnFxh810
 
 一旦信号处理流程成功,数据可以直接在点到点的在调用和被调用者之间进行传输.如果这样操作失败了则通过一个中介服务器进行传输.流的传输是```RPCPeerConnection```的主要工作. 
 
+#### RTCPeerConnection
+
+```RTCPeerConnection``` 是RPC中处理对端流数据的稳定性和效率的组件. 如下图的架构,可以看到```RTCPeerConnection```在架构中扮演的角色,绿色部分很复杂.
+
+![WebRTC architecture (from webrtc.org)](/img/in-post/webrtc_architecture.png)
+
+从JS的视觉看```RTCPeerConnection``` 讲开发人员从无法复杂性中解脱出来.WebRTC使用编码器和协议做了大量工作使得即使在不可靠的网络下也可以进行实时通讯.
+
+- 丢包隐藏
+- 回声消除
+- 带宽适应性
+- 动态抖动缓冲
+- 自动增益控制
+- 降噪和抑制
+- 图像清理
+
+上面的W3C代码从信令角度展示了WebRTC的简化示例。下面是两个正在运行的WebRTC应用程序的演练：第一个是演示RTCPeerConnection的简单示例;第二个是完全可操作的视频聊天客户端。
+
+#### 不通过服务器的 ```RTCPeerConnection```连接
+
+https://webrtc.github.io/samples/src/content/peerconnection/pc1/ 示例代码演示从单个页面实现一个 ```RTCPeerConnection```连接.
+
+示例中 ```pc1```扮演本地端,```pc2```扮演远端.
+
+##### 调用方
+
+1. 创建一个新的 ```RTCPeerConnection```对象并使用```getUserMedia()```添加流.
+
+```js
+pc1 = new RTCPeerConnection(servers);
+//..
+localStream.getTracks().forEach((track) => {
+  pc1.addTrack(track,localStream);
+}
+```
+
+2. 创建有个 ```offer``` 设置为 ```pc1```的本地描述.作为 ```pc2```的远端描述.这些可以在一段代码里搞定,不用用到信号系统.因为调用和被调用方都在一个页面.
+
+```js
+pc1.setLocalDescription(desc).then(()=>{
+onSetLocalSuccess(pc1);
+} ,
+onSetSessionDescriptionError 
+);
+trace('pc2 setRemoteDescription start')
+
+pc2.setRemoteDescription(desc).then(()=>{
+ onSetRemoteSuccess(pc2);
+},onSetSessionDescriptionError);
+```
+
+##### 被调用方
+
+1. 创建 ```pc2```,当```pc1```有流过来就显示到```video```元素
+
+```js
+
+pc2 = new RTCPeerConnection(servers);
+pc2.ontrack = gotRemoteStream;
+//...
+function gotRemoteStream(e){
+  vid2.srcObject = e.stream;
+}
+
+```
+
+#### ```RTCPeerConnection```加服务器
+
+在现实世界中,WebRTC需要服务器,虽然很简单,但是也包含以下步骤:
+
+- 用户发现彼此并交换真实世界的信息
+- WebRTC 客户端应用交换网络信息
+- 端之间交换数据,比如分辨率,视频格式和分辨率
+- WebRTC客户端穿透NAT和防火墙
+
+换句话说,WebRTC 需要四类服务器端的功能.
+
+- 用户发现和交流
+- 信号处理
+- NAT和防火墙穿透
+- 当p2p链接失败时的中继服务
+
+```RTCPeerConnection```使用的ICE框架,通过[STUN](http://en.wikipedia.org/wiki/STUN)协议,以及STUN的扩展 [TURN](http://en.wikipedia.org/wiki/Traversal_Using_Relay_NAT) 协议来进行P2P网络的穿透.
+
+[```ICE```](http://en.wikipedia.org/wiki/Interactive_Connectivity_Establishment)是一个连接对等端的框架,比如视频聊天的两个客户端.最初ICE尝试通过UDP直接连接对等端,以尽可能的降低延迟.在这个过程中,STUN服务器的作用是让处于NAT后面的端找出他的公开地址以及端口([了解更多STUN和TURN的内容](https://www.html5rocks.com/en/tutorials/webrtc/infrastructure/))
+
+![Finding connection candidates](/img/in-post/stun.png)
+
+如果UDP连接失败,ICE 尝试TCP,如果直接连接失败.ICE会使用一个TURN的中继服务器进行连接, 通常无法连接的情况是由于NAT穿透和防火墙的原因.换句话说 ICE会首先通过UDP使用STUN直接连接端.如果失败则使用TURN的中继服务.上图展示了这个查找网络地址和端口的过程.
 
 
+![WebRTC data pathways](/img/in-post/dataPathways.png)
 
-## 3 使用 ```RTCDataChannel``` 传递数据
+WebRTC大牛Justin Uberti 有个Slide,详细讲解了ICE,STUN和TURN,地址是 [https://www.youtube.com/watch?v=p2HzZkd2A40&t=21m12s](https://www.youtube.com/watch?v=p2HzZkd2A40&t=21m12s) 示例中还包含一个TURN和STUN的实现.
+
+#### 一个简单的视频聊天客户端
+
+体验WebRTC的完整功能,包含信令,防火墙穿透使用STUN服务器等功能,访问 [https://appr.tc/](https://appr.tc/).这个APP使用 [adapter.js](https://github.com/webrtc/adapter)
+一个适配层以屏蔽一些差异.访问更多信息 可以查看 [https://webrtc.org/web-apis/interop](https://webrtc.org/web-apis/interop)
+
+代码记录了比较详细的日志.以便让大家通过代码了解更多细节.
+
+如果上面的看不懂可以看 [https://codelabs.developers.google.com/codelabs/webrtc-web/](https://codelabs.developers.google.com/codelabs/webrtc-web/) ,这个教程教大家一步步建立一个完整的视频聊天应用.
+
+
+### 网络结构
+
+WebRTC 目前实现为只支持单个点到点的通讯.但是也可以被用于更复杂的场景:比如,多个点与点之间直接连接的点到点方式.或者通过一个 多点控制单元(MCU),通过服务器来处理大量的参与者进行选择性的流转发,音视频的混合和录制.
+
+![Multipoint Control Unit topology example](/img/in-post/mcu.png)
+
+
 
 
 
