@@ -73,6 +73,7 @@ systemctl restart kubelet
 写入flannel的配置
 
 UDP网络
+
 ```json
 {
     "NetWork":"10.0.0.0/16", 
@@ -82,6 +83,7 @@ UDP网络
 ```
 
 vxlan网络
+
 ```json
 {
     "NetWork":"10.0.0.0/16", 
