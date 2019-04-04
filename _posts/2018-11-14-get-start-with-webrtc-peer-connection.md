@@ -176,6 +176,12 @@ WebRTC 客户端(比如:Bob Alice) 也需要探明和交换本地以及远端的
 - 当Alice获取到Bob的会话描述信息,他使用```setRemoteDescription```设置为远端的描述信息.
 - 完成连接
 
+
+## Webrtc 调用图
+
+![JESP架构图](/img/in-post/webrtc_process.png)
+
+
 >
 > 如果不使用 ```RTCPeerConnection```了要调用```close()```进行关闭.不然会占用较多资源
 >
