@@ -295,7 +295,7 @@ journalctl -f -u kubelet
 kubectl describe node k8s1
 ```
 
-####certificate 错误
+#### - certificate 错误
 
  ```Unable to connect to the server: x509: certificate signed by unknown authority (possibly because of "crypto/rsa: verification error" while trying to verify candidate authority certificate "kubernetes") 问题```
 
@@ -307,6 +307,31 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
+####  - 网络错误 
+
+```
+failed to set bridge addr: "cni0" already has an IP address different from 10.244.4.1/24
+```
+重置后重新加入集群
+
+```sh 
+#在master节点之外的节点进行操作
+kubeadm reset
+systemctl stop kubelet
+systemctl stop docker
+rm -rf /var/lib/cni/
+rm -rf /var/lib/kubelet/*
+rm -rf /etc/cni/
+ifconfig cni0 down
+ifconfig flannel.1 down
+ifconfig docker0 down
+ip link delete cni0
+ip link delete flannel.1
+##重启kubelet
+systemctl restart kubelet
+##重启docker
+systemctl restart docker
+```
 
 
 ### Proxy 
