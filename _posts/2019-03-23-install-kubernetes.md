@@ -297,7 +297,7 @@ kubectl describe node k8s1
 
 #### - certificate 错误
 
- ```Unable to connect to the server: x509: certificate signed by unknown authority (possibly because of "crypto/rsa: verification error" while trying to verify candidate authority certificate "kubernetes") 问题```
+ ```Unable to connect to the server: x509: certificate signed by unknown authority (possibly because of "crypto/rsa: verification error" while trying to verify candidate authority certificate "kubernetes")```
 
 INIT 之后执行 
 
@@ -309,9 +309,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 ####  - 网络错误 
 
-```
-failed to set bridge addr: "cni0" already has an IP address different from 10.244.4.1/24
-```
+```failed to set bridge addr: "cni0" already has an IP address different from 10.244.4.1/24```
 重置后重新加入集群
 
 ```sh 
@@ -332,6 +330,10 @@ systemctl restart kubelet
 ##重启docker
 systemctl restart docker
 ```
+
+#### Token过期
+
+Join Token的有效期是24小时,如果TOKEN过期用 ```kubeadm token create``` 创建.
 
 
 ### Proxy 
