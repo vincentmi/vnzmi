@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "搭建Kubernetes集群(1)"
+title:      "搭建Kubernetes集群(1) - 安装集群"
 date:       2019-03-24 15:31:00
 author:     "Vincent"
 header-img:  "img/post-bg-engine.jpg"
