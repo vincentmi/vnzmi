@@ -30,6 +30,15 @@ kubelet create namespace kube-util
 
 ## 安装Prometheus Operator
 
+Prometheus Operator 扮演了一下三种角色:
+
+- Prometheus . 定义了一个Promethus的部署脚本.Operator确保符合资源定义的部署脚本都正常运行
+- ServiceMonitor.它以声明方式指定应如何监视服务组。 operator根据定义自动生成Prometheus搜集配置
+- Alertmanager. 定义一个Alertmanager的部署脚本.确保符合资源定义的正常运行.
+
+
+
+
 ```yaml
 #创建角色绑定
 apiVersion: rbac.authorization.k8s.io/v1beta1
@@ -149,6 +158,63 @@ spec:
 # 为应用添加Prometheus支持
 
 Prometheus资源包含一个```serviceMonitorSelector```字段,定义了```ServiceMonitor```应用到哪些服务中.
+
+
+### 创建角色
+
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: prometheus
+  
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: prometheus
+rules:
+- apiGroups: [""]
+  resources:
+  - nodes
+  - services
+  - endpoints
+  - pods
+  verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources:
+  - configmaps
+  verbs: ["get"]
+- nonResourceURLs: ["/metrics"]
+  verbs: ["get"]
+  
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: prometheus
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: prometheus
+subjects:
+- kind: ServiceAccount
+  name: prometheus
+  namespace: default
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: prometheus
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: prometheus
+subjects:
+- kind: ServiceAccount
+  name: prometheus
+  namespace: kube-util
+```
 
 
 ### 先创建一个部署脚本,启动3个实例
