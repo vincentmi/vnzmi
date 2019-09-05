@@ -3,7 +3,7 @@ layout:     post
 title:      "安装Kubernetes集群(3) - Prometheus"
 date:       2019-04-10 15:31:00
 author:     "Vincent"
-header-img:  "img/post-bg-engine.jpg"
+header-img:  "img/post-bg-highway.jpg"
 catalog: true
 tags:
     - kubernetes
