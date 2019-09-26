@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "JPA手册(1) - Spring Data Repository"
-date: 2019-09-26 10:16:00
+date:       "2019-09-26 10:16:00"
 author:     "Vincent"
 header-img:  "img/home-bg-highway.jpg"
 catalog: true
