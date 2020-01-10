@@ -105,6 +105,7 @@ source /etc/network/interfaces.d/*
 # The loopback network interface
 auto lo
 iface lo inet loopback
+
 # The primary network interface
 auto ens3
 iface ens3 inet static
@@ -185,6 +186,18 @@ virsh autostart vm31
 virsh autostart vm32
 ```
 
+## 通过克隆创建虚拟机
+
+```sh
+virsh suspend vm31 # 停止虚拟机
+virt-clone --connect qemu:///system --original vm31 --name vm_ubuntu16_64_docker \
+--file /opt/img/vm_ubuntu16_64_docker.img #克隆
+```
+查看镜像
+
+```sh
+virsh list --all
+```
  
  
  
