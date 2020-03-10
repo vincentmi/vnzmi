@@ -1,12 +1,8 @@
-{
-	"updatedAt" : 1583835958,
-	"templates" :[
-		{
-			"name" : "default" , 
-			"url" : "http://vnzmi.com/codesketch/default.zip",
-			"author" : "Vincent Mi",
-			"description":"测试模板"
-		}
-
-	]
-}
+[
+	{
+		"name" : "default" , 
+		"url" : "http://vnzmi.com/codesketch/default.zip",
+		"author" : "Vincent Mi",
+		"description":"测试模板"
+	}
+]
