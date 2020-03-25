@@ -123,9 +123,7 @@ Feign 的定制通过指定configuration 类来实现.非常方便.也可以使�
 代码如下:
 
 ```java
-旧的规范我们定义了接口的结构如下,
 
-```json
 package com.tourscool.passport;
 
 import com.fasterxml.jackson.databind.JsonNode;
