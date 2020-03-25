@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Feign自定义配置爱"
+title:      "Feign自定义配置"
 date:       "2020-03-25 23:31:00"
 author:     "Vincent"
 header-img:  "img/home-bg-highway.jpg"
