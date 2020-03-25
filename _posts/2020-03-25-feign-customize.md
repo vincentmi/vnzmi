@@ -7,8 +7,9 @@ header-img:  "img/home-bg-highway.jpg"
 catalog: true
 tags:
     - Java
-    - OkHttp
-    - SSL
+    - Spring
+    - Feign
+    - type
 ---
 
 
