@@ -26,7 +26,7 @@ facebook_username:  miwenshu
 highlighter: rouge
 permalink: pretty
 paginate: 10
-exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md"]
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md","Gemfile","Gemfile.lock","node_modules","vendor/bundle/","vendor/cache/","vendor/gems/","vendor/ruby/"]
 anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
 
 
@@ -37,8 +37,8 @@ plugins: [jekyll-paginate ] #, jekyll-algolia]
 
 
 algolia:
-  application_id: UM7AYDDDO7
-  index_name: VNZMI_BLOG
+  application_id: 52B8KATAQT
+  index_name: dev_posts
 
 # Markdown settings
 # replace redcarpet to kramdown,
