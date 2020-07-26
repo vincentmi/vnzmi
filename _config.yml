@@ -38,7 +38,8 @@ plugins: [jekyll-paginate ] #, jekyll-algolia]
 
 algolia:
   application_id: 52B8KATAQT
-  index_name: dev_posts
+  index_name: prod_posts
+  search_only_api_key: 8abe35af2bd7148f57ff6d8a73045c0a
 
 # Markdown settings
 # replace redcarpet to kramdown,
