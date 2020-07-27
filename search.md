@@ -2,6 +2,7 @@
 layout: page
 title: 搜索
 permalink: /search/
+header-img: "img/bg-b1.jpg"
 ---
 
 
