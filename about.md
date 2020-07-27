@@ -2,6 +2,7 @@
 layout: page
 title: 我
 permalink: /about/
+header-img: "img/post-bg-water.jpg"
 ---
 
 
