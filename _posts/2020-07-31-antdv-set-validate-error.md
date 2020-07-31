@@ -32,13 +32,23 @@ tags:
 
 #### 使用方式
 
+引入插件
+
+```js
+import MiValidator from './plugins/validator'
+Vue.use(MiValidator)
+```
+在组件中调用方式如下
+
 ```js
 this.$mi.assign(this.$refs.editorForm,result.data);//设置错误信息
 this.$mi.clear(this.$refs.editorForm);//清除错误信息
 ```
 
 ## 代码
- 
+
+使用这两个函数可以少写一些绑定代码.```assign```会自动查询目标表单中的栏位,根据```v-model```绑定的变量名称来识别错误信息.```form.name```会被识别为```name```,匹配服务端返回的```name```的错误信息.
+
 ```js
 
 const MiValidator = {}
