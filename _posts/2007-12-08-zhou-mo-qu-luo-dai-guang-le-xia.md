@@ -4,7 +4,7 @@ title:      "周末去洛带逛了下"
 date:       2007-12-08 23:39:54
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
 ---

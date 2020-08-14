@@ -4,7 +4,7 @@ title:      "为什么PHP令人不爽"
 date:       2005-11-01 11:07:34
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 技术文章

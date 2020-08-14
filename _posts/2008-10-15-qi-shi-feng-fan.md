@@ -4,7 +4,7 @@ title:      "骑士风范"
 date:       2008-10-15 19:07:27
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 生活记录

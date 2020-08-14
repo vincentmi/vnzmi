@@ -4,7 +4,7 @@ title:      "it's time to ... ?"
 date:       2008-09-10 23:24:04
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
 ---

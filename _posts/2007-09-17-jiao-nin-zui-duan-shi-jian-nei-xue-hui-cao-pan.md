@@ -4,7 +4,7 @@ title:      "教您最短时间内学会操盘"
 date:       2007-09-17 23:01:00
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 股票

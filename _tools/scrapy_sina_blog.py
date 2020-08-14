@@ -105,7 +105,7 @@ def parseContent(url):
                     if downloadPicture(url,imgUrl,tempFile) == 1 :
                         imgType = imghdr.what(tempFile)
                         if imgType is not None :
-                            shutil.move(tempFile,newFile+'.'+imgType)
+                            #shutil.move(tempFile,newFile+'.'+imgType)
                             relateFile = relateFile + '.'+imgType
                             bodytextTemp+="!["+relateFile+"]("+relateFile+")\n"
                 bodytext+= bleach.clean(str(content), tags=['img'], strip=True)+"\n" + bodytextTemp

@@ -4,7 +4,7 @@ title:      "我家光头仔"
 date:       2010-12-12 21:24:14
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 生活记录

@@ -4,7 +4,7 @@ title:      "在b/s开发中经常用到的javaScript技术"
 date:       2006-04-26 00:31:52
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 技术文章

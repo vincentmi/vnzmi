@@ -4,7 +4,7 @@ title:      "MySQL与ASP.NET配合更强大"
 date:       2006-02-22 09:41:01
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 技术文章

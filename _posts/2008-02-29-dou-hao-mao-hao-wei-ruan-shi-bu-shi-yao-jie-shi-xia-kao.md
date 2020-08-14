@@ -4,7 +4,7 @@ title:      "逗号 冒号 微软是不是要解释下 靠"
 date:       2008-02-29 22:00:47
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
 ---

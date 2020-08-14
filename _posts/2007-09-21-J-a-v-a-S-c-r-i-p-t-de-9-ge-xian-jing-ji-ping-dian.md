@@ -4,7 +4,7 @@ title:      "JavaScript的9个陷阱及评点"
 date:       2007-09-21 23:07:04
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - Javascript

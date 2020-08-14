@@ -4,7 +4,7 @@ title:      "子时香"
 date:       2009-01-27 16:00:55
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 生活记录

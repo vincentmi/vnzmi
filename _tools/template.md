@@ -4,7 +4,7 @@ title:      "${title}"
 date:       ${timestr}
 author:     "Vincent"
 header-img:  "img/${bg}"
-catalog: true
+catalog: false
 tags:
     % for tag in tags:
     - ${tag}

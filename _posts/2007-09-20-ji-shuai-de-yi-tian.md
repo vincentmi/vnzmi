@@ -4,7 +4,7 @@ title:      "极衰的一天"
 date:       2007-09-20 09:30:30
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 生活记录

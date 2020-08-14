@@ -4,7 +4,7 @@ title:      "自己拍的成都车展照片"
 date:       2007-09-25 22:43:03
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 生活记录

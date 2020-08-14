@@ -4,7 +4,7 @@ title:      "难道虾子没吃饱"
 date:       2011-01-18 21:55:11
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
 ---

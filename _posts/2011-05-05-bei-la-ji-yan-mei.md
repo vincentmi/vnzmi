@@ -4,7 +4,7 @@ title:      "被垃圾淹没"
 date:       2011-05-05 11:45:02
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 生活记录

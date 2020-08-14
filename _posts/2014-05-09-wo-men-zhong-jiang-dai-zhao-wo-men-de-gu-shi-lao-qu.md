@@ -4,7 +4,7 @@ title:      "我们终将带着我们的故事老去"
 date:       2014-05-09 23:07:18
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 生活记录

@@ -4,7 +4,7 @@ title:      "哪个B设计的指路标志"
 date:       2009-05-08 23:41:59
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
 ---

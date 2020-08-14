@@ -4,7 +4,7 @@ title:      "一个成功投资者必看的20本书"
 date:       2007-09-22 00:08:12
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 股票

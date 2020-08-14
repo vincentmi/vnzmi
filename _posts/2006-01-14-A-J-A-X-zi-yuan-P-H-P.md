@@ -4,7 +4,7 @@ title:      "AJAX资源 PHP"
 date:       2006-01-14 12:21:00
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 技术文章

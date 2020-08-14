@@ -4,7 +4,7 @@ title:      "Li Lei，Han Meimei，和Jim Green缠绵悱恻的爱情故事"
 date:       2007-09-21 15:44:22
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 无聊

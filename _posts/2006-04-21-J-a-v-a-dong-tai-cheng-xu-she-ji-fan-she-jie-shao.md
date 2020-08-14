@@ -4,7 +4,7 @@ title:      "Java动态程序设计：反射介绍"
 date:       2006-04-21 15:30:16
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 技术文章

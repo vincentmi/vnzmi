@@ -4,7 +4,7 @@ title:      "脆弱的人啊"
 date:       2009-08-24 10:48:02
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
 ---

@@ -4,7 +4,7 @@ title:      "HTTP Client"
 date:       2005-10-13 14:56:38
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 技术文章

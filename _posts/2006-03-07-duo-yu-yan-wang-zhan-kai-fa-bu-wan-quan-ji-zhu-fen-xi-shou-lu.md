@@ -4,7 +4,7 @@ title:      "多语言网站开发 不完全技术分析收录"
 date:       2006-03-07 01:24:52
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 技术文章

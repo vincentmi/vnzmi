@@ -4,7 +4,7 @@ title:      "一出太阳就去浣花溪"
 date:       2009-11-03 23:27:44
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
 ---

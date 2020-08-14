@@ -4,7 +4,7 @@ title:      "好久没更新了，发照片吧"
 date:       2010-01-25 19:17:28
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 生活记录

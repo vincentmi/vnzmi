@@ -4,7 +4,7 @@ title:      "天冷了"
 date:       2008-12-22 14:22:58
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
 ---

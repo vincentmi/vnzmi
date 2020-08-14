@@ -4,7 +4,7 @@ title:      "郁闷到了"
 date:       2007-12-28 20:05:34
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
 ---

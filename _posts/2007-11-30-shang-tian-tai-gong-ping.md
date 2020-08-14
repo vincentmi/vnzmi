@@ -4,7 +4,7 @@ title:      "上天太公平"
 date:       2007-11-30 10:14:17
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
 ---

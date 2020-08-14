@@ -4,7 +4,7 @@ title:      "怀下旧"
 date:       2005-10-18 00:49:58
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 无聊

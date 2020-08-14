@@ -4,7 +4,7 @@ title:      "没有回忆的夏天"
 date:       2008-08-03 16:07:51
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
 ---

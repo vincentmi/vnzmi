@@ -4,7 +4,7 @@ title:      "RE:一和谈股：股票的目标价位如何确定"
 date:       2007-10-09 13:16:24
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
 ---

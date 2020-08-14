@@ -4,7 +4,7 @@ title:      "伊藤COSPLAY"
 date:       2008-10-02 12:37:45
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
 ---

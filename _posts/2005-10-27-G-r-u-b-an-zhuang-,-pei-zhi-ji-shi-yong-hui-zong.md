@@ -4,7 +4,7 @@ title:      "Grub安装,配置及使用汇总"
 date:       2005-10-27 01:25:00
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
 ---

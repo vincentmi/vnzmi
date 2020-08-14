@@ -4,7 +4,7 @@ title:      "粗糙的手"
 date:       2008-05-08 19:06:52
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
 ---

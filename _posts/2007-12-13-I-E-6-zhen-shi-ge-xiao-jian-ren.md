@@ -4,7 +4,7 @@ title:      "IE 6 真是个小贱人"
 date:       2007-12-13 23:42:28
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - Javascript

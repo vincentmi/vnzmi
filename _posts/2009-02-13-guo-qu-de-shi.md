@@ -4,7 +4,7 @@ title:      "过去的事"
 date:       2009-02-13 22:21:37
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 生活记录

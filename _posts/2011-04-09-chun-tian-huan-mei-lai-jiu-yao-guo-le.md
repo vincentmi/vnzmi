@@ -4,7 +4,7 @@ title:      "春天还没来就要过了。。。"
 date:       2011-04-09 19:17:53
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 生活记录

@@ -4,7 +4,7 @@ title:      "天佑中华"
 date:       2008-05-22 09:48:11
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
 ---

@@ -4,7 +4,7 @@ title:      "起个大早"
 date:       2010-07-02 08:30:15
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 生活记录

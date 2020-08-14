@@ -4,7 +4,7 @@ title:      "做中国人真惨"
 date:       2008-09-20 22:58:44
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
 ---

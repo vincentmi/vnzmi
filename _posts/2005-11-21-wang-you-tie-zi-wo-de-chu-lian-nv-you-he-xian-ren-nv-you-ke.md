@@ -4,7 +4,7 @@ title:      "网友帖子:我的初恋女友和 现任女友。。。咳"
 date:       2005-11-21 16:11:23
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 无聊

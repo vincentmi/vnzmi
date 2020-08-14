@@ -4,7 +4,7 @@ title:      "grub三步通"
 date:       2005-10-20 11:58:47
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 技术文章

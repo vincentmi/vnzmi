@@ -4,7 +4,7 @@ title:      "折财免灾"
 date:       2007-10-31 23:31:56
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
 ---

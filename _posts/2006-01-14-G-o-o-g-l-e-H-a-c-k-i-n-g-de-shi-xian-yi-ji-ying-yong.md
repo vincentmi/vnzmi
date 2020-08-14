@@ -4,7 +4,7 @@ title:      "Google Hacking 的实现以及应用"
 date:       2006-01-14 12:27:58
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 技术文章

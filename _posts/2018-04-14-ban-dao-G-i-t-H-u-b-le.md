@@ -4,7 +4,7 @@ title:      "搬到GitHub了"
 date:       2018-04-14 22:07:15
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 生活记录

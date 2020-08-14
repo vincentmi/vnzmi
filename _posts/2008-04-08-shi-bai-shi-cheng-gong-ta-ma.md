@@ -4,7 +4,7 @@ title:      "失败是成功他妈"
 date:       2008-04-08 23:14:29
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
 ---

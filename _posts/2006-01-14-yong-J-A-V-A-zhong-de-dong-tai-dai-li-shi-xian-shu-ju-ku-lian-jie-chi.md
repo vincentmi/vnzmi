@@ -4,7 +4,7 @@ title:      "用JAVA中的动态代理实现数据库连接池"
 date:       2006-01-14 12:25:17
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 技术文章

@@ -4,7 +4,7 @@ title:      "一个人的春天"
 date:       2008-04-02 22:13:17
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
 ---

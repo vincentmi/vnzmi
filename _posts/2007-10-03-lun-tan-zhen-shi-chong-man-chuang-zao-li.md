@@ -4,7 +4,7 @@ title:      "论坛真是充满创造力"
 date:       2007-10-03 23:20:28
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 无聊

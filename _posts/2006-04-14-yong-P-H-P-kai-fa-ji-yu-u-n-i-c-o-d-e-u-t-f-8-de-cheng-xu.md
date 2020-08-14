@@ -4,7 +4,7 @@ title:      "用PHP开发基于unicode(utf-8)的程序"
 date:       2006-04-14 17:32:05
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 技术文章

@@ -4,7 +4,7 @@ title:      ".net 运用程序使用系统桌面风格"
 date:       2006-01-14 12:16:13
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 技术文章

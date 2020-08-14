@@ -4,7 +4,7 @@ title:      "主流无线传输技术GPRS与CDMA之对比"
 date:       2005-10-10 22:55:41
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 技术文章

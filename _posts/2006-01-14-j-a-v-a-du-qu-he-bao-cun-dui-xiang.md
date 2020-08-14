@@ -4,7 +4,7 @@ title:      "java读取和保存对象"
 date:       2006-01-14 12:26:43
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
     - 技术文章

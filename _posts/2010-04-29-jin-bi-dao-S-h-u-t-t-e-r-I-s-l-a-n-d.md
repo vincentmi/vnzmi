@@ -4,7 +4,7 @@ title:      "禁闭岛Shutter Island"
 date:       2010-04-29 09:56:05
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
 ---

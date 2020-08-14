@@ -4,7 +4,7 @@ title:      "我相信他们到过月球"
 date:       2009-07-25 10:45:13
 author:     "Vincent"
 header-img:  "img/xinyuan-no7.jpg"
-catalog: true
+catalog: false
 tags:
     - 新浪博客
 ---
