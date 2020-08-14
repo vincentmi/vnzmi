@@ -225,6 +225,3 @@ $t3 = distance($a,$b)."\n";
 
 
 
-
-
-转移自: (http://blog.sina.com.cn/s/blog_542a3955010001w5.html)[http://blog.sina.com.cn/s/blog_542a3955010001w5.html]

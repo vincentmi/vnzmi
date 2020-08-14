@@ -76,6 +76,3 @@ site:xxxx.com //得到N个二级域名site:xxxx.com intext:*@xxxx.com //得到N�
 
 
 
-
-
-转移自: (http://blog.sina.com.cn/s/blog_542a3955010001jw.html)[http://blog.sina.com.cn/s/blog_542a3955010001jw.html]

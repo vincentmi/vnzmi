@@ -150,6 +150,3 @@ ASP与脚本引擎页码的概念
 
 
 
-
-
-转移自: (http://blog.sina.com.cn/s/blog_542a39550100028b.html)[http://blog.sina.com.cn/s/blog_542a39550100028b.html]

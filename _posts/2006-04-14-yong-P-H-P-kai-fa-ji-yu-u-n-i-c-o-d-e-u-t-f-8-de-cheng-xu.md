@@ -15,6 +15,3 @@ Author:朱辉(ice)phpx.com ID: ice日期:2005-3-19 11:20因朋友(teacherli)�
 
 
 
-
-
-转移自: (http://blog.sina.com.cn/s/blog_542a3955010002lp.html)[http://blog.sina.com.cn/s/blog_542a3955010002lp.html]

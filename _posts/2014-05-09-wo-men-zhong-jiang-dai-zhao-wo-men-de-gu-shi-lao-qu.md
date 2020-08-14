@@ -15,6 +15,3 @@ PConline搞了个XP回忆专题。
 
 
 
-
-
-转移自: (http://blog.sina.com.cn/s/blog_542a39550101fxno.html)[http://blog.sina.com.cn/s/blog_542a39550101fxno.html]

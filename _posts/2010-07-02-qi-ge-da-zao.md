@@ -22,6 +22,3 @@ WOW SS号TBC接近毕业了 ，是不是该练个法师耍耍，哎我更喜欢s
 
 
 
-
-
-转移自: (http://blog.sina.com.cn/s/blog_542a39550100kbss.html)[http://blog.sina.com.cn/s/blog_542a39550100kbss.html]

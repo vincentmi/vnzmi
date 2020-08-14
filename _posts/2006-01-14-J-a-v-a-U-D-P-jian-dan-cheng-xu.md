@@ -25,6 +25,3 @@ import java.net.*;import java.util.Enumeration;import java.io.*;class  Datagram
 
 
 
-
-
-转移自: (http://blog.sina.com.cn/s/blog_542a3955010001jt.html)[http://blog.sina.com.cn/s/blog_542a3955010001jt.html]

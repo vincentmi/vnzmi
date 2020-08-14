@@ -18,6 +18,3 @@ mssql_connect('127.0.0.1,1433','sa','')
 
 
 
-
-
-转移自: (http://blog.sina.com.cn/s/blog_542a395501008zol.html)[http://blog.sina.com.cn/s/blog_542a395501008zol.html]

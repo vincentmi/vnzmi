@@ -26,6 +26,3 @@ HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
 
 
 
-
-
-转移自: (http://blog.sina.com.cn/s/blog_542a3955010084ra.html)[http://blog.sina.com.cn/s/blog_542a3955010084ra.html]

@@ -15,6 +15,3 @@ http://www.sitepoint.com/forums/showthread.php?t=78687#post1141938
 
 
 
-
-
-转移自: (http://blog.sina.com.cn/s/blog_542a39550100008u.html)[http://blog.sina.com.cn/s/blog_542a39550100008u.html]

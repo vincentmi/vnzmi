@@ -16,6 +16,3 @@ d给我们的是怎么样的一个世界....
 
 
 
-
-
-转移自: (http://blog.sina.com.cn/s/blog_542a39550100b85t.html)[http://blog.sina.com.cn/s/blog_542a39550100b85t.html]

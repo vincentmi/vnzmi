@@ -19,6 +19,3 @@ FTP:ftp.applios.net/pub/fedora/linux/core
 
 
 
-
-
-转移自: (http://blog.sina.com.cn/s/blog_542a39550100003v.html)[http://blog.sina.com.cn/s/blog_542a39550100003v.html]

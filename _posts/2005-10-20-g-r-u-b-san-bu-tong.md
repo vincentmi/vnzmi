@@ -297,6 +297,3 @@ grub --config-file=(hd0,0)/boot/grub/menu.lst ，运行就可以引导安装了�
 
 
 
-
-
-转移自: (http://blog.sina.com.cn/s/blog_542a39550100004m.html)[http://blog.sina.com.cn/s/blog_542a39550100004m.html]

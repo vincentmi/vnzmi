@@ -13,6 +13,3 @@ tags:
 
 ${body}
 
-
-
-转移自: (${source})[${source}]

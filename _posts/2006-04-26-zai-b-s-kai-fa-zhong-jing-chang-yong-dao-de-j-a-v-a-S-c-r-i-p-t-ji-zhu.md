@@ -197,6 +197,3 @@ alert(reg.test(str));
 		
 
 
-
-
-转移自: (http://blog.sina.com.cn/s/blog_542a3955010002vy.html)[http://blog.sina.com.cn/s/blog_542a3955010002vy.html]

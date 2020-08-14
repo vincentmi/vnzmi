@@ -143,6 +143,3 @@ setTimeout(function(){
 
 
 
-
-
-转移自: (http://blog.sina.com.cn/s/blog_542a395501000bt3.html)[http://blog.sina.com.cn/s/blog_542a395501000bt3.html]

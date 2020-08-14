@@ -15,6 +15,3 @@ http://www.matrix.org.cn/subjects/Wiki.jsp?page=JakartaStruts
 
 
 
-
-
-转移自: (http://blog.sina.com.cn/s/blog_542a39550100005o.html)[http://blog.sina.com.cn/s/blog_542a39550100005o.html]
