@@ -3,7 +3,7 @@ layout:     post
 title:      "${title}"
 date:       ${timestr}
 author:     "Vincent"
-header-img:  "img/${bg}.jpg"
+header-img:  "img/${bg}"
 catalog: true
 tags:
     % for tag in tags:
@@ -12,3 +12,7 @@ tags:
 ---
 
 ${body}
+
+
+
+转移自: (${source})[${source}]

@@ -8,8 +8,19 @@ from bs4 import BeautifulSoup,NavigableString,Tag , Comment
 import re ,os, hashlib ,sys
 from datetime import datetime 
 from mako.template import Template
+import pinyin
+import imghdr
+import shutil
+import bleach
 
 __DIR__ = os.path.split(os.path.realpath(__file__))[0]
+
+__POST_FOLDER__ = __DIR__+'/../_posts/'
+__POST_IMG__ = __DIR__+'/../img/sinablog/'
+
+__SKIP__URLS = ['http://blog.sina.com.cn/s/blog_542a3955010001mp.html',
+'http://blog.sina.com.cn/s/blog_542a39550100003i.html',
+'http://blog.sina.com.cn/s/blog_542a3955010001jy.html']
 
 def getPage(url):
     req = request.Request(url)
@@ -32,33 +43,65 @@ def getPageWithCache(url) :
         fp.close()
     return html
 def parseContent(url):
+    global __POST_IMG__
     html = getPageWithCache(url)
     #print(html)
     post = {}
     dom = BeautifulSoup(html,'lxml')
     titleElement = dom.select('#articlebody .articalTitle .titName')
-    post['title'] = titleElement[0].text
+    if len(titleElement) == 0 :
+        #print(html)
+        return ""
+    title = titleElement[0].text
+    post['title'] = title
+    post['source'] = url
+    post['title_pinyin'] = pinyin.get(title.replace('/',''),format="strip", delimiter="-")
     
     timeElement = dom.select('#articlebody .articalTitle .time')
     matcheObj = re.match('\((.*)\)',timeElement[0].text)
     timeStr = matcheObj.group(1)
     post['timestr'] = timeStr
-    post['time'] = datetime.strptime(timeStr,'%Y-%m-%d %H:%M:%S')
+    
+    postCreatedAt = datetime.strptime(timeStr,'%Y-%m-%d %H:%M:%S')
+    post['time'] = postCreatedAt
+    post['timeymd'] = postCreatedAt.strftime('%Y-%m-%d')
 
     tags = dom.select('#articlebody .articalTag .blog_class a')
-    post['tags'] = []
+    post['tags'] = ['新浪博客']
     for tag in tags :
         post['tags'].append(tag.text)
 
     body = dom.select('#articlebody .articalContent')
     bodytext=''
     Type_NavigableString = NavigableString('')
+    Type_Comment = Comment('')
     for content in body[0].contents :
         if(content.__class__ == Type_NavigableString.__class__):
-           bodytext += content
+           bodytext += str(content).strip()+"\n"
+        elif (content.__class__ == Type_Comment.__class__ ) :
+            bodytext += content
         else:
-            print(content)
-
+            if content.name == 'br' :
+                bodytext += "\n"
+            else:
+                
+                imgs = content.select('img')
+                bodytextTemp = ''
+                for img in imgs:
+                    imgUrl=img.attrs['real_src']
+                    md5 = hashlib.md5()
+                    md5.update(imgUrl.encode('utf-8'))
+                    imgNewName = md5.hexdigest()
+                    tempFile = '/tmp/'+imgNewName
+                    newFile = __POST_IMG__+imgNewName
+                    relateFile = '/img/sinablog/'+imgNewName
+                    if downloadPicture(url,imgUrl,tempFile) == 1 :
+                        imgType = imghdr.what(tempFile)
+                        if imgType is not None :
+                            shutil.move(tempFile,newFile+'.'+imgType)
+                            relateFile = relateFile + '.'+imgType
+                            bodytextTemp+="!["+relateFile+"]("+relateFile+")\n"
+                bodytext+= bleach.clean(str(content), tags=['img'], strip=True)+"\n" + bodytextTemp
     post['body'] = bodytext
         
     return post
@@ -69,26 +112,20 @@ def renderPost(post):
     return md.render(**post)
 
 def downloadPicture(referer,url,toFile) : 
-    req = request.Request(url)
-    req.add_header('Referer',referer)
-    response = request.urlopen(req)
-    fp = open(toFile,'wb')
-    fp.write(response.read())
-    fp.close()
-    return toFile
-
-post = parseContent('http://blog.sina.com.cn/s/blog_542a39550100rqrm.html')
-post['bg'] = 'life.jpg'
-print(post)
-exit(0)
-
-print(renderPost(post))
-downloadPicture(
-    'http://blog.sina.com.cn/s/blog_542a39550100rqrm.html', 
-    'http://s1.sinaimg.cn/middle/542a3955xa27f37f5ace0&amp;690',
-    __DIR__+'/x.gif'
-)
-
+    try:
+        req = request.Request(url)
+        req.add_header('Referer',referer)
+        response = request.urlopen(req)
+        if response.getcode() == 200 :
+            fp = open(toFile,'wb')
+            fp.write(response.read())
+            fp.close()
+            return 1
+        return 0
+    except BaseException:
+        return 0
+    else:
+        return 1 
 
 html = getPageWithCache('http://blog.sina.com.cn/vinz')
 matched = re.search('\$uid\s*\:\s*\"([0-9]+)\"',html,re.S)
@@ -100,9 +137,21 @@ uid = matched.group(1)
 
 for i in range(1,10):
     url = 'http://blog.sina.com.cn/s/article_sort_'+uid+'_10001_'+str(i)+'.html'
-    print(url)
+    print("PAGE - " + url)
     html = getPageWithCache(url)
     soup = BeautifulSoup(html,'lxml')
     articles = soup.select('.bloglist .blog_title a')
     for art in articles :
-        print(" "+art.attrs['href'])
+        postUrl = art.attrs['href']
+        print("     -> "+postUrl)
+        if postUrl in __SKIP__URLS :
+            continue
+        post = parseContent(postUrl)
+        if post != "" :
+            post['bg'] = 'xinyuan-no7.jpg'
+            postMd = (renderPost(post))
+            fp = open(__POST_FOLDER__+post['timeymd']+'-'+post['title_pinyin']+'.md','w+')
+            fp.write(postMd)
+            fp.close()
+        else:
+            print("     x- NO Title ")
