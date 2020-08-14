@@ -1,4 +1,4 @@
----/Users/vincentmi/vnzmi/_posts/2015-05-03-chinese-encoding.md
+---
 layout:     post
 title:      "Vagrant JS文件乱码"
 date:       2015-05-02 23:36:00
