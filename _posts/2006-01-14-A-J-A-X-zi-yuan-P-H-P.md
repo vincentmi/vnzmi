@@ -1,0 +1,26 @@
+---
+layout:     post
+title:      "AJAX资源 PHP"
+date:       2006-01-14 12:21:00
+author:     "Vincent"
+header-img:  "img/xinyuan-no7.jpg"
+catalog: true
+tags:
+    - 新浪博客
+    - 技术文章
+---
+
+
+
+<img>
+Xajax
+http://www.xajaxproject.org/
+ 
+ZK
+http://zk1.sourceforge.net/
+
+
+
+
+
+转移自: (http://blog.sina.com.cn/s/blog_542a3955010001js.html)[http://blog.sina.com.cn/s/blog_542a3955010001js.html]

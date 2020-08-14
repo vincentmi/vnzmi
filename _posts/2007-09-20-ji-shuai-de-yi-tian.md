@@ -1,0 +1,21 @@
+---
+layout:     post
+title:      "极衰的一天"
+date:       2007-09-20 09:30:30
+author:     "Vincent"
+header-img:  "img/xinyuan-no7.jpg"
+catalog: true
+tags:
+    - 新浪博客
+    - 生活记录
+---
+
+
+
+ 大清早爆胎，出门摔车....幸亏我身手敏捷弃车了不然就摔的不好看了。郁闷！原因是补胎的时候师傅把后刹车调松了，上街沿的时候速度就快那么一点点~~~于是“彭..".原来一直觉得F1老调试赛车，哪那么多调的嘛！现在才深刻体会到调试确实至关重要一门学问。
+
+
+
+
+
+转移自: (http://blog.sina.com.cn/s/blog_542a395501000bs7.html)[http://blog.sina.com.cn/s/blog_542a395501000bs7.html]

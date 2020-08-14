@@ -20,13 +20,20 @@ __POST_IMG__ = __DIR__+'/../img/sinablog/'
 
 __SKIP__URLS = ['http://blog.sina.com.cn/s/blog_542a3955010001mp.html',
 'http://blog.sina.com.cn/s/blog_542a39550100003i.html',
-'http://blog.sina.com.cn/s/blog_542a3955010001jy.html']
+'http://blog.sina.com.cn/s/blog_542a3955010001jy.html',
+'http://blog.sina.com.cn/s/blog_542a3955010001wu.html']
 
 def getPage(url):
     req = request.Request(url)
     response = request.urlopen(req)
     html = response.read().decode('utf-8')
     return html
+
+def trimTitle(title):
+    chars = [' ','-','_','/','\\','。','.','?','\'',':','，','(',')',' ','：','　']
+    for char in chars :
+        title = title.replace(char,'')
+    return title
 
 def getPageWithCache(url) :
     md5 = hashlib.md5()
@@ -55,7 +62,7 @@ def parseContent(url):
     title = titleElement[0].text
     post['title'] = title
     post['source'] = url
-    post['title_pinyin'] = pinyin.get(title.replace('/',''),format="strip", delimiter="-")
+    post['title_pinyin'] = pinyin.get(trimTitle(title),format="strip", delimiter="-")
     
     timeElement = dom.select('#articlebody .articalTitle .time')
     matcheObj = re.match('\((.*)\)',timeElement[0].text)

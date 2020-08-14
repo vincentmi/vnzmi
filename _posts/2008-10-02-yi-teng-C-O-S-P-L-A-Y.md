@@ -1,0 +1,26 @@
+---
+layout:     post
+title:      "伊藤COSPLAY"
+date:       2008-10-02 12:37:45
+author:     "Vincent"
+header-img:  "img/xinyuan-no7.jpg"
+catalog: true
+tags:
+    - 新浪博客
+---
+
+
+<img>
+![/img/sinablog/5a2ec7dfeda6ffa2285dc53d4b014c96.jpeg](/img/sinablog/5a2ec7dfeda6ffa2285dc53d4b014c96.jpeg)
+<img>
+![/img/sinablog/8c5b4a120698ebfa11543fee21799d17.jpeg](/img/sinablog/8c5b4a120698ebfa11543fee21799d17.jpeg)
+
+更多图片
+
+http://my.poco.cn/lastphoto_v2.htx&amp;id=1107262&amp;user_id=129395&amp;p=7
+
+
+
+
+
+转移自: (http://blog.sina.com.cn/s/blog_542a39550100bcrs.html)[http://blog.sina.com.cn/s/blog_542a39550100bcrs.html]

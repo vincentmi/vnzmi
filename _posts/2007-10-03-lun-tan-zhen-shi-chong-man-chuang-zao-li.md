@@ -1,0 +1,32 @@
+---
+layout:     post
+title:      "论坛真是充满创造力"
+date:       2007-10-03 23:20:28
+author:     "Vincent"
+header-img:  "img/xinyuan-no7.jpg"
+catalog: true
+tags:
+    - 新浪博客
+    - 无聊
+---
+
+
+ 最贪婪的： 晃
+　　最直接的： 昆
+　　最西方的： 咬
+　　最自豪的： 鹅
+　　最不怕烫的： 炅
+　　最处女情结的： 晷
+　　最想以数量取胜的：晁
+　　最变态的： 嬲
+　　最牛X的： 昊
+　　最无处发泄的：间
+　　最刺激宗教人士的：昵
+　　最痛苦的：旱
+　　最象形的：个
+
+
+
+
+
+转移自: (http://blog.sina.com.cn/s/blog_542a395501000bxv.html)[http://blog.sina.com.cn/s/blog_542a395501000bxv.html]
