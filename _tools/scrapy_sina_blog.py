@@ -12,8 +12,13 @@ import pinyin
 import imghdr
 import shutil
 import bleach
+from util import downloadPicture,getPage,trimTitle,getPageWithCache,md5,renderPost
 
+print("不能执行覆盖")
+exit(1)
 __DIR__ = os.path.split(os.path.realpath(__file__))[0]
+
+__UPDATE_PIC__ = 0
 
 __POST_FOLDER__ = __DIR__+'/../_posts/'
 __POST_IMG__ = __DIR__+'/../img/sinablog/'
@@ -23,32 +28,7 @@ __SKIP__URLS = ['http://blog.sina.com.cn/s/blog_542a3955010001mp.html',
 'http://blog.sina.com.cn/s/blog_542a3955010001jy.html',
 'http://blog.sina.com.cn/s/blog_542a3955010001wu.html']
 
-def getPage(url):
-    req = request.Request(url)
-    response = request.urlopen(req)
-    html = response.read().decode('utf-8')
-    return html
 
-def trimTitle(title):
-    chars = [' ','-','_','/','\\','。','.','?','\'',':','，','(',')',' ','：','　']
-    for char in chars :
-        title = title.replace(char,'')
-    return title
-
-def getPageWithCache(url) :
-    md5 = hashlib.md5()
-    md5.update(url.encode('utf-8'))
-    cacheFileName = '/tmp/py_get_'+md5.hexdigest()
-    if(os.path.exists(cacheFileName)):
-        fp = open(cacheFileName);
-        html = fp.read()
-        fp.close()
-    else :
-        html = getPage(url)
-        fp = open(cacheFileName,'w')
-        fp.write(html)
-        fp.close()
-    return html
 def parseContent(url):
     global __POST_IMG__
     html = getPageWithCache(url)
@@ -96,43 +76,24 @@ def parseContent(url):
                 bodytextTemp = ''
                 for img in imgs:
                     imgUrl=img.attrs['real_src']
-                    md5 = hashlib.md5()
-                    md5.update(imgUrl.encode('utf-8'))
-                    imgNewName = md5.hexdigest()
+                    imgNewName = md5(imgUrl)
                     tempFile = '/tmp/'+imgNewName
                     newFile = __POST_IMG__+imgNewName
                     relateFile = '/img/sinablog/'+imgNewName
                     if downloadPicture(url,imgUrl,tempFile) == 1 :
                         imgType = imghdr.what(tempFile)
                         if imgType is not None :
-                            #shutil.move(tempFile,newFile+'.'+imgType)
+                            if __UPDATE_PIC__ == 1 :
+                                shutil.move(tempFile,newFile+'.'+imgType)
                             relateFile = relateFile + '.'+imgType
                             bodytextTemp+="!["+relateFile+"]("+relateFile+")\n"
                 bodytext+= bleach.clean(str(content), tags=['img'], strip=True)+"\n" + bodytextTemp
     post['body'] = bodytext
         
     return post
-def renderPost(post):
-    global __DIR__
-    filename = __DIR__ + '/template.md'
-    md = Template(filename=filename)
-    return md.render(**post)
 
-def downloadPicture(referer,url,toFile) : 
-    try:
-        req = request.Request(url)
-        req.add_header('Referer',referer)
-        response = request.urlopen(req)
-        if response.getcode() == 200 :
-            fp = open(toFile,'wb')
-            fp.write(response.read())
-            fp.close()
-            return 1
-        return 0
-    except BaseException:
-        return 0
-    else:
-        return 1 
+
+
 
 html = getPageWithCache('http://blog.sina.com.cn/vinz')
 matched = re.search('\$uid\s*\:\s*\"([0-9]+)\"',html,re.S)
