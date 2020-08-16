@@ -3,7 +3,7 @@ layout:     post
 title:      "VUE项目读取Docker环境变量"
 date:       "2020-07-23 23:15:00"
 author:     "Vincent"
-header-img:  "img/post-bg-graff.jpg"
+header-img:  "img/bulleye_red.svg"
 catalog: true
 tags:
     - Docker

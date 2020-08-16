@@ -3,7 +3,7 @@ layout:     post
 title:      "靠 电子商务示例"
 date:       2005-10-18 17:12:24
 author:     "Vincent"
-header-img:  "img/xinyuan-no7.jpg"
+header-img:  "img/post-bg-dot.jpg"
 catalog: false
 tags:
     - 新浪博客

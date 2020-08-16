@@ -3,7 +3,7 @@ layout:     post
 title:      "系统引导资料"
 date:       2005-10-27 00:19:33
 author:     "Vincent"
-header-img:  "img/xinyuan-no7.jpg"
+header-img:  "img/post-bg-dot.jpg"
 catalog: false
 tags:
     - 新浪博客

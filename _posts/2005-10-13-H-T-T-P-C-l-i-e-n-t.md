@@ -3,14 +3,16 @@ layout:     post
 title:      "HTTP Client"
 date:       2005-10-13 14:56:38
 author:     "Vincent"
-header-img:  "img/xinyuan-no7.jpg"
+header-img:  "img/bullseye-gradient_blue.svg"
 catalog: false
 tags:
     - 新浪博客
     - 技术文章
 ---
 
+## 代码
 
+```java
 import java.net.*;
 import java.io.*;
 import java.util.Properties;
@@ -219,24 +221,38 @@ public static void main(String[]args){
         }
     }
 }
-
+```
  
 
-HTTP请求
+## HTTP请求
 
  
-
- ----------运行这个java程序并捕获输出 ----------POST http://www.7rings.com.cn/crbt/login.php HTTP/1.0User-Agent:myselfHttp/1.0Accept:www/source;text/html;image/gif;*/*Content-type:application/x-www-form-urlencodedContent-length:54
+```
+ ----------运行这个java程序并捕获输出 ----------
+POST http://www.7rings.com.cn/crbt/login.php HTTP/1.0
+User-Agent:myself
+Http/1.0
+Accept:www/source;text/html;image/gif;*/*Content-type:application/x-www-form-urlencodedContent-length:54
 
 userid=89919419&amp;passwd=******&amp;areacode=00&amp;phone_type=0
-
+```
  
 
+## 响应内容
+
  
+```
+HTTP/1.1 200 OK
+Date: Thu, 13 Oct 2005 06:45:03 GMT
+Server: Apache/1.3.33 (Unix) PHP/5.0.3
+X-Powered-By: PHP/5.0.3
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Last-Modified: Thu, 13 Oct 2005 06:45:03
+GMTCache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Pragma: no-cacheSet-Cookie: PHPSESSID=in2k6uuso7ffjkul00n480f1i2; path=/Set-Cookie: crbt_area_code=00; expires=Sat, 12-Nov-2005 06:45:03 GMT; path=/; domain=www.7rings.com.cnConnection: closeContent-Type: text/html; charset=gb2312
 
-HTTP/1.1 200 OKDate: Thu, 13 Oct 2005 06:45:03 GMTServer: Apache/1.3.33 (Unix) PHP/5.0.3X-Powered-By: PHP/5.0.3Expires: Thu, 19 Nov 1981 08:52:00 GMTLast-Modified: Thu, 13 Oct 2005 06:45:03GMTCache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0Pragma: no-cacheSet-Cookie: PHPSESSID=in2k6uuso7ffjkul00n480f1i2; path=/Set-Cookie: crbt_area_code=00; expires=Sat, 12-Nov-2005 06:45:03 GMT; path=/; domain=www.7rings.com.cnConnection: closeContent-Type: text/html; charset=gb2312
-
-&lt;script&gt;document.frames.top.location='index02.php?url=myringlist.php'&lt;/script&gt;                             
+<script><document.frames.top.location='index02.php?url=myringlist.php'</script>
+```                             
 
 
 

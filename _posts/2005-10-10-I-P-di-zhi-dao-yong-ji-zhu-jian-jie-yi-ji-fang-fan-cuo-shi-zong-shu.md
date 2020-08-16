@@ -3,7 +3,7 @@ layout:     post
 title:      "IP地址盗用技术简介以及防范措施综述"
 date:       2005-10-10 22:57:02
 author:     "Vincent"
-header-img:  "img/xinyuan-no7.jpg"
+header-img:  "img/post-bg-dot.jpg"
 catalog: false
 tags:
     - 新浪博客

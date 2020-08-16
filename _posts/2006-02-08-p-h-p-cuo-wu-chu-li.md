@@ -3,7 +3,7 @@ layout:     post
 title:      "php错误处理"
 date:       2006-02-08 15:22:38
 author:     "Vincent"
-header-img:  "img/xinyuan-no7.jpg"
+header-img:  "img/post-bg-dot.jpg"
 catalog: false
 tags:
     - 新浪博客

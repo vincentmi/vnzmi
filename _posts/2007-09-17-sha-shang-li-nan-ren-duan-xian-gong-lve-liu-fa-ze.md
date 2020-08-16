@@ -3,7 +3,7 @@ layout:     post
 title:      "杀伤力男人: 短线攻略六法则"
 date:       2007-09-17 11:24:39
 author:     "Vincent"
-header-img:  "img/xinyuan-no7.jpg"
+header-img:  "img/post-bg-dot.jpg"
 catalog: false
 tags:
     - 新浪博客

@@ -3,8 +3,8 @@ layout:     post
 title:      "Google Hacking 的实现以及应用"
 date:       2006-01-14 12:27:58
 author:     "Vincent"
-header-img:  "img/xinyuan-no7.jpg"
-catalog: false
+header-img:  "img/post-bg-dot.jpg"
+catalog: true
 tags:
     - 新浪博客
     - 技术文章
@@ -13,7 +13,9 @@ tags:
 
 
 http://soft.yesky.com/security/hkjj/389/2082889.shtml
-前言
+
+
+# 前言
 　　google hacking其实并算不上什么新东西，在早几年我在一些国外站点上就看见过相关的介绍，但是由于当时并没有重视这种技术，认为最多就只是用来找找未改名的mdb或者别人留下的webshell什么的，并无太大实际用途。但是前段时间仔细啃了些资料才猛然发觉google hacking其实并非如此简单...
 　　google hacking的简单实现
 　　记得以前看见过一篇文章写的就是简单的通过用www.google.com来搜索dvbbs6.mdb或conn.inc来获得一些站点的敏感信息.其实使用google中的一些语法可以提供给我们更多的信息(当然也提供给那些习惯攻击的人更多他们所想要的.),下面就来介绍一些常用的语法. 
@@ -69,9 +71,11 @@ site:xxxx.com //得到N个二级域名site:xxxx.com intext:*@xxxx.com //得到N�
 
 
 
+```
+<?if (strstr($_SERVER['HTTP_USER_AGENT'], "Googlebot")){　　header("HTTP/1.1 301");　　header("Location: http://www.google.com");}?>
+```
 
-&lt;?if (strstr($_SERVER['HTTP_USER_AGENT'], "Googlebot")){　　header("HTTP/1.1 301");　　header("Location: http://www.google.com");}?&gt;
-　　后记
+# 后记
 　　这段时间在国外的一些google hack的研究站点看了看，其实也都差不多是一些基本语法的灵活运用，或者配合某个脚本漏洞，主要还是靠个人的灵活思维。国外对于google hack方面的防范也并不是很多，所以大家还是点到为止，不要去搞破坏拉，呵呵。对于一些在win上跑 apache的网管们应该多注意一下这方面，一个intitle:index of就差不多都出来了：）
 
 

@@ -3,8 +3,8 @@ layout:     post
 title:      "被垃圾淹没"
 date:       2014-05-15 11:45:02
 author:     "Vincent"
-header-img:  "img/home-bg1.jpg"
-catalog: true
+header-img:  "img/post-bg.jpg"
+catalog: false
 tags:
     - 生活
 ---
@@ -16,6 +16,8 @@ tags:
 ![toursforfun_code_view](/img/in-post/2015_code_view.gif)
 
 我要自己搞东西 草..不然会死在这里
+
+
 
 
 

@@ -3,7 +3,7 @@ layout:     post
 title:      "Fedora资源"
 date:       2005-10-13 15:05:52
 author:     "Vincent"
-header-img:  "img/xinyuan-no7.jpg"
+header-img:  "img/bullseye-gradient_blue.svg"
 catalog: false
 tags:
     - 新浪博客

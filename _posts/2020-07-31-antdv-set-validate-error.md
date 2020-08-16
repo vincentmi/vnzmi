@@ -3,7 +3,7 @@ layout:     post
 title:      "Antd-v读取和设置后端的错误信息"
 date:       "2020-07-31 23:05:00"
 author:     "Vincent"
-header-img:  "img/post-bg-water.jpg"
+header-img:  "img/symbol.svg"
 catalog: true
 tags:
     - Antd

@@ -1,8 +1,8 @@
-export JEKYLL_VERSION=3.8
+
 docker run --rm \
   --volume="$PWD:/srv/jekyll" \
   --volume="$PWD/vendor/bundle:/usr/local/bundle" \
-  -it jekyll/jekyll:$JEKYLL_VERSION \
+  -it jk \
   jekyll build
 
 #docker run --rm  -v `pwd`:/srv/jekyll -e "ALGOLIA_API_KEY=b371ed94299fc01422c1ab5c7bbd39e1"  jk  ./update_index.sh

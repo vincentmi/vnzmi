@@ -3,7 +3,7 @@ layout:     post
 title:      "AJAX资源 PHP"
 date:       2006-01-14 12:21:00
 author:     "Vincent"
-header-img:  "img/xinyuan-no7.jpg"
+header-img:  "img/post-bg-dot.jpg"
 catalog: false
 tags:
     - 新浪博客

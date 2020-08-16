@@ -3,7 +3,7 @@ layout:     post
 title:      "Li Lei，Han Meimei，和Jim Green缠绵悱恻的爱情故事"
 date:       2007-09-21 15:44:22
 author:     "Vincent"
-header-img:  "img/xinyuan-no7.jpg"
+header-img:  "img/desk.jpg"
 catalog: false
 tags:
     - 新浪博客
@@ -44,7 +44,6 @@ Li Lei 和 Jim Green：
 
   最终结果，Jim的出现次数略高于Li Lei。呵呵，这毕竟是英语课本，就承认Jim的第一男主角地位吧。 
 
-<img>
 查看原图
 
 
