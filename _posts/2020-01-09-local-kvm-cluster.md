@@ -46,6 +46,8 @@ sudo systemctl enable libvirtd.service
 
 ## 配置桥接网络
 
+
+
 修改 ```/etc/network/interfaces```
 
 ```sh
@@ -67,10 +69,51 @@ iface br0 inet static
      bridge_fd 0
 ```
 
- 重启网络
+> ubuntu 18.04 使用了netplan 配置有点不同
+> 文件位置 ```/etc/netplan/01-netcfg.yaml``` 文件内如如下
+>
+
+#### 原文件
+
+```yaml
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enp2s0:
+      addresses: [ 192.168.199.152/24 ]
+      gateway4: 192.168.199.1
+      nameservers:
+          addresses:
+              - "192.168.199.1"
+```
+#### 修改为 
+
+```yaml 
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+     enp2s0:
+        dhcp4: no
+        dhcp6: no
+  bridges:
+    br0:
+        interfaces: [enp2s0]
+        dhcp4: no
+        addresses: [ 192.168.199.152/24 ]
+        gateway4: 192.168.199.1
+        nameservers:
+            addresses:
+                - "192.168.199.1"
+```
+
+
+#### 重启网络
  
  ```sh
  systemctl restart networking.service
+ # netplan apply # for ubuntu 18.04
  ```
  
  >  有时候需要```reboot```一下.
