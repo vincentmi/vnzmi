@@ -59,6 +59,8 @@ $\theta_j=\theta_j - \alpha\frac{1}{m} \sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)
 使用临时变量.不要使用被更新的$\theta$值带入更新公式
 
 ## 第二周 多元线性回归
+**样本** 
+$x=[x_1\ x_2\ x_3\ ... \ x_n]$
 **参数**
 $\theta=[\theta_0 \  \theta_1 \  \theta_2 ... \theta_n]$
 **预测函数** 
@@ -72,6 +74,17 @@ $\theta_j=\theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta_0,\theta_1)
 带入函数求导之后:
 $\theta_j=\theta_j - \alpha\frac{1}{m} \sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x^{(i)}$
 使用临时变量.不要使用被更新的$\theta$值带入更新公式
+
+
+
+
+$$
+X=\begin{bmatrix} 
+x_1^1 & x_1^2 & x_1^3 \\\
+x_1^2& x_2^2 & x_2^3 \\\
+x_1^3& x_3^2 & x_3^3 \\\
+\end{bmatrix} 
+$$
  
 
 
