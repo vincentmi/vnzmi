@@ -47,15 +47,15 @@ $j$  代价函数,描述假设函数与训练样本输出值的差异
 
 ### 4 一元线性回归
 **预测函数** 
- $h_\theta(x) = \theta_0 + \theta_1x$ 
+$$h_\theta(x) = \theta_0 + \theta_1x$$ 
 **代价函数** 
- $J(\theta_0,\theta_1)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)}-y^{(i)}))^2$
+ $$J(\theta_0,\theta_1)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)}-y^{(i)}))^2$$
 **目标**
-$min_{\theta0,\theta1}(j)$ 获得最小代价
+$$min_{\theta0,\theta1}(j)$$ 获得最小代价
 **参数更新**
-$\theta_j=\theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta_0,\theta_1)$
+$$\theta_j=\theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta_0,\theta_1)$$
 带入函数求导之后:
-$\theta_j=\theta_j - \alpha\frac{1}{m} \sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x^{(i)}$
+$$\theta_j=\theta_j - \alpha\frac{1}{m} \sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x^{(i)}$$
 使用临时变量.不要使用被更新的$\theta$值带入更新公式
 
 ## 第二周 多元线性回归
