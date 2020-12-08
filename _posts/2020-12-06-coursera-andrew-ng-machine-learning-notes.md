@@ -69,46 +69,149 @@ $\theta_j=\theta_j - \alpha\frac{1}{m} \sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)
 使用临时变量.不要使用被更新的$\theta$值带入更新公式
 
 ## 第二周 多元线性回归
+
+#### 1 公式推导1
 **样本** 
 
-$x=[x_1\ x_2\ x_3\ ... \ x_n]$
+$x=[x_0 \ x_1\ x_2\ x_3\ ... \ x_n]$
+
+$x_0 = 1 $
 
 **参数**
 
 $\theta=[\theta_0 \  \theta_1 \  \theta_2 ... \theta_n]$
 
+
+
 **预测函数** 
 
-$h_\theta(x) = \theta_0 + \theta_1x_1 ... \theta_nx_n$ 
+$h_\theta(x) = \theta_0x_0 + \theta_1x_1 ... \theta_nx_n=\theta^Tx$ 
 
 **代价函数** 
 
-$J(\theta_0,\theta_1)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)}-y^{(i)}))^2$
+$J(\theta_0, \theta_1 ... \theta_n)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)}-y^{(i)}))^2$
 
 **目标**
 
-$min_{\theta0,\theta1}(j)$ 获得最小代价
+$min_{\theta0,\theta1 ... \theta_n}(j)$ 获得最小代价
 
 **参数更新**
 
-$\theta_j=\theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta_0,\theta_1)$
+$\theta_j=\theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta_0,\theta_1 ... \theta_n) = \theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta)$
 
 带入函数求导之后:
 
-$\theta_j=\theta_j - \alpha\frac{1}{m} \sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x^{(i)}$
-
-使用临时变量.不要使用被更新的$\theta$值带入更新公式
+$\theta_j=\theta_j - \alpha\frac{1}{m} \sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)}$
 
 
 
 
+
+### 2 特征缩放
+
+- 将特征值限制在近似范围,降低梯度下降的步数.进行特征缩放后轮廓图将会更规则提高梯度下降的效率.
+- 将特征值缩放到 $-1 \le x_i \le 1$
+- 均值归一 常用公式 $x_i=\frac{x_i-avg(x)}{max(x)-min(x)}$
+
+```matlab
+%  均值归一
+% x-均值/标准差
+function xi= normalization(x)
+avg=sum(x)/length(x);
+s=max(x) - min(x);
+xi=(x - avg)/s;
+```
+
+### 3 学习速率$\alpha$
+- 太小会导致收敛过慢
+- 太大J函数不会在每次迭代进行减少.无法收敛
+- 尝试 0.001,0.01,0.1,1,0.03等
+- 绘制成本迭代图形观察收敛情况 ( x=迭代次数,y=j函数的值)
+- 自动收敛测试,成本减少少于 $10^{-3}$则可以认为函数收敛收敛
+    - 无法收敛尝试调低学习速率$\alpha$    
+
+### 4 多项式回归
+多项式回归更好的拟合数据
+- 根据数据可以选择合适的多项式回归 $h(\theta)=\theta_0+\theta_1x+\theta_1x^2$
+- 根据数据可以选择合适的多项式回归 $h(\theta)=\theta_0+\theta_1x+\theta_1\sqrt{x}$
+
+### 5 正规方程
+求$J$函数的偏导数,并置为0,即曲线斜率为0的点.即可算出对应的$\theta$值. (补微积分:()
+
+- 优点
+    - 一次即可算出最优解
+    - 不需要进行特征缩放
+    - 不需要选择学习速率
+    - 适合线性回归
+- 缺点
+    - 如果$n$非常大,效率会急剧降低
+    - 如果特征类型大于10000建议尝试梯度下降算法
+    - 不太适合比较复杂的学习算法
+- 矩阵不可逆的情况,
+    - 删除一些有线性相关的特征量.
+    - 删除重复特征
+
+设计矩阵$X$ 为 $\mathbb{R}^{m\times(n+1)}$
 $
 X=\begin{bmatrix} 
-x_1^1 & x_1^2 & x_1^3 \\\
-x_1^2& x_2^2 & x_2^3 \\\
-x_1^3& x_3^2 & x_3^3 \\\
+1 & x_1^{(1)} & x_2^{(1)} & x_3^{(1)} \\\
+1 &  x_1^{(2)}& x_2^{(2)} & x_3^{(2)} \\\
+1 &  x_1^{(3)}& x_2^{(3)} & x_3^{(3)} \\\
 \end{bmatrix} 
 $
+
+y为 $\mathbb{R}^{m}$
+
+$\theta=(T^TX)^{-1}X^Ty$
+
+```matlab
+pinv(X'*X)*X'*y
+%X' X的转置 X'=transpose(X)
+```
+### Octave 使用
+
+这部分比较简单,部分函数
+
+- ```disp```打印变量
+- ```pinv``` 求逆矩阵,一定会返回
+- ```inv```求逆矩阵,奇异矩阵会报错
+- ```transpose``` 转置 ,和 ```A'```效果一样
+- ```eye(m)```生成单元矩阵
+- ```ones(m,n)```生成均为1 的矩阵或者向量
+- ```zeros(m,n)```生成均为0的矩阵或向量
+- ```rand(m,n)```生成随机矩阵
+- ```A(:,1) ``` 取列向量
+- ```A(2,:) ``` 取一行
+- ```plot(x,y)``` 绘制平面图
+- ```surf(x,y,z)```绘制表面图
+- ```contour (x,y,z)```绘制轮廓图
+
+循环语句 
+
+```matlab
+for i=1:10,
+    v(i)=2^i;
+end;
+```
+
+
+条件判断 
+
+```matlab
+>> if v(1) == 1,
+>    disp('the value is one');
+>  elseif v(1) == 2,
+>    disp('the value is two');
+>  else
+>    disp('the value is not one or two');
+>  end;
+```
+
+
+
+
+
+
  
 
 
