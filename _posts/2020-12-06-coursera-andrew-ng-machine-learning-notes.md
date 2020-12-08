@@ -52,7 +52,7 @@ $h_\theta(x) = \theta_0 + \theta_1x$
 
 **代价函数** 
 
-$J(\theta_0,\theta_1)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)}-y^{(i)}))^2$
+$J(\theta_0,\theta_1)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2$
 
 **目标**
 
@@ -70,7 +70,7 @@ $\theta_j=\theta_j - \alpha\frac{1}{m} \sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)
 
 ## 第二周 多元线性回归
 
-#### 1 公式推导1
+###  公式
 **样本** 
 
 $x=[x_0 \ x_1\ x_2\ x_3\ ... \ x_n]$
@@ -89,7 +89,7 @@ $h_\theta(x) = \theta_0x_0 + \theta_1x_1 ... \theta_nx_n=\theta^Tx$
 
 **代价函数** 
 
-$J(\theta_0, \theta_1 ... \theta_n)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)}-y^{(i)}))^2$
+$J(\theta_0, \theta_1 ... \theta_n)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2$
 
 **目标**
 
@@ -185,6 +185,8 @@ pinv(X'*X)*X'*y
 - ```plot(x,y)``` 绘制平面图
 - ```surf(x,y,z)```绘制表面图
 - ```contour (x,y,z)```绘制轮廓图
+- ```whos```查看当前定义变量
+- ```who```查看当前定义的变量名
 
 循环语句 
 
