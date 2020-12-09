@@ -232,7 +232,8 @@ $
 |  $x$ (直线)| $1 $|| 幂次方法则| $x^n$|$nx^{n-1}$| 
 | $ax$| $a$ || 加法法则| $f+g$|$f'+g'$| 
 |$x2$(平方)|	$2x$|| 减法法则| $f-g$|$f'-g'$| 
-|$\sqrt{x}$(平方根)|  $\frac{1}{2}x^{\frac{1}{2}}$||积法则| $fg$|$fg'+f'g$| 
+|$\sqrt{x}$(平方根)|  $\frac{1}{2}x^{\frac{-1}{2}}$||积法则| $fg$|$fg'+f'g$| 
+|$\sqrt[n]{x}$ |  $\frac{1}{n}x^{-\frac{1-n}{n}}$||积法则| $fg$|$fg'+f'g$| 
 |$e^x$(指数)|	$e^x$|| 商法则| $\frac{f}{g}$|$\frac{f'g-g'f}{g^2}$| 
 |$a^x$|	$\ln(a)a^x$||倒数法则| $\frac{1}{f}$| $\frac{-f'}{f^2}$| 
 |$\ln(x)$(对数)| $\frac{1}{x}$ | 
@@ -244,7 +245,7 @@ $
 | $\cos^{-1}(x)$|	$\frac{-1}{\sqrt{1-x^2}}$| 
 | $\tan^{-1}(x)$|	$\frac{1}{\sqrt{1+x^2}}$| 
 
-参考 [导数法则](https://www.shuxuele.com/calculus/derivatives-rules.html)
+参考 [导数表](https://baike.baidu.com/item/%E5%AF%BC%E6%95%B0%E8%A1%A8)
 #### 2.7.3 矩阵乘法 
 $
 A=\begin{bmatrix}
