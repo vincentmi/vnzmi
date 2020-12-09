@@ -136,17 +136,11 @@ $\theta_j=\theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta_0,\theta_1 
 
 $\theta_j=\theta_j - \alpha\frac{1}{m} \sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)}$
 
+转换为向量
+$\theta = \theta -  \frac{\alpha}{m} X^T(X\theta - y)$
+
 ```matlab
-n = length(theta);
-temp = zeros(n,1);
-
-
-for i = 1 : n,
-    temp(i) = theta(i) - alpha * (1/m) *sum((X*theta - y).*X(:,i));
-    end;
-
-    
-theta = temp;
+theta = theta - (alpha/m) * (X'*(X*theta -y))
 ```
 
 ### 2.2 特征缩放
@@ -229,6 +223,8 @@ pinv(X'*X)*X'*y
 - ```contour (x,y,z)```绘制轮廓图
 - ```whos```查看当前定义变量
 - ```who```查看当前定义的变量名
+- ```mean```求平均值
+- ```std```求标准差
 
 循环语句 
 
@@ -348,7 +344,7 @@ $j(\theta) =\frac{1}{m}  (-y^T\log(h) - (1-y)^T\log(1-h))$
 ### 3.4 梯度下降公式
 
 $
-\theta_j := \theta_j - \frac{\alpha}{m} \sum_{i=1}^m[(h_\theta(x^{(i)}) - y^{(i)})x^{(i)_j}]
+\theta_j := \theta_j - \frac{\alpha}{m} \sum_{i=1}^m[(h_\theta(x^{(i)}) - y^{(i)})x^{(i)}_j]
 $
 
 转换为向量:
