@@ -81,13 +81,40 @@ $x_0 = 1 $
 
 **参数**
 
-$\theta=[\theta_0 \  \theta_1 \  \theta_2 ... \theta_n]$
+$\theta=\begin{bmatrix}
+\theta_0 \\\  
+\theta_1 \\\  
+\theta_2 \\\
+... \\\
+\theta_n \\\
+\end{bmatrix}
+$
+
+$y=\begin{bmatrix}
+y_0 \\\  
+y_1 \\\  
+y_2 \\\
+... \\\
+y_n \\\
+\end{bmatrix}
+$
 
 
+$X=\begin{bmatrix}
+1 & x^{(1)}_1 & x^{(1)}_2 & x^{(1)}_3&...x^{(1)}_n \\\
+1 & x^{(2)}_1 & x^{(2)}_2 & x^{(2)}_3 &...x^{(2)}_n\\\
+...\\\
+1 & x^{(m)}_1 & x^{(m)}_2 & x^{(m)}_3 &...x^{(m)}_n\\\
+\end{bmatrix}
+$
 
 **预测函数** 
 
 $h_\theta(x) = \theta_0x_0 + \theta_1x_1 ... \theta_nx_n=\theta^Tx$ 
+
+转换为向量:
+
+$h_\theta(x) = X\theta$ 
 
 **代价函数** 
 
@@ -97,6 +124,10 @@ $J(\theta)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2$
 
 $min_{\theta0,\theta1 ... \theta_n}(j)$ 获得最小代价
 
+```matlab
+J = 1/(2*m) * sum((X*theta - y).^2);
+```
+
 **参数更新**
 
 $\theta_j=\theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta_0,\theta_1 ... \theta_n) = \theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta)$
@@ -105,9 +136,18 @@ $\theta_j=\theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta_0,\theta_1 
 
 $\theta_j=\theta_j - \alpha\frac{1}{m} \sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)}$
 
+```matlab
+n = length(theta);
+temp = zeros(n,1);
 
 
+for i = 1 : n,
+    temp(i) = theta(i) - alpha * (1/m) *sum((X*theta - y).*X(:,i));
+    end;
 
+    
+theta = temp;
+```
 
 ### 2.2 特征缩放
 
@@ -277,28 +317,46 @@ $
 
 > **用A的行去乘B的列.**
 
-# 第三周 逻辑回归
+#第三周 逻辑回归
 
-### 3.1 二分回归
+### 3.1 二元分类
 
-- 预测函数$ h(\theta)=\theta^Tx$
+- h函数$ h(\theta)=\theta^Tx$
 - 逻辑函数$g$(sigmoid function) ; $g(z) = \frac{1}{1+e^{-z}}$
 - 将$g$应用到预测函数 $h(\theta) = \frac{1}{1+e^{-\theta^Tx}}$
 - 决策边界
     - $\theta^Tx > 0 => y=1$ 
-    - 非线性决策边界 $h(\theta)=g(\theta_0 + \theta_1x_1 + \theta_2x_2+\theta3_x1^2+\theta_4x_2^2$) 当$\theta=[-1 \  0 \ 0 \ 1\ 1]$则是个圆.
+    - 非线性决策边界 $h(\theta)=g(\theta_0 + \theta_1x_1 + \theta_2x_2+\theta_3x_1^2+\theta_4x_2^2$) 当$\theta=[-1 \  0 \ 0 \ 1\ 1]$则是个圆.
     - 根据数据集选择合适的假设函数
     - 通过多项式获取更复杂的决策边界
 - 代价函数,将y=1和y=0两种情况合并为一个方程$Cost(h(\theta(x),y)) = -y\log( {h_{\theta}(x)} ) - (1-y)\log(1-h_{\theta}(x))$
 
-### 3.2 代价函数
+### 3.2 预测函数
+
+$ h(\theta)=g(\theta^Tx)$
+$z=\theta^Tx$
+$g(z) = \frac{1}{1+e^{-z}}$
+$h(\theta) = \frac{1}{1+e^{-\theta^Tx}}$
+
+### 3.3 代价函数
 $j(\theta)=-\frac{1}{m} \sum_{i=1}^m[y^{(i)}\log(h_\theta(x^{(i)}))+(1-y^{(i)})\log(1-h_\theta(x^{(i)}))]$
 
 转换为向量
 $h=g(X\theta)$
 $j(\theta) =\frac{1}{m}  (-y^T\log(h) - (1-y)^T\log(1-h))$
+ 
+### 3.4 梯度下降公式
 
-###3.3 梯度下降公式
+$
+\theta_j := \theta_j - \frac{\alpha}{m} \sum_{i=1}^m[(h_\theta(x^{(i)}) - y^{(i)})x^{(i)_j}]
+$
+
+转换为向量:
+$\theta := \theta - \frac{\alpha}{m}X^T(g(X\theta)-\vec y)$
+
+### 3.5 多元分类
+
+
 
 
 
