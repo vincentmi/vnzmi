@@ -13,7 +13,9 @@ tags:
 
 课程地址: [ https://www.coursera.org/learn/machine-learning/home/welcome]( https://www.coursera.org/learn/machine-learning/home/welcome)
 
-# 第一周 简介
+作业 [Vincent code exercise](https://github.com/vincentmi/machine-learning-exercise)
+
+# 第一周 简介和一元线性回归
 
 ### 1.1 机器学习定义(Tom Mitchell)
  **E**  :  经验, 指训练样本  
@@ -274,6 +276,32 @@ $
 - 乘积C的第m行第n列的元素等于矩阵A的第m行的元素与矩阵B的第n列对应元素乘积之和。
 
 > **用A的行去乘B的列.**
+
+# 第三周 逻辑回归
+
+### 3.1 二分回归
+
+- 预测函数$ h(\theta)=\theta^Tx$
+- 逻辑函数$g$(sigmoid function) ; $g(z) = \frac{1}{1+e^{-z}}$
+- 将$g$应用到预测函数 $h(\theta) = \frac{1}{1+e^{-\theta^Tx}}$
+- 决策边界
+    - $\theta^Tx > 0 => y=1$ 
+    - 非线性决策边界 $h(\theta)=g(\theta_0 + \theta_1x_1 + \theta_2x_2+\theta3_x1^2+\theta_4x_2^2$) 当$\theta=[-1 \  0 \ 0 \ 1\ 1]$则是个圆.
+    - 根据数据集选择合适的假设函数
+    - 通过多项式获取更复杂的决策边界
+- 代价函数,将y=1和y=0两种情况合并为一个方程$Cost(h(\theta(x),y)) = -y\log( {h_{\theta}(x)} ) - (1-y)\log(1-h_{\theta}(x))$
+
+### 3.2 代价函数
+$j(\theta)=-\frac{1}{m} \sum_{i=1}^m[y^{(i)}\log(h_\theta(x^{(i)}))+(1-y^{(i)})\log(1-h_\theta(x^{(i)}))]$
+
+转换为向量
+$h=g(X\theta)$
+$j(\theta) =\frac{1}{m}  (-y^T\log(h) - (1-y)^T\log(1-h))$
+
+###3.3 梯度下降公式
+
+
+
 
 
 
