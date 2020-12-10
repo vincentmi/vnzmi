@@ -351,6 +351,97 @@ $
 $\theta := \theta - \frac{\alpha}{m}X^T(g(X\theta)-\vec y)$
 
 ### 3.5 多元分类
+- 创建多个分类器并进行拟合
+
+### 3.6 过度拟合
+-  underfit (high bais) 高偏差
+- overfit 过度拟合
+    - 出现的问题
+        - J代价函数趋近于0
+        - 无法正确对新的数据进行好的预测 
+    - 解决
+        - 减少特征数量
+            - 手动删除
+            - 使用算法选择
+        - 正规化  
+            - 减小$\theta$
+            - 当有很多稍微有点用的特性时效果很好
+
+### 3.7 正规化
+
+#### 3.7.1 线性回归
+
+##### - 代价函数
+正规化的$j$ 函数后面加入,正规化参数 $\lambda \sum_{j=1}^n\theta_j^2$
+
+$J(\theta)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2 + \lambda \sum_{j=1}^n\theta_j^2 $
+
+##### - 梯度下降函数
+
+正规化不处理$\theta_0$
+
+梯度下降函数
+
+$$
+\theta_0=
+\theta_0 - \alpha [\frac{1}{m}\sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x_0^{(i)}\\\
+\theta_j=
+\theta_j - \alpha [\frac{1}{m}\sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)}
++\frac{ \lambda}{m}\theta_j]  \\\
+= \theta_j(1-\alpha\frac{\lambda}{m} )- \alpha \frac{1}{m}\sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)})
+$$
+
+##### - 正规方程
+
+$$
+L_{n+1\times n+1}=\begin{bmatrix}
+0 \\\
+\ & 1 \\\
+\ & & 1 \\\
+...\\\
+\ & & & & 1 \\\
+\end{bmatrix} \\\
+\theta =(X^TX + \lambda\cdot L)^{-1}X^Ty
+$$
+
+**如果$m<n$** $X^TX$ 不可逆.但是加上$ \lambda\cdot L$ 则是可逆的.大佬已经证明了.
+
+#### 3.7.2 逻辑回归
+
+##### - 代价函数
+
+$j(\theta)=-\frac{1}{m} \sum_{i=1}^m[y^{(i)}\log(h_\theta(x^{(i)}))+(1-y^{(i)})\log(1-h_\theta(x^{(i)}))] + \frac{\lambda}{2m} \sum_{i=1}^n\theta_j^2$
+
+##### - 梯度下降函数
+
+$\theta= \theta_j(1-\alpha\frac{\lambda}{m} )- \alpha \frac{1}{m}\sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)})
+$
+
+
+# 第四周 神经网络描述
+#### 4.1 模型
+$$
+[x_1  x_2 x_3] \rightarrow [a_1^2 a_2^2 a_3^2] \rightarrow h_\theta(x)
+$$
+
+计算
+$$
+\begin{align*} a_1^{(2)} = g(\Theta_{10}^{(1)}x_0 + \Theta_{11}^{(1)}x_1 + \Theta_{12}^{(1)}x_2 + \Theta_{13}^{(1)}x_3) \newline a_2^{(2)} = g(\Theta_{20}^{(1)}x_0 + \Theta_{21}^{(1)}x_1 + \Theta_{22}^{(1)}x_2 + \Theta_{23}^{(1)}x_3) \newline a_3^{(2)} = g(\Theta_{30}^{(1)}x_0 + \Theta_{31}^{(1)}x_1 + \Theta_{32}^{(1)}x_2 + \Theta_{33}^{(1)}x_3) \newline h_\Theta(x) = a_1^{(3)} = g(\Theta_{10}^{(2)}a_0^{(2)} + \Theta_{11}^{(2)}a_1^{(2)} + \Theta_{12}^{(2)}a_2^{(2)} + \Theta_{13}^{(2)}a_3^{(2)}) \newline \end{align*}
+$$
+
+- activation function , $g(z)$
+- 输入层 Input Layer
+- 结果层 Output Layer
+- 隐藏层 Hidden Layer
+- $a_i^{(j)}$ 表示在$j$层的第$i$ 个单元
+- $\Theta^j$ 权重矩阵,如果$j$层有$S_j$个神经元,$j+1$层有$S_{j+1}$个神经元,那么$\Theta^{(j)}$是$S_{j+1} \times S_j +1 $ 矩阵.
+
+# 第五周 学习神经网络
+
+# 第六周 
+
+     
+
 
 
 
