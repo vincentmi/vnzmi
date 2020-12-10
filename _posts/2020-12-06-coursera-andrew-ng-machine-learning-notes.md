@@ -369,31 +369,40 @@ $\theta := \theta - \frac{\alpha}{m}X^T(g(X\theta)-\vec y)$
 
 ### 3.7 正规化
 
-#### 3.7.1 线性回归
+用来解决过度拟合(overfitting)问题.引入$\lambda$来降低$\theta$的影响.
 
-##### - 代价函数
-正规化的$j$ 函数后面加入,正规化参数 $\lambda \sum_{j=1}^n\theta_j^2$
+#### 3.7.1 正规化线性回归
 
-$J(\theta)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2 + \lambda \sum_{j=1}^n\theta_j^2 $
+- 代价函数
+    正规化的$j$ 函数后面加入,正规化参数 $\lambda \sum_{j=1}^n\theta_j^2$
+    
+    $J(\theta)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2 + \lambda \sum_{j=1}^n\theta_j^2 $
 
-##### - 梯度下降函数
+-  梯度下降函数
 
-正规化不处理$\theta_0$
+    **正规化不处理$\theta_0$**
+    
+    $
+    \theta_0=
+    \theta_0 - \alpha [\frac{1}{m}\sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x_0^{(i)}
+    $
+    
+    
+    **当前$j \gt 0$ 时**
+    
+    $
+    \theta_j=
+    \theta_j - \alpha [\frac{1}{m}\sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)}
+    +\frac{ \lambda}{m}\theta_j]  $
+    进行
+    $
+    \theta_j= \theta_j(1-\alpha\frac{\lambda}{m} )- \alpha \frac{1}{m}\sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)})
+    $
 
-梯度下降函数
+- 正规方程解法
 
 $$
-\theta_0=
-\theta_0 - \alpha [\frac{1}{m}\sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x_0^{(i)}\\\
-\theta_j=
-\theta_j - \alpha [\frac{1}{m}\sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)}
-+\frac{ \lambda}{m}\theta_j]  \\\
-= \theta_j(1-\alpha\frac{\lambda}{m} )- \alpha \frac{1}{m}\sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)})
-$$
-
-##### - 正规方程
-
-$$
+\begin{aligned}
 L_{n+1\times n+1}=\begin{bmatrix}
 0 \\\
 \ & 1 \\\
@@ -402,11 +411,12 @@ L_{n+1\times n+1}=\begin{bmatrix}
 \ & & & & 1 \\\
 \end{bmatrix} \\\
 \theta =(X^TX + \lambda\cdot L)^{-1}X^Ty
+\end{aligned}
 $$
 
 **如果$m<n$** $X^TX$ 不可逆.但是加上$ \lambda\cdot L$ 则是可逆的.大佬已经证明了.
 
-#### 3.7.2 逻辑回归
+#### 3.7.2 正规化逻辑回归
 
 ##### - 代价函数
 
@@ -417,8 +427,26 @@ $j(\theta)=-\frac{1}{m} \sum_{i=1}^m[y^{(i)}\log(h_\theta(x^{(i)}))+(1-y^{(i)})\
 $\theta= \theta_j(1-\alpha\frac{\lambda}{m} )- \alpha \frac{1}{m}\sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)})
 $
 
+#### 3.7.3 使用内建优化函数```fminunc```
+
+创建用于优化的函数返回,代价值和$\theta$的微分值,```function [J, grad] = costFunction(theta, X, y)```. 内部会选择算法
+算出最优化的$\theta$值
+
+$
+\theta =\frac{1}{m}\sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)}
+$
+
+```matlab
+%  Set options for fminunc
+options = optimset('GradObj', 'on', 'MaxIter', 400);
+% Run fminunc to obtain the optimal theta
+% This function will return theta and the cost [theta, cost] = ...
+fminunc(@(t)(costFunction(t, X, y)), initial theta, options);
+```
+
 
 # 第四周 神经网络描述
+
 #### 4.1 模型
 $$
 [x_1  x_2 x_3] \rightarrow [a_1^2 a_2^2 a_3^2] \rightarrow h_\theta(x)
