@@ -371,6 +371,10 @@ $\theta := \theta - \frac{\alpha}{m}X^T(g(X\theta)-\vec y)$
 
 用来解决过度拟合(overfitting)问题.引入$\lambda$来降低$\theta$的影响.
 
+> 
+> **特别注意: 在代价函数和梯度下降函数中,正规化都需要排除$\theta_0$**
+> 
+
 #### 3.7.1 正规化线性回归
 
 - 代价函数
@@ -422,10 +426,27 @@ $$
 
 $j(\theta)=-\frac{1}{m} \sum_{i=1}^m[y^{(i)}\log(h_\theta(x^{(i)}))+(1-y^{(i)})\log(1-h_\theta(x^{(i)}))] + \frac{\lambda}{2m} \sum_{i=1}^n\theta_j^2$
 
+向量化:
+
+$ z =g(X\theta)$
+$J(\theta) = \frac{1}{m}( -y^T \log(z) - (1-y)^T \log(1-z) + \frac{\lambda}{2m}(\theta^T \theta)$
+
+**第二个公式$\theta_0=0$**
+
+
+
 ##### - 梯度下降函数
 
 $\theta= \theta_j(1-\alpha\frac{\lambda}{m} )- \alpha \frac{1}{m}\sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)})
 $
+
+向量化:
+
+$
+\theta=\frac{1}{m} X^T(z-y) + \frac{\lambda}{m} \cdot \theta
+$
+
+第二个公式$θ_0$=0,用于移除$\theta_0$的影响
 
 #### 3.7.3 使用内建优化函数```fminunc```
 
@@ -437,6 +458,13 @@ $
 $
 
 ```matlab
+
+%代价函数
+J=(1/m) * ( -y' * log(z) - (1-y)' * log(1-z) ) + (lambda/(2*m)) * (theta_0' * theta_0);
+
+%梯度函数
+grad = 1/m * X'*(z - y) +  (lambda / m) .* theta_0;
+
 %  Set options for fminunc
 options = optimset('GradObj', 'on', 'MaxIter', 400);
 % Run fminunc to obtain the optimal theta
@@ -444,6 +472,11 @@ options = optimset('GradObj', 'on', 'MaxIter', 400);
 fminunc(@(t)(costFunction(t, X, y)), initial theta, options);
 ```
 
+#### 3.7.4 选择合适的$\lambda$
+
+- 如果$\lambda$设置过大无法拟合数据,因为对于$\theta$的调整对整体的影响力有限.
+- 如果$\lambda$设置过小则会过拟合,没有起作用
+- 可以通过对训练集进行预测查看准确率来选择合适的值
 
 # 第四周 神经网络描述
 
