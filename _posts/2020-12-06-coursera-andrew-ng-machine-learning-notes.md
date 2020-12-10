@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Coursera - Machine learning 学习笔记"
+title:      "Coursera - Machine learning 学习笔记(1) - 线性回归和分类器"
 date:       "2020-12-06 23:04:00"
 author:     "Vincent"
 header-img:  "img/post-ml.png"
@@ -429,6 +429,8 @@ $j(\theta)=-\frac{1}{m} \sum_{i=1}^m[y^{(i)}\log(h_\theta(x^{(i)}))+(1-y^{(i)})\
 向量化:
 
 $ z =g(X\theta)$
+
+
 $J(\theta) = \frac{1}{m}( -y^T \log(z) - (1-y)^T \log(1-z) + \frac{\lambda}{2m}(\theta^T \theta)$
 
 **第二个公式$\theta_0=0$**
@@ -497,9 +499,7 @@ $$
 - $a_i^{(j)}$ 表示在$j$层的第$i$ 个单元
 - $\Theta^j$ 权重矩阵,如果$j$层有$S_j$个神经元,$j+1$层有$S_{j+1}$个神经元,那么$\Theta^{(j)}$是$S_{j+1} \times S_j +1 $ 矩阵.
 
-# 第五周 学习神经网络
 
-# 第六周 
 
      
 
