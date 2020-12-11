@@ -79,7 +79,7 @@ $s_l$ 低$l$层的单元数量,不包含偏置单元
 $K$ 输出单元数量,即要分出的类别的数量
 
 $
-\begin{gather*} J(\Theta) = - \frac{1}{m} \sum_{i=1}^m \sum_{k=1}^K \left[y^{(i)}_k \log ((h_\Theta (x^{(i)}))_k) + (1 - y^{(i)}_k)\log (1 - (h_\Theta(x^{(i)}))_k)\right] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_{l+1}} ( \Theta_{j,i}^{(l)})^2\end{gather*}
+J(\Theta) = - \frac{1}{m} \sum_{i=1}^m \sum_{k=1}^K \left[y^{(i)}_k \log ((h_\Theta (x^{(i)}))_k) + (1 - y^{(i)}_k)\log (1 - (h_\Theta(x^{(i)}))_k)\right] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_{l+1}} ( \Theta_{j,i}^{(l)})^2
 $
 
 ### 5.2 反向传播算法
@@ -119,7 +119,9 @@ $
 另外不用计算第一层.
 
 
-$\delta^{(l-1)} = (\Theta^{(l-1)})^T\delta^{(l)} \cdot g^'(z^{(l-1)})$
+$
+\delta^{(l-1)} = (\Theta^{(l-1)})^T\delta^{(l)} \cdot g'(z^{(l-1)})
+$
 
 将偏导数带入:
 
