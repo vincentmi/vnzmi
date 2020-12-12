@@ -145,6 +145,7 @@ $\Delta^{(l)} := \Delta^{(l)} + \delta^{(i+1)}(a^{(l)})^T$
 然后计算新的$\Delta$矩阵
 
 $j\ne0 $时
+
 $
 D^{(l)}_{ij} := \frac{1}{m}(\Delta_{i,j}^{(l)} + \lambda\Theta_{i,j}^{(l)})
 $
@@ -155,6 +156,73 @@ $
 D^{(l)}_{ij} := \frac{1}{m}\Delta_{i,j}^{(l)}
 $
 
+#### 5.2.6 参数展开
+
+-```A(:)```会将矩阵展开到一个长矢量
+- ```reshape(a(startElement,endElement),row,column)```用于从矢量构建矩阵
+- ```fminunc``` initTherta都是使用长矢量传递
+
+#### 5.2.7 梯度检查
+
+>
+> **在确认算法正确,进行正式的学习时一定要关闭这个检查不然会慢的要死**
+>
+
+用于检验反向传播算法是否正确 .
+
+对于我们的代价函数$j$可以使用这种原始的方法来求导
+
+$
+\frac{\partial}{\partial\Theta}J(\Theta) \approx \frac{J(\Theta + \epsilon) - J(\Theta - \epsilon)}{2\epsilon}
+$
+
+多个$\Theta$值的矩阵
+
+$
+\frac{\partial}{\partial\Theta}J(\Theta) \approx \frac{J(\Theta_1,\Theta_2,\ ... \ \Theta_j + \epsilon\ ...\ \Theta_n) - J(\Theta_1,\Theta_2,\ ... \ \Theta_j - \epsilon\ ...\ \Theta_n)}{2\epsilon}
+$
+
+通常设置 $\epsilon = 10^{-4}$ 太小会引起一些数值问题
+
+```matlab
+epsilon = 1e-4;
+for i = 1:n,
+  thetaPlus = theta;
+  thetaPlus(i) += epsilon;
+  thetaMinus = theta;
+  thetaMinus(i) -= epsilon;
+  gradApprox(i) = (J(thetaPlus) - J(thetaMinus))/(2*epsilon)
+end;
+```
+运行算法后 检查 ```gradApprox ≈ deltaVector``` 来确保你算法的实现没有BUG.
+
+#### 5.2.8 随机化初始化
+
+如果将$\Theta$全部初始化为0或者同样的数,则每个神经元执行同样的函数.网络将具有单一的特性,被称为对称现象,.因此需要进行随机初始化
+(真乃玄学).
+
+生成的$\Theta$在 ```- INIT_SPSILION``` 到```INIT_SPSILION```之间.
+
+```matlab
+Theta1 = rand(10,11) * (2 * INIT_EPSILON) - INIT_EPSILON;
+Theta2 = rand(10,11) * (2 * INIT_EPSILON) - INIT_EPSILON;
+Theta3 = rand(1,11) * (2 * INIT_EPSILON) - INIT_EPSILON;
+```
+
+> 
+> rand(10,11) 生成一个矩阵,元素值在 0 - 1 之间
+
+#### 5.2.9 总结
+
+- 网络结构选择
+    - 输入层(input layer)神经元数量即为我们的特征的数量 ```n```
+    -  输出层(output layer) 单元神经元数量即为我们要分出的全部类别的数量
+        - 如果分类数量为$k$则输出层输出为 $y(k,1)$的向量,元素为 $0$和$1$,需要另外进行转换
+    - 隐藏层(hidden layer)的选择
+        - 1个隐藏层的网络
+        - 多于一层,每层有相同的神经元数量 
+        - 层肯定是越多越好,但是计算代价也会变很高
+        - 每层的单元数量通常是要比收入层数量多
 
 
 
