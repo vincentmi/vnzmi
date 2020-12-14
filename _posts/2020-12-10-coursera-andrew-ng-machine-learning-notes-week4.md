@@ -222,7 +222,7 @@ Theta3 = rand(1,11) * (2 * INIT_EPSILON) - INIT_EPSILON;
         - 1个隐藏层的网络
         - 多于一层,每层有相同的神经元数量 
         - 层肯定是越多越好,但是计算代价也会变很高
-        - 每层的单元数量通常是要比收入层数量多
+        - 每层的单元数量通常是要比输出层数量多
 - 训练神经网络 
     -  1. 使用随机数初始化节点的权重 
     -  2.实现前向传播算法 
@@ -237,6 +237,12 @@ for i = 1:m,
    Perform forward propagation and backpropagation using example (x(i),y(i))
    (Get activations a(l) and delta terms d(l) for l = 2,...,L
 ```  
+
+>
+> Matlab&Octave 函数
+>  
+> 
+>
 
 
 
