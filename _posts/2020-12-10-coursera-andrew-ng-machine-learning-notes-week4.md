@@ -36,14 +36,12 @@ $
 $
 
 计算
-$
-\begin{aligned} 
+$\begin{aligned} 
 a_1^{(2)} = g(\Theta_{10}^{(1)}x_0 + \Theta_{11}^{(1)}x_1 + \Theta_{12}^{(1)}x_2 + \Theta_{13}^{(1)}x_3) \\\
  a_2^{(2)} = g(\Theta_{20}^{(1)}x_0 + \Theta_{21}^{(1)}x_1 + \Theta_{22}^{(1)}x_2 + \Theta_{23}^{(1)}x_3) \\\
 a_3^{(2)} = g(\Theta_{30}^{(1)}x_0 + \Theta_{31}^{(1)}x_1 + \Theta_{32}^{(1)}x_2 + \Theta_{33}^{(1)}x_3) \\\
 h_\Theta(x) = a_1^{(3)} = g(\Theta_{10}^{(2)}a_0^{(2)} + \Theta_{11}^{(2)}a_1^{(2)} + \Theta_{12}^{(2)}a_2^{(2)} + \Theta_{13}^{(2)}a_3^{(2)}) \\\
-\end{aligned}
-$
+\end{aligned}$
 
 向量化:
 
@@ -52,6 +50,7 @@ z^{(j+1)} = \Theta^{(j)}a^{(j)}
 $
 
 $a^{(j)} = g(z^{(j)})$
+
 $h_{\Theta}(x) =a^{(j+1)} =  g(z^{(j+1)})$
 
 预测结果为向量:
@@ -63,6 +62,7 @@ h_{\Theta}(x)_2 \\\
 .... \\\ 
 \end{bmatrix}
 $
+
 
 >
 >Octive Matlab Tips: 
@@ -83,9 +83,7 @@ $s_l$ 低$l$层的单元数量,不包含偏置单元
 
 $K$ 输出单元数量,即要分出的类别的数量
 
-$
-J(\Theta) = - \frac{1}{m} \sum_{i=1}^m \sum_{k=1}^K [y^{(i)}_k \log ((h_\Theta (x^{(i)}))_k) + (1 - y^{(i)}_k)\log (1 - (h_\Theta(x^{(i)}))_k)] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_{l+1}} ( \Theta_{j,i}^{(l)})^2
-$
+$J(\Theta) = - \frac{1}{m} \sum_{i=1}^m \sum_{k=1}^K [y^{(i)}_k \log ((h_\Theta(x^{(i)}))_k) + (1 - y^{(i)}_k)\log(1 - (h_\Theta(x^{(i)}))_k)] + \frac{\lambda}{2m}\sum_{l=1}^{L-1}\sum_{i=1}^{s_l}\sum_{j=1}^{s_{l+1}}(\Theta_{j,i}^{(l)})^2 $
 
 ### 5.2 反向传播算法
 
