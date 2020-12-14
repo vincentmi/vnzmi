@@ -223,6 +223,22 @@ Theta3 = rand(1,11) * (2 * INIT_EPSILON) - INIT_EPSILON;
         - 多于一层,每层有相同的神经元数量 
         - 层肯定是越多越好,但是计算代价也会变很高
         - 每层的单元数量通常是要比收入层数量多
+- 训练神经网络 
+    -  1. 使用随机数初始化节点的权重 
+    -  2.实现前向传播算法 
+    -  3.实现代价函数 
+    -  4.实现反向传播计算微分值 
+    -  5.使用梯度检查算法确认反向传播计算正确,然后关闭梯度检查 
+    -  6.使用梯度递减或者内部的优化功能获取代价最小化的权重矩阵值 
+     - 正向传播可以使用for循环计算每个训练数据  
+
+```matlab
+for i = 1:m,
+   Perform forward propagation and backpropagation using example (x(i),y(i))
+   (Get activations a(l) and delta terms d(l) for l = 2,...,L
+```  
+
+
 
 
 
