@@ -16,7 +16,7 @@ tags:
 作业 [Vincent code exercise](https://github.com/vincentmi/machine-learning-exercise)
 
 
-# 第七周 支持向量机
+# 第七周 支持向量机(SVM)
 
 ### 7.1 模型
 

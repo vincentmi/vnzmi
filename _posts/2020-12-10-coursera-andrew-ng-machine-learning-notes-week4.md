@@ -346,11 +346,11 @@ X轴训练量,Y误差
 
 此类情况使用准确率($P$)召回率($R$)来评估
 
-$Accuracy = \frac{True\  positives + False\  positives }{\#total examples} = \frac{预测和真实均为阳性 + 预测和真实均为阴性 }{样本总量}$
+$Accuracy = \frac{True\  positives + False\  positives }{\#total examples} = \frac{\mbox{预测和真实均为阳性} + \mbox{预测和真实均为阴性} }{\mbox{样本总量}}$
 
-$Precision = \frac{True\  positives}{\#predicted \  positive} = \frac{预测和真实均为阳性}{预测的阳性}$
+$Precision = \frac{True\  positives}{\#predicted \  positive} = \frac{\mbox{预测和真实均为阳性}}{\mbox{预测的阳性}}$
 
-$Recall = \frac{True\  positives}{\#actual \  positive} = \frac{预测和真实均为阳性}{真实的阳性}$
+$Recall = \frac{True\  positives}{\#actual \  positive} = \frac{\mbox{预测和真实均为阳性}}{\mbox{真实的阳性}}$
 
 
 > 
