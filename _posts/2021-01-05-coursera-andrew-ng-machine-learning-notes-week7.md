@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Coursera - Machine learning 学习笔记(3)  - 支持向量机"
+title:      "Coursera - Machine learning 学习笔记(3)  - 支持向量机异常检测和推荐系统"
 date:       "2021-01-05 22:08:00"
 author:     "Vincent"
 header-img:  "img/post-ml.png"
