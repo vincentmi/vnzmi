@@ -13,10 +13,10 @@ tags:
 
 # 植物线描
 
-![植物线描](/img/artwork/20100126.jpg)
+![植物线描](/img/artworks/20100126.jpg)
 
 
-![塔](/img/artwork/IMG_0243.jpg)
+![塔](/img/artworks/IMG_0243.jpg)
 
 
 
