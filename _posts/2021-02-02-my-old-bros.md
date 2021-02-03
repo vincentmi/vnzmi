@@ -7,7 +7,6 @@ header-img:  "img/bg-beer.jpg"
 catalog: true
 tags:
     - 生活记录
-    - 新浪博客
 ---
 
 
