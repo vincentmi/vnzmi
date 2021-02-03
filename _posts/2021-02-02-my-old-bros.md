@@ -16,7 +16,7 @@ tags:
 ![植物线描](/img/in-post/bro1.jpg)
 
 
-![塔](/img/in-post/bro1.jpg)
+![塔](/img/in-post/bro2.jpg)
 
 
 
