@@ -6,8 +6,8 @@ author:     "Vincent"
 header-img:  "img/bg-beer.jpg"
 catalog: true
 tags:
-    - artwork
-    - Micheal
+    - 生活记录
+    - 新浪博客
 ---
 
 
