@@ -39,15 +39,16 @@ Vincent Mi (miwenshu@gmail.com)
 
 | 变量 | 类型 | 示例 | 说明 |
 |---| --- | ---- |---|
-| ```${projectPath}```  |String | ```/User/vicnent/dev/blog```| 目标项目路径 |
+| ```${projectPath}```  |String | /User/vicnent/dev/blog| 目标项目路径 |
 | ```${table}```  |String | user_info | 表名 |
-| ```${tableInfo}```  |TableInfo | ```{}``` | 表信息 |
+| ```${tableInfo}```  |TableInfo |{} | 表信息 |
 | ```${modelCamel}```  |String | userInfo|表名驼峰 |
 | ```${model}```  |String | UserInfo|表名模型名称 |
 | ```${modelLine}```  |String | user_info|表名下划线间隔 |
 | ```${modelMidLine}```  |String | user-info|表名中划线间隔 |
-| ```${fields}```  | ```ArrayList\<FieldInfo>``` | ```FieldInfo{}``` |栏位信息 |
+| ```${fields}```  | ArrayList\<FieldInfo> | FieldInfo{}|栏位信息 |
 | ```${schema}```  | string | my_db|数据库名称 |
+| ```${primaryKey}```  | FieldInfo{} | |主键,第一个主键 |
 
 #### TableInfo
 
@@ -56,6 +57,7 @@ Vincent Mi (miwenshu@gmail.com)
 | ```${catalog}```  |String | id | 表类型 |
 | ```${schema}```  |String | id | 数据库 |
 | ```${name}```  |String | 1 | 名称 |
+| ```${comment}```  |String | 用户表 | 表注释 |
 | ```${fields}```  | ArrayList\<FieldInfo>  | |  |
 
 
@@ -88,15 +90,3 @@ Vincent Mi (miwenshu@gmail.com)
 | ```${autoIncrement}```  | boolean | true  | 是否自增|
 | ```${primaryKey}```  | boolean | true  | 是否主键|
 | ```${guessedTitle}```  | String | 标题  | 猜测的字段名称,可以将自动名称设置到栏位注释中|
-
-
-
-###  FieldMapper
-
-| 变量 | 类型 | 示例 | 说明 |
-|---| --- | ---- |---|
-| ```${type}```  |String | int | 变量类型 |
-| ```${getter}```  |String | getId | Getter名称 |
-| ```${setter}```  |String | setId | Setter名称 |
-| ```${validators}```  |String[] | {"@NotNULL" ,"@Email"} | 验证器 |
-
