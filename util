@@ -1,9 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
 #部署工具
 # miwenshu @ 2021.5
 
-NAME=jk_vnzmi
+NAME=vincentmi/jk_vnzmi
 CONTINER_NAME=${NAME//\//-}
 PORT=4000
 DIR=$(cd "$(dirname "$0")";pwd)
