@@ -3,7 +3,8 @@
 #部署工具
 # miwenshu @ 2021.5
 
-NAME=vincentmi/jkvnz
+NAME=jk_vnzmi
+CONTINER_NAME=${NAME//\//-}
 PORT=4000
 DIR=$(cd "$(dirname "$0")";pwd)
 
@@ -34,7 +35,7 @@ doPull(){
 doServ() {
     echo "using ${NAME} , port=${PORT}"
     docker run -it  --rm \
-        --name=${NAME}  \
+        --name=${CONTINER_NAME}  \
         --volume="$DIR:/web" \
         --publish "${PORT}:4000" \
         ${NAME} \
@@ -44,7 +45,7 @@ doServ() {
 doBuild(){
     echo "using ${NAME} , dir = ${DIR}"
     docker run  --rm \
-        --name=${NAME}  \
+        --name=${CONTINER_NAME}  \
         --volume="$DIR:/web" \
         ${NAME} \
         /usr/local/bundle/bin/jekyll build --drafts --future -V
@@ -54,7 +55,7 @@ doBuild(){
 doIndex() {
     echo "using ${NAME} , dir=${DIR}"
     docker run  --rm \
-        --name=${NAME}  \
+        --name=${CONTINER_NAME}  \
         --volume="$DIR:/web" \
         -e "ALGOLIA_API_KEY=$ALGOLIA_API_KEY" \
         ${NAME} \
