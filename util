@@ -5,7 +5,7 @@
 
 NAME=jk_vnzmi
 PORT=4000
-DIR=`dirname $0`
+DIR=$(cd "$(dirname "$0")";pwd)
 
 doHelp() {
     echo ""
@@ -23,16 +23,16 @@ doHelp() {
 
 doImage(){
     docker build -t ${NAME}  ./  
-    echo -e "\033[32m image build success \033[0m"
+    echo  "\033[32m image build success \033[0m"
 }
 
 doPull(){
     git -C $DIR pull
-    echo -e "\033[32m pull success \033[0m"
+    echo  "\033[32m pull success \033[0m"
 }
 
 doServ() {
-    echo "using ${NAME}"
+    echo "using ${NAME} , port=${PORT}"
     docker run -it  --rm \
         --name=${NAME}  \
         --volume="$DIR:/web" \
@@ -42,23 +42,24 @@ doServ() {
 }
 
 doBuild(){
-    echo "using ${NAME}"
+    echo "using ${NAME} , dir = ${DIR}"
     docker run  --rm \
         --name=${NAME}  \
         --volume="$DIR:/web" \
         ${NAME} \
         /usr/local/bundle/bin/jekyll build --drafts --future -V
-     echo -e "\033[32m site build success \033[0m"
+     echo "\033[32m site build success \033[0m"
 }
 
 doIndex() {
+    echo "using ${NAME} , dir=${DIR}"
     docker run  --rm \
         --name=${NAME}  \
         --volume="$DIR:/web" \
         -e "ALGOLIA_API_KEY=$ALGOLIA_API_KEY" \
         ${NAME} \
         /usr/local/bundle/bin/jekyll algolia
-     echo -e "\033[32m algolia upload success \033[0m"
+     echo "\033[32m algolia upload success \033[0m"
 }
 
 doCommand() {
@@ -85,8 +86,7 @@ doCommand() {
     fi
 }
 
-
-for i in "$*"; do
+for i in $*; do
     doCommand $i
 done
 
