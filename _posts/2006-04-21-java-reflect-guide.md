@@ -54,11 +54,12 @@ TwoString ts = cons.newInstance(args);
 
 上面的代码忽略了几种可能的被不同的反射方法抛出的异常检查的类型。这些异常在Javadoc　API中有详细的描述，因此为简便起见，我会在所有的代码中忽略它们。在我涉及到构造器这个主题时，Java语言也定义了一个特殊的没有参数的（或默认）构造器快捷方法，你能使用它来创建一个类的实例。这个快捷方法象下面的代码这样被嵌入到类的自定义中：```Object newInstance() ``` . 使用默认的构造器创建新的实例。尽管这种方法只让你使用一个特殊的构造器，但是如果你需要的话，它是非常便利的快捷方式。这项技术在使用JavaBeans工作的时候尤其有用，因为JavaBeans需要定义一个公共的、没有参数的构造器。通过反射来查找属性字段Class类反射调用访问属性字段信息与那些用于访问构造器的方法类似，在有数组类型的参数的使用属性字段名来替代：
 使用方法如下所示：
+
 ```Field getField(String name)```  --获得由name指定的具有public级别的属性字段```Field getFields()``` 获得一个类的所有具有public级别的属性字段```Field getDeclaredField(String name)``` ?获得由name指定的被类声明的属性字段```Field getDeclaredFields() ```获得由类定义的所有的属性字段尽管与构造器的调用很相似，
 
 但是在提到属性字段的时候，有一个重要的差别：前两个方法返回能过类来访问的公共（public）属性字段的信息（包括那些来自于超类的属性字段），后两个方法返回由类直接声明的所有的属性字段（忽略了属性字段的访问类型）。
 
-Java.lang.reflect.Field的实例通过调用定义好的getXXX和setXXX方法来返回所有的原始的数据类型，就像普通的与对象引用一起工作的get和set方法一样。尽管getXXX方法会自动地处理数据类型转换（例如使用getInt方法来获取一个byte类型的值），但使用一个适当基于实际的属性字段类型的方法是应该优先考虑的。
+```Java.lang.reflect.Field``` 的实例通过调用定义好的getXXX和setXXX方法来返回所有的原始的数据类型，就像普通的与对象引用一起工作的get和set方法一样。尽管getXXX方法会自动地处理数据类型转换（例如使用getInt方法来获取一个byte类型的值），但使用一个适当基于实际的属性字段类型的方法是应该优先考虑的。
 
 下面的代码显示了如何使用属性字段的反射方法，通过指定属性字段名，找到一个对象的int类型的属性字段，并给这个属性字段值加1。
 
@@ -71,20 +72,25 @@ public int incrementField(String name, Object obj) throws... {    
 }
 ```
 
-这个方法开始展现一些使用反射所可能带来的灵活性，它优于与一个特定的类一同工作，incrementField方法把要查找的类信息的对象传递给getClass方法，然后直接在那个类中查找命名的属性字段。通过反射来查找方法Class反射调用访问方法的信息与访问构造器和字段属性的方法非常相似：    
+这个方法开始展现一些使用反射所可能带来的灵活性，它优于与一个特定的类一同工作，incrementField方法把要查找的类信息的对象传递给getClass方法，然后直接在那个类中查找命名的属性字段。通过反射来查找方法Class反射调用访问方法的信息与访问构造器和字段属性的方法非常相似
 
-```Method getMethod(String name,Class[] params)```  --使用指定的参数类型获得由name参数指定的public类型的方法。
-```Mehtod[] getMethods()```获得一个类的所有的public类型的方法```Mehtod getDeclaredMethod(String name, Class[] params)```使用指定的参数类型获得由name参数所指定的由这个类声明的方法。
-```Method[] getDeclaredMethods()```获得这个类所声明的所有的方法与属性字段的调用一样，
+```Method getMethod(String name,Class[] params)``` --使用指定的参数类型获得由name参数指定的public类型的方法。
 
-前两个方法返回通过这个类的实例可以访问的public类型的方法?包括那些继承于超类的方法。后两个方法返回由这个类直接声明的方法的信息，而不管方法的访问类型。通过调用返回的```Java.lang.reflect.Mehtod```实例定义了一个```invoke```方法，你可以使用它来调用定义类的有关实例。这个invoke方法需要两个参数，一个是提供这个方法的类的实例，一个是调用这个方法所需要的参数值的数组。下面给出了比属性字段的例子更加深入的例子，它显示了一个的方法反射的例子，这个方法使用get和set方法来给JavaBean定义的int类型的属性做增量操作。例如，如果对象为一个整数类型count属性定义了getCount和setCount方法，那么为了给这个属性做增量运算，你就可以把“count”做为参数名传递给调用的这个方法中。
+```Mehtod[] getMethods()``` 获得一个类的所有的public类型的方法
+```Mehtod getDeclaredMethod(String name, Class[] params)``` 使用指定的参数类型获得由name参数所指定的由这个类声明的方法。
+
+```Method[] getDeclaredMethods()``` 获得这个类所声明的所有的方法与属性字段的调用一样，
+
+前两个方法返回通过这个类的实例可以访问的```public```类型的方法?包括那些继承于超类的方法。
+后两个方法返回由这个类直接声明的方法的信息，而不管方法的访问类型。通过调用返回的```Java.lang.reflect.Mehtod```实例定义了一个```invoke```方法，你可以使用它来调用定义类的有关实例。这个invoke方法需要两个参数，一个是提供这个方法的类的实例，一个是调用这个方法所需要的参数值的数组。下面给出了比属性字段的例子更加深入的例子，它显示了一个的方法反射的例子，这个方法使用get和set方法来给JavaBean定义的int类型的属性做增量操作。例如，如果对象为一个整数类型count属性定义了getCount和setCount方法，那么为了给这个属性做增量运算，你就可以把“count”做为参数名传递给调用的这个方法中。
 
 示例代码如下：
+
 
 ```java
 
 public int incrementProperty(String name, Object obj) {    
-    String prop = Character.toUpperCase(name.charAt(0)) +        name.substring(1);    
+    String prop = Character.toUpperCase(name.charAt(0)) + name.substring(1);    
     String mname = "get" + prop;    Class[] types = new Class[] {};   
      Method method = obj.getClass().getMethod(mname, types);    
      Object result = method.invoke(obj, new Object[0]);    
@@ -92,8 +98,7 @@ public int incrementProperty(String name, Object obj) {    
      mname = "set" + prop;    
      types = new Class[] { int.class }; 
      method = obj.getClass().getMethod(mname, types);    
-     method.invoke(obj, new Object[] { 
-        new Integer(value) });    
+     method.invoke(obj, new Object[] {new Integer(value) });    
         return value;
 }
 ```
