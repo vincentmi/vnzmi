@@ -1,0 +1,96 @@
+#!/bin/sh
+
+#部署工具
+# miwenshu @ 2021.5
+
+NAME=jk_vnzmi
+PORT=4000
+
+doHelp() {
+    echo ""
+    echo "jekyll develop util by vincent_mi"
+    echo "   { NAME=${NAME},PORT=${PORT}}   "
+    echo " "
+    echo "Using : ./build [command1] [command2] ..."
+    echo ""
+    echo "Commands: "
+    echo "  image : build a custom jekyll builder docker images"
+    echo "  serv : serv jekyll in your local server on port 4000"
+    echo "  build : build jekyll pages"
+    echo "  index : upload index to algolia"
+}
+
+doImage(){
+    docker build -t ${NAME}  ./  
+    echo -e "\033[32m image build success \033[0m"
+}
+
+doPull(){
+    git pull
+}
+
+doServ() {
+    echo "using ${NAME}"
+    docker run -it  --rm \
+        --name=${NAME}  \
+        --volume="$PWD:/web" \
+        --publish "${PORT}:4000" \
+        ${NAME} \
+        /usr/local/bundle/bin/jekyll serve --host 0.0.0.0
+}
+
+doBuild(){
+    echo "using ${NAME}"
+    docker run  --rm \
+        --name=${NAME}  \
+        --volume="$PWD:/web" \
+        ${NAME} \
+        /usr/local/bundle/bin/jekyll build --drafts --future -V
+     echo -e "\033[32m site build success \033[0m"
+}
+
+doIndex() {
+    docker run  --rm \
+        --name=${NAME}  \
+        --volume="$PWD:/web" \
+        -e "ALGOLIA_API_KEY=$ALGOLIA_API_KEY" \
+        ${NAME} \
+        /usr/local/bundle/bin/jekyll algolia
+     echo -e "\033[32m algolia upload success \033[0m"
+}
+
+doCommand() {
+    if [ "${1}" = "image" ]
+    then
+        doImage
+
+    elif [ "${1}" = "serv" ]
+
+    then
+        doServ
+
+    elif [ "${1}" = "build" ]
+    then
+        doBuild
+
+    elif [ "${1}" = "index" ]
+    then
+        doIndex
+
+    fi
+}
+
+
+for i in "$*"; do
+    doCommand $i
+done
+
+if [ $# -eq 0 ]
+then 
+    doHelp
+fi
+
+#doCommand ${1}
+
+
+exit

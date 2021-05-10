@@ -3,3 +3,4 @@
 .sass-cache
 /vendor/*
 /_tools/__pycache__
+.jekyll-cache
