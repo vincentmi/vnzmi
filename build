@@ -5,11 +5,12 @@
 
 NAME=jk_vnzmi
 PORT=4000
+DIR=`dirname $0`
 
 doHelp() {
     echo ""
     echo "jekyll develop util by vincent_mi"
-    echo "   { NAME=${NAME},PORT=${PORT}}   "
+    echo "   { NAME=${NAME},PORT=${PORT},DIR=${DIR}}   "
     echo " "
     echo "Using : ./build [command1] [command2] ..."
     echo ""
@@ -26,14 +27,15 @@ doImage(){
 }
 
 doPull(){
-    git pull
+    git -C $DIR pull
+    echo -e "\033[32m pull success \033[0m"
 }
 
 doServ() {
     echo "using ${NAME}"
     docker run -it  --rm \
         --name=${NAME}  \
-        --volume="$PWD:/web" \
+        --volume="$DIR:/web" \
         --publish "${PORT}:4000" \
         ${NAME} \
         /usr/local/bundle/bin/jekyll serve --host 0.0.0.0
@@ -43,7 +45,7 @@ doBuild(){
     echo "using ${NAME}"
     docker run  --rm \
         --name=${NAME}  \
-        --volume="$PWD:/web" \
+        --volume="$DIR:/web" \
         ${NAME} \
         /usr/local/bundle/bin/jekyll build --drafts --future -V
      echo -e "\033[32m site build success \033[0m"
@@ -52,7 +54,7 @@ doBuild(){
 doIndex() {
     docker run  --rm \
         --name=${NAME}  \
-        --volume="$PWD:/web" \
+        --volume="$DIR:/web" \
         -e "ALGOLIA_API_KEY=$ALGOLIA_API_KEY" \
         ${NAME} \
         /usr/local/bundle/bin/jekyll algolia
@@ -65,9 +67,12 @@ doCommand() {
         doImage
 
     elif [ "${1}" = "serv" ]
-
     then
         doServ
+
+    elif [ "${1}" = "pull" ]
+    then
+        doPull
 
     elif [ "${1}" = "build" ]
     then
