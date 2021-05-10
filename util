@@ -3,7 +3,7 @@
 #部署工具
 # miwenshu @ 2021.5
 
-NAME=jk_vnzmi
+NAME=vincentmi/jk_vnzmi
 PORT=4000
 DIR=$(cd "$(dirname "$0")";pwd)
 
