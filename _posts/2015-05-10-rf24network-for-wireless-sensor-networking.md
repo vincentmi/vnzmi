@@ -15,7 +15,7 @@ tags:
 
 翻译: Vincent Mi [http://vnzmi.com/rf24network-for-wireless-sensor-networking.html](http://vnzmi.com/rf24network-for-wireless-sensor-networking.html)
 
-![7013108743_416996c44c_z.jpg](/img/in-post/3153790176.jpg)
+![7013108743_416996c44c_z.jpg]({{ site.imgurl }}/img/in-post/3153790176.jpg)
 
 [RF24Network](http://maniacbug.github.io/RF24Network/)网络是一个使用Nordic nRF24L01+ 无线，运行在Arduino兼容硬件的网络层。他的目标是成为Arduino单元通信的除Xbee外的另外一个选择。他提供一个主机地址空间和消息路由最高支持6000个节点，形成一个有能力和可扩展的无线传感器网络系统。 同时让两个节点之间的通讯更加简单。
 
@@ -142,14 +142,14 @@ void loop(void)
 
 ### 地址分布
 
-![7015275513_73663f8a74.jpg](/img/in-post/2931979606.jpg)
+![7015275513_73663f8a74.jpg]({{ site.imgurl }}/img/in-post/2931979606.jpg)
 
 RF24Network在节点少的时候工作的非常好，但是他是设计用于整个房间的节点。节点在树拓扑中根据节点地址自动配置。节点只能直接与他们的父节点和子节点进行通信。网络将自动发送消息到正确的地方。
 
 ```#00```是 基础节点，```#01-#05``` 直接与```#00```通讯，但是互相之间不进行通讯。所以如果#01要发送消息到#02，他将通过#00的转发，```#011```,```#021```,```#031```等等是```#01```的子节点。所以```#011```发送到```#02```,他将发送到 ```#01```然后```#00``` 然后```#02```.因此，如果你放一个节点#011到你的网络，确定有节点#01在网络，并且是开启电源也在通讯范围内。
 
 
-![6782822751_739036c12e.jpg](/img/in-post/2760920830.jpg)
+![6782822751_739036c12e.jpg]({{ site.imgurl }}/img/in-post/2760920830.jpg)
 
 在实践中，我设计了router(路由)节点 #01-#05到每一层，使用了外接天线和墙壁电源。然后本层的所有节点都与本层的父节点进行通讯。上面的图片是一个标准的V3节点，加上特别的电源模块。以便可以插入墙壁电源。无线单元被加上了天线。
 
@@ -206,7 +206,7 @@ struct S_message
 
 我喜欢监控每个节点的电池的级别，这样我可以知道是否一个节点什么时候需要更换电池。因此我连接来自我们电池的正级到电压传感器的输入。通过一个分压器:
 
-![6046166167_fb49f479d2_n.jpg](/img/in-post/706352279.jpg)
+![6046166167_fb49f479d2_n.jpg]({{ site.imgurl }}/img/in-post/706352279.jpg)
 
 我使用一个1M/479K 分频器电路。他将3.44V电压降低到1.1V,然后使用这个1.1V的电压做参考。这对于我的使用很完美，因为我不会使用超过3.44V的电压。当然如果你的电压超过了，你将需要一个大点的分压器。在我的这个示例中，当analogRead(A3)返回1024，我的电压是3.44V.代码如下：
 
@@ -317,7 +317,7 @@ const int sleep_cycles_per_transmission = 1;
 
 Pachube是一个非常棒的东西，但是有几次我可能需要自己调整扑捉我数据库的读数。他回比Pachube做的少 但是我们对我的读数数据库进行我想做的任何操作。我写好了我自己的PHP+MySQL方案，但是不太好移植。我最新的想法是用Ruby on Rail服务器来实现他，ROR看起来很适合做这个。
 
-附件作者的源代码 [sensornet.zip](/img/in-post/1928276898.zip)
+附件作者的源代码 [sensornet.zip]({{ site.imgurl }}/img/in-post/1928276898.zip)
 
 [RF24 Git Repo](http://maniacbug.github.com/RF24)
 [RF24 Network Repo](http://maniacbug.github.com/RF24Network)

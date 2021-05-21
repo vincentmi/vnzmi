@@ -12,11 +12,11 @@ tags:
 ---
 
 
-![](/img/poco/cz1.jpg)
+![]({{ site.imgurl }}/img/poco/cz1.jpg)
 
-![](/img/poco/cz2.jpg)
+![]({{ site.imgurl }}/img/poco/cz2.jpg)
 
-![](/img/poco/cz3.jpg)
+![]({{ site.imgurl }}/img/poco/cz3.jpg)
 
 
 

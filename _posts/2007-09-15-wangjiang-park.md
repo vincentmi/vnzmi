@@ -15,11 +15,11 @@ tags:
 
 
 
-![](/img/poco/bl1.jpg)
+![]({{ site.imgurl }}/img/poco/bl1.jpg)
 
-![](/img/poco/bl2.jpg)
+![]({{ site.imgurl }}/img/poco/bl2.jpg)
 
-![](/img/poco/bl3.jpg)
+![]({{ site.imgurl }}/img/poco/bl3.jpg)
 
 
 

@@ -14,7 +14,7 @@ tags:
  租房子真TMD不爽,好想有个自己得房子·现在要拼命赚钱天天上班。。靠
 
 <img>
-![/img/sinablog/2c64a389a9793b47b5dffd7f75430133.jpeg](/img/sinablog/2c64a389a9793b47b5dffd7f75430133.jpeg)
+![/img/sinablog/2c64a389a9793b47b5dffd7f75430133.jpeg]({{ site.imgurl }}/img/sinablog/2c64a389a9793b47b5dffd7f75430133.jpeg)
 
 
 

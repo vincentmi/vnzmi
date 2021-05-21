@@ -18,7 +18,7 @@ WOW SS号TBC接近毕业了 ，是不是该练个法师耍耍，哎我更喜欢s
 最近出于对wow的兴趣,到joyo上买了本 《DirectX 9.0 
 3D游戏开发基础》，研究了几天发现研究3D算法的先驱真不是人！<img>他们都是神...叫他们大神真没错！简直太太太复杂了....线性代数没学好
 悲剧了，慢慢研究有空玩下就当玩游戏了
-![/img/sinablog/b28712042b2022576f07a7b84b69b4a5.gif](/img/sinablog/b28712042b2022576f07a7b84b69b4a5.gif)
+![/img/sinablog/b28712042b2022576f07a7b84b69b4a5.gif]({{ site.imgurl }}/img/sinablog/b28712042b2022576f07a7b84b69b4a5.gif)
 
 
 

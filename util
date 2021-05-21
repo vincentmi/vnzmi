@@ -35,17 +35,17 @@ doPull(){
 doServ() {
     echo "using ${NAME} , port=${PORT}"
     docker run -it  --rm \
-        --name=${CONTINER_NAME}  \
+        --name=${CONTINER_NAME}_serv  \
         --volume="$DIR:/web" \
         --publish "${PORT}:4000" \
         ${NAME} \
-        /usr/local/bundle/bin/jekyll serve --host 0.0.0.0
+        /usr/local/bundle/bin/jekyll serve  --config _config.yml,_config_dev.yml --host 0.0.0.0
 }
 
 doBuild(){
     echo "using ${NAME} , dir = ${DIR}"
     docker run  --rm \
-        --name=${CONTINER_NAME}  \
+        --name=${CONTINER_NAME}_builder  \
         --volume="$DIR:/web" \
         ${NAME} \
         /usr/local/bundle/bin/jekyll build --drafts --future -V

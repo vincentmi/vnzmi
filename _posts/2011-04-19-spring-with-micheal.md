@@ -11,9 +11,9 @@ tags:
 
 今天又去了浣花溪，人满为患。春天还没来都要过了。带宸宸去抓下春天的尾巴.
 
-![spring1](/img/in-post/2011_spring_1.jpg)
+![spring1]({{ site.imgurl }}/img/in-post/2011_spring_1.jpg)
 
-![spring2](/img/in-post/2011_spring_2.jpg)
+![spring2]({{ site.imgurl }}/img/in-post/2011_spring_2.jpg)
 
 
 

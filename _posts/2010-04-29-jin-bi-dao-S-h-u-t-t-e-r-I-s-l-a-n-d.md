@@ -10,7 +10,7 @@ tags:
 ---
 
 
-![/img/sinablog/6d9afefabebdf5cd152835b4bb089f70.jpeg](/img/sinablog/6d9afefabebdf5cd152835b4bb089f70.jpeg)
+![/img/sinablog/6d9afefabebdf5cd152835b4bb089f70.jpeg]({{ site.imgurl }}/img/sinablog/6d9afefabebdf5cd152835b4bb089f70.jpeg)
 
 
 

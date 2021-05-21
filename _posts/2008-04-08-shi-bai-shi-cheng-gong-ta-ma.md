@@ -16,9 +16,9 @@ tags:
 浆打到地面..哎....第一次试飞就这样结束了.另外一个第一次就是是做清蒸鲈鱼.也弄成如图这样子.
 
 
-![/img/sinablog/234435b6984aec75b5c7e0022c9a2d1e.jpeg](/img/sinablog/234435b6984aec75b5c7e0022c9a2d1e.jpeg)
-![/img/sinablog/0ff7a5053018aad4acfd0a95e61c3bf4.jpeg](/img/sinablog/0ff7a5053018aad4acfd0a95e61c3bf4.jpeg)
-![/img/sinablog/fef6a849ab418ed9fffccbb8a610eb09.jpeg](/img/sinablog/fef6a849ab418ed9fffccbb8a610eb09.jpeg)
+![/img/sinablog/234435b6984aec75b5c7e0022c9a2d1e.jpeg]({{ site.imgurl }}/img/sinablog/234435b6984aec75b5c7e0022c9a2d1e.jpeg)
+![/img/sinablog/0ff7a5053018aad4acfd0a95e61c3bf4.jpeg]({{ site.imgurl }}/img/sinablog/0ff7a5053018aad4acfd0a95e61c3bf4.jpeg)
+![/img/sinablog/fef6a849ab418ed9fffccbb8a610eb09.jpeg]({{ site.imgurl }}/img/sinablog/fef6a849ab418ed9fffccbb8a610eb09.jpeg)
 
 
 

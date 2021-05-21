@@ -77,7 +77,7 @@ docker run --name web -d -p 6001:80 -e BASE_URL=http://admin-svc:9100 admin-web
 
 BaseURL已经修改了. 在不同的环境设置不同的参数即可.
 
-![preview](/img/in-post/adminweb.png)
+![preview]({{ site.imgurl }}/img/in-post/adminweb.png)
 
  
 

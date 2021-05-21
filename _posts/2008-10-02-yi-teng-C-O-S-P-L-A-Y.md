@@ -11,9 +11,9 @@ tags:
 
 
 
-![/img/sinablog/5a2ec7dfeda6ffa2285dc53d4b014c96.jpeg](/img/sinablog/5a2ec7dfeda6ffa2285dc53d4b014c96.jpeg)
+![/img/sinablog/5a2ec7dfeda6ffa2285dc53d4b014c96.jpeg]({{ site.imgurl }}/img/sinablog/5a2ec7dfeda6ffa2285dc53d4b014c96.jpeg)
 
-![/img/sinablog/8c5b4a120698ebfa11543fee21799d17.jpeg](/img/sinablog/8c5b4a120698ebfa11543fee21799d17.jpeg)
+![/img/sinablog/8c5b4a120698ebfa11543fee21799d17.jpeg]({{ site.imgurl }}/img/sinablog/8c5b4a120698ebfa11543fee21799d17.jpeg)
 
 更多图片
 

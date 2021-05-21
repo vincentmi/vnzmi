@@ -15,7 +15,7 @@ tags:
 
 
 
-![](/img/poco/baby.jpg)
+![]({{ site.imgurl }}/img/poco/baby.jpg)
 
 
 

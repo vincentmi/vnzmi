@@ -12,12 +12,12 @@ tags:
 
 # 雄风不减当年 ;)
 
-![雄风不减当年](/img/in-post/bro1.jpg)
+![雄风不减当年]({{ site.imgurl }}/img/in-post/bro1.jpg)
 
 
 # 深水炸弹
 
-![深水炸弹](/img/in-post/bro2.jpg)
+![深水炸弹]({{ site.imgurl }}/img/in-post/bro2.jpg)
 
 
 

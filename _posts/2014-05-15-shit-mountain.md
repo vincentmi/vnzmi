@@ -13,7 +13,7 @@ tags:
 让垃圾PHP程序员去死吧.
 妈逼的你学过编程没有
 
-![toursforfun_code_view](/img/in-post/2015_code_view.gif)
+![toursforfun_code_view]({{ site.imgurl }}/img/in-post/2015_code_view.gif)
 
 我要自己搞东西 草..不然会死在这里
 
