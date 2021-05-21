@@ -7,7 +7,8 @@ description: "关于生活和code | Vincent Mi"
 keyword: "PHP,Java,框架,Linux,Arduino"
 url: "http://vnzmi.com" # your host, for absolute URL
 baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
-imgurl: "http://img.vnzmi.com"
+#imgurl: "http://img.vnzmi.com"
+imgurl: ""
 timezone: Asia/Shanghai
 
 # SNS settings
