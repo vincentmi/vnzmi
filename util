@@ -28,7 +28,7 @@ doImage(){
 }
 
 doPull(){
-    git -C $DIR fetch -v
+    git -C $DIR pull -v
     echo  "\033[32m pull success \033[0m"
 }
 
