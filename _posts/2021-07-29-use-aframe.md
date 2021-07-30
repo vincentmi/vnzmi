@@ -581,3 +581,7 @@ template组件文档 地址 [aframe-super-hot-loader/example at master · superm
 
 最后完成了一个简单交互的360度VR展示.
 
+
+
+相关代码 在 [vincentmi/aframe-vr: aframe vr guide codes (github.com)](https://github.com/vincentmi/aframe-vr/tree/main)
+
