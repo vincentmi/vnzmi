@@ -585,3 +585,4 @@ template组件文档 地址 [aframe-super-hot-loader/example at master · superm
 
 相关代码 在 [vincentmi/aframe-vr: aframe vr guide codes (github.com)](https://github.com/vincentmi/aframe-vr/tree/main)
 
+预览:  https://vincentmi.github.io/aframe-vr/vr.html
