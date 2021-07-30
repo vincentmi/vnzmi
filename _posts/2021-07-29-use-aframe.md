@@ -573,5 +573,11 @@ template组件文档 地址 [aframe-super-hot-loader/example at master · superm
 
 淡入淡出通过对材质颜色进行变化来实现.淡出之后我们的另外一个事件修改背景图.
 
+
+
+## 完成收工
+
+
+
 最后完成了一个简单交互的360度VR展示.
 
