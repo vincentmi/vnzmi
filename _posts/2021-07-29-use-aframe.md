@@ -575,6 +575,20 @@ template组件文档 地址 [aframe-super-hot-loader/example at master · superm
 
 
 
+## 使用立方体进行投影(CMP Cube Map Projection)
+
+全景图投影使用球形投影,南北极的像素会被拉升,可以看到接缝.下面尝试下立方体投影
+
+
+
+
+
+## 等角方块投影(EAC Equi-Angular Cubemap)
+
+CMP方式立方体角落的像素会被拉升,因此Google于2017年提出了新的映射方式，在Cubemap基础上进行了改进。
+
+
+
 ## 完成收工
 
 
@@ -583,6 +597,8 @@ template组件文档 地址 [aframe-super-hot-loader/example at master · superm
 
 
 
-相关代码 在 [vincentmi/aframe-vr: aframe vr guide codes (github.com)](https://github.com/vincentmi/aframe-vr/tree/main)
+代码:  [vincentmi/aframe-vr: aframe vr guide codes (github.com)](https://github.com/vincentmi/aframe-vr/tree/main)
 
-预览:  https://vincentmi.github.io/aframe-vr/vr.html
+预览:  [https://vincentmi.github.io/aframe-vr/vr.html](https://vincentmi.github.io/aframe-vr/vr.html)
+
+参考 [Bringing pixels front and center in VR video (blog.google)](https://blog.google/products/google-ar-vr/bringing-pixels-front-and-center-vr-video/)

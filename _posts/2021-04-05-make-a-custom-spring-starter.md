@@ -190,10 +190,10 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 </project>
 ```
 
-####  使用starter
- 
+##  使用starter
+
  要使用我们的starter 只需要在 项目的```pom.xml```加上
- 
+
  ```xml
 
  <dependency>
@@ -202,18 +202,18 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
     <version>${greeter-starter.version}</version>
 </dependency>
  ```
- 
+
  Spring Boot将会自动将一切配置好,并且我们会有一个已经注入到容器的```Greeter```的bean.
- 
+
  如果要修改一下默认配置,只需要在项目的 ```application.properties```中增加一些配置:
- 
+
  ```
  baeldung.greeter.userName=Baeldung
 baeldung.greeter.afternoonMessage=Woha Afternoon
  ```
- 
+
  最后我们再应用程序当中直接使用 ```Greeter``` bean即可 
- 
+
  ```java
  @SpringBootApplication
 public class GreeterSampleApplication implements CommandLineRunner {
@@ -231,8 +231,30 @@ public class GreeterSampleApplication implements CommandLineRunner {
         System.out.println(message);
         }
 }
-```   
+ ```
 
 
 完整代码 
 https://github.com/eugenp/tutorials/tree/master/spring-boot-modules/spring-boot-custom-starter
+
+## 增加配置项提示
+
+Spring自带的starter在IDEA中修改配置时会展示一个提示.包含默认值和简单说明.
+
+![spring-hint](/img/in-post/spring-hint.png)
+
+IDEA会解析包中的```META-INFO/spring-configuration-metadata.json``` 文件来显示这些内容.因此我们自己的Starter要实现这个功能.只需要增加这个文件就可以了.
+
+```json
+{
+
+  "properties": [
+    {
+      "name": "baeldung.greeter.user-name",
+      "type": "java.lang.String",
+      "description":"名字",
+      "sourceType": "xxxx.xxx.GreeterProperties"
+    },
+ }
+```
+
