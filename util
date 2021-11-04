@@ -4,7 +4,7 @@
 # miwenshu @ 2021.5
 
 NAME=vincentmi/jk_vnzmi
-CONTINER_NAME=${NAME//\//-}
+CONTINER_NAME=${NAME//\//_}
 PORT=4000
 DIR=$(cd "$(dirname "$0")";pwd)
 
