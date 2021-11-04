@@ -5,3 +5,4 @@
 /vendor/*
 /_tools/__pycache__
 .jekyll-cache
+*.log
