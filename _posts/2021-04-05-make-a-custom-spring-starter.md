@@ -3,7 +3,7 @@ layout:     post
 title:      "制作自定义的Spring Starter"
 date:       "2021-04-05 10:53:00"
 author:     "Vincent"
-header-img:  "img/bullseye-gradient_blue.svg"
+header-img:  "img/leaf.jpg"
 catalog: true
 tags:
     - Spring
