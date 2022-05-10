@@ -175,8 +175,8 @@ public Page<DeviceInfoVO> listQueryDSL(DeviceQueryDTO queryDTO, Pageable pageabl
 package com.xxx.platform.common.repository;
 
 
-import com.heroera.common.exception.ApiException;
-import com.heroera.common.exception.ErrorCode;
+import com.xxx.common.exception.ApiException;
+import com.xxx.common.exception.ErrorCode;
 import com.querydsl.jpa.impl.JPAQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
