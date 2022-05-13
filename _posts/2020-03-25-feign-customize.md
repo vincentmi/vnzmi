@@ -120,7 +120,7 @@ Feign 的定制通过指定configuration 类来实现.非常方便.也可以使�
 我们希望在Feign使用中,发现异常情况直接抛出异常,而如果执行正常则需要直接返回实际的数据结构.
 
 因此我们需要自己实现一个Feign的```Decoder```用于将Feign返回的内容转换成对象.
-代码如下:
+代码如下: 处理了泛型数据
 
 ```java
 
@@ -161,13 +161,33 @@ public class FeignConfiguration {
             int code = codeNode.asInt();
             String message = msgNode.asText();
 
-            if(code  != 0 )
-            {
-                throw new BusinessException(500,"rpc error ["+message+"]");
-            }
+            if (code != 0) {
+                throw new ApiException(code, message).setData(dataNode.asText());
+        } else {
 
-            JsonNode dataNode = root.get("data");
-            return mapper.treeToValue(dataNode, Types.getRawType(type));
+            Class rawType = Types.getRawType(type);
+            if (type instanceof ParameterizedType){
+                ParameterizedType type1 = (ParameterizedType)  type;
+                //log.info("{} - > {} ->{}",type1.getRawType().getTypeName(),type1.getActualTypeArguments()[0].getClass(),dataNode);
+                try {
+                    List<Class> params = new ArrayList<>();
+                    for (Type e : type1.getActualTypeArguments()) {
+                        Class<?> aClass = Class.forName(e.getTypeName());
+                        params.add(aClass);
+                    }
+                    JavaType resultType = mapper.getTypeFactory().constructParametricType(
+                            Class.forName(type1.getRawType().getTypeName()),
+                            params.toArray(new Class[params.size()]));
+                    return mapper.readValue(dataNode.toString(),resultType);
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                    throw new ApiException(e);
+                }
+
+            }else{
+                return mapper.treeToValue(dataNode,rawType);
+            }
+        }
         };
     }
 }
