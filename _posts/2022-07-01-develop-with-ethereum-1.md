@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "以太坊开发入门"
+title:      "以太坊开发入门 - 搭建私链"
 date:       "2022-07-01 09:46:00"
 author:     "Vincent"
 header-img:  "img/post-bg-blockchain.jpg"
@@ -132,6 +132,7 @@ geth \
 --http.api "eth,net,web3,personal,admin,shh,txpool,debug,miner" \
 --nodiscover --maxpeers 30 --networkid 198989 --port 30303 \
 --mine --miner.threads 1 \
+--allow-insecure-unlock 
 --miner.etherbase "0x5e00b4e110975f62414aae1f7ef9a959cb4782b7" \
 console
 
@@ -166,6 +167,118 @@ address=0xC43A7efC02e50eb04d8BEbe74c9A2FB7563A9329
 
 #### 转账
 
+解锁账户
+
+```sh
+personal.unlockAccount(eth.accounts[0],'123',3000)
+```
+
+##### 发起转账
+
+```sh
+eth.sendTransaction({
+  from: eth.accounts[0],
+  to: eth.accounts[1],
+  value: web3.toWei(10, 'ether')
+  }
+)
+
+0x5e63fddb2995f33fbe756e980e6957ca7c4ec172a4dcdd837bc728b465cda0a7
+```
+
+执行后返回的哈希就是交易的哈希值.
+
+此时只是发布了转账请求,交易还没有被确认,
+
+```sh
+txpool.status //查看交易状态
+{
+  pending: 2,
+  queued: 0
+}
+```
+
+查看交易内容
+
+```js
+> eth.getTransaction('0xefe7ff837428cbdc88f719bf214c5f0f3a666f7d9fe0f1896e4c4118d404d71d')
+{
+  blockHash: null,
+  blockNumber: null,
+  from: "0x51009778ffdcc26094b58b2ac9e0ae6ab1e60ca1",
+  gas: 21000,
+  gasPrice: 1000000000,
+  hash: "0xefe7ff837428cbdc88f719bf214c5f0f3a666f7d9fe0f1896e4c4118d404d71d",
+  input: "0x",
+  nonce: 0,
+  r: "0x812b7536609d74d184efd6fcaed7b99a3d68f5a163781922cb7352a81348faf8",
+  s: "0x72794bb8053e2bce05000078761b17994c51ef071f7966ae403ae6090fdf423d",
+  to: "0xc43a7efc02e50eb04d8bebe74c9a2fb7563a9329",
+  transactionIndex: null,
+  type: "0x0",
+  v: "0x48",
+  value: 10000000000000000000
+}
+```
+
+##### 打包交易
+
+```sh
+miner.start(1); admin.sleepBlocks(1); miner.stop();
+```
+
+##### 查看已打包的交易
+
+```sh
+> eth.getTransaction('0xefe7ff837428cbdc88f719bf214c5f0f3a666f7d9fe0f1896e4c4118d404d71d')
+{
+  blockHash: "0x517c5d434fdf83806c67903a9f2cb1843e23cfa2484c054d5eef62cf50e15d97",
+  blockNumber: 844,
+  from: "0x51009778ffdcc26094b58b2ac9e0ae6ab1e60ca1",
+  gas: 21000,
+  gasPrice: 1000000000,
+  hash: "0xefe7ff837428cbdc88f719bf214c5f0f3a666f7d9fe0f1896e4c4118d404d71d",
+  input: "0x",
+  nonce: 0,
+  r: "0x812b7536609d74d184efd6fcaed7b99a3d68f5a163781922cb7352a81348faf8",
+  s: "0x72794bb8053e2bce05000078761b17994c51ef071f7966ae403ae6090fdf423d",
+  to: "0xc43a7efc02e50eb04d8bebe74c9a2fb7563a9329",
+  transactionIndex: 0,
+  type: "0x0",
+  v: "0x48",
+  value: 10000000000000000000
+}
+```
+
+当前交易被打包到了```844```区块.
+
+##### 查看区块信息
+
+```sh
+eth.getBlock(844)
+{
+  difficulty: 169043,
+  extraData: "0xd983010a14846765746888676f312e31382e318664617277696e",
+  gasLimit: 1882918455,
+  gasUsed: 42000,
+  hash: "0x517c5d434fdf83806c67903a9f2cb1843e23cfa2484c054d5eef62cf50e15d97",
+  logsBloom: "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  miner: "0x51009778ffdcc26094b58b2ac9e0ae6ab1e60ca1",
+  mixHash: "0x67cd6786e999f7cb6cdd09bc5eaf45e6e25e952647114e894c33f93d0f92fab1",
+  nonce: "0x685fbe752776be1f",
+  number: 844,
+  parentHash: "0x4e332f616cbf16a63cb9667913388dd9a23e266967da2078f6e4f5f804d3af04",
+  receiptsRoot: "0x0963aebd5272efe190c2582915ab9a802e7978cda7b4bcda3ee67808d06aafde",
+  sha3Uncles: "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+  size: 761,
+  stateRoot: "0xc3dca0428b5b75a24984a09d42fd0fa96e24f93e11c462afe5668f662c007e25",
+  timestamp: 1656735556,
+  totalDifficulty: 125284919,
+  transactions: ["0xefe7ff837428cbdc88f719bf214c5f0f3a666f7d9fe0f1896e4c4118d404d71d", "0x5e63fddb2995f33fbe756e980e6957ca7c4ec172a4dcdd837bc728b465cda0a7"],
+  transactionsRoot: "0x17d2a5f94692e77b342b7aff678af99f29882d477c20c9e630f7b25117b43b30",
+  uncles: []
+}
+```
 
 
 
