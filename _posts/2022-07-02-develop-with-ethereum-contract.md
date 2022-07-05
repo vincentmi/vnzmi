@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "以太坊开发入门 - 智能合约"
-date:       "2022-07-01 09:46:00"
+date:       "2022-07-02 09:46:00"
 author:     "Vincent"
 header-img:  "img/post-bg-blockchain.jpg"
 catalog: true
@@ -9,6 +9,7 @@ tags:
     - blockchain
     - Eth
     - Ethereum
+    - Contract
 ---
 
 ## 安装编译器
@@ -167,4 +168,143 @@ var output = {
   }
 ```
 
-使用 ```loadScript```将合约载入到Geth节点.
+使用 ```loadScript("/Users/vincentmi/work/eth/contract/output/temp.js")```将合约内容载入.
+
+### 部署合约 
+
+上面的JSON数据结构包含了我们部署合约需要的数据, ```contracts['sources/Vault.sol:Vault'].abi```是合约的定义信息, ```contracts['sources/Vault.sol:Vault'].bin```是合约的代码二进制信息.智能合约的部署过程也是一次普通的交易过程，我们需要将智能合约的数据整合到交易体的数据区（data），并发送出去。 一旦交易被捕获且挖矿完成，我们的合约就已经部署在了区块链上并具有了一个独一无二的地址。通过该地址我们就能和智能合约通信并调用合约的方法.
+
+```sh
+> output.contracts['sources/Vault.sol:Vault'].abi
+[{
+    inputs: [],
+    name: "get",
+    outputs: [{
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+    }],
+    stateMutability: "view",
+    type: "function"
+}, {
+    inputs: [{
+        internalType: "uint256",
+        name: "data",
+        type: "uint256"
+    }],
+    name: "set",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+}]
+```
+
+
+```sh
+> output.contracts['sources/Vault.sol:Vault'].bin
+"6080604052348015600f57600080fd5b5060ac8061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c806360fe47b11460375780636d4ce63c146049575b600080fd5b60476042366004605e565b600055565b005b60005460405190815260200160405180910390f35b600060208284031215606f57600080fd5b503591905056fea26469706673582212204cb30acaef1d56054ffdb656c07e2788eb723c95eeb4155255171050ba19561464736f6c634300080a0033"
+
+```
+
+#### 准备变量
+
+```sh
+var vaultAbi = output.contracts['sources/Vault.sol:Vault'].abi
+var vaultContract=eth.contract(vaultAbi)
+var vaultBin = '0x'+output.contracts['sources/Vault.sol:Vault'].bin
+```
+
+#### 解锁账户
+
+```sh
+#选择一个账户
+web3.fromWei(eth.getBalance('0x72fe0d652a873730006fe1ebc8059a3816f9f93b'))
+#挖矿的这个账户有4000多,我们就用这个来进行合约部署
+
+personal.unlockAccount('0x72fe0d652a873730006fe1ebc8059a3816f9f93b',"111",3000)
+```
+
+#### 提交合约
+
+```js
+
+var vaultDeploy = {from : '0x72fe0d652a873730006fe1ebc8059a3816f9f93b',data: vaultBin ,gas: 1000000}
+
+var vaultContractInstance = vaultContract.new(vaultDeploy)
+
+```
+
+可以在控制台看到产生了合约地址
+
+```
+INFO [07-05|15:29:07.026] Submitted contract creation              hash=0xcee9a8ebc7781b8d9448866ef3605b30e3377f854a1e2a8f1e63f6b7e68ce333 from=0x51009778fFdcC26094b58B2AC9E0Ae6AB1E60Ca1 nonce=6 contract=0x3828d7E57F70522c3a6e01941A821Ff2378146f5 value=0
+```
+
+合约地址为 **0x3828d7e57f70522c3a6e01941a821ff2378146f5**
+
+打印合约信息
+
+```js
+> vaultContractInstance
+{
+  abi: [{
+      inputs: [],
+      name: "get",
+      outputs: [{...}],
+      stateMutability: "view",
+      type: "function"
+  }, {
+      inputs: [{...}],
+      name: "set",
+      outputs: [],
+      stateMutability: "nonpayable",
+      type: "function"
+  }],
+  address: "0x3828d7e57f70522c3a6e01941a821ff2378146f5",
+  transactionHash: "0xcee9a8ebc7781b8d9448866ef3605b30e3377f854a1e2a8f1e63f6b7e68ce333",
+  allEvents: function bound(),
+  get: function bound(),
+  set: function bound()
+}
+```
+
+>
+> 如果打印的```address```一直为空,说明没有矿工打包你的交易.
+> 可以提高 ```gas``` 后就可以了 .
+>
+
+
+#### 调用合约
+
+>
+> 如果出现 错误```Error: invalid opcode: SHR```,可能是因为创世区块少了 ```"byzantiumBlock": 0,```参数.您需要重新初始化链
+> 
+
+我们合约的GET方法由于没有进行交易和变更可以直接调用.此时获取到的值是  0 
+
+```js
+> vaultContractInstance.get.call()
+0
+```
+
+我们发送交易来修改这个值.
+
+```js
+> vaultContractInstance.set.sendTransaction(100,{from:"0x72fe0d652a873730006fe1ebc8059a3816f9f93b" ,gas:1000000 })
+
+"0x1b62634409d62402563ff152c9db8af4649de26bf18464b2b6db34f7a5a07a08"
+
+# 控制台输出
+INFO [07-05|17:34:11.348] Submitted transaction                    hash=0x1b62634409d62402563ff152c9db8af4649de26bf18464b2b6db34f7a5a07a08 from=0x72Fe0D652a873730006Fe1eBC8059a3816F9F93b nonce=1 recipient=0x1004838d7DFD2750470C214021E58A1252c33699 value=0
+
+```
+
+打印出了交易号. 再调用```vaultContractInstance.get.call()``` 获取修改后的值.
+
+```js
+> vaultContractInstance.get.call()
+100
+```
+
+一个简单的智能合约已经开发完成.
+

@@ -9,6 +9,7 @@ tags:
     - blockchain
     - Eth
     - Ethereum
+    - Geth
 ---
 
 ## 背景
@@ -66,25 +67,24 @@ docker exec -it eth sh
 ##### gensis.json
 
 ```js
-
 {
     "config": {
-        "chainId": 18622,
+        "chainId": 622,
         "homesteadBlock": 0,
         "eip150Block": 0,
         "eip155Block": 0,
-        "eip158Block": 0
+        "eip158Block": 0,
+        "byzantiumBlock": 0,
+        "constantinopleBlock": 0,
+        "petersburgBlock": 0,
+        "ethash": {}
     },
-    "difficulty": "0x400",
-    "gasLimit": "0xffffffff",
-    "coinbase": "0x0000000000000000000000000000000000000000",
-    "extraData": "0x00",
-    "nonce": "0x0000000000000001",
-    "mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-    "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-    "timestamp": "0x00",
+    "difficulty": "1",
+    "gasLimit": "8000000",
+    "coinbase": "0x5e00b4e110975f62414aae1f7ef9a959cb4782b7",
+    "extraData": "0x00000000000000000000000000000000000000000000000000000000000000005e00b4e110975f62414aae1f7ef9a959cb4782b70000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
     "alloc": {
-      "41835237711e43bab9e0b70dd8425f6fe7867213": {"balance": "111111"},
+      "5e00b4e110975f62414aae1f7ef9a959cb4782b7": {"balance": "999999"},
       "c40e24f1ae49fda0c6e7bd243337e0f43ac0ad81": {"balance": "999999"},
       "6789820778cbf30c50974a799c725bbb36c5a66e": {"balance": "600000"},
       "c848b72d24e2733c00dc8262366ed633228430b8": {"balance": "600000"}
@@ -120,19 +120,19 @@ docker run -it --rm --name eth -v /Users/vincentmi/data/eth/private_net_2:/root 
 ethereum/client-go  --datadir /root \
 --http --http.addr=127.0.0.1 --http.port 8545 --http.corsdomain "*" \
 --http.api "eth,net,web3,personal,admin,shh,txpool,debug,miner" \
---nodiscover --maxpeers 30 --networkid 198989 --port 30303 \
+--nodiscover --maxpeers 30 --networkid 622 --port 30303 \
 --mine --miner.threads 1 \
 --miner.etherbase "0x5e00b4e110975f62414aae1f7ef9a959cb4782b7" \
 console
 
 #命令行
 geth \
---datadir  /Users/vincentmi/data/eth/private_net_2 \
+--datadir  /Users/vincentmi/data/eth/private_net_2/db \
 --http --http.addr=127.0.0.1 --http.port 8545 --http.corsdomain "*" \
 --http.api "eth,net,web3,personal,admin,shh,txpool,debug,miner" \
---nodiscover --maxpeers 30 --networkid 198989 --port 30303 \
+--nodiscover --maxpeers 30 --networkid 622 --port 30303 \
 --mine --miner.threads 1 \
---allow-insecure-unlock 
+--allow-insecure-unlock \
 --miner.etherbase "0x5e00b4e110975f62414aae1f7ef9a959cb4782b7" \
 console
 
@@ -143,8 +143,8 @@ console
 
 ```sh
 geth \
---datadir  /Users/vincentmi/data/eth/private_net_2 \
-attach ipc:/Users/vincentmi/data/eth/private_net_2/geth.ipc
+--datadir  /Users/vincentmi/data/eth/private_net_2/db \
+attach ipc:/Users/vincentmi/data/eth/private_net_2/db/geth.ipc
 ```
 
 #### 查看挖矿账户收益
