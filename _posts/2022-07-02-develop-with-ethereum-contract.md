@@ -12,9 +12,63 @@ tags:
     - Contract
 ---
 
+## Solidity 语言
+
+智能合约使用[Solidity](https://soliditylang.org/)语言进行开发,
+
+[Solidity语法参考](https://ethbook.abyteahead.com/ch8/index.html)
+
+Solidity 语言的一些特点:
+
+##### 没有浮点数 
+使用${wei}$来规避浮点运算.
+
+  $
+  1 \times {ether} = 1 \times  10^{18}{wei}
+  $
+
+##### 指数运算符
+
+```sol
+10**18 = 10^18
+```
+
+##### 函数权限关键字在最后
+
+函数默认是```public```
+约定 ```private```修饰的函数名字前缀加上下划线 _ 
+
+```internal``` 修饰符可以让合约继承后子合约访问该函数
+```external``` 让该函数只能被外部调用者调用
+
+```view``` 修饰符,用于标明单纯的“查勘”类型的函数，它会读取记录在区块链上的数据，但它并不修改数据，是个只读操作
+```pure``` 纯粹的函数,只是进行一些内存运算
+默认则认为是写数据操作
+
+
+##### 函数返回值可以是多个
+
+#####  keccak256 函数
+用于生成256bit的散列
+
+##### 使用 emit产生日志
+
+利用日志减少遍历区块的负担
+
+##### msg.sender 合约调用者地址
+
+##### require和assert
+- require条件检查语句如果不通过，则扣除运行到当前语句时，程序执行所花费的 gas，终止程序执行，并返回。
+- assert 条件检查语句如果不通过，则视为严重错误，扣除所有的gas，终止程序执行，并返回.
+
+##### 使用 _ 进行 Ownerable和Pauseable控制
+
+其他语法请参考语法说明.
+
 ## 安装编译器
 
-智能合约使用[Solidity](https://soliditylang.org/)语言进行开发,我们需要安装一个编译器solc.
+我们需要安装一个编译器solc.
+
 
 ### 使用NPM安装
 
