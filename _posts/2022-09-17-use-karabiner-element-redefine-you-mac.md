@@ -27,7 +27,7 @@ tags:
 
 ```js
 {
-  "title": "DA_V2_X_MOUSE",
+  "title": "VNZ_MOUSE_DEFINE",
   "rules": [
     {
       "description": "DA_V2_X_btn5_alfred",
@@ -76,6 +76,67 @@ tags:
                 {
                   "vendor_id": 1678,
                   "product_id": 157,
+                  "is_pointing_device": true
+                }
+              ]
+            }
+          ],
+          "to": [
+            {
+              "repeat": false,
+              "key_code": "launchpad"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "LOGI_M590_btn5_alfred",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button5"
+          },
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1133,
+                  "product_id": 45083,
+                  "is_pointing_device": true
+                }
+              ]
+            }
+          ],
+          "to": [
+            {
+              "repeat": false,
+              "modifiers": [
+                "left_alt"
+              ],
+              "key_code": "spacebar"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "LOGI_M590_btn4_lunch_app",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button4"
+          },
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1133,
+                  "product_id": 45083,
                   "is_pointing_device": true
                 }
               ]
