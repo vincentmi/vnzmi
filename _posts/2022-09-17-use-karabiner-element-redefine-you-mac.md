@@ -23,14 +23,14 @@ tags:
 ## Razer DA V2X 规则
 
 > 1. ```btn5_alfred``` 将鼠标键 button5 映射成 Left_Option + Spacebar 用于打开Alfred
-> 2.
+> 2. ```btn4_lunch_app``` 打开lunchpad
 
-```json
+```js
 {
   "title": "DA_V2_X_MOUSE",
   "rules": [
     {
-      "description": "btn5_alfred",
+      "description": "DA_V2_X_btn5_alfred",
       "manipulators": [
         {
           "type": "basic",
@@ -56,6 +56,35 @@ tags:
                 "left_alt"
               ],
               "key_code": "spacebar"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "DA_V2_X_btn4_lunch_app",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button4"
+          },
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1678,
+                  "product_id": 157,
+                  "is_pointing_device": true
+                }
+              ]
+            }
+          ],
+          "to": [
+            {
+              "repeat": false,
+              "key_code": "launchpad"
             }
           ]
         }
