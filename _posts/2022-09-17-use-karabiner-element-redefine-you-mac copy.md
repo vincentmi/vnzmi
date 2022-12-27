@@ -154,3 +154,52 @@ tags:
   ]
 }
 ```
+
+
+
+####  FOR ALL Device
+
+```json
+{
+  "title": "VNZ_MOUSE_DEFINE_FOR_ALL",
+  "rules": [
+    {
+      "description": "btn5_alfred",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button5"
+          },
+          "to": [
+            {
+              "repeat": false,
+              "modifiers": [
+                "left_alt"
+              ],
+              "key_code": "spacebar"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "btn4_lunch_app",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button4"
+          },
+          "to": [
+            {
+              "repeat": false,
+              "key_code": "launchpad"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
