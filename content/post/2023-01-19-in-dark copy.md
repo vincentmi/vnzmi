@@ -1,0 +1,42 @@
+---
+layout:     post
+title:      "2023新的一年"
+date:       "2023-01-19 10:00:00"
+author:     "Vincent"
+image:  "/img/bg-in-dark.jpg"
+catalog: true
+tags:
+    - life
+    - memory
+---
+
+##  1668.12.26.40
+
+![](/img/lam/0.jpg)
+![](/img/lam/1.jpg)
+![](/img/lam/2.jpg)
+![](/img/lam/3.jpg)
+![](/img/lam/4.jpg)
+![](/img/lam/4.2.jpg)
+![](/img/lam/4.5.jpg)
+![](/img/lam/5.jpg)
+![](/img/lam/6.jpg)
+![](/img/lam/7.jpg)
+![](/img/lam/8.jpg)
+![](/img/lam/9.jpg)
+![20230129](/img/lam/10.jpg)
+
+<!--58-8118-2469-->
+<!--xfr-08-39-626-730 - 1004 - -->
+
+
+
+
+
+
+
+
+
+
+
+

@@ -6,3 +6,5 @@
 /_tools/__pycache__
 .jekyll-cache
 *.log
+.well-known
+/public

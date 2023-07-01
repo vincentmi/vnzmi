@@ -1,0 +1,103 @@
+baseURL = '/'
+languageCode = 'en-us'
+theme = 'cleanwhite'
+title = '我的乐与怒'
+header_image = 'img/tianfu_3_st.jpg'
+googleAnalytics = "UA-78738242-1"
+ba_track_id  = "2b745fdb2d90955bdfb8ad1194277073"
+hasCJKLanguage = true
+summaryLength = 140
+
+[outputs]
+home = ["HTML", "RSS"]
+
+
+[params]
+  icp = "蜀ICP备17040089号-2"
+  header_image = "img/tianfu_3_st.jpg"
+  SEOTitle = "我的乐与怒 | Vincent's Blog"
+  description = "In code we trust"
+  keyword = "我的乐与怒,vincent mi, miwenshu, 电商,  博客, 个人网站, 互联网, Web, 云原生, PaaS, Java, Kubernetes, 微服务, Microservice"
+  slogan = "Life, thoughts, stories and ideas."
+
+  image_404 = "img/404-bg.jpg"
+  title_404 = "你来到了没有知识的荒原 :("
+  omit_categories = false
+# Sidebar settings
+  sidebar_about_description = "In Code We Trust"
+  sidebar_avatar = "/img/avatar.png"      # use absolute URL, seeing it's used in both `/` and `/about/`
+
+  featured_tags = true 
+  featured_condition_size = 1 
+
+    friends = true
+  bookmarks = true
+  about_me = true
+
+  reward = true
+[params.wechat_media_platform]
+    name = "InCodeWeTrust"
+    qr = "/img/icwt.jpg"
+
+[params.social]
+  rss            = true 
+  #email          = "miwenshu@gmail.com"
+  #facebook      = "full profile url in facebook"
+  #googleplus    = "full profile url in googleplus"
+  github         = "https://github.com/vincentmi"
+  twitter       = "https://twitter.com/miwenshu"
+  linkedin       = "https://www.linkedin.com/in/miwenshu"
+  stackoverflow  = "https://stackoverflow.com/users/5311815/vincent-mi"
+  #instagram     = "full profile url in instagram"
+  wechat         = "/img/icwt.jpg"
+  zhihu          = "https://www.zhihu.com/people/vincentz"
+  
+[[params.friend_link]]
+  title = "青鸟的翅膀"
+  href =  "http://blog.sina.com.cn/vegas"
+
+[[params.friend_link]]
+  title = "Caffeine Park"
+  href =  "http://blog.sina.com.cn/yoshikilau"
+
+[[params.friend_link]]
+  title = "Theme From Hux"
+  href =  "http://huxpro.github.io"
+
+  [[params.bookmark_link]]
+  title =  "Martin Fowler"
+  href =  "https://martinfowler.com"
+  [[params.bookmark_link]]
+  title = "中国省市区数据库"
+  href =  "https://github.com/vincentmi/vnzmi/tree/gh-pages/attach/region.sql"
+  [[params.bookmark_link]]
+  title = "spring-security-reference"
+  href =  "https://www.gitbook.com/book/vincentmi/spring-security-reference-zh/details"
+  [[params.bookmark_link]]
+  title = "unsplash"
+  href = "https://unsplash.com"
+  [[params.bookmark_link]]
+  title = "json2swg"
+  href = "https://vincentmi.github.io/json2swg/"
+
+  
+    [[params.addtional_menus]]
+  title =  "我"
+  href =  "/about/"
+  [[params.addtional_menus]]
+  title =  "归档"
+  href =  "/archive/"
+   [[params.addtional_menus]]
+  title =  "搜索"
+  href =  "/search/"
+  [[params.addtional_menus]]
+  title =  "CodeSketch"
+  href =  "/codesketch/"
+
+
+[markup]
+  [markup.tableOfContents]
+    endLevel = 2
+    startLevel = 1
+  [markup.highlight]
+    style = "manni"
