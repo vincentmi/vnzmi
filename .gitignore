@@ -8,3 +8,4 @@
 *.log
 .well-known
 /public
+.hugo_build.lock
