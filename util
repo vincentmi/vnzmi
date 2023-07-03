@@ -5,7 +5,7 @@
 
 NAME=vincentmi/hugo-builder
 CONTINER_NAME=${NAME//\//_}
-PORT=4000
+PORT=1313
 DIR=$(cd "$(dirname "$0")";pwd)
 
 doHelp() {
@@ -16,51 +16,51 @@ doHelp() {
     echo "Using : ./build [command1] [command2] ..."
     echo ""
     echo "Commands: "
-    echo "  image : build a custom hugo builder docker images"
+    echo "  image : pull hugo builder docker images"
     echo "  serv : serv jekyll in your local server on port 1313"
     echo "  build : build hugo pages"
     echo "  index : upload index to algolia"
 }
 
 doImage(){
-    docker build -t ${NAME}  ./  
-    echo  "\033[32m image build success \033[0m"
+    docker pull -t ${NAME}  ./  
+    echo -e "\033[32m image build success \033[0m"
 }
 
 doPull(){
     git -C $DIR pull -v
-    echo  "\033[32m pull success \033[0m"
+    echo  -e "\033[32m site pull success \033[0m"
 }
 
 doServ() {
     echo "using ${NAME} , port=${PORT}"
+
     docker run -it  --rm \
         --name=${CONTINER_NAME}_serv  \
-        --volume="$DIR:/web" \
-        --publish "${PORT}:4000" \
+        --volume="$DIR:/app" \
+        --publish "${PORT}:1313" \
         ${NAME} \
-        /usr/local/bundle/bin/jekyll serve  --config _config.yml,_config_dev.yml --host 0.0.0.0
+        hugo server -s /app  --bind 0.0.0.0  --renderToDisk
 }
 
 doBuild(){
     echo "using ${NAME} , dir = ${DIR}"
     docker run  --rm \
         --name=${CONTINER_NAME}_builder  \
-        --volume="$DIR:/web" \
+        --volume="$DIR:/app" \
         ${NAME} \
-        /usr/local/bundle/bin/jekyll build --drafts --future -V
-     echo "\033[32m site build success \033[0m"
+        hugo --source /app
+     echo -e "\033[32m site build success \033[0m"
 }
 
 doIndex() {
     echo "using ${NAME} , dir=${DIR}"
     docker run  --rm \
         --name=${CONTINER_NAME}  \
-        --volume="$DIR:/web" \
-        -e "ALGOLIA_API_KEY=$ALGOLIA_API_KEY" \
+        --volume="$DIR:/app" \
         ${NAME} \
-        /usr/local/bundle/bin/jekyll algolia
-     echo "\033[32m algolia upload success \033[0m"
+        pagefind --source public
+     echo -e "\033[32m pagefind index success \033[0m"
 }
 
 doCommand() {

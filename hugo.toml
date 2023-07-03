@@ -1,5 +1,5 @@
 baseURL = '/'
-languageCode = 'en-us'
+languageCode = 'zh-cn'
 theme = 'cleanwhite'
 title = '我的乐与怒'
 header_image = 'img/tianfu_3_st.jpg'

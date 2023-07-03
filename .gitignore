@@ -9,3 +9,4 @@
 .well-known
 /public
 .hugo_build.lock
+/.hugo_cache
