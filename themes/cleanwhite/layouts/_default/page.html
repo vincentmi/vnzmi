@@ -5,14 +5,25 @@
         background-image: url('{{ if .Params.image }}{{ .Params.image | relURL }}{{ else }}{{ .Site.Params.header_image | relURL}}{{ end }}')
     }
 
+    {{ if .Params.titleColor }}
     .titleColor {
         text-align: center;font-size:80px;
-        {{ if .Params.titleColor }}
-        color: .Params.titleColor;
-        {{ else }}
-        color:#ffffff;
-        {{  end }}
+        color: {{.Params.titleColor}} !important;
+        font-style: normal !important;
     }
+    .navbar-brand {
+        color:{{.Params.titleColor}} !important;
+    }
+    .navbar-custom .nav li a{
+        color:{{.Params.titleColor}} !important;
+    }
+    {{ else }}
+    .titleColor {
+        text-align: center;font-size:80px;
+        color: #FFFFFF;
+    }
+   
+    {{  end }}
     
 </style>
 {{ if eq .Params.headerstyle "text" }}
