@@ -4,6 +4,25 @@
     header.intro-header {
         background-image: url('{{ if .Params.image }}{{ .Params.image | relURL }}{{ else }}{{ .Site.Params.header_image | relURL}}{{ end }}')
     }
+    {{ if .Params.titleColor }}
+    .titleColor {
+        text-align: center;font-size:80px;
+        color: {{.Params.titleColor}} !important;
+        font-style: normal !important;
+    }
+    .navbar-brand {
+        color:{{.Params.titleColor}} !important;
+    }
+    .navbar-custom .nav li a{
+        color:{{.Params.titleColor}} !important;
+    }
+    {{ else }}
+    .titleColor {
+        text-align: center;font-size:80px;
+        color: #FFFFFF;
+    }
+   
+    {{  end }}
 </style>
 {{ if eq .Params.headerstyle "text" }}
 <header class="intro-header style-text" >
@@ -21,9 +40,9 @@
                         </a>
                         {{ end }}
                     </div>
-                    <h1>{{ .Title }}</h1>
-                    <h2 class="subheading">{{ .Params.subtitle }}</h2>
-                    <span class="meta">
+                    <h1 class="titleColor">{{ .Title }}</h1>
+                    <h2 class="subheading titleColor">{{ .Params.subtitle }}</h2>
+                    <span class="meta titleColor">
                         {{ if .Params.metadata }}
                             {{ range $index, $element := .Params.metadata }}
                                 {{ if .link }}
