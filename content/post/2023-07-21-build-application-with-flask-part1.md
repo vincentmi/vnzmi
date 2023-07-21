@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "使用Flask开发应用程序"
+title:      "使用Flask开发应用程序(1) - 基础"
 date:       "2023-07-21 10:44:00"
 author:     "Vincent"
 image:  "/img/erhai18622_0_1.jpg"
@@ -245,54 +245,3 @@ flaskr
 ```
 
 端口已经改变成我们设置的端口了。
-
-
-# 数据库访问
-
-我们先使用SQLlite数据库来看看如何初始化一些资源。python内建了sqlite3 模块。我们使用这个模块来进行一些数据的保存。使用SQLite 可以不用启动独立的数据库服务器，比较适合小型的应用和嵌入式设备等。
-
-## 连接数据库
-
-```flaskr/db.py```文件
-
-
-```py
-import sqlite3
-
-import click
-from flask import current_app, g
-
-def get_db():
-    if 'db' not in g:
-        g.db = sqlite3.connect(
-            current_app.config['DATABASE'],
-            detect_types=sqlite3.PARSE_DECLTYPES
-        )
-        g.db.row_factory = sqlite3.Row
-
-    return g.db
-
-
-def close_db(e=None):
-    db = g.pop('db', None)
-
-    if db is not None:
-        db.close()
-```
-
- - ```g``` 是一个特殊对象，每一次请求会初始化一次。我们使用```g``` 对象在一次访问中存储了数据库连接。当一个请求中多次调用 ```get_db```的时候就不用重复创建 数据库连接了。
- - ```current_app``` 是另一个特殊对象，指向当前正在处理该请求的Flask应用程序。可以理解这是本次请求的上下文。因为我们使用了应用工厂模式，所以现在并没有一个应用对象。```get_db```将在应用被创建的时候调用，所以我们使用这个对象.
-- ```sqlite3.connect() ```  使用 ```DATABASE``` 设置的路径，简历数据库连接. 稍后我们会初始化这个数据文件。
-- ```sqlite3.Row``` 设置查询结果返回的类型，我们设置返回Dict，可以使用栏位名访问列内容。
-
-
-## 创建数据表
-
-
-
-
-
-
-
-
-
