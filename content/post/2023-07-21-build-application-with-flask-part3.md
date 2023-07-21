@@ -507,7 +507,7 @@ app.add_url_rule('/', endpoint='index')
 
 ``` app.add_url_rule('/', endpoint='index')``` 设置名称 ```"index"```对应的 URL规则。
 
-#### 首页
+## 首页
 
 ```py 
 @bp.route('/')
@@ -722,4 +722,4 @@ flask --app flaskr  run -h 0.0.0.0 --debug   -p 18622
 
 打开浏览器查看 [http://127.0.0.1:18622](http://127.0.0.1:18622)
 
-![大功告成](flask_running.jpg)
+![大功告成](/img/in-post/flask_running.jpg)
