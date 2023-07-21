@@ -721,3 +721,5 @@ flask --app flaskr  run -h 0.0.0.0 --debug   -p 18622
 ```
 
 打开浏览器查看 [http://127.0.0.1:18622](http://127.0.0.1:18622)
+
+![大功告成](flask_running.jpg)
