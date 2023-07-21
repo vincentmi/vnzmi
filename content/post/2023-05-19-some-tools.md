@@ -3,7 +3,7 @@ layout:     post
 title:      "一些脚本"
 date:       "2023-05-19 23:48:00"
 author:     "Vincent"
-image:  "/img/post-bg-engine.jpg"
+image:  "/img/bulleye_red.svg"
 catalog: true
 tags:
     - Linux

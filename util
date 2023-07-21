@@ -17,7 +17,8 @@ doHelp() {
     echo ""
     echo "Commands: "
     echo "  image : pull hugo builder docker images"
-    echo "  serv : serv jekyll in your local server on port 1313"
+    echo "  servdisk : serv hugo in your local server on port 1313"
+    echo "  serv : serv hugo in memory on port 1313"
     echo "  build : build hugo pages"
     echo "  index : upload index to algolia"
 }
@@ -32,7 +33,7 @@ doPull(){
     echo  -e "\033[32m site pull success \033[0m"
 }
 
-doServ() {
+doServDisk() {
     echo "using ${NAME} , port=${PORT}"
 
     docker run -it  --rm \
@@ -41,6 +42,17 @@ doServ() {
         --publish "${PORT}:1313" \
         ${NAME} \
         hugo server -s /app  --bind 0.0.0.0  --renderToDisk
+}
+
+doServMem() {
+    echo "using ${NAME} , port=${PORT}"
+
+    docker run -it  --rm \
+        --name=${CONTINER_NAME}_serv  \
+        --volume="$DIR:/app" \
+        --publish "${PORT}:1313" \
+        ${NAME} \
+        hugo server -s /app  --bind 0.0.0.0  --buildFuture --buildDrafts
 }
 
 doBuild(){
@@ -68,9 +80,13 @@ doCommand() {
     then
         doImage
 
+    elif [ "${1}" = "servdisk" ]
+    then
+        doServDisk
+
     elif [ "${1}" = "serv" ]
     then
-        doServ
+        doServMem
 
     elif [ "${1}" = "pull" ]
     then
