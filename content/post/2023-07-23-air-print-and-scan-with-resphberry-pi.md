@@ -38,7 +38,7 @@ tags:
 
 > 注意如果使用安装器无法成功安装，可以手动下载安装，下载与本机版本hplip版本一致的 插件版本。下载时同时下载```.asc```文件安装时会进行文件校验。
 
-
+> 插件不安装也可以进行打印，但是无法进行扫描。```scanimage``` 命令发送过后会出现 硬件通讯错误。
 
 
 下载文件：
@@ -55,6 +55,17 @@ wget --no-check-certification https://www.openprinting.org/download/printdriver/
 chmod a+x hplip-3.16.2-plugin.run
 
 ./hplip-3.16.2-plugin.run
+```
+
+#### 使用了ZjStream协议的HP打印机
+
+需要安装该驱动,foo2zjs是一个基于ZjStream协议的Linux开源驱动.源代码 ```https://github.com/koenkooi/foo2zjs```.可以直接安装二进制版本。
+
+> 我的打印机是 HP Lasterjet M1136 MFP 打印报"filter fail" 安装该驱动解决了问题。
+
+
+```sh
+apt-get install -y printer-driver-foo2zjs
 ```
 
 
