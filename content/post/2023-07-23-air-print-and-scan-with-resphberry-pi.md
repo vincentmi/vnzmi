@@ -20,19 +20,95 @@ tags:
 ## 选择系统
 首先给树莓派烧录一个系统，我选择的是debian.可以从这里 [https://www.raspberrypi.com/software/](https://www.raspberrypi.com/software/) 下载。
 
+我选择的Debian
+
+```sh
+uname -a
+Linux raspberrypi 4.14.98-v7+ #1200 SMP Tue Feb 12 20:27:48 GMT 2019 armv7l GNU/Linux
+```
+
+打开相关的一些服务```ssh```,```vnc```打开可以远程操作，方便一点。
+
+![/img/in-post/raspi_setting.png](/img/in-post/raspi_setting.png)
+
 ## 配置网络
 
+先连接上WIFI，然后。
 
-# 安装CUPS
+打开编辑器编辑网络
 
-# 解决驱动问题
+```sh
+sudo leafpad /etc/dhcpcd.conf 
+```
+
+因为我使用WIFI连接，设置WIIF的IP地址
+
+```conf
+SSID Vincent
+inform 192.168.199.191
+static routers=192.168.199.1
+static domain_name_servers=114.114.114.114
+
+SSID Vincent
+inform 192.168.199.191
+static routers=192.168.199.1
+static domain_name_servers=114.114.114.114
+```
+
+> ```domain_name_servers```不设置的话会导致无法解析DNS
+
+
+
+# 安装驱动
 
 ## HP 打印机Linux驱动
+
+安装HP基础驱动,安装时会自动安装CUPS 打印服务。
+
+```sh
+sudo apt-get install hplip
+```
+
+
+将用户添加入lpadmin，我的用户名是pi。如果不添加，之后添加网络打印机，会报错：Unable to add printer forbidden。
+
+```sh 
+sudo usermod -a -G lpadmin pi
+```
+
+修改cups配置环境，为了安全起见，cups服务默认是只能本地用户localhost访问的。现在我们需要远程访问，需要修改配置文件```/etc/cups/cupsd.conf```。在修改配置文件前，先关掉cups服务，然后再开启。
+
+```sh
+sudo service cups stop           #关掉服务
+sudo leafpad /etc/cups/cupsd.conf  #开始编辑
+sudo service cups start          #开启服务
+```
+
+
+```conf
+Port 631
+#Listen /var/run/cups/cups.sock
+Listen 0.0.0.0:631
+```
+
+
+## 使用了ZjStream协议的HP打印机
+
+需要安装该驱动,foo2zjs是一个基于ZjStream协议的Linux开源驱动.源代码 ```https://github.com/koenkooi/foo2zjs```.可以直接安装二进制版本。
+
+> 我的打印机是 HP Lasterjet M1136 MFP 打印报"filter fail" 安装该驱动解决了问题。
+
+
+```sh
+apt-get install -y printer-driver-foo2zjs
+```
+
+
 
 前往这里下载惠普打印机相关驱动 [https://developers.hp.com/hp-linux-imaging-and-printing/gethplip](https://developers.hp.com/hp-linux-imaging-and-printing/gethplip)
 
 
-#### HP驱动插件
+## HP驱动插件
 
 插件网站地址 [https://www.openprinting.org/download/printdriver/auxfiles/HP/plugins/](https://www.openprinting.org/download/printdriver/auxfiles/HP/plugins/)
 
@@ -52,22 +128,75 @@ wget --no-check-certification https://www.openprinting.org/download/printdriver/
 安装插件
 
 ```sh
-chmod a+x hplip-3.16.2-plugin.run
-
-./hplip-3.16.2-plugin.run
+hp-plugin
 ```
 
-#### 使用了ZjStream协议的HP打印机
+调用HP Plugin的UI界面来选择刚才下载的文件进行安装。
 
-需要安装该驱动,foo2zjs是一个基于ZjStream协议的Linux开源驱动.源代码 ```https://github.com/koenkooi/foo2zjs```.可以直接安装二进制版本。
+> 注意你可以使用 ```sudo apt list --installed | grep hplip ```来查看你安装的驱动版本，以选择正确的插件版本。
 
-> 我的打印机是 HP Lasterjet M1136 MFP 打印报"filter fail" 安装该驱动解决了问题。
+```sh
+pi@raspberrypi:~ $ sudo apt list --installed | grep hplip
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+hplip/oldoldstable,now 3.16.11+repack0-3 armhf [已安装]
+hplip-data/oldoldstable,now 3.16.11+repack0-3 all [已安装，自动]
+hplip-gui/oldoldstable,now 3.16.11+repack0-3 all [已安装]
+```
+
+
+
+
+# 添加打印机
+
+CUPS安装好之后可以通过  ```http://192.168.199.191:631```端口进行访问
+
+![rapi_cups.jpg](/img/in-post/rapi_cups.jpg)
+
+添加打印机得登录 ```https://192.168.199.191:631/admin/``` 使用```root```登录后进行添加
+
+
+## 选择打印机
+
+![raspi_add_printer.png](/img/in-post/raspi_add_printer.png)
+
+## 选择共享
+![raspi_add_printer2.png](/img/in-post/raspi_add_printer2.png)
+
+## 选择驱动
+
+如果你的型号不在列表中，选择同一系列理论上应该都可以
+![raspi_add_printer.png](/img/in-post/raspi_add_printer3.png)
+
+# 扫描仪
+
+## 安装 ```sane```
+
 
 
 ```sh
-apt-get install -y printer-driver-foo2zjs
+sudo apt-get install -y sane
+
 ```
 
+## 查看系统扫描仪
 
-# 剩余的问题
+```sh
+pi@raspberrypi:~ $ scanimage -L
+device `hpaio:/usb/HP_LaserJet_Professional_M1136_MFP?serial=000000000QHCMMPKPR1a' is a Hewlett-Packard HP_LaserJet_Professional_M1136_MFP all-in-one
+```
 
+## 使用扫描仪
+
+![raspi_xsane.png](/img/in-post/raspi_xsane.png)
+
+## 扫描结果
+
+![raspi_scan.png](/img/in-post/raspi_scan.png)
+
+
+# 还未完成
+
+现在已经可以通过网络添加打印机了。可以方便的远程进行打印。
+扫描仪目前哈无法远程操作。后续看安装一个应用程序来实现该功能。
