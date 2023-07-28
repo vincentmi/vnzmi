@@ -3,7 +3,7 @@ layout:     post
 title:      "用树莓派实现局域网打印和扫描"
 date:       "2023-07-23 21:44:00"
 author:     "Vincent"
-image:  "/img/raspi.jpg"
+image:  "/img/post-bg-raspi.jpg"
 catalog: true
 tags:
     - Rasphberry PI
@@ -208,7 +208,7 @@ Golang 版本（树莓派python版本比较低Flask运行不了。还是golang�
 
 ```https://github.com/vincentmi/scanserv-go```
 
-![raspi_scanserv.jpg](/img/in-post/raspi_sanserv.jpg)
+![raspi_scanserv.jpg](/img/in-post/raspi_scanserv.jpg)
 
 
 ##  使用
