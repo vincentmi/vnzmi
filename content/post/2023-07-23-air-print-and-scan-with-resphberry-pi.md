@@ -196,7 +196,31 @@ device `hpaio:/usb/HP_LaserJet_Professional_M1136_MFP?serial=000000000QHCMMPKPR1
 ![raspi_scan.png](/img/in-post/raspi_scan.png)
 
 
-# 还未完成
+# ScanServ
 
-现在已经可以通过网络添加打印机了。可以方便的远程进行打印。
-扫描仪目前哈无法远程操作。后续看安装一个应用程序来实现该功能。
+写了一个小服务器用于局域网进行扫描，在Web端操作扫描仪进行扫描。
+
+
+Python版本
+```https://github.com/vincentmi/scanserv```
+
+Golang 版本（树莓派python版本比较低Flask运行不了。还是golang方便点）
+
+```https://github.com/vincentmi/scanserv-go```
+
+![raspi_scanserv.jpg](/img/in-post/raspi_sanserv.jpg)
+
+
+##  使用
+
+```sh
+ ./scanserv -h
+Usage of ./scanserv:
+  -f string
+    	上传和中转文件路径 (default "./file")
+  -m string
+    	扫描命令 (default "/usr/bin/scanimage")
+  -p int
+    	监听端口 (default 8080)
+```
+
