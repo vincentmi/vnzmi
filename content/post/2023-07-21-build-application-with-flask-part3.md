@@ -406,3 +406,56 @@ coverage html
 
 现在我们的应用已经开发完成可以部署到生产环境。
 
+## 构建
+
+为了更方便的部署我们将应用打包成 wheel文件包。安装打包工具```pip install build```
+
+```sh
+$ python3 -m build --wheel
+* Creating venv isolated environment...
+* Installing packages in isolated environment... (flit_core<4)
+* Getting build dependencies for wheel...
+* Building wheel...
+Successfully built flaskr-1.0.0-py2.py3-none-any.whl
+```
+
+打包好的文件在```./dist/flaskr-1.0.0-py2.py3-none-any.whl``` ，文件名格式为 ``` {project name}-{version}-{python tag} -{abi tag}-{platform tag}```
+
+在新的机器上创建虚拟环境，然后执行
+```pip install flaskr-1.0.0-py3-none-any.whl```安装应用，
+执行 ```flask --app flaskr init-db```初始化数据库。
+
+执行成功后会在虚拟环境产生一个目录 ```.venv/var/flaskr-instance ``` 用于存储数据。
+
+
+生成环境我们需要配置足够复杂的Secert避免加密数据被破解。增加一个配置文件
+
+```config.py```
+
+```py
+SECRET_KEY = '192b9bdd22ab9ed4d12e236c78afcb9a393ec15f71bbf5dc987d54727823bcbf'
+```
+
+> 使用python命令可以生成一个随机字符串 ```$ python -c 'import secrets; print(secrets.token_hex())'```
+> '192b9bdd22ab9ed4d12e236c78afcb9a393ec15f71bbf5dc987d54727823bcbf'
+
+
+
+## 部署到生产型WebServer
+
+```flask run```命令启动的WebServer仅仅用于方便开发时进行调试和预览。对于生产环境的高吞吐量和大流量访问是无法稳定支持的。因此我们需要选择专业WSGI应用服务来部署我们的应用。有很多用于生产的WSGI服务器，[https://flask.palletsprojects.com/en/2.3.x/deploying/](https://flask.palletsprojects.com/en/2.3.x/deploying/),我们目前选择```waitress```
+
+先安装
+
+```sh
+pip install waitress
+```
+
+然后部署：
+
+```sh
+waitress-serve --call 'flaskr:create_app'
+```
+
+
+
