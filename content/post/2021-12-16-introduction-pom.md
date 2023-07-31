@@ -3,7 +3,7 @@ layout:     post
 title:      "Maven的POM文件"
 date:       "2021-12-16 17:36:00"
 author:     "Vincent"
-image:  "img/coffee.jpg"
+image:  "img/post-bg-java.png"
 catalog: true
 tags:
     - Maven

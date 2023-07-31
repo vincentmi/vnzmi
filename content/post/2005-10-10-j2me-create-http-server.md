@@ -3,7 +3,7 @@ layout:     post
 title:      "在无线J2ME设备上实现HTTP协议　"
 date:       2005-10-10 22:50:36
 author:     "Vincent"
-image:  "img/post-bg-dot.jpg"
+image:  "img/post-bg-java.png"
 catalog: false
 tags:
     - 新浪博客
