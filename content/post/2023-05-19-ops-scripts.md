@@ -179,7 +179,6 @@ ps -eo pid,args,psr | grep [n]ginx
 ```
 
 
-
 ## TIME_WAIT 问题
 
 #### 原因
@@ -223,6 +222,11 @@ upstream http_backend {
 }
 ```
 
+>
+> keepalive指令不限制nginxworker可以打开的连接总数，官方建议keepalive设置为upstream中服务器数量的两倍即可保持到所有服务器的连接，同时页足够小，upstream也可以创建新的连接。
+> **keepalive指令最好放到最后面**，这个指令必须放到均衡算法指令之后。
+> 
+
 设置使用http1.1并且Connection头
 
 ```conf
@@ -238,10 +242,14 @@ server {
 }
 ```
 
+>
+> NGINX 默认使用 HTTP/1.0 连接上游服务器，并相应地将 Connection: close 标头添加到它所转发到服务器的请求中。这样尽管 upstream{} 块中包含了keepalive 指令，但每个连接仍然会在请求完成时关闭。
+>
+
 
 NGINX官方博客：
 
-[https://www.nginx.com/blog/avoiding-top-10-nginx-configuration-mistakes/#no-keepalives](https://www.nginx.com/blog/avoiding-top-10-nginx-configuration-mistakes/#no-keepalives)
+[https://www.nginx-cn.net/blog/avoiding-top-10-nginx-configuration-mistakes/](https://www.nginx-cn.net/blog/avoiding-top-10-nginx-configuration-mistakes/)
 
 # JAVA
 
