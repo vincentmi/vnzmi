@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "使用tile-server搭建离线地图服务"
-titleColor: "#000000"
+#titleColor: "#000000"
 date:       "2023-07-08 09:44:00"
 author:     "Vincent"
 image:  "/img/home-bg-map.jpg"
