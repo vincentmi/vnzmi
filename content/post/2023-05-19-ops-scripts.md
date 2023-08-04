@@ -86,7 +86,7 @@ watch -n 3 'netstat -nat | grep -i "5001"'
 watch -n 3 'netstat -nat | grep -i "2510"'
 
 # 监控连接数 每3秒执行一次
-watch -n 3 'netstat -n | awk \'/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}\'‘
+watch -n 3 'netstat -n | awk \'/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}\''
 
 
 
