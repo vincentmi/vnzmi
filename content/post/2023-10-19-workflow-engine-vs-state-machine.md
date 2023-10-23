@@ -3,7 +3,7 @@ layout:     post
 title:      "对比工作流引擎和状态机"
 date:       "2023-10-19 14:25:00"
 author:     "Vincent"
-image:  "/img/post-bg-python.png"
+image:  "/img/symbol.svg"
 catalog: true
 tags:
     - workflow
