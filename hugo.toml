@@ -4,7 +4,7 @@ theme = 'cleanwhite'
 title = '我的乐与怒'
 header_image = 'img/tianfu_3_st.jpg'
 googleAnalytics = "UA-78738242-1"
-ba_track_id  = "2b745fdb2d90955bdfb8ad1194277073"
+baiduTrackId  = "2b745fdb2d90955bdfb8ad1194277073"
 hasCJKLanguage = true
 summaryLength = 140
 
@@ -13,6 +13,8 @@ home = ["HTML", "RSS"]
 
 
 [params]
+  googleAnalytics = "UA-78738242-1"
+  baiduTrackId  = "2b745fdb2d90955bdfb8ad1194277073"
   icp = "蜀ICP备17040089号-2"
   header_image = "img/tianfu_3_st.jpg"
   SEOTitle = "我的乐与怒 | Vincent's Blog"
