@@ -84,7 +84,7 @@ spec:
           path: 15/1602411903/apiclient_key.pem
 ```
 
-#### 应用到POD
+#### 应用到pod
 
 ```sh
 kubectl apply -f nginx1.yaml
