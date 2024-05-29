@@ -3,8 +3,7 @@ layout:     post
 title:      "在k8s中使用configmap保存配置文件"
 date:       "2024-05-28 15:13:00"
 author:     "Vincent"
-image:  "/img/post-bg-engine.jpg"
-catalog: true
+image:      "/img/rudder.jpg"
 tags:
     - k8s
     - yaml

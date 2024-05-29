@@ -2,7 +2,7 @@
 layout: page
 title: 我
 permalink: /about/
-image: "/img/home-bg1.jpg"
+image: "/img/skate.jpg"
 ---
 
 
