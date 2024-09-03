@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vue on 我的乐与怒</title>
+    <link>//localhost:1313/tags/vue/</link>
+    <description>Recent content in Vue on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 31 Jul 2020 23:05:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/vue/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Antd-v读取和设置后端的错误信息</title>
+      <link>//localhost:1313/post/2020-07-31-antdv-set-validate-error/</link>
+      <pubDate>Fri, 31 Jul 2020 23:05:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2020-07-31-antdv-set-validate-error/</guid>
+      <description>场景 最近用Antd-v做后台,自带的验证框架.提供了很多的前台验证方法,找了一圈没有找到结合后端验证的,比较纳闷现在前端同学都自己验证不用后端的验证信息了吗?最终的数据验证应该还是以后端为准.自己写了几个函数. 使用 后端返回数据结构 { code: 600412, msg: &amp;#34;数据验证失败&amp;#34;, data: { userName: &amp;</description>
+    </item>
+    
+    <item>
+      <title>VUE项目读取Docker环境变量</title>
+      <link>//localhost:1313/post/2020-07-23-vue-docker-run-with-env/</link>
+      <pubDate>Thu, 23 Jul 2020 23:15:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2020-07-23-vue-docker-run-with-env/</guid>
+      <description>使用场景 前端项目通常编译的时候会配置多个环境的参数,根据环境参数编译不同的文件.无法做到在各个环境使用同一个版本的镜像.使用环境变量可以在创建镜像的时候传递基础参数减少编译确保测试的有效性. 方案 通过将环境变量传递到DOM,在VUE项目中读取DOM来进行使用环境变量. 读取环境变量 const</description>
+    </item>
+    
+  </channel>
+</rss>

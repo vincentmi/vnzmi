@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>artwork on 我的乐与怒</title>
+    <link>//localhost:1313/tags/artwork/</link>
+    <description>Recent content in artwork on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 28 Jan 2021 21:53:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/artwork/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>小伙子的画越来越像样了</title>
+      <link>//localhost:1313/post/2021-01-28-micheal-artwork/</link>
+      <pubDate>Thu, 28 Jan 2021 21:53:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2021-01-28-micheal-artwork/</guid>
+      <description>植物线描 塔 静物写生</description>
+    </item>
+    
+  </channel>
+</rss>

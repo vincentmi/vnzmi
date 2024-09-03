@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kind on 我的乐与怒</title>
+    <link>//localhost:1313/tags/kind/</link>
+    <description>Recent content in kind on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 27 May 2022 10:46:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/kind/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用Kind搭建K8S学习环境</title>
+      <link>//localhost:1313/post/2022-05-27-use-kind-copy/</link>
+      <pubDate>Fri, 27 May 2022 10:46:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2022-05-27-use-kind-copy/</guid>
+      <description>背景 K8S集群的搭建由于墙的存在比较麻烦而且也比较占用资源,个人学习搭建K8S学习使用和做一些测试推荐使用Kind来在本地搭建. 安装 前置条件需要先安装golang 1.16 或更新的版本. 低版本需要加上 GO111MODULE=&amp;quot;on&amp;quot; 如果包无法下载,因为墙可以添加Go package的国内镜像, 设置阿里的镜像 go env -w GOPROXY=https://mirrors.aliyun.com/goproxy/,direct go install</description>
+    </item>
+    
+  </channel>
+</rss>

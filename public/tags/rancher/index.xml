@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rancher on 我的乐与怒</title>
+    <link>//localhost:1313/tags/rancher/</link>
+    <description>Recent content in Rancher on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 09 Jan 2020 18:24:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/rancher/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>搭建本地KVM和K8S集群</title>
+      <link>//localhost:1313/post/2020-01-09-local-kvm-cluster/</link>
+      <pubDate>Thu, 09 Jan 2020 18:24:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2020-01-09-local-kvm-cluster/</guid>
+      <description>准备工作 版本 Ubuntu 16.04.6 LTS Linux version 4.4.0-142-generic qemu-img version 2.5.0 (Debian 1:2.5+dfsg-5ubuntu10.42) 检查 检查是否支持虚拟化 egrep -c &amp;#39;(svm|vmx)&amp;#39; /proc/cpuinfo 返回 0 则不支持,需要看下BIOS里是否没有打开虚拟化支持. 安装KVM sudo apt update sudo apt install qemu qemu-kvm libvirt-bin bridge-utils virt-manager virt-sysperp 配置自启动 sudo systemctl start libvirtd.service sudo systemctl enable libvirtd.service 配置桥接网络 修改 /etc/network/interfaces # The loopback network interface auto lo iface lo inet loopback # The bridge interface auto br0 iface br0 inet static address 10.10.0.3 netmask 255.255.255.0 network 10.10.0.1 broadcast 10.10.0.255 gateway 10.10.0.1 dns-nameservers 10.10.0.1 bridge_ports enp1s0 bridge_stp off bridge_fd 0 ubuntu</description>
+    </item>
+    
+  </channel>
+</rss>

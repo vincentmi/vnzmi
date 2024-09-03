@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>监控 on 我的乐与怒</title>
+    <link>//localhost:1313/tags/%E7%9B%91%E6%8E%A7/</link>
+    <description>Recent content in 监控 on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 15 May 2016 20:44:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/%E7%9B%91%E6%8E%A7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>安装Zabbix监控</title>
+      <link>//localhost:1313/post/2016-05-15-install-zabbix/</link>
+      <pubDate>Sun, 15 May 2016 20:44:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2016-05-15-install-zabbix/</guid>
+      <description>服务器 CentOS 6.5 安装 因为Zabbix使用到了MySQL和PHP所以需要先安装MySQL 安装MySQL yum -y install mysql-server 安装Zabbix 服务器CentOS 6.6 安装如下 yum -y install zabbix22-web-mysql zabbix22-server-mysql zabbix22-agent 创建zabbix数据库和用户,然后创建基本的数据结构 mysql&amp;gt; source /usr/share/zabbix-mysql/schema.sql mysql&amp;gt; source /usr/share/zabbix-mysql/images.sql mysql&amp;gt; source /usr/share/zabbix-mysql/data.sql 运行apache service httpd start 进入 http://localh</description>
+    </item>
+    
+  </channel>
+</rss>

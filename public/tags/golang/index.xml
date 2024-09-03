@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Golang on 我的乐与怒</title>
+    <link>//localhost:1313/tags/golang/</link>
+    <description>Recent content in Golang on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 04 Nov 2021 17:12:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>golang协程和channel使用</title>
+      <link>//localhost:1313/post/2021-11-04-use-channel/</link>
+      <pubDate>Thu, 04 Nov 2021 17:12:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2021-11-04-use-channel/</guid>
+      <description>简介 协程是golang的一大特色和卖点. 协程(goroutine) 是轻量级的执行线程,使用go关键字到函数或者lamba表达式可以快速启动协程.协程函数的返回值会被抛弃.线程的调度由操作系统来管理，是抢占式调度。而协程不同，协程需要互相配合，主动交出执行权。 配置 GOMAXPROCS 设置逻辑CPU数</description>
+    </item>
+    
+    <item>
+      <title>Golang net/rpc 开发jsonrpc服务</title>
+      <link>//localhost:1313/post/2017-04-17-golang-json-rpc/</link>
+      <pubDate>Mon, 17 Apr 2017 16:01:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2017-04-17-golang-json-rpc/</guid>
+      <description>RPC RPC作为微服务框架下的各个模块的通讯协议进行系统内部各个服务之间的沟通。随着业务量的增大和系统的复杂度增加，可能还需要使用系统总线对各个消息进行路由、异步调用以及流量控制。Go提供了net/rpc包来实现对RPC的支持,通过启动一个服务器，注册一个对象暴露他的公共方法来允许远</description>
+    </item>
+    
+    <item>
+      <title>Golang:错误即值 Errors are values</title>
+      <link>//localhost:1313/post/2016-06-22-golang-errors-are-values/</link>
+      <pubDate>Wed, 22 Jun 2016 14:15:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2016-06-22-golang-errors-are-values/</guid>
+      <description>英文原版见此 https://blog.golang.org/errors-are-values 作者 :Rob Pike 翻译 :Vincent Mi 前言 最近用Go写了一下程序,没有try-catch不太适应。因此翻到了这篇文章. 顺手翻译了过来.可能翻译不太好纯为了自己加深理解. 正文 如何进行错误处理,这是一个Go程序员之间,特别是一些新的Go程序员,会经常讨论的问题.讨论到最后往往由于以下代码的多</description>
+    </item>
+    
+  </channel>
+</rss>

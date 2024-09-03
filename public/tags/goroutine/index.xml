@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>goroutine on 我的乐与怒</title>
+    <link>//localhost:1313/tags/goroutine/</link>
+    <description>Recent content in goroutine on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 04 Nov 2021 17:12:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/goroutine/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>golang协程和channel使用</title>
+      <link>//localhost:1313/post/2021-11-04-use-channel/</link>
+      <pubDate>Thu, 04 Nov 2021 17:12:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2021-11-04-use-channel/</guid>
+      <description>简介 协程是golang的一大特色和卖点. 协程(goroutine) 是轻量级的执行线程,使用go关键字到函数或者lamba表达式可以快速启动协程.协程函数的返回值会被抛弃.线程的调度由操作系统来管理，是抢占式调度。而协程不同，协程需要互相配合，主动交出执行权。 配置 GOMAXPROCS 设置逻辑CPU数</description>
+    </item>
+    
+  </channel>
+</rss>

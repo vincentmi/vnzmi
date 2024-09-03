@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Javascript on 我的乐与怒</title>
+    <link>//localhost:1313/tags/javascript/</link>
+    <description>Recent content in Javascript on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 13 Dec 2007 23:42:28 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>IE 6 真是个小贱人</title>
+      <link>//localhost:1313/post/2007-12-13-ie6-should-go-to-die/</link>
+      <pubDate>Thu, 13 Dec 2007 23:42:28 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2007-12-13-ie6-should-go-to-die/</guid>
+      <description>今天敲鼓了大半天HTML,firefox让人很省心，ie弄死要装怪。常看论坛啊博客大家恨IE恨的咬牙切齿的。查啊查终于找到原因了,Css控制如下内容 &amp;lt;div style=&amp;ldquo;overflow:hidden&amp;rdquo;&amp;gt;&amp;lt;div style=&amp;ldquo;position:relative&amp;rdquo;&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt</description>
+    </item>
+    
+    <item>
+      <title>JavaScript的9个陷阱及评点</title>
+      <link>//localhost:1313/post/2007-09-21-javascript-traps/</link>
+      <pubDate>Fri, 21 Sep 2007 23:07:04 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2007-09-21-javascript-traps/</guid>
+      <description>来自 Nine Javascript Gotchas , 以下是JavaScript容易犯错的九个陷阱。虽然不是什么很高深的技术问题，但注意一下，会使您的编程轻松些，即所谓make life easier. 笔者对某些陷阱会混杂一些评点。 1. 最后一个逗号 如这段代码，注意最后一个逗号，按语言学角度来说应该是不错的（python的类似数据类型辞典dict</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -7,6 +7,6 @@
 .jekyll-cache
 *.log
 .well-known
-/public
+#/public
 .hugo_build.lock
 /.hugo_cache

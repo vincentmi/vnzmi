@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Voice on 我的乐与怒</title>
+    <link>//localhost:1313/tags/voice/</link>
+    <description>Recent content in Voice on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 04 May 2015 08:36:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/voice/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>几个常见的语音交互平台的简介和比较</title>
+      <link>//localhost:1313/post/2015-05-03-speech-signal-processing/</link>
+      <pubDate>Mon, 04 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-05-03-speech-signal-processing/</guid>
+      <description>&lt;p&gt;转自 &lt;a href=&#34;http://ibillxia.github.io/blog/2012/11/24/several-plantforms-on-audio-and-speech-signal-processing/&#34;&gt;http://ibillxia.github.io/blog/2012/11/24/several-plantforms-on-audio-and-speech-signal-processing/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;1.概述
+最近做了两个与语音识别相关的项目，两个项目的主要任务虽然都是语音识别，或者更确切的说是关键字识别，但开发的平台不同， 一个是windows下的，另一个是android平台的，于是也就选用了不同的语音识别平台，前者选的是微软的Speech API开发的，后者则选用 的是CMU的pocketsphinx，本文主要将一些常见的语音交互平台进行简单的介绍和对比。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

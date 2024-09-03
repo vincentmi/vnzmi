@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="我的乐与怒">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//localhost:1313//img/tianfu_3_st.jpg">
+    <meta property="twitter:image" content="//localhost:1313//img/tianfu_3_st.jpg" />
+    
+
+    
+    <meta name="title" content="扩展Thymeleaf-4 创建我们自己的方言" />
+    <meta property="og:title" content="扩展Thymeleaf-4 创建我们自己的方言" />
+    <meta property="twitter:title" content="扩展Thymeleaf-4 创建我们自己的方言" />
+    
+
+    
+    <meta name="description" content="In code we trust">
+    <meta property="og:description" content="In code we trust" />
+    <meta property="twitter:description" content="In code we trust" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="我的乐与怒,vincent mi, miwenshu, 电商,  博客, 个人网站, 互联网, Web, 云原生, PaaS, Java, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>扩展Thymeleaf-4 创建我们自己的方言 | 我的乐与怒 | Vincent&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/2015-07-24-extending-thymeleaf-part-4/">
+
+    
+
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">我的乐与怒</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/about/">我</a></li>
+                    
+                        <li><a href="/archive/">归档</a></li>
+                    
+                        <li><a href="/search/">搜索</a></li>
+                    
+                        <li><a href="/codesketch/">CodeSketch</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/post-bg.jpg')
+    }
+    
+    .titleColor {
+        text-align: center;font-size:80px;
+        color: #FFFFFF;
+    }
+   
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/rd" title="RD">
+                            RD
+                        </a>
+                        
+                        <a class="tag" href="/tags/spring" title="Spring">
+                            Spring
+                        </a>
+                        
+                        <a class="tag" href="/tags/thymeleaf" title="Thymeleaf">
+                            Thymeleaf
+                        </a>
+                        
+                    </div>
+                    <h1 class="titleColor">扩展Thymeleaf-4 创建我们自己的方言</h1>
+                    <h2 class="subheading titleColor"></h2>
+                    <span class="meta titleColor">
+                        
+                            Posted by 
+                            
+                                Vincent
+                             
+                            on 
+                            Friday, July 24, 2015
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <p>[http://vincentmi.gitbooks.io/extendingthymeleaf/][http://vincentmi.gitbooks.io/extendingthymeleaf/]</p>
+<p>足球是麝香草大陆最流行的运动。每个赛季有10对参加联赛，主办方请为我们为它创建一个叫做&quot;Extrathyme&quot;的网站。</p>
+<p>这个网站将非常简单，就是一个表格。</p>
+<ul>
+<li>队名</li>
+<li>胜平负的场次，以及获得的总分</li>
+<li>备注，该队伍当前所处的位置，下赛季保级还是升入高级别联赛</li>
+</ul>
+<p>然后在表格上显示一个广告和最近比赛的比分。</p>
+<p>
+  <img src="/img/in-post/extrathyme-league-table.png" alt="Extrathyme league table">
+
+</p>
+<p>我们将使用HTML5 ,Spring MVC 和Spring标准方言来完成我们的应用程序。然后我们扩展Thymeleaf去创建一个 计分方言。它包含：</p>
+<ul>
+<li><code>score:remarkforposition</code> 属性，输出一个国际化的文本备注列到表格中，这个文本解释了当前队伍的位置，是否符合参加世界锦标赛的条件，是否可以进行附加赛，或者降级到低级联赛。</li>
+<li><code>score:classforposition</code>属性 根据备注设置颜色，蓝色背景表示可以参加世界锦标赛，绿色可以参加附加赛，红色会降级.</li>
+<li><code>score:headlines</code> 标签用于显示一个最近比赛的黄色的框到顶部。这个标签需要支持一个order属性 ：random:为了随机显示最近的比赛 latest显示最近的比赛，默认只显示最近的比赛。我们的标签看起来像这样，使用了th和score属性：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>        <span style="color:#099">&lt;!DOCTYPE html&gt;</span>
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#309;font-weight:bold">html</span> <span style="color:#309">xmlns:th</span><span style="color:#555">=</span><span style="color:#c30">&#34;http://www.thymeleaf.org&#34;</span> <span style="color:#309">xmlns:score</span><span style="color:#555">=</span><span style="color:#c30">&#34;http://thymeleafexamples&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#309;font-weight:bold">head</span>&gt;
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#309;font-weight:bold">title</span>&gt;extraThyme: Thymeland&#39;s football website&lt;/<span style="color:#309;font-weight:bold">title</span>&gt;
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#309;font-weight:bold">meta</span> <span style="color:#309">http-equiv</span><span style="color:#555">=</span><span style="color:#c30">&#34;Content-Type&#34;</span> <span style="color:#309">content</span><span style="color:#555">=</span><span style="color:#c30">&#34;text/html; charset=UTF-8&#34;</span> /&gt;
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#309;font-weight:bold">link</span> <span style="color:#309">rel</span><span style="color:#555">=</span><span style="color:#c30">&#34;stylesheet&#34;</span> <span style="color:#309">type</span><span style="color:#555">=</span><span style="color:#c30">&#34;text/css&#34;</span> <span style="color:#309">media</span><span style="color:#555">=</span><span style="color:#c30">&#34;all&#34;</span>
+</span></span><span style="display:flex;"><span>                  <span style="color:#309">href</span><span style="color:#555">=</span><span style="color:#c30">&#34;../../css/extrathyme.css&#34;</span> <span style="color:#309">th:href</span><span style="color:#555">=</span><span style="color:#c30">&#34;@{/css/extrathyme.css}&#34;</span>/&gt;
+</span></span><span style="display:flex;"><span>          &lt;/<span style="color:#309;font-weight:bold">head</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#309;font-weight:bold">body</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#309;font-weight:bold">div</span>&gt;
+</span></span><span style="display:flex;"><span>              &lt;<span style="color:#309;font-weight:bold">img</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;../../images/extrathymelogo.png&#34;</span> 
+</span></span><span style="display:flex;"><span>                   <span style="color:#309">alt</span><span style="color:#555">=</span><span style="color:#c30">&#34;extraThyme logo&#34;</span> <span style="color:#309">title</span><span style="color:#555">=</span><span style="color:#c30">&#34;extraThyme logo&#34;</span>
+</span></span><span style="display:flex;"><span>                   <span style="color:#309">th:src</span><span style="color:#555">=</span><span style="color:#c30">&#34;@{/images/extrathymelogo.png}&#34;</span> <span style="color:#309">th:alt-title</span><span style="color:#555">=</span><span style="color:#c30">&#34;#{title.application}&#34;</span>/&gt;
+</span></span><span style="display:flex;"><span>            &lt;/<span style="color:#309;font-weight:bold">div</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#309;font-weight:bold">score:headlines</span> <span style="color:#309">order</span><span style="color:#555">=</span><span style="color:#c30">&#34;random&#34;</span> /&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#309;font-weight:bold">div</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;leaguetable&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>              &lt;<span style="color:#309;font-weight:bold">h2</span> <span style="color:#309">th:text</span><span style="color:#555">=</span><span style="color:#c30">&#34;#{title.leaguetable(${execInfo.now.time})}&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>                League table for 07 July 2011
+</span></span><span style="display:flex;"><span>              &lt;/<span style="color:#309;font-weight:bold">h2</span>&gt;
+</span></span><span style="display:flex;"><span>              
+</span></span><span style="display:flex;"><span>              &lt;<span style="color:#309;font-weight:bold">table</span>&gt;
+</span></span><span style="display:flex;"><span>                &lt;<span style="color:#309;font-weight:bold">thead</span>&gt;
+</span></span><span style="display:flex;"><span>                  &lt;<span style="color:#309;font-weight:bold">tr</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">th</span> <span style="color:#309">th:text</span><span style="color:#555">=</span><span style="color:#c30">&#34;#{team.name}&#34;</span>&gt;Team&lt;/<span style="color:#309;font-weight:bold">th</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">th</span> <span style="color:#309">th:text</span><span style="color:#555">=</span><span style="color:#c30">&#34;#{team.won}&#34;</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;matches&#34;</span>&gt;Won&lt;/<span style="color:#309;font-weight:bold">th</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">th</span> <span style="color:#309">th:text</span><span style="color:#555">=</span><span style="color:#c30">&#34;#{team.drawn}&#34;</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;matches&#34;</span>&gt;Drawn&lt;/<span style="color:#309;font-weight:bold">th</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">th</span> <span style="color:#309">th:text</span><span style="color:#555">=</span><span style="color:#c30">&#34;#{team.lost}&#34;</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;matches&#34;</span>&gt;Lost&lt;/<span style="color:#309;font-weight:bold">th</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">th</span> <span style="color:#309">th:text</span><span style="color:#555">=</span><span style="color:#c30">&#34;#{team.points}&#34;</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;points&#34;</span>&gt;Points&lt;/<span style="color:#309;font-weight:bold">th</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">th</span> <span style="color:#309">th:text</span><span style="color:#555">=</span><span style="color:#c30">&#34;#{team.remarks}&#34;</span>&gt;Remarks&lt;/<span style="color:#309;font-weight:bold">th</span>&gt;
+</span></span><span style="display:flex;"><span>                  &lt;/<span style="color:#309;font-weight:bold">tr</span>&gt;
+</span></span><span style="display:flex;"><span>                &lt;/<span style="color:#309;font-weight:bold">thead</span>&gt;
+</span></span><span style="display:flex;"><span>                &lt;<span style="color:#309;font-weight:bold">tbody</span>&gt;
+</span></span><span style="display:flex;"><span>                  &lt;<span style="color:#309;font-weight:bold">tr</span> <span style="color:#309">th:each</span><span style="color:#555">=</span><span style="color:#c30">&#34;t : ${teams}&#34;</span> <span style="color:#309">score:classforposition</span><span style="color:#555">=</span><span style="color:#c30">&#34;${tStat.count}&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">td</span> <span style="color:#309">th:text</span><span style="color:#555">=</span><span style="color:#c30">&#34;|${t.name} (${t.code})|&#34;</span>&gt;The Winners (TWN)&lt;/<span style="color:#309;font-weight:bold">td</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">td</span> <span style="color:#309">th:text</span><span style="color:#555">=</span><span style="color:#c30">&#34;${t.won}&#34;</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;matches&#34;</span>&gt;1&lt;/<span style="color:#309;font-weight:bold">td</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">td</span> <span style="color:#309">th:text</span><span style="color:#555">=</span><span style="color:#c30">&#34;${t.drawn}&#34;</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;matches&#34;</span>&gt;0&lt;/<span style="color:#309;font-weight:bold">td</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">td</span> <span style="color:#309">th:text</span><span style="color:#555">=</span><span style="color:#c30">&#34;${t.lost}&#34;</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;matches&#34;</span>&gt;0&lt;/<span style="color:#309;font-weight:bold">td</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">td</span> <span style="color:#309">th:text</span><span style="color:#555">=</span><span style="color:#c30">&#34;${t.points}&#34;</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;points&#34;</span>&gt;3&lt;/<span style="color:#309;font-weight:bold">td</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">td</span> <span style="color:#309">score:remarkforposition</span><span style="color:#555">=</span><span style="color:#c30">&#34;${tStat.count}&#34;</span>&gt;Great winner!&lt;/<span style="color:#309;font-weight:bold">td</span>&gt;
+</span></span><span style="display:flex;"><span>                  &lt;/<span style="color:#309;font-weight:bold">tr</span>&gt;
+</span></span><span style="display:flex;"><span>                  <span style="color:#09f;font-style:italic">&lt;!--/*--&gt;</span>
+</span></span><span style="display:flex;"><span>                  &lt;<span style="color:#309;font-weight:bold">tr</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">td</span>&gt;The First Losers (TFL)&lt;/<span style="color:#309;font-weight:bold">td</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">td</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;matches&#34;</span>&gt;0&lt;/<span style="color:#309;font-weight:bold">td</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">td</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;matches&#34;</span>&gt;1&lt;/<span style="color:#309;font-weight:bold">td</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">td</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;matches&#34;</span>&gt;0&lt;/<span style="color:#309;font-weight:bold">td</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">td</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;points&#34;</span>&gt;1&lt;/<span style="color:#309;font-weight:bold">td</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">td</span>&gt;Little loser!&lt;/<span style="color:#309;font-weight:bold">td</span>&gt;
+</span></span><span style="display:flex;"><span>                  &lt;/<span style="color:#309;font-weight:bold">tr</span>&gt;
+</span></span><span style="display:flex;"><span>                  &lt;<span style="color:#309;font-weight:bold">tr</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">td</span>&gt;The Last Losers (TLL)&lt;/<span style="color:#309;font-weight:bold">td</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">td</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;matches&#34;</span>&gt;0&lt;/<span style="color:#309;font-weight:bold">td</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">td</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;matches&#34;</span>&gt;0&lt;/<span style="color:#309;font-weight:bold">td</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">td</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;matches&#34;</span>&gt;1&lt;/<span style="color:#309;font-weight:bold">td</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">td</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;points&#34;</span>&gt;0&lt;/<span style="color:#309;font-weight:bold">td</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#309;font-weight:bold">td</span>&gt;Big loooooser&lt;/<span style="color:#309;font-weight:bold">td</span>&gt;
+</span></span><span style="display:flex;"><span>                  &lt;/<span style="color:#309;font-weight:bold">tr</span>&gt;
+</span></span><span style="display:flex;"><span>                  <span style="color:#09f;font-style:italic">&lt;!--*/--&gt;</span>
+</span></span><span style="display:flex;"><span>                &lt;/<span style="color:#309;font-weight:bold">tbody</span>&gt;
+</span></span><span style="display:flex;"><span>              &lt;/<span style="color:#309;font-weight:bold">table</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            &lt;/<span style="color:#309;font-weight:bold">div</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>          &lt;/<span style="color:#309;font-weight:bold">body</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#309;font-weight:bold">html</span>&gt;
+</span></span></code></pre></div><p>请注意，我们增加了第二和第三行到表中，由解析器的注释包围&lt;！ - /*&hellip; */ - &gt;，这样我们可以再浏览器打开时显示一个近似的原型。</p>
+<h2 id="根据队伍的排名设置css样式">根据队伍的排名设置CSS样式</h2>
+<p>我们将首先开放一个属性处理器 ClassForPositionAttrProcessor，为了更方便我们将继承自Thymeleaf  提供的抽象类AbstractAttributeModifierAttrProcessor.</p>
+<p>此抽象类面向创建那些需要修改或设置主标签的属性值的处理器，这正是我们需要的（我们讲为<!-- raw HTML omitted -->设置一个class属性)。</p>
+<p>下面是我们的代码:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">public</span> <span style="color:#069;font-weight:bold">class</span> <span style="color:#0a8;font-weight:bold">ClassForPositionAttrProcessor</span>  <span style="color:#069;font-weight:bold">extends</span> AbstractAttributeModifierAttrProcessor <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#069;font-weight:bold">public</span> <span style="color:#c0f">ClassForPositionAttrProcessor</span><span style="color:#555">()</span> <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#069;font-weight:bold">super</span><span style="color:#555">(</span><span style="color:#c30">&#34;classforposition&#34;</span><span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#069;font-weight:bold">public</span> <span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">getPrecedence</span><span style="color:#555">()</span> <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">12000</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#99f">@Override</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#069;font-weight:bold">protected</span> Map<span style="color:#555">&lt;</span>String<span style="color:#555">,</span> String<span style="color:#555">&gt;</span> <span style="color:#c0f">getModifiedAttributeValues</span><span style="color:#555">(</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#069;font-weight:bold">final</span> Arguments arguments<span style="color:#555">,</span> <span style="color:#069;font-weight:bold">final</span> Element element<span style="color:#555">,</span> <span style="color:#069;font-weight:bold">final</span> String attributeName<span style="color:#555">)</span> <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#069;font-weight:bold">final</span> Configuration configuration <span style="color:#555">=</span> arguments<span style="color:#555">.</span><span style="color:#309">getConfiguration</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#09f;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">                     * 获得属性值
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">                     */</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#069;font-weight:bold">final</span> String attributeValue <span style="color:#555">=</span> element<span style="color:#555">.</span><span style="color:#309">getAttributeValue</span><span style="color:#555">(</span>attributeName<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#09f;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">                     * 获得Thymeleaf的标准表达式解析器                      */</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#069;font-weight:bold">final</span> IStandardExpressionParser parser <span style="color:#555">=</span>
+</span></span><span style="display:flex;"><span>                            StandardExpressions<span style="color:#555">.</span><span style="color:#309">getExpressionParser</span><span style="color:#555">(</span>configuration<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#09f;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">                     * 以一个标准Thymeleaf表达式解析属性值                    */</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#069;font-weight:bold">final</span> IStandardExpression expression <span style="color:#555">=</span>
+</span></span><span style="display:flex;"><span>                            parser<span style="color:#555">.</span><span style="color:#309">parseExpression</span><span style="color:#555">(</span>configuration<span style="color:#555">,</span> arguments<span style="color:#555">,</span> attributeValue<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#09f;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">                     * 执行刚才解析到的表达式
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">                     */</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#069;font-weight:bold">final</span> Integer position <span style="color:#555">=</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#555">(</span>Integer<span style="color:#555">)</span> expression<span style="color:#555">.</span><span style="color:#309">execute</span><span style="color:#555">(</span>configuration<span style="color:#555">,</span> arguments<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#09f;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">                     * 获取联赛表格中对应该位置的备注信息                     */</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#069;font-weight:bold">final</span> Remark remark <span style="color:#555">=</span> RemarkUtil<span style="color:#555">.</span><span style="color:#309">getRemarkForPosition</span><span style="color:#555">(</span>position<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#09f;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">                     * 应用对应的CSS样式到元素中                           */</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#069;font-weight:bold">final</span> Map<span style="color:#555">&lt;</span>String<span style="color:#555">,</span>String<span style="color:#555">&gt;</span> values <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">new</span> HashMap<span style="color:#555">&lt;</span>String<span style="color:#555">,</span> String<span style="color:#555">&gt;();</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#069;font-weight:bold">if</span> <span style="color:#555">(</span>remark <span style="color:#555">!=</span> <span style="color:#069;font-weight:bold">null</span><span style="color:#555">)</span> <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#069;font-weight:bold">switch</span> <span style="color:#555">(</span>remark<span style="color:#555">)</span> <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#069;font-weight:bold">case</span> WORLD_CHAMPIONS_LEAGUE<span style="color:#555">:</span>
+</span></span><span style="display:flex;"><span>                                values<span style="color:#555">.</span><span style="color:#309">put</span><span style="color:#555">(</span><span style="color:#c30">&#34;class&#34;</span><span style="color:#555">,</span> <span style="color:#c30">&#34;wcl&#34;</span><span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>                                <span style="color:#069;font-weight:bold">break</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#069;font-weight:bold">case</span> CONTINENTAL_PLAYOFFS<span style="color:#555">:</span>
+</span></span><span style="display:flex;"><span>                                values<span style="color:#555">.</span><span style="color:#309">put</span><span style="color:#555">(</span><span style="color:#c30">&#34;class&#34;</span><span style="color:#555">,</span> <span style="color:#c30">&#34;cpo&#34;</span><span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>                                <span style="color:#069;font-weight:bold">break</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#069;font-weight:bold">case</span> RELEGATION<span style="color:#555">:</span>
+</span></span><span style="display:flex;"><span>                                values<span style="color:#555">.</span><span style="color:#309">put</span><span style="color:#555">(</span><span style="color:#c30">&#34;class&#34;</span><span style="color:#555">,</span> <span style="color:#c30">&#34;rel&#34;</span><span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>                                <span style="color:#069;font-weight:bold">break</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#069;font-weight:bold">return</span> values<span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#99f">@Override</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#069;font-weight:bold">protected</span> ModificationType <span style="color:#c0f">getModificationType</span><span style="color:#555">(</span><span style="color:#069;font-weight:bold">final</span> Arguments arguments<span style="color:#555">,</span> 
+</span></span><span style="display:flex;"><span>                        <span style="color:#069;font-weight:bold">final</span> Element element<span style="color:#555">,</span> <span style="color:#069;font-weight:bold">final</span> String attributeName<span style="color:#555">,</span> 
+</span></span><span style="display:flex;"><span>                        <span style="color:#069;font-weight:bold">final</span> String newAttributeName<span style="color:#555">)</span> <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#09f;font-style:italic">// 万一该元素已经设置了Class属性，我们将把我们的新值拼接到后面（用空格隔开），或者简单的取代他
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"></span>                    <span style="color:#069;font-weight:bold">return</span> ModificationType<span style="color:#555">.</span><span style="color:#309">APPEND_WITH_SPACE</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#99f">@Override</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#069;font-weight:bold">protected</span> <span style="color:#078;font-weight:bold">boolean</span> <span style="color:#c0f">removeAttributeIfEmpty</span><span style="color:#555">(</span><span style="color:#069;font-weight:bold">final</span> Arguments arguments<span style="color:#555">,</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#069;font-weight:bold">final</span> Element element<span style="color:#555">,</span> <span style="color:#069;font-weight:bold">final</span> String attributeName<span style="color:#555">,</span> 
+</span></span><span style="display:flex;"><span>                        <span style="color:#069;font-weight:bold">final</span> String newAttributeName<span style="color:#555">)</span> <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#09f;font-style:italic">// 如果算出来的class属性是空则根本不显示出来                  return true;
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"></span>                <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#99f">@Override</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#069;font-weight:bold">protected</span> <span style="color:#078;font-weight:bold">boolean</span> <span style="color:#c0f">recomputeProcessorsAfterExecution</span><span style="color:#555">(</span><span style="color:#069;font-weight:bold">final</span> Arguments arguments<span style="color:#555">,</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#069;font-weight:bold">final</span> Element element<span style="color:#555">,</span> <span style="color:#069;font-weight:bold">final</span> String attributeName<span style="color:#555">)</span> <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#09f;font-style:italic">// 当这个元素被执行完成后不需要再重新计算
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"></span>                    <span style="color:#069;font-weight:bold">return</span> <span style="color:#069;font-weight:bold">false</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>            
+</span></span></code></pre></div><p>如你所见，在这种情况下我们使用便利的抽象类没有直接对DOM树进行修改，而只需要创建并返回一个需要设置到标签中设置的一组新值的Map。</p>
+<p>非常重要的一点，我们创建的这些属性支持标准语法的表达式运算（在标准方言和Spring  标准方言中都用到了），我们可以这样设置变量 ${var} , #{messageKey} ,使用条件表达式等等。 我们在我们的模板中这样使用。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">tr</span> <span style="color:#309">th:each</span><span style="color:#555">=</span><span style="color:#c30">&#34;t : ${teams}&#34;</span> <span style="color:#309">score:classforposition</span><span style="color:#555">=</span><span style="color:#c30">&#34;${tStat.count}&#34;</span>&gt;
+</span></span></code></pre></div><p>为了计算这些表达式（或者叫做Thymeleaf标准表达式），首先我们需要获取标准表达式的解析器，然后解析属性值，然后计算解析后的表达式。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">final</span> IStandardExpressionParser parser <span style="color:#555">=</span>
+</span></span><span style="display:flex;"><span>            StandardExpressions<span style="color:#555">.</span><span style="color:#309">getExpressionParser</span><span style="color:#555">(</span>configuration<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">final</span> IStandardExpression expression <span style="color:#555">=</span>
+</span></span><span style="display:flex;"><span>            parser<span style="color:#555">.</span><span style="color:#309">parseExpression</span><span style="color:#555">(</span>configuration<span style="color:#555">,</span> arguments<span style="color:#555">,</span> attributeValue<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">final</span> Integer position <span style="color:#555">=</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#555">(</span>Integer<span style="color:#555">)</span> expression<span style="color:#555">.</span><span style="color:#309">execute</span><span style="color:#555">(</span>configuration<span style="color:#555">,</span> arguments<span style="color:#555">);</span>
+</span></span></code></pre></div><h2 id="显示一个国际化备注">显示一个国际化备注</h2>
+<p>下一件事情是创建一个属性解析器，去显示备注的文本。这个与ClassForPositionAttrProcessor比较相似，但是又一些重要的不同点:</p>
+<p>我们将不会设置一个标签属性到主标签，也不会和th:text一样设置标签的内容。
+我们需要访问从我们的代码访问国际化消息系统显示选定的locale的相应消息。这次我们将使用另外一个不同的抽象类AbstractTextChildModifierAttrProcessor，特别设计用于设置标签的文本内容。我们的代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">public</span> <span style="color:#069;font-weight:bold">class</span> <span style="color:#0a8;font-weight:bold">RemarkForPositionAttrProcessor</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">extends</span> AbstractTextChildModifierAttrProcessor <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">public</span> <span style="color:#c0f">RemarkForPositionAttrProcessor</span><span style="color:#555">()</span> <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">super</span><span style="color:#555">(</span><span style="color:#c30">&#34;remarkforposition&#34;</span><span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">public</span> <span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">getPrecedence</span><span style="color:#555">()</span> <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">12000</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#99f">@Override</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">protected</span> String <span style="color:#c0f">getText</span><span style="color:#555">(</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#069;font-weight:bold">final</span> Arguments arguments<span style="color:#555">,</span> <span style="color:#069;font-weight:bold">final</span> Element element<span style="color:#555">,</span> <span style="color:#069;font-weight:bold">final</span> String attributeName<span style="color:#555">)</span> <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">final</span> Configuration configuration <span style="color:#555">=</span> arguments<span style="color:#555">.</span><span style="color:#309">getConfiguration</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#09f;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">             * 获取属性值
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">             */</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">final</span> String attributeValue <span style="color:#555">=</span> element<span style="color:#555">.</span><span style="color:#309">getAttributeValue</span><span style="color:#555">(</span>attributeName<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#09f;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">             * 获取Thymeleaf 标准表达式解析器
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">             */</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">final</span> IStandardExpressionParser parser <span style="color:#555">=</span>
+</span></span><span style="display:flex;"><span>                    StandardExpressions<span style="color:#555">.</span><span style="color:#309">getExpressionParser</span><span style="color:#555">(</span>configuration<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#09f;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">             * 解析属性值用于Thymeleaf 标准表达式
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">             */</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">final</span> IStandardExpression expression <span style="color:#555">=</span>
+</span></span><span style="display:flex;"><span>                    parser<span style="color:#555">.</span><span style="color:#309">parseExpression</span><span style="color:#555">(</span>configuration<span style="color:#555">,</span> arguments<span style="color:#555">,</span> attributeValue<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#09f;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">             * 执行刚才解析出的表达式
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">             */</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">final</span> Integer position <span style="color:#555">=</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#555">(</span>Integer<span style="color:#555">)</span> expression<span style="color:#555">.</span><span style="color:#309">execute</span><span style="color:#555">(</span>configuration<span style="color:#555">,</span> arguments<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#09f;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">             * 从联赛表获取对应位置的备注
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">             */</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">final</span> Remark remark <span style="color:#555">=</span> RemarkUtil<span style="color:#555">.</span><span style="color:#309">getRemarkForPosition</span><span style="color:#555">(</span>position<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#09f;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">             * 如果没有备注显示空
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">             */</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">if</span> <span style="color:#555">(</span>remark <span style="color:#555">==</span> <span style="color:#069;font-weight:bold">null</span><span style="color:#555">)</span> <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#069;font-weight:bold">return</span> <span style="color:#c30">&#34;&#34;</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#09f;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">             *  消息应该是国际化的，所以我们让模板引擎处理消息
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">             * &#39;remarks.{REMARK}&#39; (e.g. &#39;remarks.RELEGATION&#39;). 不需要参数             *.
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">             */</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">return</span> getMessage<span style="color:#555">(</span>arguments<span style="color:#555">,</span> <span style="color:#c30">&#34;remarks.&#34;</span> <span style="color:#555">+</span> remark<span style="color:#555">.</span><span style="color:#309">toString</span><span style="color:#555">(),</span> <span style="color:#069;font-weight:bold">new</span> Object<span style="color:#555">[</span><span style="color:#f60">0</span><span style="color:#555">]);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}</span>
+</span></span></code></pre></div><p>我们使用这段代码访问国际化消息系统：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">return</span> getMessage<span style="color:#555">(</span>arguments<span style="color:#555">,</span> <span style="color:#c30">&#34;remarks.&#34;</span> <span style="color:#555">+</span> remark<span style="color:#555">.</span><span style="color:#309">toString</span><span style="color:#555">(),</span> <span style="color:#069;font-weight:bold">new</span> Object<span style="color:#555">[</span><span style="color:#f60">0</span><span style="color:#555">]);</span>
+</span></span></code></pre></div><p>事实上这不是唯一的方式。AbstractProcessor 提供了3个方法从属性 处理器获取国际化消息。以下2个方法从模板的消息文件和控制器的消息文件获取：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">protected</span> String <span style="color:#c0f">getMessageForTemplate</span><span style="color:#555">(</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">final</span> Arguments arguments<span style="color:#555">,</span> <span style="color:#069;font-weight:bold">final</span> TemplateResolution templateResolution<span style="color:#555">,</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">final</span> String messageKey<span style="color:#555">,</span> <span style="color:#069;font-weight:bold">final</span> Object<span style="color:#555">[]</span> messageParameters<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">protected</span> String <span style="color:#c0f">getMessageForProcessor</span><span style="color:#555">(</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">final</span> Arguments arguments<span style="color:#555">,</span> <span style="color:#069;font-weight:bold">final</span> String messageKey<span style="color:#555">,</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">final</span> Object<span style="color:#555">[]</span> messageParameters<span style="color:#555">);</span>
+</span></span></code></pre></div><p>getMessageForTemplate(&hellip;) 使用模板引擎当前注册的外部机制去查询期望的消息，例如：uses the Template Engine’s currently registered externalization mechanisms to look for the desired message. For example:</p>
+<p>在一个Spring应用程序中，我们可以使用了一个指定的Message Resolver 来查询Spring的注册到应用程序中的MessageSource对象。当不在一个Spring应用程序中时，我们可能会使用Thymeleaf的标准Message Resolver去查找与当前模板同名的.properties文件。</p>
+<p>getMessageForProcessor(&hellip;)使用组件化的消息解决方案，如果你愿意你可以自己为一个方言进行封装。该机制包括在允许标签和属性的处理器来指定自己的消息，无论方言用在哪个应用程序。他们读取与处理器（或者其父类）同一个包下的.properties文件。例如：我们例子中的 thymeleafexamples.extrathyme.dialects.score  包可能包含以下内容。</p>
+<ul>
+<li>RemarkForPositionAttrProcessor.java: 属性处理器</li>
+<li>RemarkForPositionAttrProcessor_en_GB.properties: 用于英国英语的的资源文件</li>
+<li>RemarkForPositionAttrProcessor_en.properties: 用于其他国家的语言的资源文件</li>
+<li>RemarkForPositionAttrProcessor.properties: 默认的资源文件</li>
+</ul>
+<p>最后，这是第三个方法，我们用在我们的代码中的方法:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">protected</span> String <span style="color:#c0f">getMessage</span><span style="color:#555">(</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">final</span> Arguments arguments<span style="color:#555">,</span> <span style="color:#069;font-weight:bold">final</span> TemplateResolution templateResolution<span style="color:#555">,</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">final</span> String messageKey<span style="color:#555">,</span> <span style="color:#069;font-weight:bold">final</span> Object<span style="color:#555">[]</span> messageParameters<span style="color:#555">);</span>
+</span></span></code></pre></div><p>getMessage(&hellip;)的行为相当于以上两个方法的组合。首先他尝试通过模板资源文件(在应用程序中定义的资源文件)去找到需要的消息 ，如果没有找到就从处理器的资源文件中查找。这样应用如果需要的话应用程序可以覆盖在方言处理器中定义的消息。</p>
+<h2 id="用于显示头条的元素处理器">用于显示头条的元素处理器</h2>
+<p>第三个也是最后一个我们将要实现的处理器是一个元素（标签）处理器。正如他的名字一样元素处理器由元素的名字触发而不是元素的属性名字。相对属性处理器他有一个优点也有一个劣势。</p>
+<p><strong>优势</strong>: 元素可以包含多个属性，这样你的元素处理器可以接受更多更复杂的配置参数。
+<strong>劣势</strong>: 定制化的元素或标签无法被浏览器识别，如果你正在开发的是一个web应用程序，你可能不得不牺牲Thymeleaf最有趣的功能: 以静态原型的方式显示模板（我们称为原生模板）</p>
+<p>这个处理器将由org.thymeleaf.processor.element.AbstractElementProcessor进行扩展，但是和属性处理器一样，我们不直接从AbstractElementProcessor扩展，而是从Thymeleaf提供的便利的抽象类AbstractMarkupSubstitutionElementProcessor进行扩展。这个基础的元素处理器用于，在模板处理时简单的生成DOM节点替换主标签。
+代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">public</span> <span style="color:#069;font-weight:bold">class</span> <span style="color:#0a8;font-weight:bold">HeadlinesElementProcessor</span> <span style="color:#069;font-weight:bold">extends</span> AbstractMarkupSubstitutionElementProcessor <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">private</span> <span style="color:#069;font-weight:bold">final</span> Random rand <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">new</span> Random<span style="color:#555">(</span>System<span style="color:#555">.</span><span style="color:#309">currentTimeMillis</span><span style="color:#555">());</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">public</span> <span style="color:#c0f">HeadlinesTagProcessor</span><span style="color:#555">()</span> <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">super</span><span style="color:#555">(</span><span style="color:#c30">&#34;headlines&#34;</span><span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">public</span> <span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">getPrecedence</span><span style="color:#555">()</span> <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">1000</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#99f">@Override</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">protected</span> List<span style="color:#555">&lt;</span>Node<span style="color:#555">&gt;</span> <span style="color:#c0f">getMarkupSubstitutes</span><span style="color:#555">(</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#069;font-weight:bold">final</span> Arguments arguments<span style="color:#555">,</span> <span style="color:#069;font-weight:bold">final</span> Element element<span style="color:#555">)</span> <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#09f;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">            * 获取Spring应用程序的上下文
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">             */</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">final</span> ApplicationContext appCtx <span style="color:#555">=</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#555">((</span>SpringWebContext<span style="color:#555">)</span>arguments<span style="color:#555">.</span><span style="color:#309">getContext</span><span style="color:#555">()).</span><span style="color:#309">getApplicationContext</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#09f;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">            * 从应用程序上下文获取HeadlineRepository的Bean，查询当前的头条信息            */</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">final</span> HeadlineRepository headlineRepository <span style="color:#555">=</span> 
+</span></span><span style="display:flex;"><span>                    appCtx<span style="color:#555">.</span><span style="color:#309">getBean</span><span style="color:#555">(</span>HeadlineRepository<span style="color:#555">.</span><span style="color:#309">class</span><span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">final</span> List<span style="color:#555">&lt;</span>Headline<span style="color:#555">&gt;</span> headlines <span style="color:#555">=</span> headlineRepository<span style="color:#555">.</span><span style="color:#309">findAllHeadlines</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#09f;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">            * 读取标签的order属性值，这个可选的属性用于允许我们随机显示头条信息还是只显示最新的
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">             */</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">final</span> String order <span style="color:#555">=</span> element<span style="color:#555">.</span><span style="color:#309">getAttributeValue</span><span style="color:#555">(</span><span style="color:#c30">&#34;order&#34;</span><span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            String headlineText <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">null</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">if</span> <span style="color:#555">(</span>order <span style="color:#555">!=</span> <span style="color:#069;font-weight:bold">null</span> <span style="color:#555">&amp;&amp;</span> order<span style="color:#555">.</span><span style="color:#309">trim</span><span style="color:#555">().</span><span style="color:#309">toLowerCase</span><span style="color:#555">().</span><span style="color:#309">equals</span><span style="color:#555">(</span><span style="color:#c30">&#34;random&#34;</span><span style="color:#555">))</span> <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#09f;font-style:italic">// Order is random
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"></span>                <span style="color:#069;font-weight:bold">final</span> <span style="color:#078;font-weight:bold">int</span> r <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">this</span><span style="color:#555">.</span><span style="color:#309">rand</span><span style="color:#555">.</span><span style="color:#309">nextInt</span><span style="color:#555">(</span>headlines<span style="color:#555">.</span><span style="color:#309">size</span><span style="color:#555">());</span>
+</span></span><span style="display:flex;"><span>                headlineText <span style="color:#555">=</span> headlines<span style="color:#555">.</span><span style="color:#309">get</span><span style="color:#555">(</span>r<span style="color:#555">).</span><span style="color:#309">getText</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#555">}</span> <span style="color:#069;font-weight:bold">else</span> <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#09f;font-style:italic">// Order is &#34;latest&#34;, only the latest headline will be shown
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"></span>                Collections<span style="color:#555">.</span><span style="color:#309">sort</span><span style="color:#555">(</span>headlines<span style="color:#555">);</span> headlineText <span style="color:#555">=</span> 
+</span></span><span style="display:flex;"><span>                        headlines<span style="color:#555">.</span><span style="color:#309">get</span><span style="color:#555">(</span>headlines<span style="color:#555">.</span><span style="color:#309">size</span><span style="color:#555">()</span> <span style="color:#555">-</span> <span style="color:#f60">1</span><span style="color:#555">).</span><span style="color:#309">getText</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#09f;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">             * 创建替换主标签的DOM结构
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">             * 头条内容将显示到&lt;div&gt;标签内，所以我们首先创建他然后将文本节点添加进去             */</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">final</span> Element container <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">new</span> Element<span style="color:#555">(</span><span style="color:#c30">&#34;div&#34;</span><span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>            container<span style="color:#555">.</span><span style="color:#309">setAttribute</span><span style="color:#555">(</span><span style="color:#c30">&#34;class&#34;</span><span style="color:#555">,</span> <span style="color:#c30">&#34;headlines&#34;</span><span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">final</span> Text text <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">new</span> Text<span style="color:#555">(</span>headlineText<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>            container<span style="color:#555">.</span><span style="color:#309">addChild</span><span style="color:#555">(</span>text<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#09f;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">            * 抽象类IAttrProcessor实现我们返回一个节点的list，然后这些list会替换掉主标签
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">             */</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">final</span> List<span style="color:#555">&lt;</span>Node<span style="color:#555">&gt;</span> nodes <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">new</span> ArrayList<span style="color:#555">&lt;</span>Node<span style="color:#555">&gt;();</span>
+</span></span><span style="display:flex;"><span>            nodes<span style="color:#555">.</span><span style="color:#309">add</span><span style="color:#555">(</span>container<span style="color:#555">);</span> <span style="color:#069;font-weight:bold">return</span> nodes<span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>    
+</span></span></code></pre></div><p>这里没有太多的新东西，除了我们访问了Spring的ApplicationContext为了获取一个Bean（HeadlineRepository).</p>
+<p>还要注意我们可以像这样访问其他DOM元素一样访问定制的标签的order属性：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">final</span> String order <span style="color:#555">=</span> element<span style="color:#555">.</span><span style="color:#309">getAttributeValue</span><span style="color:#555">(</span><span style="color:#c30">&#34;order&#34;</span><span style="color:#555">);</span>
+</span></span></code></pre></div><h2 id="声明整个方言">声明整个方言</h2>
+<p>为了完成方言我们还差最后最后一步，定义方言类本省。</p>
+<p>方言类必须实现org.thymeleaf.dialect.IDialect接口，我们再次使用便利的抽象类，这样我们可以只实现我们需要的方法，其他的则使用默认（空值）。</p>
+<p>这是代码，很简单：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">public</span> <span style="color:#069;font-weight:bold">class</span> <span style="color:#0a8;font-weight:bold">ScoreDialect</span> <span style="color:#069;font-weight:bold">extends</span> AbstractDialect <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#09f;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">     * Default prefix: this is the prefix that will be used for this dialect
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">     * unless a different one is specified when adding the dialect to
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">     * the Template Engine.
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">     * 默认的用于该方言的前缀。可以再添加到模板引擎时进行了制定。
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">public</span> String <span style="color:#c0f">getPrefix</span><span style="color:#555">()</span> <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">return</span> <span style="color:#c30">&#34;score&#34;</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#09f;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">     * 定义了2个属性处理器 &#39;classforposition&#39; 和
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">     * &#39;remarkforposition&#39;. 以及一个元素处理器&#39;headlines&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#99f">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">public</span> Set<span style="color:#555">&lt;</span>IProcessor<span style="color:#555">&gt;</span> <span style="color:#c0f">getProcessors</span><span style="color:#555">()</span> <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">final</span> Set<span style="color:#555">&lt;</span>IProcessor<span style="color:#555">&gt;</span> processors <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">new</span> HashSet<span style="color:#555">&lt;</span>IProcessor<span style="color:#555">&gt;();</span>
+</span></span><span style="display:flex;"><span>        processors<span style="color:#555">.</span><span style="color:#309">add</span><span style="color:#555">(</span><span style="color:#069;font-weight:bold">new</span> ClassForPositionAttrProcessor<span style="color:#555">());</span>
+</span></span><span style="display:flex;"><span>        processors<span style="color:#555">.</span><span style="color:#309">add</span><span style="color:#555">(</span><span style="color:#069;font-weight:bold">new</span> RemarkForPositionAttrProcessor<span style="color:#555">());</span>
+</span></span><span style="display:flex;"><span>        processors<span style="color:#555">.</span><span style="color:#309">add</span><span style="color:#555">(</span><span style="color:#069;font-weight:bold">new</span> HeadlinesElementProcessor<span style="color:#555">());</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">return</span> processors<span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span>
+</span></span></code></pre></div><p>一旦我们的方言创建好我们需要在我们的模板引擎定义它。我们将使用 additionalDialects 属性来添加到Spring 标准方言中。</p>
+<p>来看看如何进行配置:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#309;font-weight:bold">&lt;bean</span> <span style="color:#309">id=</span><span style="color:#c30">&#34;templateEngine&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#309">class=</span><span style="color:#c30">&#34;org.thymeleaf.spring4.SpringTemplateEngine&#34;</span><span style="color:#309;font-weight:bold">&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#309;font-weight:bold">&lt;property</span> <span style="color:#309">name=</span><span style="color:#c30">&#34;templateResolver&#34;</span> <span style="color:#309">ref=</span><span style="color:#c30">&#34;templateResolver&#34;</span> <span style="color:#309;font-weight:bold">/&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#309;font-weight:bold">&lt;property</span> <span style="color:#309">name=</span><span style="color:#c30">&#34;additionalDialects&#34;</span><span style="color:#309;font-weight:bold">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#309;font-weight:bold">&lt;set&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#309;font-weight:bold">&lt;bean</span> <span style="color:#309">class=</span><span style="color:#c30">&#34;thymeleafexamples.extrathyme.dialects.score.ScoreDialect&#34;</span> <span style="color:#309;font-weight:bold">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#309;font-weight:bold">&lt;/set&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#309;font-weight:bold">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#309;font-weight:bold">&lt;/bean&gt;</span>
+</span></span></code></pre></div><p>好了，完成了，我们的联赛表格将按照我们希望的方式显示出来了。</p>
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="//localhost:1313/"><img src="/img/favicon.png" />我的乐与怒</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2015-07-23-extending-thymeleaf-part-2/" data-toggle="tooltip" data-placement="top" title="扩展Thymeleaf-2  方言和处理器"><i class="fa fa-angle-left fa-lg"></i>
+                            Previous</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2015-07-23-extending-thymeleaf-part-3/" data-toggle="tooltip" data-placement="top" title="扩展Thymeleaf 3 - 模板模式">Next
+                        <i class="fa fa-angle-right fa-lg"></i></a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">目录</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">标签</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/aframe" title="aframe">
+                            aframe
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/andrew-ng" title="andrew-ng">
+                            andrew-ng
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/arduino" title="arduino">
+                            arduino
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                            blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/cgi" title="cgi">
+                            cgi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/consul" title="consul">
+                            consul
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                            docker
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/eth" title="eth">
+                            eth
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ethereum" title="ethereum">
+                            ethereum
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/evm" title="evm">
+                            evm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/feign" title="feign">
+                            feign
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                            golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/hw" title="hw">
+                            hw
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/jpa" title="jpa">
+                            jpa
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/js" title="js">
+                            js
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/k8s" title="k8s">
+                            k8s
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                            kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/linux" title="linux">
+                            linux
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mac" title="mac">
+                            mac
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/machine-learning" title="machine-learning">
+                            machine-learning
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/math" title="math">
+                            math
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mysql" title="mysql">
+                            mysql
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/nginx" title="nginx">
+                            nginx
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/op" title="op">
+                            op
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ops" title="ops">
+                            ops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/poco" title="poco">
+                            poco
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/pptp" title="pptp">
+                            pptp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/rd" title="rd">
+                            rd
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/spring" title="spring">
+                            spring
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/springboot" title="springboot">
+                            springboot
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ssl" title="ssl">
+                            ssl
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/thymeleaf" title="thymeleaf">
+                            thymeleaf
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/type" title="type">
+                            type
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vagrant" title="vagrant">
+                            vagrant
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vpn" title="vpn">
+                            vpn
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/vue" title="vue">
+                            vue
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/webrtc" title="webrtc">
+                            webrtc
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0" title="技术文章">
+                            技术文章
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2" title="新浪博客">
+                            新浪博客
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%97%A0%E8%81%8A" title="无聊">
+                            无聊
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB" title="生活">
+                            生活
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95" title="生活记录">
+                            生活记录
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E8%82%A1%E7%A5%A8" title="股票">
+                            股票
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E8%BF%90%E7%BB%B4" title="运维">
+                            运维
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>链接</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/vegas">青鸟的翅膀</a></li>
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/yoshikilau">Caffeine Park</a></li>
+                        
+                        <li><a target="_blank" href="http://huxpro.github.io">Theme From Hux</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/vincentz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/img/icwt.jpg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/vincentmi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/5311815/vincent-mi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="我的乐与怒" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; 我的乐与怒 2023 | <a href="http://www.beian.miit.gov.cn" style="text-decoration: none;"> 蜀ICP备17040089号-2</a>
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-78738242-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

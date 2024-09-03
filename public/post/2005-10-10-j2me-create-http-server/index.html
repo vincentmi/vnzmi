@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="我的乐与怒">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//localhost:1313//img/tianfu_3_st.jpg">
+    <meta property="twitter:image" content="//localhost:1313//img/tianfu_3_st.jpg" />
+    
+
+    
+    <meta name="title" content="在无线J2ME设备上实现HTTP协议　" />
+    <meta property="og:title" content="在无线J2ME设备上实现HTTP协议　" />
+    <meta property="twitter:title" content="在无线J2ME设备上实现HTTP协议　" />
+    
+
+    
+    <meta name="description" content="In code we trust">
+    <meta property="og:description" content="In code we trust" />
+    <meta property="twitter:description" content="In code we trust" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="我的乐与怒,vincent mi, miwenshu, 电商,  博客, 个人网站, 互联网, Web, 云原生, PaaS, Java, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>在无线J2ME设备上实现HTTP协议　 | 我的乐与怒 | Vincent&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/2005-10-10-j2me-create-http-server/">
+
+    
+
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">我的乐与怒</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/about/">我</a></li>
+                    
+                        <li><a href="/archive/">归档</a></li>
+                    
+                        <li><a href="/search/">搜索</a></li>
+                    
+                        <li><a href="/codesketch/">CodeSketch</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/post-bg-dot.jpg')
+    }
+    
+    .titleColor {
+        text-align: center;font-size:80px;
+        color: #FFFFFF;
+    }
+   
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2" title="新浪博客">
+                            新浪博客
+                        </a>
+                        
+                        <a class="tag" href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0" title="技术文章">
+                            技术文章
+                        </a>
+                        
+                    </div>
+                    <h1 class="titleColor">在无线J2ME设备上实现HTTP协议　</h1>
+                    <h2 class="subheading titleColor"></h2>
+                    <span class="meta titleColor">
+                        
+                            Posted by 
+                            
+                                Vincent
+                             
+                            on 
+                            Monday, October 10, 2005
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <p>随着越来越多手提电话和个人数字助理开始融入到信息高速公路之上，从移动设备上访问Web站点变得越来越重要。Java开创了消费设备中小型的储存容量的先河，它是用于开发手机、传呼机及其他微型设备应用程序的理想语言。　　在本文中，我们将学习如何从一个J2ME客户机上向服务器发送一条HTTPGET请求和一条HTTPPOST请求。虽然这只是一篇探讨性质的文章，但是我还是假定读者已经熟悉Java，J2ME，以及JavaMidlets（MIDP应用程序）的运作机制。我们将使用J2ME的MIDP简表，并利用SUN的J2ME的无线应用程序开发工具包编译、配置和测试我们的应用程序。对于HTTP服务器，任何WWW地址都可以被访问，但是默认时我们将使用一个简单的JavaServlet来返回我们的HTTP请求的细节。</p>
+<p>　　如何使用J2ME客户机向Web服务器和类似的支持HTTP的服务器发送HTTP请求呢？答案就是使用可在javax.microedition.io程序包中可找到的J2ME的网络类。本文就想具体阐述这个问题。</p>
+<p>　　本文概述∶　　使用J2ME设计无线网络应用程序　　.发送一条超文本GET请求　　.发送一条超文本POST请求　　.使用J2ME进行无线网络编程</p>
+<p>　　Java的网络编程能力是相当健壮的。Java2标准版(J2SE)在java.io和java.net程序包中定义了100多个接口程序，类和异常。通过这些库实现的功能是很强大的，但是这只适用于传统的计算机系统，这些计算机系统有强大的CPU处理能力，快速的内存和持久的数据储存，但是这些在大多数的无线设备上是不现实的。因此，J2ME定义了这些函数的子集，并提供了一套用于网络和文件访问的固定的程序包&mdash;javax.microedition.io程序包。由于可移动设备种类繁多，这个程序包仅仅定义了一套接口，而为每个可移动设备供应厂商留下了实际的应用程序接口实现。这就在可移植性和设备特定特征的应用中找到了一个最佳的平衡点。</p>
+<p>　　定义在javax.microedition.io类中的抽象网络和文件输入输出框架称为通用连接框架（GenericConnectionFramework，简称GCF）。GCF定义了一套有关抽象化的内容来描述不同的通信方法。最高级的抽象被称作连接（Connection），还声明了六个接口（四个是直接的，两个是间接的）。这七个接口就构成了J2ME的CLDC的一部分，CLDC是大多数的能使用Java的无线设备使用的配置。设计这个配置的目的就是为所有的CLDC设备（手提电话，双向传呼机，低档的PDA等等)提供公用的网络和文件输入输出能力。虽然GCF的目的是公用网络和文件输入输出框架，但是生产商并不要求实现GCF中声明的所有的接口。有的厂家可以决定只支持socket连接，而其它的厂家可以选择只支持基于数据报的通信。为了促进跨越类似装置的可移植性，MIDP规范要求所有的MIDP设备实现HttpConnection接口。HttpConnection不是GCF的一部分，但是它是从GCF的一个接口ContentConnection衍生出来的。我们将使用HttpConnection接口构造我们样本应用程序。</p>
+<p>发送一个HTTPGET请求</p>
+<p>　　这一节将重点解释程序代码，在下一节中我们将只讲述被用来发送HTTP请求并检索由服务器返回的响应通用连接框架接口和HttpConnection接口。创建MIDP用户界面的程序代码见附录。</p>
+<p>　　我们先要定义一个方法来放用于发送HTTPGET请求的代码。因为这个方法中的有些操作有潜在的抛出IOException的可能，所以我们将把这样的意外(exception)抛给调用方法。</p>
+<p>publicStringsendHttpGet(Stringurl)throwsIOException{;HttpConnectionhcon=null;DataInputStreamdis=null;StringBuffermessage=&quot;&quot;;try{;</p>
+<p>　　第一步是使用Connector类打开一个到服务器的连接，这是GCF的关键。我们将把这个连接强制转换为需要的类型，在本例中为HttpConnection类型。</p>
+<p>hcon=(HttpConnection)Connector.open(url);</p>
+<p>　　接下来，我们得到HttpConnection上的一个DataInputStream，允许我们一个字符一个字符的读取服务器的响应数据。</p>
+<p>dis=newDataInputStream(hcon.openInputStream());</p>
+<p>　　使用DataInputStream的read()方法，服务器响应的每个字符都被集中起来放入StringBuffer对象。</p>
+<p>intch;while((ch=dis.read())!=-1){;message=message.append((char)ch);};</p>
+<p>　　最后，连接对象被净空以保存资源，而信息从这个方法中返回。</p>
+<p>};finally{;if(hcon!=null)hcon.close();if(dis!=null)dis.close();};//结束try/finally代码段returnmessage.toString();};//结束sendGetRequest(String)</p>
+<p>　　如何发送一个HTTPPOST请求</p>
+<p>　　你可以想象，发送一个HTTPPOST请求的处理过程其实与发送一个GET请求非常地类似。我们将修改一个现有命令，添加少量的新的命令，并添加一个来自通用连接框架的附加的对象和一个附加的StringBuffer对象把POST请求体重的内容发送到服务器中。剩下的命令将保持不变。</p>
+<p>　　复制我们刚才创建的sendHttpGet()方法，把它粘贴进同一个类文件，改名为sendHttpPost()。现在，我们将修改这个新方法来发送一个HTTPPOST请求到服务器。在方法的顶部添加两个新的变量说明。声明一个类型为DataOutputStream的变量和另一个String类型的变量。我们将使用DataOutputStream对象把存在于字符串变量中的POST请求体发送到服务器中。</p>
+<p>DataOutputStreamdos=null;StringrequestBody=null;</p>
+<p>　　修改connector.open()命令包含另一个参数，指出连接将允许客户端可以通过连接在服务器上读和写。</p>
+<p>hcon=(HttpConnection)Connector.open(url,Connector.READ_WRITE);</p>
+<p>　　设置HttpConnection对象使用的请求方法为POST（默认的方法是GET）。</p>
+<p>hcon.setRequestMethod(HttpConnection.POST);</p>
+<p>　　得到一个用于现有的HTTP连接的DataOutputStream对象。</p>
+<p>dos=hc.openDataOutputStream();</p>
+<p>　　声明一个字节数组并通过检索一个来自requestBody字符串的字节数组初始化。然后把DataOutputStream的缓冲写入字节数组内。</p>
+<p>byte[]byteRequest=requestBody.getBytes();for(inti=0;i&lt;byteRequest.length;i++){;dos.writeByte(byteRequest[i]);};//结束for(inti=0;i&lt;byteRequest.length;i++)</p>
+<p>dos.flush();//包含本句，在某些设被上将可能会产生不可预期的结果</p>
+<p>　　调用flush()方法的意图是发送已经写入的数据到DataOutputStream的服务器的缓冲区中。在某些电话上，这个操作工作正常，在其他的电话上，它导致HTTP请求的Transfer-Encoding被设置为&quot;chunked&quot;，有一些随机字符被放到请求本身的前面和后面。那又怎样处理这个问题呢？这个方法调用实际上是根本不需要的。在接下来的一行中，服务器连接打开（通过openInputStream()），将自动输入缓冲区。因此，你最好不要调用缓冲区的flush()方法。这个方法其余的部分保持不变，除了DataOutputStream对象必须在finally{;};语句块中关闭。</p>
+<p>};finally{;if(hc!=null)hc.close();</p>
+<p>if(dis!=null)dis.close();</p>
+<p>if(dos!=null)dis.close();};//结束try/finally</p>
+<p>　　这就是所有的程序代码!并请参见本文后附带的程序代码。</p>
+<p>　　随着可以使用国际互联网络和支持网络的无线设备日益的增多普及，Java和J2ME的重要性也在不断的变大。因为HTTP协议是当前仅有的，被所有的遵从MIDP规范的设备支持的网络协议，它也是用于开发无线网络应用程序的最好的候选者。</p>
+<p>　　在本文中，我们探究了无线网络编程的基本结构和几个核心问题，我们看了如何调用两个最常用的HTTP请求方法：GET和POST。J2ME仍然在它的发展初期，并且无线设备也即将得到大面积的普及。所以，所有有志投身于无线网络编程中的开发者们将得到大展拳脚的好机会。</p>
+<p>　　附录：</p>
+<p>/*<em>HttpMidlet.java</em>/importjavax.microedition.midlet.<em>;importjavax.microedition.lcdui.</em>;importjavax.microedition.io.<em>;importjava.io.</em>;</p>
+<p>publicclassHttpMidletextendsMIDletimplementsCommandListener{;//使用默认的URL。用户可以从图形用户接口改变这个值privatestaticStringdefaultURL=&ldquo;http://localhost:8080/test/servlet/EchoServlet&rdquo;;;</p>
+<p>//主MIDP显示privateDisplaymyDisplay=null;</p>
+<p>//输入URL的图形用户接口组件privateformrequestScreen;privateTextFieldrequestField;</p>
+<p>//用于提交请求的图形用户接口组件privateListlist;privateString[]menuItems;</p>
+<p>//用于显示服务器响应的图形用户接口组件privateformresultScreen;privateStringItemresultField;</p>
+<p>//用于requestScreen的&quot;send&quot;按钮CommandsendCommand;//用于requestScreen的&quot;exit&quot;按钮CommandexitCommand;//用于requestScreen的&quot;back&quot;按钮CommandbackCommand;</p>
+<p>publicHttpMidlet(){;//初始化图形用户接口组件myDisplay=Display.getDisplay(this);sendCommand=newCommand(&ldquo;SEND&rdquo;,Command.OK,1);exitCommand=newCommand(&ldquo;EXIT&rdquo;,Command.OK,1);backCommand=newCommand(&ldquo;BACK&rdquo;,Command.OK,1);</p>
+<p>//显示请求的URLrequestScreen=newform(&ldquo;TypeinaURL:&rdquo;);requestField=newTextField(null,defaultURL,100,TextField.URL);requestScreen.append(requestField);requestScreen.addCommand(sendCommand);requestScreen.addCommand(exitCommand);requestScreen.setCommandListener(this);</p>
+<p>//选择想要的HTTP请求方法menuItems=newString[]{;&ldquo;GETRequest&rdquo;,&ldquo;POSTRequest&rdquo;};;list=newList(&ldquo;SelectanHTTPmethod:&quot;,List.IMPLICIT,menuItems,null);list.setCommandListener(this);</p>
+<p>//先是从服务器上收到的信息resultScreen=newform(&ldquo;ServerResponse:&rdquo;);resultScreen.addCommand(backCommand);resultScreen.setCommandListener(this);</p>
+<p>};//结束HttpMidlet()</p>
+<p>publicvoidstartApp(){;myDisplay.setCurrent(requestScreen);};//结束startApp()</p>
+<p>publicvoidcommandAction(Commandcom,Displayabledisp){;//当用户点击&quot;send&quot;按钮if(com==sendCommand){;myDisplay.setCurrent(list);};elseif(com==backCommand){;requestField.setString(defaultURL);myDisplay.setCurrent(requestScreen);};elseif(com==exitCommand){;destroyApp(true);notifyDestroyed();};//结束if(com==sendCommand)</p>
+<p>if(disp==list&amp;&amp;com==List.SELECT_COMMAND){;</p>
+<p>Stringresult;</p>
+<p>if(list.getSelectedIndex()==0)//发送一个GET请求到服务器result=sendHttpGet(requestField.getString());else//发送一个POST请求到服务器result=sendHttpPost(requestField.getString());</p>
+<p>resultField=newStringItem(null,result);resultScreen.append(resultField);myDisplay.setCurrent(resultScreen);};//结束if(dis==list&amp;&amp;com==List.SELECT_COMMAND)};//结束commandAction(Command,Displayable)</p>
+<p>privateStringsendHttpGet(Stringurl){;HttpConnectionhcon=null;DataInputStreamdis=null;StringBufferresponseMessage=newStringBuffer();</p>
+<p>try{;//使用READ权限的标准的HttpConnectionhcon=(HttpConnection)Connector.open(url);</p>
+<p>//从HttpConnection取得一个DataInputStreamdis=newDataInputStream(hcon.openInputStream());</p>
+<p>//从服务器上取回响应intch;while((ch=dis.read())!=-1){;responseMessage.append((char)ch);};//结束while((ch=dis.read())!=-1)};catch(Exceptione){;e.printStackTrace();responseMessage.append(&ldquo;ERROR&rdquo;);};finally{;try{;if(hcon!=null)hcon.close();if(dis!=null)dis.close();};catch(IOExceptionioe){;ioe.printStackTrace();};//结束try/catch};//结束try/catch/finallyreturnresponseMessage.toString();};//结束sendHttpGet(String)</p>
+<p>privateStringsendHttpPost(Stringurl){;HttpConnectionhcon=null;DataInputStreamdis=null;DataOutputStreamdos=null;StringBufferresponseMessage=newStringBuffer();//请求体Stringrequeststring=&ldquo;ThisisaPOST.&rdquo;;</p>
+<p>try{;//使用读写权限的HttpConnectionhcon=(HttpConnection)Connector.open(url,Connector.READ_WRITE);</p>
+<p>//设置请求方法为POSThcon.setRequestMethod(HttpConnection.POST);</p>
+<p>//取得发送请求字符串的DataOutputStreamdos=hcon.openDataOutputStream();byte[]request_body=requeststring.getBytes();</p>
+<p>//发送请求字符串到服务器for(inti=0;i&lt;request_body.length;i++){;dos.writeByte(request_body[i]);};//结束for(inti=0;i&lt;request_body.length;i++)</p>
+<p>//取得做为接收服务器响应的DataInputStreamdis=newDataInputStream(hcon.openInputStream());</p>
+<p>//从服务器上取回响应intch;while((ch=dis.read())!=-1){;responseMessage.append((char)ch);};//结束while((ch=dis.read())!=-1){;};catch(Exceptione){;e.printStackTrace();responseMessage.append(&ldquo;ERROR&rdquo;);};finally{;//释放输入输出流和HTTP连接try{;if(hcon!=null)hcon.close();if(dis!=null)dis.close();if(dos!=null)dos.close();};catch(IOExceptionioe){;ioe.printStackTrace();};//结束try/catch};//结束try/catch/finallyreturnresponseMessage.toString();};//结束sendHttpPost(String)</p>
+<p>publicvoidpauseApp(){;};//结束pauseApp()</p>
+<p>publicvoiddestroyApp(booleanunconditional){;myDisplay=null;requestScreen=null;requestField=null;resultScreen=null;resultField=null;};//结束destroyApp(boolean)};//结束HttpMidlet</p>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="//localhost:1313/"><img src="/img/favicon.png" />我的乐与怒</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2020-08-13-mbp-crash/" data-toggle="tooltip" data-placement="top" title="来挽救MBP"><i class="fa fa-angle-left fa-lg"></i>
+                            Previous</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2005-10-10-compare-with-gprs-and-cdma/" data-toggle="tooltip" data-placement="top" title="主流无线传输技术GPRS与CDMA之对比">Next
+                        <i class="fa fa-angle-right fa-lg"></i></a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">目录</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">标签</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/aframe" title="aframe">
+                            aframe
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/andrew-ng" title="andrew-ng">
+                            andrew-ng
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/arduino" title="arduino">
+                            arduino
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                            blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/cgi" title="cgi">
+                            cgi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/consul" title="consul">
+                            consul
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                            docker
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/eth" title="eth">
+                            eth
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ethereum" title="ethereum">
+                            ethereum
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/evm" title="evm">
+                            evm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/feign" title="feign">
+                            feign
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                            golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/hw" title="hw">
+                            hw
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/jpa" title="jpa">
+                            jpa
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/js" title="js">
+                            js
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/k8s" title="k8s">
+                            k8s
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                            kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/linux" title="linux">
+                            linux
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mac" title="mac">
+                            mac
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/machine-learning" title="machine-learning">
+                            machine-learning
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/math" title="math">
+                            math
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mysql" title="mysql">
+                            mysql
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/nginx" title="nginx">
+                            nginx
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/op" title="op">
+                            op
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ops" title="ops">
+                            ops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/poco" title="poco">
+                            poco
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/pptp" title="pptp">
+                            pptp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/rd" title="rd">
+                            rd
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/spring" title="spring">
+                            spring
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/springboot" title="springboot">
+                            springboot
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ssl" title="ssl">
+                            ssl
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/thymeleaf" title="thymeleaf">
+                            thymeleaf
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/type" title="type">
+                            type
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vagrant" title="vagrant">
+                            vagrant
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vpn" title="vpn">
+                            vpn
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/vue" title="vue">
+                            vue
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/webrtc" title="webrtc">
+                            webrtc
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0" title="技术文章">
+                            技术文章
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2" title="新浪博客">
+                            新浪博客
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%97%A0%E8%81%8A" title="无聊">
+                            无聊
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB" title="生活">
+                            生活
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95" title="生活记录">
+                            生活记录
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E8%82%A1%E7%A5%A8" title="股票">
+                            股票
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E8%BF%90%E7%BB%B4" title="运维">
+                            运维
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>链接</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/vegas">青鸟的翅膀</a></li>
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/yoshikilau">Caffeine Park</a></li>
+                        
+                        <li><a target="_blank" href="http://huxpro.github.io">Theme From Hux</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/vincentz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/img/icwt.jpg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/vincentmi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/5311815/vincent-mi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="我的乐与怒" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; 我的乐与怒 2023 | <a href="http://www.beian.miit.gov.cn" style="text-decoration: none;"> 蜀ICP备17040089号-2</a>
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-78738242-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

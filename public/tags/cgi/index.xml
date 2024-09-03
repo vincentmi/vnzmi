@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CGI on 我的乐与怒</title>
+    <link>//localhost:1313/tags/cgi/</link>
+    <description>Recent content in CGI on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 04 May 2015 08:36:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/cgi/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>关于矩阵</title>
+      <link>//localhost:1313/post/2015-05-03-matrix/</link>
+      <pubDate>Mon, 04 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-05-03-matrix/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;转的啊&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;人总是会为自己找捷径，而往往捷径是要付出不一般的代价。
+呵呵&amp;mdash;说说矩阵的事：
+通过坐标变换将3D空间的图元转换成2D图元的过程：主要为世界变换-&amp;gt;视图变换-&amp;gt;投影变换-&amp;gt;视口变换
+3D场景中的任何物体，都是由一个一个三角形组成的。而三角形位置信息的就是其各个顶点的三维坐标。这是用来在模型中存储的，而要把物体显示在屏幕上，还需要将它们转换成显示器上的二维坐标。这就需要对每个点实施一套 3 to 2 的转换公式，在Direct3D中叫做“几何流水线”（Geometry Pipeline)。
+一般创建的mesh处于自己的局部坐标系。基本是屏幕正中放置。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Clayman的3D学习指南</title>
+      <link>//localhost:1313/post/2015-05-03-clayman-3d-guide/</link>
+      <pubDate>Sun, 03 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-05-03-clayman-3d-guide/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://www.cnblogs.com/clayman/archive/2009/05/17/1459001.html&#34;&gt;http://www.cnblogs.com/clayman/archive/2009/05/17/1459001.html&lt;/a&gt;
+仅供个人学习使用，请勿转载，勿用于任何商业用途。
+作者：Clayman
+与玩游戏相比,写游戏要复杂上千万倍,除了需要掌握通用的编程技巧以外，还要有相当的图形学，物理，数学基础，特别是在国内，由于相关资料的缺乏，更是让初学者无从下手。下面总结了一些入门方法和比较容易入手的资料。
+首先你要精通一门高级语言，比如C++或者C#，其次，要有良好的英文阅读能力。对游戏开发者来说英文阅读能力是最重要也是最基本的工具之一，因为你遇到的大部分资源都将是英文的，不要总等着别人为你翻译。慢慢尝试着阅读英文资料，你会发现其实也并没有那么难:)&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

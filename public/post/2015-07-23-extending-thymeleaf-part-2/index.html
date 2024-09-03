@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="我的乐与怒">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//localhost:1313//img/tianfu_3_st.jpg">
+    <meta property="twitter:image" content="//localhost:1313//img/tianfu_3_st.jpg" />
+    
+
+    
+    <meta name="title" content="扩展Thymeleaf-2  方言和处理器" />
+    <meta property="og:title" content="扩展Thymeleaf-2  方言和处理器" />
+    <meta property="twitter:title" content="扩展Thymeleaf-2  方言和处理器" />
+    
+
+    
+    <meta name="description" content="In code we trust">
+    <meta property="og:description" content="In code we trust" />
+    <meta property="twitter:description" content="In code we trust" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="我的乐与怒,vincent mi, miwenshu, 电商,  博客, 个人网站, 互联网, Web, 云原生, PaaS, Java, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>扩展Thymeleaf-2  方言和处理器 | 我的乐与怒 | Vincent&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/2015-07-23-extending-thymeleaf-part-2/">
+
+    
+
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">我的乐与怒</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/about/">我</a></li>
+                    
+                        <li><a href="/archive/">归档</a></li>
+                    
+                        <li><a href="/search/">搜索</a></li>
+                    
+                        <li><a href="/codesketch/">CodeSketch</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/post-bg.jpg')
+    }
+    
+    .titleColor {
+        text-align: center;font-size:80px;
+        color: #FFFFFF;
+    }
+   
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/rd" title="RD">
+                            RD
+                        </a>
+                        
+                        <a class="tag" href="/tags/spring" title="Spring">
+                            Spring
+                        </a>
+                        
+                        <a class="tag" href="/tags/thymeleaf" title="Thymeleaf">
+                            Thymeleaf
+                        </a>
+                        
+                    </div>
+                    <h1 class="titleColor">扩展Thymeleaf-2  方言和处理器</h1>
+                    <h2 class="subheading titleColor"></h2>
+                    <span class="meta titleColor">
+                        
+                            Posted by 
+                            
+                                Vincent
+                             
+                            on 
+                            Thursday, July 23, 2015
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <p>gitbook [http://vincentmi.gitbooks.io/extendingthymeleaf/content/][1]</p>
+<p>如果你读过Thymeleaf的入门教程（你应该已经读完了）。你应该知道你之前学的准确的说不是Thymeleaf，而是Thymeleaf的标准方言。（或者，如果你读过Thymeleaf+Spring教程的话就是Spring标准方言）。</p>
+<p>这是什么意思？意思是你学的th:xattribute只是可以立即使用的标准方言。但是你可以使用你喜欢的名字自己定义一组attribute或者tag在Thymeleaf用来处理你的模板。你可以定义你自己的方言。</p>
+<p>Dialects 是实现了org.thymeleaf.dialect.IDialect 接口的对象, 接口是这样的:</p>
+<pre tabindex="0"><code>public interface IDialect {
+
+    public String getPrefix();
+
+    public Set&lt;IProcessor&gt; getProcessors();
+    public Map&lt;String,Object&gt; getExecutionAttributes();
+
+    public Set&lt;IDocTypeTranslation&gt; getDocTypeTranslations();
+    public Set&lt;IDocTypeResolutionEntry&gt; getDocTypeResolutionEntries();
+}```
+
+让我们一步步来看他的方法:
+
+首先, 前缀:
+
+    public String getPrefix();
+
+这是你方言的tag和attribute的前缀，一种命名空间(它在添加到模板引擎时可以被改变）。如果你添加了一个attribute 为 ```earth``` 而你的方言的前缀是```planets```,你在模板里将你的attribute可以写成```planets:earth```.
+
+标准方言和Spring标准方言是 th.前缀可以是null.所以你可以为没有前缀的attribute和tag定义处理器。（例如：标准的XHTML标签&lt;p&gt; ,&lt;div&gt; &lt;table&gt;）
+
+现在，让我们看看IDialect接口最重要的部分，处理器：
+
+    public Set&lt;IProcessor&gt; getProcessors();
+ 
+处理器是主要在DOM节点上执行和进行变化的对象。我们将会在下一章节介绍更多细节。
+
+执行属性是在模板处理过程中为方言提供执行参数的一些对象。这些对象（usually utility objects通常是通用对象）将在执行器执行时可以使用。注意这些对象不会存在变量上下文中，只能在内部可见。
+
+    public Map&lt;String,Object&gt; getExecutionAttributes();
+
+更多接口方法:
+
+    public Set&lt;IDocTypeTranslation&gt; getDocTypeTranslations();
+
+这个将返回一个DCOTYPE转换的集合.如果你记得入门教程。Thymeleaf可以处理一系列DOCTYPE的转换.这样允许你为你的模板指定一个转换，将你的DOCTYPE在输出时转换为另一个DOCTYPE .
+
+最后一个方法:
+
+    public Set&lt;IDocTypeResolutionEntry&gt; getDocTypeResolutionEntries();
+
+This method returns the DOCTYPE resolution entries available for the dialect. DOCTYPE resolution entries allow Thymeleaf’s XML Parser to locally resolve DTDs linked from your templates (从而避免远程检索这些DTD).
+
+通过让你的方言实现抽象类 ```org.thymeleaf.dialect.AbstractXHTMLEnabledDialect```，Thymeleaf让大部分标准的XHTML DTD可用。但是你可以继续为你自己模板添加DTD。
+
+
+## 处理器
+
+处理器需要实现```org.thymeleaf.processor.IProcessor``` 接口, 它们包含了应用到DOM节点的真实逻辑. 接口定于如下:
+
+     public interface IProcessor extends Comparable&lt;IProcessor&gt; {
+
+     public IProcessorMatcher&lt;? extends Node&gt; getMatcher();
+
+     public ProcessorResult process(final Arguments arguments,final ProcessorMatchingContext processorMatchingContext, final Node node);
+     }
+
+
+首先我们可以看到，它扩展自Comparable接口，这是它确定优先级的方式。如果一个处理器排在另外一前面。他就有更高的优先级，这样他讲会比后面的更早的再相同的节点执行。
+
+现在看方法。一个matcher建立来匹配一个处理器是否可以应用到一个DOM节点:
+
+    public IProcessorMatcher&lt;? extends Node&gt; getMatcher();
+    
+Matcher对象将检查节点的类型、名字和或属性（如果是一个DOM节点元素），如果是其他节点元素其他的节点特性也会被用来检查处理器是否可用。Thymeleaf附带一组预定义的IProcessorMatcher实现,这样您不必执行常见的任务，像通过它的名称或者它的一个属性匹配元素标记。   
+
+最终这个方法做真正的工作：
+
+    public ProcessorResult process(final Arguments arguments,
+                final ProcessorMatchingContext processorMatchingContext, final Node node);
+                
+                
+                
+process(...) 有三个参数:
+
+org.thymeleaf.Arguments对象的执行参数包含上下文、局部变量、模板解析信息和其他一些DOM处理的有用的数据。
+
+处理器匹配上下文，其中包含有关执行处理器正在执行的条件的信息，实际上是匹配的。
+
+问题在于相同的处理器类可以被包含在多个方言，在一个相同的模板引起中执行。可能配置会有所不同。单这些方言可能使用不同的前缀。如果这，我们怎么知道处理器执行的是哪个方言？这就是ProcessorMatchingContext对象的功能。
+
+node是处理器将会执行的节点。注意这个处理器是应用到了特定的节点。但是并没有阻止这个节点树的其他部分的修改。
+
+Thymeleaf提供一个抽象工具类，用于扩展处理器，```org.thymeleaf.processor.AbstractProcessor``` 这个类实现Comparable接口。定义了获得本地化和国际化的标准机制:
+
+     public abstract class AbstractProcessor implements IProcessor {
+
+    /* Try to resolve a message first as template message, then if not */
+    /* found as processor message.                                     */
+    protected String getMessage(
+                final Arguments arguments, final String messageKey, 
+                final Object[] messageParameters) {...}
+
+    /* Try to resolve a message as a template message */
+    protected String getMessageForTemplate(
+                final Arguments arguments, final String messageKey, 
+                final Object[] messageParameters) {...}
+
+    /* Try to resolve a message as a processor message */
+    protected String getMessageForProcessor(
+                final Arguments arguments, final String messageKey, 
+                final Object[] messageParameters) {...}
+
+    public abstract int getPrecedence();
+
+    ...
+
+      }
+      
+      
+### 特殊类型的处理器
+
+虽然处理器可以在任何DOM树上执行。Thymeleaf内部执行引擎有两种特别类型的处理器用于提高效率：属性处理器和元素处理器。
+
+
+### 属性处理器 (Attribute Processor)
+
+这些处理器（实现了IProcessor接口）的getMatcher()方法返回一个```org.thymeleaf.processor.IAttributeNameProcessorMatcher```的实现，我们称为&#34;属性处理器&#34;。
+
+因为这类Matcher定义了这些处理器将在DOM元素（通常是XML\HTML\HTML标签）包含了一个指定名称的属性时被触发。例如：在标准方言中，为th:text,th:each,th:if等等属性定义了Matcher。
+
+为了简单起见，Thymeleaf提供了一个抽象类 ```org.thymeleaf.processor.attr.AbstractAttrProcessor``` 可以用来扩展为你自己的属性处理器。这个类已经实现了getMatcher方法，返回一个实现IAttributeNameProcessorMatcher接口的Matcher,让你更容易创建这类处理器。
+
+### 元素处理器 (Element Processors)
+
+这类处理器的getMatcher()方法返回一个```org.thymeleaf.processor.IElementNameProcessorMatcher```接口的实现被称为元素处理器。
+
+注意,DOM行话所说的“元素”,在XML HTML5 /XHTML文档我们通常称之为“标签”。Thymeleaf喜欢使用更通用的“元素”这个词,因为**模板模式**可能被定义为工作在一个非XML类似结构的文档中。
+
+这类matcher定义这些处理器在找到一个指定名称的元素时触发。
+
+标准方言没有定于元素处理器。
+
+简单起见，Thymeleaf也提供一个抽象类```org.thymeleaf.processor.element.AbstractElementProcessor```用来扩展成元素处理器。这个类已经实现了getMatcher返回一个IElementNameProcessorMatcher的实现，以便更容易的创建这类处理器。
+</code></pre>
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="//localhost:1313/"><img src="/img/favicon.png" />我的乐与怒</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2015-07-23-extending-thymeleaf-part-1/" data-toggle="tooltip" data-placement="top" title="扩展Thymeleaf-1 为什么需要扩展Thymeleaf"><i class="fa fa-angle-left fa-lg"></i>
+                            Previous</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2015-07-24-extending-thymeleaf-part-4/" data-toggle="tooltip" data-placement="top" title="扩展Thymeleaf-4 创建我们自己的方言">Next
+                        <i class="fa fa-angle-right fa-lg"></i></a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">目录</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">标签</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/aframe" title="aframe">
+                            aframe
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/andrew-ng" title="andrew-ng">
+                            andrew-ng
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/arduino" title="arduino">
+                            arduino
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                            blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/cgi" title="cgi">
+                            cgi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/consul" title="consul">
+                            consul
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                            docker
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/eth" title="eth">
+                            eth
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ethereum" title="ethereum">
+                            ethereum
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/evm" title="evm">
+                            evm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/feign" title="feign">
+                            feign
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                            golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/hw" title="hw">
+                            hw
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/jpa" title="jpa">
+                            jpa
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/js" title="js">
+                            js
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/k8s" title="k8s">
+                            k8s
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                            kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/linux" title="linux">
+                            linux
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mac" title="mac">
+                            mac
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/machine-learning" title="machine-learning">
+                            machine-learning
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/math" title="math">
+                            math
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mysql" title="mysql">
+                            mysql
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/nginx" title="nginx">
+                            nginx
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/op" title="op">
+                            op
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ops" title="ops">
+                            ops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/poco" title="poco">
+                            poco
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/pptp" title="pptp">
+                            pptp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/rd" title="rd">
+                            rd
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/spring" title="spring">
+                            spring
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/springboot" title="springboot">
+                            springboot
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ssl" title="ssl">
+                            ssl
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/thymeleaf" title="thymeleaf">
+                            thymeleaf
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/type" title="type">
+                            type
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vagrant" title="vagrant">
+                            vagrant
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vpn" title="vpn">
+                            vpn
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/vue" title="vue">
+                            vue
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/webrtc" title="webrtc">
+                            webrtc
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0" title="技术文章">
+                            技术文章
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2" title="新浪博客">
+                            新浪博客
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%97%A0%E8%81%8A" title="无聊">
+                            无聊
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB" title="生活">
+                            生活
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95" title="生活记录">
+                            生活记录
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E8%82%A1%E7%A5%A8" title="股票">
+                            股票
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E8%BF%90%E7%BB%B4" title="运维">
+                            运维
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>链接</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/vegas">青鸟的翅膀</a></li>
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/yoshikilau">Caffeine Park</a></li>
+                        
+                        <li><a target="_blank" href="http://huxpro.github.io">Theme From Hux</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/vincentz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/img/icwt.jpg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/vincentmi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/5311815/vincent-mi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="我的乐与怒" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; 我的乐与怒 2023 | <a href="http://www.beian.miit.gov.cn" style="text-decoration: none;"> 蜀ICP备17040089号-2</a>
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-78738242-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

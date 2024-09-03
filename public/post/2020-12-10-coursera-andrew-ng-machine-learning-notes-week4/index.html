@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="我的乐与怒">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//localhost:1313//img/tianfu_3_st.jpg">
+    <meta property="twitter:image" content="//localhost:1313//img/tianfu_3_st.jpg" />
+    
+
+    
+    <meta name="title" content="Coursera - Machine learning 学习笔记(2) - 神经网络" />
+    <meta property="og:title" content="Coursera - Machine learning 学习笔记(2) - 神经网络" />
+    <meta property="twitter:title" content="Coursera - Machine learning 学习笔记(2) - 神经网络" />
+    
+
+    
+    <meta name="description" content="In code we trust">
+    <meta property="og:description" content="In code we trust" />
+    <meta property="twitter:description" content="In code we trust" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="我的乐与怒,vincent mi, miwenshu, 电商,  博客, 个人网站, 互联网, Web, 云原生, PaaS, Java, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Coursera - Machine learning 学习笔记(2) - 神经网络 | 我的乐与怒 | Vincent&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/2020-12-10-coursera-andrew-ng-machine-learning-notes-week4/">
+
+    
+    
+    <link rel="stylesheet" href="/katex/katex.min.css">
+    <script defer src="/katex/katex.min.js"></script>
+
+    <script defer src="/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
+    
+
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">我的乐与怒</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/about/">我</a></li>
+                    
+                        <li><a href="/archive/">归档</a></li>
+                    
+                        <li><a href="/search/">搜索</a></li>
+                    
+                        <li><a href="/codesketch/">CodeSketch</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/post-ml.png')
+    }
+    
+    .titleColor {
+        text-align: center;font-size:80px;
+        color: #FFFFFF;
+    }
+   
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/machine-learning" title="Machine Learning">
+                            Machine Learning
+                        </a>
+                        
+                        <a class="tag" href="/tags/andrew-ng" title="Andrew NG">
+                            Andrew NG
+                        </a>
+                        
+                        <a class="tag" href="/tags/math" title="Math">
+                            Math
+                        </a>
+                        
+                    </div>
+                    <h1 class="titleColor">Coursera - Machine learning 学习笔记(2) - 神经网络</h1>
+                    <h2 class="subheading titleColor"></h2>
+                    <span class="meta titleColor">
+                        
+                            Posted by 
+                            
+                                Vincent
+                             
+                            on 
+                            Thursday, December 10, 2020
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <p>课程地址: <a href="https://www.coursera.org/learn/machine-learning/home/welcome"> https://www.coursera.org/learn/machine-learning/home/welcome</a></p>
+<p>作业 <a href="https://github.com/vincentmi/machine-learning-exercise">Vincent code exercise</a></p>
+<h1 id="第四周-神经网络-模型">第四周 神经网络-模型</h1>
+<h3 id="41-模型">4.1 模型</h3>
+<h5 id="411-基本元素">4.1.1 基本元素</h5>
+<ul>
+<li>激活函数(activation function) , $g(z)$ , $a_i^{(j)}$第$j$层的第$i$个神经元</li>
+<li>偏置神经元(bias unit)</li>
+<li>权重(Weight)</li>
+<li>输入层 Input Layer</li>
+<li>结果层 Output Layer</li>
+<li>隐藏层 Hidden Layer</li>
+<li>$a_i^{(j)}$ 表示在$j$层的第$i$ 个单元</li>
+<li>$\Theta^j$ 权重矩阵控制$j$到$j+1$层各个神经元的权重,如果$j$层有$S_j$个神经元,$j+1$层有$S_{j+1}$个神经元,那么$\Theta^{(j)}$是$S_{j+1} \times S_j +1 $ 矩阵.</li>
+</ul>
+<h5 id="412-计算公式">4.1.2 计算公式</h5>
+<p>$
+[x_1  x_2 x_3] \rightarrow [a_1^2 a_2^2 a_3^2 &hellip;. ] \rightarrow h_\theta(x)
+$</p>
+<p>计算
+$
+a_1^{(2)} = g(\Theta_{10}^{(1)}x_0 + \Theta_{11}^{(1)}x_1 + \Theta_{12}^{(1)}x_2 + \Theta_{13}^{(1)}x_3) \\
+a_2^{(2)} = g(\Theta_{20}^{(1)}x_0 + \Theta_{21}^{(1)}x_1 + \Theta_{22}^{(1)}x_2 + \Theta_{23}^{(1)}x_3) \\
+a_3^{(2)} = g(\Theta_{30}^{(1)}x_0 + \Theta_{31}^{(1)}x_1 + \Theta_{32}^{(1)}x_2 + \Theta_{33}^{(1)}x_3) \\
+h_\Theta(x) = a_1^{(3)} = g(\Theta_{10}^{(2)}a_0^{(2)} + \Theta_{11}^{(2)}a_1^{(2)} + \Theta_{12}^{(2)}a_2^{(2)} + \Theta_{13}^{(2)}a_3^{(2)}) \\
+$</p>
+<p>向量化:</p>
+<p>$
+z^{(j+1)} = \Theta^{(j)}a^{(j)}
+$</p>
+<p>$a^{(j)} = g(z^{(j)})$</p>
+<p>$h_{\Theta}(x) =a^{(j+1)} =  g(z^{(j+1)})$</p>
+<p>预测结果为向量:</p>
+<p>$
+y^{(i)} = \begin{bmatrix}
+h_{\Theta}(x)<em>1 \\
+h</em>{\Theta}(x)_2 \\
+&hellip;. \\
+\end{bmatrix}
+$</p>
+<blockquote>
+<p>Octive Matlab Tips:
+<code>[m,n] = max(A,[],2)</code>可以查找矩阵每行的最大值的位置.</p>
+</blockquote>
+<h1 id="第五周-神经网络-训练">第五周 神经网络-训练</h1>
+<p>通过正向传播算法和反向传播算法来进行神经网络的训练</p>
+<h3 id="51-代价函数j">5.1 代价函数$j$</h3>
+<p>来看看这个复杂到爆的代价函数.</p>
+<p>$L$ 网络的总层数</p>
+<p>$s_l$ 第 $l$层的单元数量,不包含偏置单元</p>
+<p>$K$ 输出单元数量,即要分出的类别的数量</p>
+<p>$J(\Theta) = - \frac{1}{m} \sum_{i=1}^m \sum_{k=1}^K [y^{(i)}<em>k \log ((h</em>\Theta(x^{(i)}))<em>k) + (1 - y^{(i)}<em>k)\log(1 - (h</em>\Theta(x^{(i)}))<em>k)] + \frac{\lambda}{2m}\sum</em>{l=1}^{L-1}\sum</em>{i=1}^{s_l}\sum_{j=1}^{s_{l+1}}(\Theta_{j,i}^{(l)})^2 $</p>
+<h3 id="52-反向传播算法">5.2 反向传播算法</h3>
+<p>计算步骤,训练集$(x^{(t)},y^{(t)})$</p>
+<ol>
+<li>执行正向传播算法计算出$h_{\Theta}(x)$</li>
+<li>对于第$l$层的每个节点$j$.计算误差$\delta_j^{(l)}$.这个值表示本层输出与正确值的误差</li>
+</ol>
+<h4 id="521-初始化">5.2.1 初始化</h4>
+<p>我们的训练集 为 ${(x^{(1)},y^{(1)})\ &hellip; \ (x^{(m)},y^{(m)}}$
+将权重矩阵$\Delta^l$初始化为0矩阵.</p>
+<h4 id="522-计算正向传播">5.2.2 计算正向传播</h4>
+<blockquote>
+<p>注意计算每一层的时候 都要加上一个 $a_0^{(l)} = 0$.</p>
+</blockquote>
+<p>对于训练样本 $t = 0 &hellip; m $
+设置 $a^{(1)} = x^{(t)}$<br>
+计算正向传播每层的 $a{(l)}$的值,$l = 2,3,4 \ &hellip;\ L$</p>
+<p>需要提供 $J(\Theta)$ 和他的偏导数$\frac{\partial}{\partial\Theta^{(l)}_{i,j}}J(\Theta)$ 来运行梯度下降或其他高级算法</p>
+<p>$
+z^{(l)} = \Theta^{(l-1)}a^{(l-1)} \\
+a^{(l)} = g(z^{(l)}) \\
+a^{(L)} = h_{\Theta}(x) = g(z^L)
+$</p>
+<h4 id="523-使用yt计算">5.2.3 使用$y^t$计算</h4>
+<p>最后一层.使用样本的正确结果减去通过神经元激活函数算出的值获取我们计算的总偏差.
+通过公式我们可以反向推算出上一层的偏差.依次推到第一层.</p>
+<p>$\delta^L = a^L - y^{(t)}$</p>
+<h4 id="524-计算上一层的偏差值-deltal-1delta-l-2---delta-2">5.2.4 计算上一层的偏差值 $\delta^{(L-1)},\delta ^{(L-2)},\ &hellip; \ \delta ^2$</h4>
+<p>每个权重都是下一层的误差乘激活函数的
+偏导数$\delta_j^{(l)}=\frac{\partial}{\partial z_j^{(l)}}cost(t)$,对数据进行一些微调.</p>
+<p>另外不用计算第一层, $l = 1 &hellip; L-1 $.</p>
+<p>$
+\delta^{(l)} = (\Theta^{(l)})^T\delta^{(l+1)} \cdot g&rsquo;(z^{(l)})
+$</p>
+<p>将偏导数带入:</p>
+<p>$\delta^{(l)} = ((\Theta^{(l)})^T\delta^{(l+1)}) \cdot a^{(l)} \cdot (1-a^{(l)})$</p>
+<h4 id="525-更新权重矩阵">5.2.5 更新权重矩阵</h4>
+<p>公式:</p>
+<p>$\Delta^{(l)}<em>{i,j} := \Delta^{(l)}</em>{i,j} + a_j^{l}\delta^{l+1}_{i,j}$</p>
+<p>对应的向量公式:</p>
+<p>$\Delta^{(l)} := \Delta^{(l)} + \delta^{(i+1)}(a^{(l)})^T$</p>
+<p>然后计算新的$\Delta$矩阵</p>
+<p>$j\ne0 $时</p>
+<p>$
+D^{(l)}<em>{ij} := \frac{1}{m}(\Delta</em>{i,j}^{(l)} + \lambda\Theta_{i,j}^{(l)})
+$</p>
+<p>$j=0 $时去掉正规化相关内容</p>
+<p>$
+D^{(l)}<em>{ij} := \frac{1}{m}\Delta</em>{i,j}^{(l)}
+$</p>
+<h4 id="526-参数展开">5.2.6 参数展开</h4>
+<p>-<code>A(:)</code>会将矩阵展开到一个长矢量</p>
+<ul>
+<li><code>reshape(a(startElement,endElement),row,column)</code>用于从矢量构建矩阵</li>
+<li><code>fminunc</code> initTherta都是使用长矢量传递</li>
+</ul>
+<h4 id="527-梯度检查">5.2.7 梯度检查</h4>
+<blockquote>
+<p><strong>在确认算法正确,进行正式的学习时一定要关闭这个检查不然会慢的要死</strong></p>
+</blockquote>
+<p>用于检验反向传播算法是否正确 .</p>
+<p>对于我们的代价函数$j$可以使用这种原始的方法来求导</p>
+<p>$
+\frac{\partial}{\partial\Theta}J(\Theta) \approx \frac{J(\Theta + \epsilon) - J(\Theta - \epsilon)}{2\epsilon}
+$</p>
+<p>多个$\Theta$值的矩阵</p>
+<p>$
+\frac{\partial}{\partial\Theta}J(\Theta) \approx \frac{J(\Theta_1,\Theta_2,\ &hellip; \ \Theta_j + \epsilon\ &hellip;\ \Theta_n) - J(\Theta_1,\Theta_2,\ &hellip; \ \Theta_j - \epsilon\ &hellip;\ \Theta_n)}{2\epsilon}
+$</p>
+<p>通常设置 $\epsilon = 10^{-4}$ 太小会引起一些数值问题</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-matlab" data-lang="matlab"><span style="display:flex;"><span>epsilon = <span style="color:#f60">1e-4</span>;
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">for</span> <span style="color:#366">i</span> = <span style="color:#f60">1</span>:n,
+</span></span><span style="display:flex;"><span>  thetaPlus = theta;
+</span></span><span style="display:flex;"><span>  thetaPlus(<span style="color:#366">i</span>) <span style="color:#555">+</span>= epsilon;
+</span></span><span style="display:flex;"><span>  thetaMinus = theta;
+</span></span><span style="display:flex;"><span>  thetaMinus(<span style="color:#366">i</span>) <span style="color:#555">-</span>= epsilon;
+</span></span><span style="display:flex;"><span>  gradApprox(<span style="color:#366">i</span>) = (J(thetaPlus) <span style="color:#555">-</span> J(thetaMinus))<span style="color:#555">/</span>(<span style="color:#f60">2</span><span style="color:#555">*</span>epsilon)
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">end</span>;
+</span></span></code></pre></div><p>运行算法后 检查 <code>gradApprox ≈ deltaVector</code> 来确保你算法的实现没有BUG.</p>
+<h4 id="528-随机化初始化">5.2.8 随机化初始化</h4>
+<p>如果将$\Theta$全部初始化为0或者同样的数,则每个神经元执行同样的函数.网络将具有单一的特性,被称为对称现象,.因此需要进行随机初始化
+(真乃玄学).</p>
+<p>生成的$\Theta$在 <code>- INIT_SPSILION</code> 到<code>INIT_SPSILION</code>之间.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-matlab" data-lang="matlab"><span style="display:flex;"><span>Theta1 = <span style="color:#366">rand</span>(<span style="color:#f60">10</span>,<span style="color:#f60">11</span>) <span style="color:#555">*</span> (<span style="color:#f60">2</span> <span style="color:#555">*</span> INIT_EPSILON) <span style="color:#555">-</span> INIT_EPSILON;
+</span></span><span style="display:flex;"><span>Theta2 = <span style="color:#366">rand</span>(<span style="color:#f60">10</span>,<span style="color:#f60">11</span>) <span style="color:#555">*</span> (<span style="color:#f60">2</span> <span style="color:#555">*</span> INIT_EPSILON) <span style="color:#555">-</span> INIT_EPSILON;
+</span></span><span style="display:flex;"><span>Theta3 = <span style="color:#366">rand</span>(<span style="color:#f60">1</span>,<span style="color:#f60">11</span>) <span style="color:#555">*</span> (<span style="color:#f60">2</span> <span style="color:#555">*</span> INIT_EPSILON) <span style="color:#555">-</span> INIT_EPSILON;
+</span></span></code></pre></div><blockquote>
+<p>rand(10,11) 生成一个矩阵,元素值在 0 - 1 之间
+函数 <code>func1(arg1 ... arg2)</code> 中的 <code>...</code>仅用于换行</p>
+</blockquote>
+<h4 id="529-总结">5.2.9 总结</h4>
+<ul>
+<li>网络结构选择
+<ul>
+<li>输入层(input layer)神经元数量即为我们的特征的数量 <code>n</code></li>
+<li>输出层(output layer) 单元神经元数量即为我们要分出的全部类别的数量
+<ul>
+<li>如果分类数量为$k$则输出层输出为 $y(k,1)$的向量,元素为 $0$和$1$,需要另外进行转换</li>
+</ul>
+</li>
+<li>隐藏层(hidden layer)的选择
+<ul>
+<li>1个隐藏层的网络</li>
+<li>多于一层,每层有相同的神经元数量</li>
+<li>层肯定是越多越好,但是计算代价也会变很高</li>
+<li>每层的单元数量通常是要比输出层数量多</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>训练神经网络
+<ul>
+<li>
+<ol>
+<li>使用随机数初始化节点的权重</li>
+</ol>
+</li>
+<li>2.实现前向传播算法</li>
+<li>3.实现代价函数</li>
+<li>4.实现反向传播计算微分值</li>
+<li>5.使用梯度检查算法确认反向传播计算正确,然后关闭梯度检查</li>
+<li>6.使用梯度递减或者内部的优化功能获取代价最小化的权重矩阵值</li>
+<li>正向传播可以使用for循环计算每个训练数据</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-matlab" data-lang="matlab"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">for</span> <span style="color:#366">i</span> = <span style="color:#f60">1</span>:m,
+</span></span><span style="display:flex;"><span>   Perform forward propagation and backpropagation using example (x(<span style="color:#366">i</span>),y(<span style="color:#366">i</span>))
+</span></span><span style="display:flex;"><span>   (Get activations a(l) and delta terms d(l) <span style="color:#069;font-weight:bold">for</span> l = <span style="color:#f60">2</span>,<span style="color:#09f;font-style:italic">...,L</span>
+</span></span></code></pre></div><blockquote>
+<p>Matlab&amp;Octave 函数</p>
+</blockquote>
+<h1 id="第六周-机器学习系统设计">第六周 机器学习系统设计</h1>
+<h3 id="61-评估学习算法">6.1 评估学习算法</h3>
+<ul>
+<li>通常可以提高预测准确性的方法
+<ul>
+<li>获取更多的训练集 - 修复高方差</li>
+<li>少选择一些特征量 - 修复高方差</li>
+<li>尝试更多的特征量 - 修复高偏差</li>
+<li>尝试多项式特征值 - 修复高偏差</li>
+<li>减少$\lambda$ - 修改高偏差</li>
+<li>增加$\lambda$  - 修复高方差</li>
+</ul>
+</li>
+<li>评估预测函数
+<ul>
+<li>将训练集随机分为 <code>70% </code>的训练集和<code>30%</code> 的测试集.</li>
+<li>将训练集得到的$\theta$带入测试集,计算误差值.</li>
+</ul>
+</li>
+<li>模型选择,$d$ 表示多项式的维数,应用到交叉验证集来确定何种多项式更合适.
+<ul>
+<li>训练集划分
+<ul>
+<li>交叉验证集 CV 20% -</li>
+<li>测试集 20%</li>
+<li>训练集 60%</li>
+</ul>
+</li>
+<li>使用三个训练集计算三个不同的误差
+<ul>
+<li>对于多个多项式使用训练集来找到最优化的$\Theta$</li>
+<li>使用交叉训练集找到最小误差的$d$</li>
+<li>用测试集计算泛化误差</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="62-偏差和方差">6.2 偏差和方差</h3>
+<p>
+  <img src="/img/in-post/overfitting.jpg" alt="偏差和方差的情况">
+
+</p>
+<h4 id="高偏差欠拟合预测函数多项式过低">高偏差(欠拟合,预测函数多项式过低)</h4>
+<ul>
+<li>$J_{train}(\Theta)$ 高</li>
+<li>$J_{cv}(\Theta)$ 高 并与$J_{train}(\Theta)$相似</li>
+</ul>
+<h4 id="高方差过拟合预测函数多项式过高">高方差(过拟合,预测函数多项式过高)</h4>
+<ul>
+<li>$J_{train}(\Theta)$ 低</li>
+<li>$J_{cv}(\Theta)$ 高 并远高于$J_{train}(\Theta)$</li>
+</ul>
+<h4 id="与正规化的关系">与正规化的关系</h4>
+<p>训练集和CV集不加入正规化选项</p>
+<p>
+  <img src="/img/in-post/fitingwithlambda.jpg" alt="加入lambda的情况">
+
+</p>
+<ul>
+<li>$\lambda$  过小可能是过拟合状态</li>
+<li>$\lambda$则是高偏差的不拟合状态</li>
+</ul>
+<h4 id="学习曲线">学习曲线</h4>
+<p>X轴训练量,Y误差</p>
+<p>
+  <img src="/img/in-post/high_bias.jpg" alt="High BIAS">
+
+</p>
+<p>高偏差情况.$J_{cv}$和$J_{train}$ 快速收敛到一起,并将误差保持到较高位置.
+此时是高偏差情况,需要更复杂的预测函数.增加训练集没有效果</p>
+<p>
+  <img src="/img/in-post/high_variance.jpg" alt="加入lambda的情况">
+
+</p>
+<p>高方差情况,$J_{cv}$和$J_{train}$ 之间有较大差距,随着训练集的增大差距缩小
+此时可能需要更多的训练集.</p>
+<h4 id="神经网络的偏差和方差">神经网络的偏差和方差</h4>
+<ul>
+<li>通常大型的网络结构性能更好</li>
+<li>增加网络层数可以改善高偏差问题</li>
+<li>层数越多越容易过拟合-通过正规化增加$\lambda$来改善</li>
+<li>通过对比不同隐藏层的学习曲线进行结构选择,可以先从一层网络开始尝试</li>
+<li>模型影响
+<ul>
+<li>低阶模型,高偏差,低方差</li>
+<li>高阶模型,低偏差,高方差</li>
+<li>选择复杂度居中的模型</li>
+</ul>
+</li>
+</ul>
+<h3 id="63-误差分析">6.3 误差分析</h3>
+<h4 id="应用机器学习的方法">应用机器学习的方法</h4>
+<ul>
+<li>用你能最快实现的简单的算法来实现并在你的验证集测试它.</li>
+<li>画出学习曲线来决定更多数据或者更多特征量能提供帮助</li>
+<li>误差分析,手动的分析验证集中的误差,尝试找到规律</li>
+<li>建立评估算法的数值系统来帮助自己做决定.预测误差率</li>
+</ul>
+<h4 id="skewed-classes-偏斜的分类误差度量">Skewed Classes 偏斜的分类误差度量</h4>
+<p>在偏斜的分类中,直接使用预测误差率会无法进行评估.比如:一个二元分类,0 的训练集
+占了绝大多数.直接预测 0 会得到很小的误差率.因此单纯使用误差率是无法判断对算法的
+修改是模型表现更好.</p>
+<p>此类情况使用准确率($P$)召回率($R$)来评估</p>
+<p>$Accuracy = \frac{True\  positives + False\  positives }{#total examples} = \frac{\mbox{预测和真实均为阳性} + \mbox{预测和真实均为阴性} }{\mbox{样本总量}}$</p>
+<p>$Precision = \frac{True\  positives}{#predicted \  positive} = \frac{\mbox{预测和真实均为阳性}}{\mbox{预测的阳性}}$</p>
+<p>$Recall = \frac{True\  positives}{#actual \  positive} = \frac{\mbox{预测和真实均为阳性}}{\mbox{真实的阳性}}$</p>
+<blockquote>
+<p>高准确率和高召回率说明算法运行良好,使用精度和召回进行度量避免算法在偏斜的训练集中被欺骗.</p>
+</blockquote>
+<h4 id="召回率和准确率的平衡">召回率和准确率的平衡</h4>
+<p>修改分类算法预测的临界值,(默认0.5)</p>
+<ul>
+<li>临界值,越大则$P$ 越大,</li>
+<li>临界值越小则$R$ 越大</li>
+</ul>
+<p>F公式,通过召回率和准确率计算F值,选择F值较大的算法</p>
+<p>$F_1= 2\frac{PR}{P+R}$</p>
+<p>F值取值在 0 - 1之间,越大越好.</p>
+<blockquote>
+<p>在交叉验证集上进行测试</p>
+</blockquote>
+<h3 id="64-训练数据">6.4 训练数据</h3>
+<ul>
+<li>在确保特征值有足够的信息进行预测的情况下,增大数据集可以提高算法性能</li>
+<li>在有较多特征值(神经网络有大量隐藏层)的情况下使用大量训练集不容易过拟合</li>
+</ul>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="//localhost:1313/"><img src="/img/favicon.png" />我的乐与怒</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2020-12-06-coursera-andrew-ng-machine-learning-notes/" data-toggle="tooltip" data-placement="top" title="Coursera - Machine learning 学习笔记(1) - 线性回归和分类器"><i class="fa fa-angle-left fa-lg"></i>
+                            Previous</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2021-01-05-coursera-andrew-ng-machine-learning-notes-week7/" data-toggle="tooltip" data-placement="top" title="Coursera - Machine learning 学习笔记(3)  - 支持向量机异常检测和推荐系统">Next
+                        <i class="fa fa-angle-right fa-lg"></i></a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">目录</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">标签</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/aframe" title="aframe">
+                            aframe
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/andrew-ng" title="andrew-ng">
+                            andrew-ng
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/arduino" title="arduino">
+                            arduino
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                            blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/cgi" title="cgi">
+                            cgi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/consul" title="consul">
+                            consul
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                            docker
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/eth" title="eth">
+                            eth
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ethereum" title="ethereum">
+                            ethereum
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/evm" title="evm">
+                            evm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/feign" title="feign">
+                            feign
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                            golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/hw" title="hw">
+                            hw
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/jpa" title="jpa">
+                            jpa
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/js" title="js">
+                            js
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/k8s" title="k8s">
+                            k8s
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                            kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/linux" title="linux">
+                            linux
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mac" title="mac">
+                            mac
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/machine-learning" title="machine-learning">
+                            machine-learning
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/math" title="math">
+                            math
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mysql" title="mysql">
+                            mysql
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/nginx" title="nginx">
+                            nginx
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/op" title="op">
+                            op
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ops" title="ops">
+                            ops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/poco" title="poco">
+                            poco
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/pptp" title="pptp">
+                            pptp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/rd" title="rd">
+                            rd
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/spring" title="spring">
+                            spring
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/springboot" title="springboot">
+                            springboot
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ssl" title="ssl">
+                            ssl
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/thymeleaf" title="thymeleaf">
+                            thymeleaf
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/type" title="type">
+                            type
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vagrant" title="vagrant">
+                            vagrant
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vpn" title="vpn">
+                            vpn
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/vue" title="vue">
+                            vue
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/webrtc" title="webrtc">
+                            webrtc
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0" title="技术文章">
+                            技术文章
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2" title="新浪博客">
+                            新浪博客
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%97%A0%E8%81%8A" title="无聊">
+                            无聊
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB" title="生活">
+                            生活
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95" title="生活记录">
+                            生活记录
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E8%82%A1%E7%A5%A8" title="股票">
+                            股票
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E8%BF%90%E7%BB%B4" title="运维">
+                            运维
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>链接</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/vegas">青鸟的翅膀</a></li>
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/yoshikilau">Caffeine Park</a></li>
+                        
+                        <li><a target="_blank" href="http://huxpro.github.io">Theme From Hux</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/vincentz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/img/icwt.jpg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/vincentmi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/5311815/vincent-mi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="我的乐与怒" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; 我的乐与怒 2023 | <a href="http://www.beian.miit.gov.cn" style="text-decoration: none;"> 蜀ICP备17040089号-2</a>
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-78738242-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

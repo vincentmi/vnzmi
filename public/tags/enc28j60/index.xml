@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ENC28J60 on 我的乐与怒</title>
+    <link>//localhost:1313/tags/enc28j60/</link>
+    <description>Recent content in ENC28J60 on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 08 May 2015 23:16:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/enc28j60/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ENC28J60接线</title>
+      <link>//localhost:1313/post/2015-05-08-enc28j60/</link>
+      <pubDate>Fri, 08 May 2015 23:16:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-05-08-enc28j60/</guid>
+      <description>drivers.rar HanRun HR911105A 14/20 CLKOUT INT WOL SO SI SCK CS RESET VCC GND 接线 ENC28J60 Arduino Due/UNO Arduino Mega VCC 3V3 3V3 CLKOUT ENC-WOL RESET RESET RESET ENC-INT 2 2 GND GND GND SCK 13 52 MISO 12 50 MOSI 11 51 CS 10 53 另外一个库的接法 https://github.com/jcw/ethercard 该库支持DNS,DHCP 测试可用。 &amp;ndash; &amp;ndash; VCC 3.3V GND GND SCK Pin 13 SO Pin 12 SI Pin 11 CS Pin 8 # Selectable with the ether.begin() function</description>
+    </item>
+    
+  </channel>
+</rss>

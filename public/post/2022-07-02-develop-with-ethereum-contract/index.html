@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="我的乐与怒">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//localhost:1313//img/tianfu_3_st.jpg">
+    <meta property="twitter:image" content="//localhost:1313//img/tianfu_3_st.jpg" />
+    
+
+    
+    <meta name="title" content="以太坊开发入门 - 智能合约" />
+    <meta property="og:title" content="以太坊开发入门 - 智能合约" />
+    <meta property="twitter:title" content="以太坊开发入门 - 智能合约" />
+    
+
+    
+    <meta name="description" content="In code we trust">
+    <meta property="og:description" content="In code we trust" />
+    <meta property="twitter:description" content="In code we trust" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="我的乐与怒,vincent mi, miwenshu, 电商,  博客, 个人网站, 互联网, Web, 云原生, PaaS, Java, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>以太坊开发入门 - 智能合约 | 我的乐与怒 | Vincent&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/2022-07-02-develop-with-ethereum-contract/">
+
+    
+
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">我的乐与怒</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/about/">我</a></li>
+                    
+                        <li><a href="/archive/">归档</a></li>
+                    
+                        <li><a href="/search/">搜索</a></li>
+                    
+                        <li><a href="/codesketch/">CodeSketch</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/post-bg-blockchain.jpg')
+    }
+    
+    .titleColor {
+        text-align: center;font-size:80px;
+        color: #FFFFFF;
+    }
+   
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/blockchain" title="blockchain">
+                            blockchain
+                        </a>
+                        
+                        <a class="tag" href="/tags/eth" title="Eth">
+                            Eth
+                        </a>
+                        
+                        <a class="tag" href="/tags/ethereum" title="Ethereum">
+                            Ethereum
+                        </a>
+                        
+                        <a class="tag" href="/tags/contract" title="Contract">
+                            Contract
+                        </a>
+                        
+                    </div>
+                    <h1 class="titleColor">以太坊开发入门 - 智能合约</h1>
+                    <h2 class="subheading titleColor"></h2>
+                    <span class="meta titleColor">
+                        
+                            Posted by 
+                            
+                                Vincent
+                             
+                            on 
+                            Saturday, July 2, 2022
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <h2 id="solidity-语言">Solidity 语言</h2>
+<p>智能合约使用<a href="https://soliditylang.org/">Solidity</a>语言进行开发,</p>
+<p><a href="https://ethbook.abyteahead.com/ch8/index.html">Solidity语法参考</a></p>
+<p>Solidity 语言的一些特点:</p>
+<h5 id="没有浮点数">没有浮点数</h5>
+<p>使用${wei}$来规避浮点运算.</p>
+<p>$
+1 \times {ether} = 1 \times  10^{18}{wei}
+$</p>
+<h5 id="指数运算符">指数运算符</h5>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sol" data-lang="sol"><span style="display:flex;"><span><span style="color:#f60">10</span><span style="color:#555">**</span><span style="color:#f60">18</span> <span style="color:#555">=</span> <span style="color:#f60">10</span><span style="color:#555">^</span><span style="color:#f60">18</span>
+</span></span></code></pre></div><h5 id="函数权限关键字在最后">函数权限关键字在最后</h5>
+<p>函数默认是<code>public</code>
+约定 <code>private</code>修饰的函数名字前缀加上下划线 _</p>
+<p><code>internal</code> 修饰符可以让合约继承后子合约访问该函数
+<code>external</code> 让该函数只能被外部调用者调用</p>
+<p><code>view</code> 修饰符,用于标明单纯的“查勘”类型的函数，它会读取记录在区块链上的数据，但它并不修改数据，是个只读操作
+<code>pure</code> 纯粹的函数,只是进行一些内存运算
+默认则认为是写数据操作</p>
+<h5 id="函数返回值可以是多个">函数返回值可以是多个</h5>
+<h5 id="keccak256-函数">keccak256 函数</h5>
+<p>用于生成256bit的散列</p>
+<h5 id="使用-emit产生日志">使用 emit产生日志</h5>
+<p>利用日志减少遍历区块的负担</p>
+<h5 id="msgsender-合约调用者地址">msg.sender 合约调用者地址</h5>
+<h5 id="require和assert">require和assert</h5>
+<ul>
+<li>require条件检查语句如果不通过，则扣除运行到当前语句时，程序执行所花费的 gas，终止程序执行，并返回。</li>
+<li>assert 条件检查语句如果不通过，则视为严重错误，扣除所有的gas，终止程序执行，并返回.</li>
+</ul>
+<h5 id="使用-_-进行-ownerable和pauseable控制">使用 _ 进行 Ownerable和Pauseable控制</h5>
+<p>其他语法请参考语法说明.</p>
+<h2 id="安装编译器">安装编译器</h2>
+<p>我们需要安装一个编译器solc.</p>
+<h3 id="使用npm安装">使用NPM安装</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>npm install -g solc
+</span></span></code></pre></div><p>运行 <code>solcjs --help</code></p>
+<h3 id="使用docker">使用Docker</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>docker run ethereum/solc:stable --help
+</span></span></code></pre></div><p>编译文件</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>docker run -v /local/path:/sources ethereum/solc:stable -o /sources/output --abi --bin /sources/Contract.sol
+</span></span></code></pre></div><h3 id="进行编译">进行编译</h3>
+<p>我们创建一个最简单的合约设置一个变量和读取这个变量</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sol" data-lang="sol"><span style="display:flex;"><span><span style="color:#09f;font-style:italic">//SPDX-License-Identifier: UNLICENSED
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"></span><span style="color:#069;font-weight:bold">pragma solidity</span> <span style="color:#f60">0</span>.<span style="color:#f60">8</span>.<span style="color:#f60">10</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">contract</span> <span style="color:#0a8;font-weight:bold">Vault</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#078;font-weight:bold">uint</span> vaultData;
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">function</span> <span style="color:#c0f">set</span>(<span style="color:#078;font-weight:bold">uint</span> <span style="color:#366">data</span>) <span style="color:#069;font-weight:bold">public</span> {
+</span></span><span style="display:flex;"><span>        vaultData <span style="color:#555">=</span> <span style="color:#366">data</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">function</span> <span style="color:#c0f">get</span>() <span style="color:#069;font-weight:bold">public</span> <span style="color:#069;font-weight:bold">view</span> <span style="color:#069;font-weight:bold">returns</span> (<span style="color:#078;font-weight:bold">uint</span>){
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">return</span> vaultData;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>进行编译</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">#docker编译</span>
+</span></span><span style="display:flex;"><span> docker run -it --rm --name<span style="color:#555">=</span>solc  -v <span style="color:#c30">`</span><span style="color:#366">pwd</span><span style="color:#c30">`</span>:/sources ethereum/solc:stable -o /sources/output --optimize  --combined-json abi,bin /sources/Vault.sol
+</span></span></code></pre></div><p>编译后生成了ABI文件用于对合约进行描述.</p>
+<p>combine.json</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#c30">&#34;contracts&#34;</span><span style="color:#555">:</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c30">&#34;sources/Vault.sol:Vault&#34;</span><span style="color:#555">:</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#c30">&#34;abi&#34;</span><span style="color:#555">:</span> [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#c30">&#34;inputs&#34;</span><span style="color:#555">:</span> [],
+</span></span><span style="display:flex;"><span>          <span style="color:#c30">&#34;name&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;get&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#c30">&#34;outputs&#34;</span><span style="color:#555">:</span> [
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>              <span style="color:#c30">&#34;internalType&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;uint256&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#c30">&#34;name&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#c30">&#34;type&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;uint256&#34;</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>          ],
+</span></span><span style="display:flex;"><span>          <span style="color:#c30">&#34;stateMutability&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;view&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#c30">&#34;type&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;function&#34;</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#c30">&#34;inputs&#34;</span><span style="color:#555">:</span> [
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>              <span style="color:#c30">&#34;internalType&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;uint256&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#c30">&#34;name&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;data&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#c30">&#34;type&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;uint256&#34;</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>          ],
+</span></span><span style="display:flex;"><span>          <span style="color:#c30">&#34;name&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;set&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#c30">&#34;outputs&#34;</span><span style="color:#555">:</span> [],
+</span></span><span style="display:flex;"><span>          <span style="color:#c30">&#34;stateMutability&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;nonpayable&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#c30">&#34;type&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;function&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#c30">&#34;bin&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;6080604052348015600f57600080fd5b5060ac8061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c806360fe47b11460375780636d4ce63c146049575b600080fd5b60476042366004605e565b600055565b005b60005460405190815260200160405180910390f35b600060208284031215606f57600080fd5b503591905056fea26469706673582212204cb30acaef1d56054ffdb656c07e2788eb723c95eeb4155255171050ba19561464736f6c634300080a0033&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#c30">&#34;version&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;0.8.10+commit.fc410830.Linux.g++&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>栏位描述</p>
+<p>| &mdash; | &mdash; |
+| 名称 | 	解释 |
+|type |	接口类型，默认为function，也可以是construnctor、fallback等|
+|name |	方法名字|
+|inputs |	接口输入参数列表，每一项都是参数名+参数类型|
+|outputs |	接口输出结果列表，每一项都是返回值名+返回值类型|
+|constant |	布尔值，若为true 则该接口不修改合约存储区，是只读方法|
+|payable |	布尔值，标明该方法是否接受以太币|
+|stateMutability |	枚举类型，为下列选项之一： pure：表明该方法只读不修改存储， 且不读取区块链状态 view：表明该方法只读不修改存储，但读取区块链状态 nonpayable：该方法不能接受以太币 payable：该方法可以接受以太币 |</p>
+<p>生成的BIN代码即为虚拟机执行的代码.</p>
+<h2 id="合约部署">合约部署</h2>
+<h3 id="载入合约脚本">载入合约脚本</h3>
+<p>准备脚本 , 将上一步生成的json文件格式化后编辑保存为js文件</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">var</span> output <span style="color:#555">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c30">&#34;contracts&#34;</span><span style="color:#555">:</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#c30">&#34;sources/Vault.sol:Vault&#34;</span><span style="color:#555">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#c30">&#34;abi&#34;</span><span style="color:#555">:</span> [
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            <span style="color:#c30">&#34;inputs&#34;</span><span style="color:#555">:</span> [],
+</span></span><span style="display:flex;"><span>            <span style="color:#c30">&#34;name&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;get&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#c30">&#34;outputs&#34;</span><span style="color:#555">:</span> [
+</span></span><span style="display:flex;"><span>              {
+</span></span><span style="display:flex;"><span>                <span style="color:#c30">&#34;internalType&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;uint256&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#c30">&#34;name&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#c30">&#34;type&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;uint256&#34;</span>
+</span></span><span style="display:flex;"><span>              }
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#c30">&#34;stateMutability&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;view&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#c30">&#34;type&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;function&#34;</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            <span style="color:#c30">&#34;inputs&#34;</span><span style="color:#555">:</span> [
+</span></span><span style="display:flex;"><span>              {
+</span></span><span style="display:flex;"><span>                <span style="color:#c30">&#34;internalType&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;uint256&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#c30">&#34;name&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;data&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#c30">&#34;type&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;uint256&#34;</span>
+</span></span><span style="display:flex;"><span>              }
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#c30">&#34;name&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;set&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#c30">&#34;outputs&#34;</span><span style="color:#555">:</span> [],
+</span></span><span style="display:flex;"><span>            <span style="color:#c30">&#34;stateMutability&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;nonpayable&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#c30">&#34;type&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;function&#34;</span>
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        ],
+</span></span><span style="display:flex;"><span>        <span style="color:#c30">&#34;bin&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;6080604052348015600f57600080fd5b5060ac8061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c806360fe47b11460375780636d4ce63c146049575b600080fd5b60476042366004605e565b600055565b005b60005460405190815260200160405180910390f35b600060208284031215606f57600080fd5b503591905056fea26469706673582212204cb30acaef1d56054ffdb656c07e2788eb723c95eeb4155255171050ba19561464736f6c634300080a0033&#34;</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#c30">&#34;version&#34;</span><span style="color:#555">:</span> <span style="color:#c30">&#34;0.8.10+commit.fc410830.Linux.g++&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span></code></pre></div><p>使用 <code>loadScript(&quot;/Users/vincentmi/work/eth/contract/output/temp.js&quot;)</code>将合约内容载入.</p>
+<h3 id="部署合约">部署合约</h3>
+<p>上面的JSON数据结构包含了我们部署合约需要的数据, <code>contracts['sources/Vault.sol:Vault'].abi</code>是合约的定义信息, <code>contracts['sources/Vault.sol:Vault'].bin</code>是合约的代码二进制信息.智能合约的部署过程也是一次普通的交易过程，我们需要将智能合约的数据整合到交易体的数据区（data），并发送出去。 一旦交易被捕获且挖矿完成，我们的合约就已经部署在了区块链上并具有了一个独一无二的地址。通过该地址我们就能和智能合约通信并调用合约的方法.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>&gt; output.contracts<span style="color:#555">[</span><span style="color:#c30">&#39;sources/Vault.sol:Vault&#39;</span><span style="color:#555">]</span>.abi
+</span></span><span style="display:flex;"><span><span style="color:#555">[{</span>
+</span></span><span style="display:flex;"><span>    inputs: <span style="color:#555">[]</span>,
+</span></span><span style="display:flex;"><span>    name: <span style="color:#c30">&#34;get&#34;</span>,
+</span></span><span style="display:flex;"><span>    outputs: <span style="color:#555">[{</span>
+</span></span><span style="display:flex;"><span>        internalType: <span style="color:#c30">&#34;uint256&#34;</span>,
+</span></span><span style="display:flex;"><span>        name: <span style="color:#c30">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        type: <span style="color:#c30">&#34;uint256&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}]</span>,
+</span></span><span style="display:flex;"><span>    stateMutability: <span style="color:#c30">&#34;view&#34;</span>,
+</span></span><span style="display:flex;"><span>    type: <span style="color:#c30">&#34;function&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span>, <span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>    inputs: <span style="color:#555">[{</span>
+</span></span><span style="display:flex;"><span>        internalType: <span style="color:#c30">&#34;uint256&#34;</span>,
+</span></span><span style="display:flex;"><span>        name: <span style="color:#c30">&#34;data&#34;</span>,
+</span></span><span style="display:flex;"><span>        type: <span style="color:#c30">&#34;uint256&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}]</span>,
+</span></span><span style="display:flex;"><span>    name: <span style="color:#c30">&#34;set&#34;</span>,
+</span></span><span style="display:flex;"><span>    outputs: <span style="color:#555">[]</span>,
+</span></span><span style="display:flex;"><span>    stateMutability: <span style="color:#c30">&#34;nonpayable&#34;</span>,
+</span></span><span style="display:flex;"><span>    type: <span style="color:#c30">&#34;function&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}]</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>&gt; output.contracts<span style="color:#555">[</span><span style="color:#c30">&#39;sources/Vault.sol:Vault&#39;</span><span style="color:#555">]</span>.bin
+</span></span><span style="display:flex;"><span><span style="color:#c30">&#34;6080604052348015600f57600080fd5b5060ac8061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c806360fe47b11460375780636d4ce63c146049575b600080fd5b60476042366004605e565b600055565b005b60005460405190815260200160405180910390f35b600060208284031215606f57600080fd5b503591905056fea26469706673582212204cb30acaef1d56054ffdb656c07e2788eb723c95eeb4155255171050ba19561464736f6c634300080a0033&#34;</span>
+</span></span></code></pre></div><h4 id="准备变量">准备变量</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>var <span style="color:#033">vaultAbi</span> <span style="color:#555">=</span> output.contracts<span style="color:#555">[</span><span style="color:#c30">&#39;sources/Vault.sol:Vault&#39;</span><span style="color:#555">]</span>.abi
+</span></span><span style="display:flex;"><span>var <span style="color:#033">vaultContract</span><span style="color:#555">=</span>eth.contract<span style="color:#555">(</span>vaultAbi<span style="color:#555">)</span>
+</span></span><span style="display:flex;"><span>var <span style="color:#033">vaultBin</span> <span style="color:#555">=</span> <span style="color:#c30">&#39;0x&#39;</span>+output.contracts<span style="color:#555">[</span><span style="color:#c30">&#39;sources/Vault.sol:Vault&#39;</span><span style="color:#555">]</span>.bin
+</span></span></code></pre></div><h4 id="解锁账户">解锁账户</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#09f;font-style:italic">#选择一个账户</span>
+</span></span><span style="display:flex;"><span>web3.fromWei<span style="color:#555">(</span>eth.getBalance<span style="color:#555">(</span><span style="color:#c30">&#39;0x72fe0d652a873730006fe1ebc8059a3816f9f93b&#39;</span><span style="color:#555">))</span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">#挖矿的这个账户有4000多,我们就用这个来进行合约部署</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>personal.unlockAccount<span style="color:#555">(</span><span style="color:#c30">&#39;0x72fe0d652a873730006fe1ebc8059a3816f9f93b&#39;</span>,<span style="color:#c30">&#34;111&#34;</span>,3000<span style="color:#555">)</span>
+</span></span></code></pre></div><h4 id="提交合约">提交合约</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">var</span> vaultDeploy <span style="color:#555">=</span> {from <span style="color:#555">:</span> <span style="color:#c30">&#39;0x72fe0d652a873730006fe1ebc8059a3816f9f93b&#39;</span>,data<span style="color:#555">:</span> vaultBin ,gas<span style="color:#555">:</span> <span style="color:#f60">1000000</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">var</span> vaultContractInstance <span style="color:#555">=</span> vaultContract.<span style="color:#069;font-weight:bold">new</span>(vaultDeploy)
+</span></span></code></pre></div><p>可以在控制台看到产生了合约地址</p>
+<pre tabindex="0"><code>INFO [07-05|15:29:07.026] Submitted contract creation              hash=0xcee9a8ebc7781b8d9448866ef3605b30e3377f854a1e2a8f1e63f6b7e68ce333 from=0x51009778fFdcC26094b58B2AC9E0Ae6AB1E60Ca1 nonce=6 contract=0x3828d7E57F70522c3a6e01941A821Ff2378146f5 value=0
+</code></pre><p>合约地址为 <strong>0x3828d7e57f70522c3a6e01941a821ff2378146f5</strong></p>
+<p>打印合约信息</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#555">&gt;</span> vaultContractInstance
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  abi<span style="color:#555">:</span> [{
+</span></span><span style="display:flex;"><span>      inputs<span style="color:#555">:</span> [],
+</span></span><span style="display:flex;"><span>      name<span style="color:#555">:</span> <span style="color:#c30">&#34;get&#34;</span>,
+</span></span><span style="display:flex;"><span>      outputs<span style="color:#555">:</span> [{...}],
+</span></span><span style="display:flex;"><span>      stateMutability<span style="color:#555">:</span> <span style="color:#c30">&#34;view&#34;</span>,
+</span></span><span style="display:flex;"><span>      type<span style="color:#555">:</span> <span style="color:#c30">&#34;function&#34;</span>
+</span></span><span style="display:flex;"><span>  }, {
+</span></span><span style="display:flex;"><span>      inputs<span style="color:#555">:</span> [{...}],
+</span></span><span style="display:flex;"><span>      name<span style="color:#555">:</span> <span style="color:#c30">&#34;set&#34;</span>,
+</span></span><span style="display:flex;"><span>      outputs<span style="color:#555">:</span> [],
+</span></span><span style="display:flex;"><span>      stateMutability<span style="color:#555">:</span> <span style="color:#c30">&#34;nonpayable&#34;</span>,
+</span></span><span style="display:flex;"><span>      type<span style="color:#555">:</span> <span style="color:#c30">&#34;function&#34;</span>
+</span></span><span style="display:flex;"><span>  }],
+</span></span><span style="display:flex;"><span>  address<span style="color:#555">:</span> <span style="color:#c30">&#34;0x3828d7e57f70522c3a6e01941a821ff2378146f5&#34;</span>,
+</span></span><span style="display:flex;"><span>  transactionHash<span style="color:#555">:</span> <span style="color:#c30">&#34;0xcee9a8ebc7781b8d9448866ef3605b30e3377f854a1e2a8f1e63f6b7e68ce333&#34;</span>,
+</span></span><span style="display:flex;"><span>  allEvents<span style="color:#555">:</span> <span style="color:#069;font-weight:bold">function</span> bound(),
+</span></span><span style="display:flex;"><span>  get<span style="color:#555">:</span> <span style="color:#069;font-weight:bold">function</span> bound(),
+</span></span><span style="display:flex;"><span>  set<span style="color:#555">:</span> <span style="color:#069;font-weight:bold">function</span> bound()
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><blockquote>
+<p>如果打印的<code>address</code>一直为空,说明没有矿工打包你的交易.
+可以提高 <code>gas</code> 后就可以了 .</p>
+</blockquote>
+<h4 id="调用合约">调用合约</h4>
+<blockquote>
+<p>如果出现 错误<code>Error: invalid opcode: SHR</code>,可能是因为创世区块少了 <code>&quot;byzantiumBlock&quot;: 0,</code>参数.您需要重新初始化链</p>
+</blockquote>
+<p>我们合约的GET方法由于没有进行交易和变更可以直接调用.此时获取到的值是  0</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#555">&gt;</span> vaultContractInstance.get.call()
+</span></span><span style="display:flex;"><span><span style="color:#f60">0</span>
+</span></span></code></pre></div><p>我们发送交易来修改这个值.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#555">&gt;</span> vaultContractInstance.set.sendTransaction(<span style="color:#f60">100</span>,{from<span style="color:#555">:</span><span style="color:#c30">&#34;0x72fe0d652a873730006fe1ebc8059a3816f9f93b&#34;</span> ,gas<span style="color:#555">:</span><span style="color:#f60">1000000</span> })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c30">&#34;0x1b62634409d62402563ff152c9db8af4649de26bf18464b2b6db34f7a5a07a08&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a00;background-color:#faa">#</span> 控制台输出
+</span></span><span style="display:flex;"><span>INFO [<span style="color:#f60">07</span><span style="color:#555">-</span><span style="color:#f60">05</span><span style="color:#555">|</span><span style="color:#f60">17</span><span style="color:#555">:</span><span style="color:#f60">34</span><span style="color:#555">:</span><span style="color:#f60">11.348</span>] Submitted transaction                    hash<span style="color:#555">=</span><span style="color:#f60">0x1b62634409d62402563ff152c9db8af4649de26bf18464b2b6db34f7a5a07a08</span> from<span style="color:#555">=</span><span style="color:#f60">0x72Fe0D652a873730006Fe1eBC8059a3816F9F93b</span> nonce<span style="color:#555">=</span><span style="color:#f60">1</span> recipient<span style="color:#555">=</span><span style="color:#f60">0x1004838d7DFD2750470C214021E58A1252c33699</span> value<span style="color:#555">=</span><span style="color:#f60">0</span>
+</span></span></code></pre></div><p>打印出了交易号. 再调用<code>vaultContractInstance.get.call()</code> 获取修改后的值.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#555">&gt;</span> vaultContractInstance.get.call()
+</span></span><span style="display:flex;"><span><span style="color:#f60">100</span>
+</span></span></code></pre></div><p>一个简单的智能合约已经开发完成.</p>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="//localhost:1313/"><img src="/img/favicon.png" />我的乐与怒</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2022-07-01-develop-with-ethereum-private-chain/" data-toggle="tooltip" data-placement="top" title="以太坊开发入门 - 搭建私链"><i class="fa fa-angle-left fa-lg"></i>
+                            Previous</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2022-07-05-develop-with-ethereum-evm/" data-toggle="tooltip" data-placement="top" title="以太坊开发入门 - EVM">Next
+                        <i class="fa fa-angle-right fa-lg"></i></a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">目录</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">标签</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/aframe" title="aframe">
+                            aframe
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/andrew-ng" title="andrew-ng">
+                            andrew-ng
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/arduino" title="arduino">
+                            arduino
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                            blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/cgi" title="cgi">
+                            cgi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/consul" title="consul">
+                            consul
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                            docker
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/eth" title="eth">
+                            eth
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ethereum" title="ethereum">
+                            ethereum
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/evm" title="evm">
+                            evm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/feign" title="feign">
+                            feign
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                            golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/hw" title="hw">
+                            hw
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/jpa" title="jpa">
+                            jpa
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/js" title="js">
+                            js
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/k8s" title="k8s">
+                            k8s
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                            kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/linux" title="linux">
+                            linux
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mac" title="mac">
+                            mac
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/machine-learning" title="machine-learning">
+                            machine-learning
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/math" title="math">
+                            math
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mysql" title="mysql">
+                            mysql
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/nginx" title="nginx">
+                            nginx
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/op" title="op">
+                            op
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ops" title="ops">
+                            ops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/poco" title="poco">
+                            poco
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/pptp" title="pptp">
+                            pptp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/rd" title="rd">
+                            rd
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/spring" title="spring">
+                            spring
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/springboot" title="springboot">
+                            springboot
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ssl" title="ssl">
+                            ssl
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/thymeleaf" title="thymeleaf">
+                            thymeleaf
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/type" title="type">
+                            type
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vagrant" title="vagrant">
+                            vagrant
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vpn" title="vpn">
+                            vpn
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/vue" title="vue">
+                            vue
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/webrtc" title="webrtc">
+                            webrtc
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0" title="技术文章">
+                            技术文章
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2" title="新浪博客">
+                            新浪博客
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%97%A0%E8%81%8A" title="无聊">
+                            无聊
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB" title="生活">
+                            生活
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95" title="生活记录">
+                            生活记录
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E8%82%A1%E7%A5%A8" title="股票">
+                            股票
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E8%BF%90%E7%BB%B4" title="运维">
+                            运维
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>链接</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/vegas">青鸟的翅膀</a></li>
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/yoshikilau">Caffeine Park</a></li>
+                        
+                        <li><a target="_blank" href="http://huxpro.github.io">Theme From Hux</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/vincentz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/img/icwt.jpg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/vincentmi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/5311815/vincent-mi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="我的乐与怒" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; 我的乐与怒 2023 | <a href="http://www.beian.miit.gov.cn" style="text-decoration: none;"> 蜀ICP备17040089号-2</a>
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-78738242-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

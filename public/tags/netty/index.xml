@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Netty on 我的乐与怒</title>
+    <link>//localhost:1313/tags/netty/</link>
+    <description>Recent content in Netty on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 15 Jul 2021 10:53:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/netty/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>学习下Netty</title>
+      <link>//localhost:1313/post/2021-07-15-use-netty/</link>
+      <pubDate>Thu, 15 Jul 2021 10:53:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2021-07-15-use-netty/</guid>
+      <description>前言 很久以前跟电信对接短信和彩信,然后要跟移动同步订购关系,移动要访问我们的WEB服务器,当时struct一堆XML看得头大,就自己写了个WEBSERVER,当时是用的 ServerSocket加多线程,比较原始不过自己实现了部分HTTP协议,整个过程自己对网络通讯的技术有了很深刻</description>
+    </item>
+    
+  </channel>
+</rss>

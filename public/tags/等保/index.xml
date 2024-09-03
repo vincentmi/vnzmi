@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>等保 on 我的乐与怒</title>
+    <link>//localhost:1313/tags/%E7%AD%89%E4%BF%9D/</link>
+    <description>Recent content in 等保 on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 16 Nov 2021 17:12:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/%E7%AD%89%E4%BF%9D/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>网络安全等级保护</title>
+      <link>//localhost:1313/post/2021-11-16-gb22240/</link>
+      <pubDate>Tue, 16 Nov 2021 17:12:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2021-11-16-gb22240/</guid>
+      <description>等保定级 根据等级保护对象在国家安全、经济建设、社会生活中的重要程度，以及一旦遭到破坏、丧失功能或者数据被篡改、泄露、丢失、损毁后，对国家安全、社会秩序、公共利益以及公民、法人和其他组织的合法权益的侵害程度等因素，等级保护对象的安全保护等级分为以下五级： 第一级，等级保护对象受到破坏</description>
+    </item>
+    
+  </channel>
+</rss>

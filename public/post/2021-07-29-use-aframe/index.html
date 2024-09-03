@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="我的乐与怒">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//localhost:1313//img/tianfu_3_st.jpg">
+    <meta property="twitter:image" content="//localhost:1313//img/tianfu_3_st.jpg" />
+    
+
+    
+    <meta name="title" content="使用A-Frame搭建360VR" />
+    <meta property="og:title" content="使用A-Frame搭建360VR" />
+    <meta property="twitter:title" content="使用A-Frame搭建360VR" />
+    
+
+    
+    <meta name="description" content="In code we trust">
+    <meta property="og:description" content="In code we trust" />
+    <meta property="twitter:description" content="In code we trust" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="我的乐与怒,vincent mi, miwenshu, 电商,  博客, 个人网站, 互联网, Web, 云原生, PaaS, Java, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>使用A-Frame搭建360VR | 我的乐与怒 | Vincent&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/2021-07-29-use-aframe/">
+
+    
+
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">我的乐与怒</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/about/">我</a></li>
+                    
+                        <li><a href="/archive/">归档</a></li>
+                    
+                        <li><a href="/search/">搜索</a></li>
+                    
+                        <li><a href="/codesketch/">CodeSketch</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/3d.png')
+    }
+    
+    .titleColor {
+        text-align: center;font-size:80px;
+        color: #FFFFFF;
+    }
+   
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/aframe" title="AFrame">
+                            AFrame
+                        </a>
+                        
+                        <a class="tag" href="/tags/three.js" title="three.js">
+                            three.js
+                        </a>
+                        
+                        <a class="tag" href="/tags/js" title="js">
+                            js
+                        </a>
+                        
+                    </div>
+                    <h1 class="titleColor">使用A-Frame搭建360VR</h1>
+                    <h2 class="subheading titleColor"></h2>
+                    <span class="meta titleColor">
+                        
+                            Posted by 
+                            
+                                Vincent
+                             
+                            on 
+                            Thursday, July 29, 2021
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <h2 id="简介">简介</h2>
+<p>A-Frame是一个用于构建虚拟现实(VR)体验的Web框架。 A-Frame基于HTML之上，使其更加易于上手。但是A-Frame不仅仅是3D场景图或标记语言；他的核心是一个强大的实体组件框架，它对three.js进行扩展,提供了一个声明性的、可扩展的和可组合的结构。A-Frame 最初是在Mozilla内部构思的，现在由 Supermedium 进行维护.官网 <a href="https://aframe.io/">https://aframe.io/</a></p>
+<h4 id="搭建基础场景">搭建基础场景</h4>
+<h4 id="html结构">HTML结构</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">html</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">head</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">script</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://aframe.io/releases/1.2.0/aframe.min.js&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">script</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#309;font-weight:bold">head</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">body</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#309;font-weight:bold">body</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">html</span>&gt;
+</span></span></code></pre></div><p><code>&lt;a-scene&gt;</code>将会处理我们场景中用到的所有3D元素.</p>
+<h4 id="添加元件">添加元件</h4>
+<p>在<code>&lt;a-scene&gt;</code>中,我们可以使用普通的HTML标签的方式添加,A-Frame的标准元件,通过设置属性来进行元件的设置,比如 <code>&lt;a-box&gt;</code>长方体,<code>&lt;a-cylinder&gt;</code>圆柱体,<code>&lt;a-plane&gt;</code>平面,<code>&lt;a-sphere&gt;</code>球体.<code>&lt;a-box&gt;</code>的属性见此,<a href="https://aframe.io/docs/1.2.0/primitives/">https://aframe.io/docs/1.2.0/primitives/</a></p>
+<p>添加一个红色立方体</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span><span style="display:flex;"><span>	&lt;<span style="color:#309;font-weight:bold">a-box</span> <span style="color:#309">color</span><span style="color:#555">=</span><span style="color:#c30">&#34;red&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-box</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span></code></pre></div><p>这些标签可以很容易的添加基础元件.非常方便,但是<code>&lt;a-box&gt;</code>实际上是一个包含<code>geometry</code>(几何)和<code>meterial</code>(材质)组件<code>&lt;a-entity&gt;</code>的元件.上面的代码对应为:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span><span style="display:flex;"><span>	&lt;<span style="color:#309;font-weight:bold">a-entity</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;box&#34;</span> <span style="color:#309">geometry</span><span style="color:#555">=</span><span style="color:#c30">&#34;primitive: box&#34;</span> <span style="color:#309">material</span><span style="color:#555">=</span><span style="color:#c30">&#34;color: red&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-entity</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span></code></pre></div><p>因为默认的<code>camera</code>组件是摆放到了 0 ,0,0 位置,所以我们并不能看到这个元件.</p>
+<h4 id="3d坐标系">3D坐标系</h4>
+<p>A-Frame使用右手坐标系,x轴的正方形指向我们的右手边,y轴正方向指向上方,Z轴的正方向为从屏幕向外指向我们的方向.坐标的单位为米.因为WebVR API 是使用的米作为单位.在我们的电脑和VR设置中尺寸的感觉会有点不一样如果是做VR 开发要特别感受下.WEB上的10米在VR里会显得特别大.</p>
+<p>
+  <img src="/img/in-post/right_hand_rule.jpg" alt="右手坐标系">
+
+</p>
+<p>坐标的旋转使用角度作为单位.内部 three.js进行转换时会替换为弧度.旋转的正方向均为右手坐标系中手指卷曲的方向.</p>
+<p>x轴旋转,正方向为z轴正方方向,即从屏幕向我们眼睛延伸的方向</p>
+<p>y轴旋转,正方向为z轴的负方向,即从屏幕往我们眼睛相反的方向,往屏幕内旋转</p>
+<p>z轴旋转,正方向为逆时针方向,即往上方旋转</p>
+<p>使用 <code>position</code>改变元件的位置,<code>rotation</code>改变旋转角度,<code>scale</code>对元件进行缩放</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-box</span> <span style="color:#309">color</span><span style="color:#555">=</span><span style="color:#c30">&#34;red&#34;</span> <span style="color:#309">rotation</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 45 45&#34;</span> <span style="color:#309">scale</span><span style="color:#555">=</span><span style="color:#c30">&#34;2 2 2&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-box</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span></code></pre></div><p>以上会将一个红色的立方体绕y轴和x轴分别旋转45度,并在3个轴进行2倍缩放</p>
+<h4 id="父子元件">父子元件</h4>
+<p>场景中每个元件可以有一个父元件和多个子级元件.子元件集成父元件的位置信息.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-box</span> <span style="color:#309">position</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 2 0&#34;</span> <span style="color:#309">rotation</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 45 45&#34;</span> <span style="color:#309">scale</span><span style="color:#555">=</span><span style="color:#c30">&#34;2 4 2&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">a-sphere</span> <span style="color:#309">position</span><span style="color:#555">=</span><span style="color:#c30">&#34;1 0 3&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-sphere</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#309;font-weight:bold">a-box</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span></code></pre></div><p>如上面子圆球元件的世界坐标会是 1,2,3.子元件是在父元件的基础上进行变化.如果父元件的坐标发生变化会,子元件也会跟随进行变化.</p>
+<h4 id="移动位置">移动位置</h4>
+<p>因为默认的位置是在 0 0 0 坐标,为了让我们的摄像机能看到元件我们需要在Y轴的负方向移动一下我们的元件.例如</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-box</span> <span style="color:#309">color</span><span style="color:#555">=</span><span style="color:#c30">&#34;red&#34;</span> <span style="color:#309">position</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 2 -5&#34;</span> <span style="color:#309">rotation</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 45 45&#34;</span> <span style="color:#309">scale</span><span style="color:#555">=</span><span style="color:#c30">&#34;2 2 2&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-box</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span></code></pre></div><p>在浏览器或者桌面应用中我们可以使用鼠标点击拖拽来查看内容.也可以通过<code>WASD</code>按键和方向键来控制摄像机的移动,在移动端通过按压旋转来调整摄像机.</p>
+<h4 id="环境组件">环境组件</h4>
+<p>A-Frame允许开发者创建和分享可以重复使用的组件,@feiss分享了一个环境组件,可以一行代码生成各种风格的环境场景.我们可以很方便的进行测试.</p>
+<p>引入组件</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">head</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">script</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://aframe.io/releases/1.2.0/aframe.min.js&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">script</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">script</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">script</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">head</span>&gt;
+</span></span></code></pre></div><p>在场景中使用</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-box</span> <span style="color:#309">color</span><span style="color:#555">=</span><span style="color:#c30">&#34;red&#34;</span> <span style="color:#309">position</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 2 -5&#34;</span> <span style="color:#309">rotation</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 45 45&#34;</span> <span style="color:#309">scale</span><span style="color:#555">=</span><span style="color:#c30">&#34;2 2 2&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-box</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#09f;font-style:italic">&lt;!-- Out of the box environment! --&gt;</span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-entity</span> <span style="color:#309">environment</span><span style="color:#555">=</span><span style="color:#c30">&#34;preset: forest; dressingAmount: 500&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-entity</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span></code></pre></div><p>详细使用参考 <a href="https://github.com/feiss/aframe-environment-component/">https://github.com/feiss/aframe-environment-component/</a></p>
+<h4 id="使用材质">使用材质</h4>
+<p>我们可以对元件添加材质,只需要像图片一样指定src熟悉即可,如果设置了color属性.则颜色会和材质进行融合.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-box</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://i.imgur.com/mYmmbrp.jpg&#34;</span> <span style="color:#309">position</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 2 -5&#34;</span> <span style="color:#309">rotation</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 45 45&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#309">scale</span><span style="color:#555">=</span><span style="color:#c30">&#34;2 2 2&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-box</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-sky</span> <span style="color:#309">color</span><span style="color:#555">=</span><span style="color:#c30">&#34;#222&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-sky</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span></code></pre></div><h4 id="使用资产管理器">使用资产管理器</h4>
+<p>使用资产管理器可以提高性能,让浏览器对资源进行缓存,确保渲染之前资产都已经加载.我们可以更好进行复用.包含跨域之类的配置也由系统统一处理.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-assets</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">img</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;boxTexture&#34;</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://i.imgur.com/mYmmbrp.jpg&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#309;font-weight:bold">a-assets</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-box</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;#boxTexture&#34;</span> <span style="color:#309">position</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 2 -5&#34;</span> <span style="color:#309">rotation</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 45 45&#34;</span> <span style="color:#309">scale</span><span style="color:#555">=</span><span style="color:#c30">&#34;2 2 2&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-box</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-sky</span> <span style="color:#309">color</span><span style="color:#555">=</span><span style="color:#c30">&#34;#222&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-sky</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span></code></pre></div><blockquote>
+<p>直接本地文件方式会有跨域无法访问,需要启动一个HTTP 服务器</p>
+</blockquote>
+<h4 id="添加天空">添加天空</h4>
+<p>使用 <code>&lt;a-sky&gt;</code>可以添加一个背景到场景中.天空是将一个球体包裹场景将图片或你设置的颜色贴图到球体上.可以设置为颜色,360度图片或者视频.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-box</span> <span style="color:#309">color</span><span style="color:#555">=</span><span style="color:#c30">&#34;red&#34;</span> <span style="color:#309">position</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 2 -5&#34;</span> <span style="color:#309">rotation</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 45 45&#34;</span> <span style="color:#309">scale</span><span style="color:#555">=</span><span style="color:#c30">&#34;2 2 2&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-box</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-sky</span> <span style="color:#309">color</span><span style="color:#555">=</span><span style="color:#c30">&#34;#222&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-sky</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span></code></pre></div><p>使用全景图片</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-assets</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">img</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;boxTexture&#34;</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://i.imgur.com/mYmmbrp.jpg&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">img</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;skyTexture&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#309;font-weight:bold">a-assets</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-box</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;#boxTexture&#34;</span> <span style="color:#309">position</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 2 -5&#34;</span> <span style="color:#309">rotation</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 45 45&#34;</span> <span style="color:#309">scale</span><span style="color:#555">=</span><span style="color:#c30">&#34;2 2 2&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-box</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-sky</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;#skyTexture&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-sky</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span></code></pre></div><h4 id="添加地面">添加地面</h4>
+<p>使用<code>&lt;a-plane&gt;</code>可以添加一个屏幕,默认的平面是在xy平面上.如果平面作为地面则需要将其沿着x轴旋转-90度.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-plane</span> <span style="color:#309">rotation</span><span style="color:#555">=</span><span style="color:#c30">&#34;-90 0 0&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-plane</span>&gt;
+</span></span></code></pre></div><p>我们可以设置他们的width和height让平面足够大.然后我们为平面贴上贴图.为了让贴图铺满整个平面可以使用<code>repeat=&quot;10 10&quot;</code>来平铺贴图.</p>
+<h4 id="调整灯光">调整灯光</h4>
+<p>我们可以通过<code>&lt;a-light&gt;</code>为场景添加多个灯光.默认我们没有添加灯光,A-Frame会为我们添加一个环境灯和平行光灯.如果我们添加了灯光.默认的灯光就会取消.</p>
+<p>环境光会作用到场景中的所有元素,给他们一个默认的材质表现</p>
+<p>点光源对实体的影响取决于他们之间的距离.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-assets</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">img</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;boxTexture&#34;</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://i.imgur.com/mYmmbrp.jpg&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">img</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;skyTexture&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">img</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;groundTexture&#34;</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://cdn.aframe.io/a-painter/images/floor.jpg&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#309;font-weight:bold">a-assets</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-box</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;#boxTexture&#34;</span> <span style="color:#309">position</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 2 -5&#34;</span> <span style="color:#309">rotation</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 45 45&#34;</span> <span style="color:#309">scale</span><span style="color:#555">=</span><span style="color:#c30">&#34;2 2 2&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-box</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-sky</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;#skyTexture&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-sky</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-light</span> <span style="color:#309">type</span><span style="color:#555">=</span><span style="color:#c30">&#34;ambient&#34;</span> <span style="color:#309">color</span><span style="color:#555">=</span><span style="color:#c30">&#34;#445451&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-light</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-light</span> <span style="color:#309">type</span><span style="color:#555">=</span><span style="color:#c30">&#34;point&#34;</span> <span style="color:#309">intensity</span><span style="color:#555">=</span><span style="color:#c30">&#34;2&#34;</span> <span style="color:#309">position</span><span style="color:#555">=</span><span style="color:#c30">&#34;2 4 4&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-light</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span></code></pre></div><h4 id="添加动画">添加动画</h4>
+<p>使用A-Frame内部的动画系统可以给对象添加动画效果</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-assets</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">img</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;boxTexture&#34;</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://i.imgur.com/mYmmbrp.jpg&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#309;font-weight:bold">a-assets</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-box</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;#boxTexture&#34;</span> <span style="color:#309">position</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 2 -5&#34;</span> <span style="color:#309">rotation</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 45 45&#34;</span> <span style="color:#309">scale</span><span style="color:#555">=</span><span style="color:#c30">&#34;2 2 2&#34;</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#309">animation</span><span style="color:#555">=</span><span style="color:#c30">&#34;property: object3D.position.y; to: 2.2; dir: alternate; dur: 2000; loop: true&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-box</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span></code></pre></div><p>对属性 <a href="https://aframe.io/docs/1.2.0/core/entity.html#object3d">https://aframe.io/docs/1.2.0/core/entity.html#object3d</a> 进行变换.</p>
+<h4 id="添加交互">添加交互</h4>
+<p>通过添加交互我们可以让诸如鼠标点击来影响场景的变化.首先我们要添加一个鼠标</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-assets</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">img</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;boxTexture&#34;</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://i.imgur.com/mYmmbrp.jpg&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#309;font-weight:bold">a-assets</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-box</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;#boxTexture&#34;</span> <span style="color:#309">position</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 2 -5&#34;</span> <span style="color:#309">rotation</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 45 45&#34;</span> <span style="color:#309">scale</span><span style="color:#555">=</span><span style="color:#c30">&#34;2 2 2&#34;</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#309">animation</span><span style="color:#555">=</span><span style="color:#c30">&#34;property: object3D.position.y; to: 2.2; dir: alternate; dur: 2000; loop: true&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-box</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-camera</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">a-cursor</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-cursor</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#309;font-weight:bold">a-camera</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span></code></pre></div><p>我们再摄像机中将鼠标添加为他的子元素.鼠标就会跟随摄像机运动了.</p>
+<p>添加事件监听,最简单的方式,在<code>&lt;script&gt;</code>标签添加</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#069;font-weight:bold">var</span> boxEl <span style="color:#555">=</span> <span style="color:#366">document</span>.querySelector(<span style="color:#c30">&#39;a-box&#39;</span>);
+</span></span><span style="display:flex;"><span>  boxEl.addEventListener(<span style="color:#c30">&#39;mouseenter&#39;</span>, <span style="color:#069;font-weight:bold">function</span> () {
+</span></span><span style="display:flex;"><span>    boxEl.setAttribute(<span style="color:#c30">&#39;scale&#39;</span>, {x<span style="color:#555">:</span> <span style="color:#f60">2</span>, y<span style="color:#555">:</span> <span style="color:#f60">2</span>, z<span style="color:#555">:</span> <span style="color:#f60">2</span>});
+</span></span><span style="display:flex;"><span>  });
+</span></span></code></pre></div><p>更好的方式是把这个事件处理机制包装成A-Frame的组件.如下:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  AFRAME.registerComponent(<span style="color:#c30">&#39;scale-on-mouseenter&#39;</span>, {
+</span></span><span style="display:flex;"><span>    schema<span style="color:#555">:</span> {
+</span></span><span style="display:flex;"><span>      to<span style="color:#555">:</span> {<span style="color:#069;font-weight:bold">default</span><span style="color:#555">:</span> <span style="color:#c30">&#39;2.5 2.5 2.5&#39;</span>, type<span style="color:#555">:</span> <span style="color:#c30">&#39;vec3&#39;</span>}
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    init<span style="color:#555">:</span> <span style="color:#069;font-weight:bold">function</span> () {
+</span></span><span style="display:flex;"><span>      <span style="color:#069;font-weight:bold">var</span> data <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">this</span>.data;
+</span></span><span style="display:flex;"><span>      <span style="color:#069;font-weight:bold">var</span> el <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">this</span>.el;
+</span></span><span style="display:flex;"><span>      <span style="color:#069;font-weight:bold">this</span>.el.addEventListener(<span style="color:#c30">&#39;mouseenter&#39;</span>, <span style="color:#069;font-weight:bold">function</span> () {
+</span></span><span style="display:flex;"><span>        el.object3D.scale.copy(data.to);
+</span></span><span style="display:flex;"><span>      });
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  });
+</span></span></code></pre></div><blockquote>
+<p>this.el.object3D.scale 直接调用性能更好</p>
+</blockquote>
+<p>使用</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">script</span>&gt;
+</span></span><span style="display:flex;"><span>  AFRAME.registerComponent(<span style="color:#c30">&#39;scale-on-mouseenter&#39;</span>, {
+</span></span><span style="display:flex;"><span>    <span style="color:#09f;font-style:italic">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"></span>  });
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">script</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span><span style="display:flex;"><span>  <span style="color:#09f;font-style:italic">&lt;!-- ... --&gt;</span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-box</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;#boxTexture&#34;</span> <span style="color:#309">position</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 2 -5&#34;</span> <span style="color:#309">rotation</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 45 45&#34;</span> <span style="color:#309">scale</span><span style="color:#555">=</span><span style="color:#c30">&#34;2 2 2&#34;</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#309">animation</span><span style="color:#555">=</span><span style="color:#c30">&#34;property: object3D.position.y; to: 2.2; dir: alternate; dur: 2000; loop: true&#34;</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#309">scale-on-mouseenter</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-box</span>&gt;
+</span></span><span style="display:flex;"><span>  <span style="color:#09f;font-style:italic">&lt;!-- ... --&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span></code></pre></div><h4 id="事件触发动画">事件触发动画</h4>
+<p>动画组件可以在元件发生事件时进行动画.我们可以简单的通过<code>startEvents</code>属性来实现,多个事件名字用逗号分隔</p>
+<p>对元件配置多个动画使用 <code>__&lt;ID&gt;</code>的方式.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-box</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;#boxTexture&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#309">position</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 2 -5&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#309">rotation</span><span style="color:#555">=</span><span style="color:#c30">&#34;0 45 45&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#309">scale</span><span style="color:#555">=</span><span style="color:#c30">&#34;2 2 2&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#309">animation__position</span><span style="color:#555">=</span><span style="color:#c30">&#34;property: object3D.position.y; to: 2.2; dir: alternate; dur: 2000; loop: true&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#309">animation__mouseenter</span><span style="color:#555">=</span><span style="color:#c30">&#34;property: scale; to: 2.3 2.3 2.3; dur: 300; startEvents: mouseenter&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#309">animation__mouseleave</span><span style="color:#555">=</span><span style="color:#c30">&#34;property: scale; to: 2 2 2; dur: 300; startEvents: mouseleave&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-box</span>&gt;
+</span></span></code></pre></div><h4 id="添加音频">添加音频</h4>
+<p>通过资产管理器添加音频</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-assets</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">audio</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://cdn.aframe.io/basic-guide/audio/backgroundnoise.wav&#34;</span> <span style="color:#309">autoplay</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#309">preload</span>&gt;&lt;/<span style="color:#309;font-weight:bold">audio</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#309;font-weight:bold">a-assets</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#09f;font-style:italic">&lt;!-- ... --&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span></code></pre></div><p>我们可以在空间中添加音频,这样音频就会根据摄像机的位置来计算声音的大小</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span><span style="display:flex;"><span>  <span style="color:#09f;font-style:italic">&lt;!-- ... --&gt;</span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-sound</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://cdn.aframe.io/basic-guide/audio/backgroundnoise.wav&#34;</span> <span style="color:#309">autoplay</span><span style="color:#555">=</span><span style="color:#c30">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#309">position</span><span style="color:#555">=</span><span style="color:#c30">&#34;-3 1 -4&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-sound</span>&gt;
+</span></span><span style="display:flex;"><span>  <span style="color:#09f;font-style:italic">&lt;!-- ... --&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span></code></pre></div><h4 id="添加文本">添加文本</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-entity</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#309">text</span><span style="color:#555">=</span><span style="color:#c30">&#34;value: Hello, A-Frame!; color: #BBB&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#309">position</span><span style="color:#555">=</span><span style="color:#c30">&#34;-0.9 0.2 -3&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#309">scale</span><span style="color:#555">=</span><span style="color:#c30">&#34;1.5 1.5 1.5&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-entity</span>&gt;
+</span></span></code></pre></div><p>文本渲染还有这个组件 可以参考 <a href="https://github.com/Jam3/three-bmfont-text">Jam3/three-bmfont-text: renders BMFont files in ThreeJS with word-wrapping (github.com)</a></p>
+<h2 id="搭建360度全景图展示">搭建360度全景图展示</h2>
+<p>先看看效果 <a href="https://glitch.com/edit/#!/aframe-gallery?path=index.html%3A1%3A0">Glitch AFrame Gallery</a></p>
+<h4 id="搭建框架">搭建框架</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-assets</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">audio</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;click-sound&#34;</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">audio</span>&gt;
+</span></span><span style="display:flex;"><span>    <span style="color:#09f;font-style:italic">&lt;!-- Images. --&gt;</span>
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">img</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;city&#34;</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">img</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;city-thumb&#34;</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">img</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;cubes&#34;</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">img</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;cubes-thumb&#34;</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">img</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;sechelt&#34;</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">img</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;sechelt-thumb&#34;</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#309;font-weight:bold">a-assets</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#09f;font-style:italic">&lt;!-- 360-degree image. --&gt;</span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-sky</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;image-360&#34;</span> <span style="color:#309">radius</span><span style="color:#555">=</span><span style="color:#c30">&#34;10&#34;</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;#city&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-sky</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#09f;font-style:italic">&lt;!-- Link template we will build. --&gt;</span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-entity</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;link&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-entity</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#09f;font-style:italic">&lt;!-- Camera + Cursor. --&gt;</span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-camera</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">a-cursor</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;cursor&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#309">animation__click</span><span style="color:#555">=</span><span style="color:#c30">&#34;property: scale; from: 0.1 0.1 0.1; to: 1 1 1; easing: easeInCubic; dur: 150; startEvents: click&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#309">animation__clickreset</span><span style="color:#555">=</span><span style="color:#c30">&#34;property: scale; to: 0.1 0.1 0.1; dur: 1; startEvents: animationcomplete__click&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#309">animation__fusing</span><span style="color:#555">=</span><span style="color:#c30">&#34;property: scale; from: 1 1 1; to: 0.1 0.1 0.1; easing: easeInCubic; dur: 150; startEvents: fusing&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-cursor</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#309;font-weight:bold">a-camera</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span></code></pre></div><p>框架中我们做了以下的工作</p>
+<ul>
+<li>在资源管理器中设置了我们要加载的图片和音频资源</li>
+<li>使用<code>&lt;a-sky&gt;</code>元素来存放我们的360度图片</li>
+<li>在摄像机中添加了一个鼠标,增加了一些基于事件的动画</li>
+</ul>
+<h4 id="使用标准组件">使用标准组件</h4>
+<p>A-Frame提供内建了很多标准组件.我们使用一些贴上材质的平面来作为链接.点击这个平面后修改全景图的内容.从一个空白实体开始</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-entity</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;link&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-entity</span>&gt;
+</span></span></code></pre></div><p>我们对这个元素设置 <code>geometry</code>属性,与行内CSS类似</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-entity</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;link&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#309">geometry</span><span style="color:#555">=</span><span style="color:#c30">&#34;primitive: plane; height: 1; width: 1&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-entity</span>&gt;
+</span></span></code></pre></div><p>同时设置他的材质,使用<code>material</code>属性</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-entity</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;link&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#309">geometry</span><span style="color:#555">=</span><span style="color:#c30">&#34;primitive: plane; height: 1; width: 1&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#309">material</span><span style="color:#555">=</span><span style="color:#c30">&#34;shader: flat; src: #cubes-thumb&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-entity</span>&gt;
+</span></span></code></pre></div><blockquote>
+<p>shader:flat  表示该对象不受灯光系统的影响</p>
+</blockquote>
+<p>再加上声音 <code>sound</code>属性</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-entity</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;link&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#309">geometry</span><span style="color:#555">=</span><span style="color:#c30">&#34;primitive: plane; height: 1; width: 1&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#309">material</span><span style="color:#555">=</span><span style="color:#c30">&#34;shader: flat; src: #cubes-thumb&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#309">sound</span><span style="color:#555">=</span><span style="color:#c30">&#34;on: click; src: #click-sound&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-entity</span>&gt;
+</span></span></code></pre></div><p>点击这个对象就会播放我们指定的声音</p>
+<h4 id="使用开源组件">使用开源组件</h4>
+<p>AFrame的组件较少但是有很多开源的组件,可以通过NPM 下载很多组件在我们的HTML代码中直接使用.下面会用到以下几个组件.这里 <a href="https://supermedium.com/superframe/">Superframe (supermedium.com)</a> 有 supermedium收集的很多组件.</p>
+<ul>
+<li>event-set <a href="https://supermedium.com/superframe/components/event-set/">https://supermedium.com/superframe/components/event-set/</a> 设置响应的属性</li>
+<li>layout <a href="https://supermedium.com/superframe/components/layout/">https://supermedium.com/superframe/components/layout/</a> 对元件进行布局</li>
+<li>proxy-event <a href="https://supermedium.com/superframe/components/proxy-event/">https://supermedium.com/superframe/components/proxy-event/</a>  代理事件</li>
+<li>template <a href="https://supermedium.com/superframe/components/template/">https://supermedium.com/superframe/components/template/</a> 模板引擎批量生产元件</li>
+</ul>
+<h5 id="加载组件">加载组件</h5>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">html</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">head</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">title</span>&gt;360° Image Browser&lt;/<span style="color:#309;font-weight:bold">title</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">script</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://aframe.io/releases/1.2.0/aframe.min.js&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">script</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">script</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://unpkg.com/aframe-template-component@3.x.x/dist/aframe-template-component.min.js&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">script</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">script</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://unpkg.com/aframe-layout-component@4.x.x/dist/aframe-layout-component.min.js&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">script</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">script</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://unpkg.com/aframe-event-set-component@5.x.x/dist/aframe-event-set-component.min.js&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">script</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">script</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://unpkg.com/aframe-proxy-event-component/dist/aframe-proxy-event-component.min.js&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">script</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#309;font-weight:bold">head</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">body</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span><span style="display:flex;"><span>      <span style="color:#09f;font-style:italic">&lt;!-- ... --&gt;</span>
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#309;font-weight:bold">a-scene</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#309;font-weight:bold">body</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">html</span>&gt;
+</span></span></code></pre></div><h5 id="使用template组件">使用template组件</h5>
+<p>template组件文档 地址 <a href="https://github.com/supermedium/aframe-super-hot-loader/tree/master/example">aframe-super-hot-loader/example at master · supermedium/aframe-super-hot-loader (github.com)</a></p>
+<p>首先在资源管理器中定义模板</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-assets</span>&gt;
+</span></span><span style="display:flex;"><span>  <span style="color:#09f;font-style:italic">&lt;!-- ... --&gt;</span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">script</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;plane&#34;</span> <span style="color:#309">type</span><span style="color:#555">=</span><span style="color:#c30">&#34;text/html&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    <span style="color:#555">&lt;</span>a<span style="color:#555">-</span>entity <span style="color:#069;font-weight:bold">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;link&#34;</span>
+</span></span><span style="display:flex;"><span>      geometry<span style="color:#555">=</span><span style="color:#c30">&#34;primitive: plane; height: 1; width: 1&#34;</span>
+</span></span><span style="display:flex;"><span>      material<span style="color:#555">=</span><span style="color:#c30">&#34;shader: flat; src: ${thumb}&#34;</span>
+</span></span><span style="display:flex;"><span>      sound<span style="color:#555">=</span><span style="color:#c30">&#34;on: click; src: #click-sound&#34;</span><span style="color:#555">&gt;&lt;</span><span style="color:#a00;background-color:#faa">/a-entity&gt;</span>
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#309;font-weight:bold">script</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">a-assets</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">&lt;!-- ... --&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">&lt;!-- Pass image sources to the template. --&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-entity</span> <span style="color:#309">template</span><span style="color:#555">=</span><span style="color:#c30">&#34;src: #plane&#34;</span> <span style="color:#309">data-thumb</span><span style="color:#555">=</span><span style="color:#c30">&#34;#city-thumb&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-entity</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-entity</span> <span style="color:#309">template</span><span style="color:#555">=</span><span style="color:#c30">&#34;src: #plane&#34;</span> <span style="color:#309">data-thumb</span><span style="color:#555">=</span><span style="color:#c30">&#34;#cubes-thumb&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-entity</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-entity</span> <span style="color:#309">template</span><span style="color:#555">=</span><span style="color:#c30">&#34;src: #plane&#34;</span> <span style="color:#309">data-thumb</span><span style="color:#555">=</span><span style="color:#c30">&#34;#sechelt-thumb&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-entity</span>&gt;
+</span></span></code></pre></div><p>然后传递参数替换掉模板中的变量</p>
+<h5 id="使用layout组件排列链接">使用layout组件排列链接</h5>
+<p>刚才创建的plane 全部是放在 0 0 0 坐标位置.我们可以使用layout组件来进行排列</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-entity</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;links&#34;</span> <span style="color:#309">layout</span><span style="color:#555">=</span><span style="color:#c30">&#34;type: line; margin: 1.5&#34;</span> <span style="color:#309">position</span><span style="color:#555">=</span><span style="color:#c30">&#34;-3 -1 -4&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-entity</span> <span style="color:#309">template</span><span style="color:#555">=</span><span style="color:#c30">&#34;src: #plane&#34;</span> <span style="color:#309">data-thumb</span><span style="color:#555">=</span><span style="color:#c30">&#34;#city-thumb&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-entity</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-entity</span> <span style="color:#309">template</span><span style="color:#555">=</span><span style="color:#c30">&#34;src: #plane&#34;</span> <span style="color:#309">data-thumb</span><span style="color:#555">=</span><span style="color:#c30">&#34;#cubes-thumb&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-entity</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">a-entity</span> <span style="color:#309">template</span><span style="color:#555">=</span><span style="color:#c30">&#34;src: #plane&#34;</span> <span style="color:#309">data-thumb</span><span style="color:#555">=</span><span style="color:#c30">&#34;#sechelt-thumb&#34;</span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-entity</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">a-entity</span>&gt;
+</span></span></code></pre></div><h4 id="增加更多的交互">增加更多的交互</h4>
+<p>对链接增加一些交互,移动到上面我们给他进行一些放大.只需要在模板上添加事件处理即可,我们使用event-set 组件只需要添加一些属性.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">script</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;link&#34;</span> <span style="color:#309">type</span><span style="color:#555">=</span><span style="color:#c30">&#34;text/html&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  <span style="color:#555">&lt;</span>a<span style="color:#555">-</span>entity <span style="color:#069;font-weight:bold">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;link&#34;</span>
+</span></span><span style="display:flex;"><span>    geometry<span style="color:#555">=</span><span style="color:#c30">&#34;primitive: plane; height: 1; width: 1&#34;</span>
+</span></span><span style="display:flex;"><span>    material<span style="color:#555">=</span><span style="color:#c30">&#34;shader: flat; src: ${thumb}&#34;</span>
+</span></span><span style="display:flex;"><span>    sound<span style="color:#555">=</span><span style="color:#c30">&#34;on: click; src: #click-sound&#34;</span>
+</span></span><span style="display:flex;"><span>    event<span style="color:#555">-</span>set__mouseenter<span style="color:#555">=</span><span style="color:#c30">&#34;scale: 1.2 1.2 1&#34;</span>
+</span></span><span style="display:flex;"><span>    event<span style="color:#555">-</span>set__mouseleave<span style="color:#555">=</span><span style="color:#c30">&#34;scale: 1 1 1&#34;</span>
+</span></span><span style="display:flex;"><span>    event<span style="color:#555">-</span>set__click<span style="color:#555">=</span><span style="color:#c30">&#34;_target: #image-360; _delay: 300; material.src: ${src}&#34;</span><span style="color:#555">&gt;&lt;</span><span style="color:#a00;background-color:#faa">/a-entity&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">script</span>&gt;
+</span></span></code></pre></div><p>因为我们增加了一个 <code>${src}</code>模板变量.因此我们要更新链接增加这个<code>data-src</code>变量.</p>
+<blockquote>
+<p>注意  <code>event-set__click</code>事件我们使用_target属性实际设置了另外一个元件的属性</p>
+</blockquote>
+<h5 id="增加背景图切换的过渡动画">增加背景图切换的过渡动画</h5>
+<p>使用event-proxy组件可以发送一个事件到其他对象.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">script</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;plane&#34;</span> <span style="color:#309">type</span><span style="color:#555">=</span><span style="color:#c30">&#34;text/html&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>        <span style="color:#555">&lt;</span>a<span style="color:#555">-</span>entity <span style="color:#069;font-weight:bold">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;link&#34;</span>
+</span></span><span style="display:flex;"><span>        geometry<span style="color:#555">=</span><span style="color:#c30">&#34;primitive: plane; height: 1; width: 1&#34;</span>
+</span></span><span style="display:flex;"><span>        material<span style="color:#555">=</span><span style="color:#c30">&#34;shader: flat; src: ${thumb}&#34;</span>
+</span></span><span style="display:flex;"><span>        sound<span style="color:#555">=</span><span style="color:#c30">&#34;on: click; src: #click-sound&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        event<span style="color:#555">-</span>set__mouseenter<span style="color:#555">=</span><span style="color:#c30">&#34;scale: 1.2 1.2 1&#34;</span>
+</span></span><span style="display:flex;"><span>        event<span style="color:#555">-</span>set__mouseleave<span style="color:#555">=</span><span style="color:#c30">&#34;scale: 1 1 1&#34;</span>
+</span></span><span style="display:flex;"><span>        event<span style="color:#555">-</span>set__click<span style="color:#555">=</span><span style="color:#c30">&#34;_target: #image-360; _delay: 300; material.src: ${src}&#34;</span>
+</span></span><span style="display:flex;"><span>        proxy<span style="color:#555">-</span>event<span style="color:#555">=</span><span style="color:#c30">&#34;event: click; to: #image-360; as: fade&#34;</span><span style="color:#555">&gt;</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#555">&gt;&lt;</span><span style="color:#a00;background-color:#faa">/a-entity&gt;</span>
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#309;font-weight:bold">script</span>&gt;
+</span></span></code></pre></div><blockquote>
+<p>如上面的代码,当我们的连接被点击时,我们发送给 #image-360对象一个fade事件</p>
+</blockquote>
+<p>然后 #image360我们来添加一个淡出淡入的动画.设置startEvent为 fade,</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">a-sky</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;image-360&#34;</span> <span style="color:#309">radius</span><span style="color:#555">=</span><span style="color:#c30">&#34;10&#34;</span> <span style="color:#309">src</span><span style="color:#555">=</span><span style="color:#c30">&#34;#city&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#309">animation__fade</span><span style="color:#555">=</span><span style="color:#c30">&#34;property: components.material.material.color; type: color; from: #FFF; to: #000; dur: 2000; startEvents: fade&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#309">animation__fadeback</span><span style="color:#555">=</span><span style="color:#c30">&#34;property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade&#34;</span>
+</span></span><span style="display:flex;"><span>&gt;&lt;/<span style="color:#309;font-weight:bold">a-sky</span>&gt;
+</span></span></code></pre></div><p>淡入淡出通过对材质颜色进行变化来实现.淡出之后我们的另外一个事件修改背景图.</p>
+<h2 id="使用立方体进行投影cmp-cube-map-projection">使用立方体进行投影(CMP Cube Map Projection)</h2>
+<p>全景图投影使用球形投影,南北极的像素会被拉升,可以看到接缝.下面尝试下立方体投影</p>
+<h2 id="等角方块投影eac-equi-angular-cubemap">等角方块投影(EAC Equi-Angular Cubemap)</h2>
+<p>CMP方式立方体角落的像素会被拉升,因此Google于2017年提出了新的映射方式，在Cubemap基础上进行了改进。</p>
+<h2 id="完成收工">完成收工</h2>
+<p>最后完成了一个简单交互的360度VR展示.</p>
+<p>代码:  <a href="https://github.com/vincentmi/aframe-vr/tree/main">vincentmi/aframe-vr: aframe vr guide codes (github.com)</a></p>
+<p>预览:  <a href="https://vincentmi.github.io/aframe-vr/vr.html">https://vincentmi.github.io/aframe-vr/vr.html</a></p>
+<p>参考 <a href="https://blog.google/products/google-ar-vr/bringing-pixels-front-and-center-vr-video/">Bringing pixels front and center in VR video (blog.google)</a></p>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="//localhost:1313/"><img src="/img/favicon.png" />我的乐与怒</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2021-07-15-use-netty/" data-toggle="tooltip" data-placement="top" title="学习下Netty"><i class="fa fa-angle-left fa-lg"></i>
+                            Previous</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2021-11-04-use-channel/" data-toggle="tooltip" data-placement="top" title="golang协程和channel使用">Next
+                        <i class="fa fa-angle-right fa-lg"></i></a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">目录</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">标签</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/aframe" title="aframe">
+                            aframe
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/andrew-ng" title="andrew-ng">
+                            andrew-ng
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/arduino" title="arduino">
+                            arduino
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                            blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/cgi" title="cgi">
+                            cgi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/consul" title="consul">
+                            consul
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                            docker
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/eth" title="eth">
+                            eth
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ethereum" title="ethereum">
+                            ethereum
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/evm" title="evm">
+                            evm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/feign" title="feign">
+                            feign
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                            golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/hw" title="hw">
+                            hw
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/jpa" title="jpa">
+                            jpa
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/js" title="js">
+                            js
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/k8s" title="k8s">
+                            k8s
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                            kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/linux" title="linux">
+                            linux
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mac" title="mac">
+                            mac
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/machine-learning" title="machine-learning">
+                            machine-learning
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/math" title="math">
+                            math
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mysql" title="mysql">
+                            mysql
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/nginx" title="nginx">
+                            nginx
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/op" title="op">
+                            op
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ops" title="ops">
+                            ops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/poco" title="poco">
+                            poco
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/pptp" title="pptp">
+                            pptp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/rd" title="rd">
+                            rd
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/spring" title="spring">
+                            spring
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/springboot" title="springboot">
+                            springboot
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ssl" title="ssl">
+                            ssl
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/thymeleaf" title="thymeleaf">
+                            thymeleaf
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/type" title="type">
+                            type
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vagrant" title="vagrant">
+                            vagrant
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vpn" title="vpn">
+                            vpn
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/vue" title="vue">
+                            vue
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/webrtc" title="webrtc">
+                            webrtc
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0" title="技术文章">
+                            技术文章
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2" title="新浪博客">
+                            新浪博客
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%97%A0%E8%81%8A" title="无聊">
+                            无聊
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB" title="生活">
+                            生活
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95" title="生活记录">
+                            生活记录
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E8%82%A1%E7%A5%A8" title="股票">
+                            股票
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E8%BF%90%E7%BB%B4" title="运维">
+                            运维
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>链接</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/vegas">青鸟的翅膀</a></li>
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/yoshikilau">Caffeine Park</a></li>
+                        
+                        <li><a target="_blank" href="http://huxpro.github.io">Theme From Hux</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/vincentz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/img/icwt.jpg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/vincentmi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/5311815/vincent-mi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="我的乐与怒" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; 我的乐与怒 2023 | <a href="http://www.beian.miit.gov.cn" style="text-decoration: none;"> 蜀ICP备17040089号-2</a>
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-78738242-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>技术文章 on 我的乐与怒</title>
+    <link>//localhost:1313/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/</link>
+    <description>Recent content in 技术文章 on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 21 Apr 2006 15:30:16 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java动态程序设计：反射介绍</title>
+      <link>//localhost:1313/post/2006-04-21-java-reflect-guide/</link>
+      <pubDate>Fri, 21 Apr 2006 15:30:16 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2006-04-21-java-reflect-guide/</guid>
+      <description>使用运行的类的信息使你的程序设计更加灵活反射授予了你的代码访问装载进JVM内的Java类的内部信息的权限，并且允许你编写在程序执行期间与所选择的类的一同工作的代码，而不是在源代码中。这种机制使得反射成为创建灵活的应用程序的强大工具，但是要小心的是，如果使用不恰当，反射会带来很大的</description>
+    </item>
+    
+    <item>
+      <title>用PHP开发基于unicode(utf-8)的程序</title>
+      <link>//localhost:1313/post/2006-04-14-let-php-support-utf8/</link>
+      <pubDate>Fri, 14 Apr 2006 17:32:05 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2006-04-14-let-php-support-utf8/</guid>
+      <description>Author:朱辉(ice)phpx.com ID: ice日期:2005-3-19 11:20因朋友(teacherli)的再三要求, 所以我终于定下心来, 写一篇关于这方面的文章.让大家轻松的从本地编码的程序过度到unicode程序.Unicode又被称之为&amp;quot;万国码&amp;quot;,</description>
+    </item>
+    
+    <item>
+      <title>多语言网站开发 不完全技术分析收录</title>
+      <link>//localhost:1313/post/2006-03-07-develop-with-i18n/</link>
+      <pubDate>Tue, 07 Mar 2006 01:24:52 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2006-03-07-develop-with-i18n/</guid>
+      <description>语言是信息传播的主要障碍。 多语言网站，顾名思义就是能够以多种语言（而不是单种语言）为用户提供信息服务，让使用不同语言的用户都能够从同个网站获得内容相同的信息。 多语言网站实现方案 1，静态：就是为每种语言分别准备一套页面文件，要么通过文件后缀名来区分不同语言，要么通过子目录来区分不同</description>
+    </item>
+    
+    <item>
+      <title>MySQL与ASP.NET配合更强大</title>
+      <link>//localhost:1313/post/2006-02-22-mysql-and-asp/</link>
+      <pubDate>Wed, 22 Feb 2006 09:41:01 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2006-02-22-mysql-and-asp/</guid>
+      <description>前言 由于富有竞争力的价格和易于使用，MySQL在市场占有率方面逐步提升。开放源代码社区为了扩展MySQL的使用范围，开发出了.Net框架(.NET Framework)中可以使用的数据库连接器。我们就来学习一下如何在.Net应用程序中使用MySQL。 每周三发布的TechRepubl</description>
+    </item>
+    
+    <item>
+      <title>php错误处理</title>
+      <link>//localhost:1313/post/2006-02-08-error-handle-with-php/</link>
+      <pubDate>Wed, 08 Feb 2006 15:22:38 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2006-02-08-error-handle-with-php/</guid>
+      <description>PHP 有如下几种错误和警告： 表格 16-1. PHP 错误类型 值 常量 描述 备注 1 E_ERROR 运行时致命错误 2 E_WARNING 运行时警告（非致命错误） 4 E_PARSE 编译时解析错误 8 E_NOTICE 运行时提醒（比 Warning 的严重性更低） 16 E_CORE_ERROR 在 PHP 初始化过程中发生的致命错误 仅 PHP 4 有效 32 E_CORE_WARNING 在 PHP 初始化过程中发生的警告（非指明错误） 仅 PHP 4 有效 64 E_COMPILE_ERROR 编译时指明错误 仅 PHP 4 有效 128</description>
+    </item>
+    
+    <item>
+      <title>播放器</title>
+      <link>//localhost:1313/post/2006-01-14-video-player/</link>
+      <pubDate>Sat, 14 Jan 2006 12:44:42 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2006-01-14-video-player/</guid>
+      <description>匹配 &amp;lt;tr....&amp;gt;....&amp;lt;/tr&amp;gt; 标签 /&amp;lt;tr(&amp;gt;|\s[^&amp;gt;]{0,}&amp;gt;).{0,}?&amp;lt;\/tr&amp;gt;/ 不知这播放器相关参数说明能否帮上你的忙(默认0为否,-1或1为是) &amp;lt;object classid=&amp;#34;clsid:22D6F312-B0F6-11D0-94AB-0080C74C7E95&amp;#34; id=&amp;#34;MediaPlayer1&amp;#34; width=&amp;#34;286&amp;#34; height=&amp;#34;225&amp;#34;&amp;gt; &amp;lt;param name=&amp;#34;AudioStream&amp;#34; value=&amp;#34;-1&amp;#34;&amp;gt; &amp;lt;param name=&amp;#34;AutoSize&amp;#34; value=&amp;#34;-1&amp;#34;&amp;gt; &amp;lt;!--是否自动调整播放大小--&amp;gt; &amp;lt;param name=&amp;#34;AutoStart&amp;#34; value=&amp;#34;-1&amp;#34;&amp;gt; &amp;lt;!--是否自动播放--&amp;gt; &amp;lt;param name=&amp;#34;AnimationAtStart&amp;#34; value=&amp;#34;-1&amp;#34;&amp;gt; &amp;lt;param name=&amp;#34;AllowScan&amp;#34; value=&amp;#34;-1&amp;#34;&amp;gt; &amp;lt;param name=&amp;#34;AllowChangeDisplaySize&amp;#34; value=&amp;#34;-1&amp;#34;&amp;gt; &amp;lt;param name=&amp;#34;AutoRewind&amp;#34; value=&amp;#34;0&amp;#34;&amp;gt; &amp;lt;param name=&amp;#34;Balance&amp;#34; value=&amp;#34;0&amp;#34;&amp;gt; &amp;lt;!--左右声道平衡,最左-9640,最右9640--</description>
+    </item>
+    
+    <item>
+      <title>我爱精神分裂</title>
+      <link>//localhost:1313/post/2006-01-14-i-like-schizophrenia-movies/</link>
+      <pubDate>Sat, 14 Jan 2006 12:28:41 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2006-01-14-i-like-schizophrenia-movies/</guid>
+      <description>【片名】Identity 【译名】致命ID 【年代】2003 【国家】美国 【类别】惊悚/恐怖/犯罪 【语言】英语 【字幕】外挂中/英文 【评分】7.1/10 (4,195 votes) 【链接】http://us.imdb.com/Title?0309698 【导演】詹姆斯·曼高德 James Mangold 【主演】雷·利奥塔 Ray Liotta 阿曼达·皮特</description>
+    </item>
+    
+    <item>
+      <title>Google Hacking 的实现以及应用</title>
+      <link>//localhost:1313/post/2006-01-14-google-search-hack/</link>
+      <pubDate>Sat, 14 Jan 2006 12:27:58 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2006-01-14-google-search-hack/</guid>
+      <description>http://soft.yesky.com/security/hkjj/389/2082889.shtml 前言 google hacking其实并算不上什么新东西，在早几年我在一些国外站点上就看见过相关的介绍，但是由于当时并没有重视这种技术，认为最多就只是用来找找未改名的mdb或者别人留下的webshell什么的，并无太大实际用途。但是前段时间仔细啃了些资料才猛然发觉google hacking其</description>
+    </item>
+    
+    <item>
+      <title>java读取和保存对象</title>
+      <link>//localhost:1313/post/2006-01-14-j-a-v-a-du-qu-he-bao-cun-dui-xiang/</link>
+      <pubDate>Sat, 14 Jan 2006 12:26:43 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2006-01-14-j-a-v-a-du-qu-he-bao-cun-dui-xiang/</guid>
+      <description>有这个东西，做缓存就很方便了 Map map = new HashMap(); FileOutputStream fos = new FileOutputStream(&amp;#34;d:\\111.conf&amp;#34;); ObjectOutputStream o = new ObjectOutputStream(fos); o.writeObject(map); fos.close(); o.close(); FileInputStream fis = new FileInputStream(new File(&amp;#34;d:\\111.conf&amp;#34;)); ObjectInputStream ois = new ObjectInputStream(fis); Map map = (Map)ois.readObject(); System.out.println(map.size()); fis.close(); ois.close();</description>
+    </item>
+    
+    <item>
+      <title>用JAVA中的动态代理实现数据库连接池</title>
+      <link>//localhost:1313/post/2006-01-14-java-use-dynamic-proxy-connection-pool/</link>
+      <pubDate>Sat, 14 Jan 2006 12:25:17 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2006-01-14-java-use-dynamic-proxy-connection-pool/</guid>
+      <description>developerWorks 时事通讯 刘冬珠 海市创我科技发展有限公司软件工程师 2002 年 12 月 05 日 作者通过使用JAVA中的动态代理实现数据库连接池，使使用者可以以普通的jdbc连接的使用习惯来使用连接池。数据库连接池在编写应用服务是经常需要用到的模块，太过频繁的连接数据库对服务性能来讲是一个瓶颈，使用缓冲池技术可以</description>
+    </item>
+    
+    <item>
+      <title>Java UDP 简单程序</title>
+      <link>//localhost:1313/post/2006-01-14-java-udp-test/</link>
+      <pubDate>Sat, 14 Jan 2006 12:22:49 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2006-01-14-java-udp-test/</guid>
+      <description>Server /* * Miwenshu Created on 2005-9-15 * */ import java.net.*; import java.io.*; class DatagramServer{ private static int PORT=8122; public static void main(String[] args) { try{ System.out.println(&amp;#34;Datagram Server.&amp;#34;); byte[] buf = new byte[1000]; DatagramSocket ds = new DatagramSocket(PORT); //开始监视12345端口 DatagramPacket ip = new DatagramPacket(buf, buf.length); //创建接收数据报的实例 int i=0; String base=&amp;#34;&amp;#34;; while (true) { ds.receive(ip); //阻塞，直到收到数据报后将数据装入IP中 String info=new String(buf); if(i==1) base=info; if(base.equals(info)){ }else{ System.out.println(&amp;#34;-------------&amp;#34;); System.out.println(info.trim()); base=info; } i++; } }catch(SocketException e1){ System.out.println(&amp;#34;SocketException&amp;#34;); }catch( UnknownHostException e11){ System.out.println(&amp;#34;UnknownHostException&amp;#34;); }catch(IOException e){ System.out.println(&amp;#34;IOException&amp;#34;); } } } Client import java.net.*; import java.util.Enumeration; import java.io.*; class DatagramClient{ private static int PORT=8122;//listen..... private static int</description>
+    </item>
+    
+    <item>
+      <title>AJAX资源 PHP</title>
+      <link>//localhost:1313/post/2006-01-14-ajax-doc/</link>
+      <pubDate>Sat, 14 Jan 2006 12:21:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2006-01-14-ajax-doc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sitepoint资源</title>
+      <link>//localhost:1313/post/2005-11-11-sitepoint-resources/</link>
+      <pubDate>Fri, 11 Nov 2005 10:50:23 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2005-11-11-sitepoint-resources/</guid>
+      <description>http://www.sitepoint.com/forums/showthread.php?t=78687#post1141938</description>
+    </item>
+    
+    <item>
+      <title>为什么PHP令人不爽</title>
+      <link>//localhost:1313/post/2005-11-01-why-php-not-so-good/</link>
+      <pubDate>Tue, 01 Nov 2005 11:07:34 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2005-11-01-why-php-not-so-good/</guid>
+      <description>翻译：ShiningRay @ Nirvana Studio 我在过去的四年里一直致力于PHP应用的开发。PHP确实十分容易编写。但是PHP也有一些十分严重的缺陷。 下面我会给出我的理由，为什么PHP不适合于比小型业余网站更大的网站。 1. 对递归的不良支持 递归是一种函数调用自身的机制。这是一种强大的特性可以把某些复</description>
+    </item>
+    
+    <item>
+      <title>Struts中文文档</title>
+      <link>//localhost:1313/post/2005-11-01-structs-doc/</link>
+      <pubDate>Tue, 01 Nov 2005 10:52:43 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2005-11-01-structs-doc/</guid>
+      <description>http://www.matrix.org.cn/subjects/Wiki.jsp?page=JakartaStruts</description>
+    </item>
+    
+    <item>
+      <title>Grub</title>
+      <link>//localhost:1313/post/2005-10-27-grub/</link>
+      <pubDate>Thu, 27 Oct 2005 01:01:15 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2005-10-27-grub/</guid>
+      <description>http://www.linuxsir.org/bbs/showthread.php?t=181878 win/linux双系统安装grub 2004-04-23 15:18 pm 作者：作者来自：Linux知识宝库现载：http://www.douzhe.com/linuxtips/534.html地址：无名 我的是windows2000+linux, 当我重装windows，格式化c:后，会把MBR的grub格掉，</description>
+    </item>
+    
+    <item>
+      <title>系统引导资料</title>
+      <link>//localhost:1313/post/2005-10-27-system-boot-doc/</link>
+      <pubDate>Thu, 27 Oct 2005 00:19:33 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2005-10-27-system-boot-doc/</guid>
+      <description>系统引导过程及硬盘分区结构论述 作者： zhy2111314来自： LinuxSir.Org ouc.edu.cn摘要： 本文是理论性文档，主要讲述系统引导过程以及硬盘的物理结构； ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++正文++++++</description>
+    </item>
+    
+    <item>
+      <title>grub三步通</title>
+      <link>//localhost:1313/post/2005-10-20-grub-guide/</link>
+      <pubDate>Thu, 20 Oct 2005 11:58:47 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2005-10-20-grub-guide/</guid>
+      <description>grub三步通 ################## GRUB的优点 ################## GRUB 是引导装入器(boot loader) &amp;ndash; 它负责装入内核并引导 Linux 系统。GRUB 还可以引导其它操作系统，如 FreeBSD、NetBSD、OpenBSD、GNU HURD 和 DOS，以及 Windows 95、98、NT 和 2000。尽管引导操作系统看上去是件平凡且琐碎的任务，但它实际上很重要</description>
+    </item>
+    
+    <item>
+      <title>Fedora资源</title>
+      <link>//localhost:1313/post/2005-10-13-fedora-resources/</link>
+      <pubDate>Thu, 13 Oct 2005 15:05:52 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2005-10-13-fedora-resources/</guid>
+      <description>Fedora http://fedora.redhat.com/ FTP:ftp.applios.net/pub/fedora/linux/core</description>
+    </item>
+    
+    <item>
+      <title>HTTP Client</title>
+      <link>//localhost:1313/post/2005-10-13-http-client/</link>
+      <pubDate>Thu, 13 Oct 2005 14:56:38 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2005-10-13-http-client/</guid>
+      <description>代码 import java.net.*; import java.io.*; import java.util.Properties; import java.util.Enumeration; public class Http{ protected Socket client; protected BufferedOutputStream sender; protected BufferedInputStream receiver; protected ByteArrayInputStream byteStream; protected URL target; private int responseCode=-1; private String responseMessage=&amp;#34;&amp;#34;; private String serverVersion=&amp;#34;&amp;#34;; private Properties header=new Properties(); public Http(){} public Http(String url){ GET(url); } /*GET方法根据URL，会请求文件、数据库查询结果、程序运行结果等多种内容*/ public void GET(String url){ try{ checkHTTP(url); openServer(target.getHost(),target.getPort()); String cmd=&amp;#34;GET &amp;#34;+getURLFormat(target)+&amp;#34; HTTP/1.0\r\n&amp;#34;+getBaseHeads()+&amp;#34;\r\n&amp;#34;; System.out.println(cmd); sendMessage(cmd); receiveMessage(); }catch(ProtocolException p){ p.printStackTrace(); return; }catch(UnknownHostException e){ e.printStackTrace(); return; }catch(IOException i){ i.printStackTrace(); return; } } /* *HEAD方法只请求URL的元信息，不包括UR</description>
+    </item>
+    
+    <item>
+      <title>IP地址盗用技术简介以及防范措施综述</title>
+      <link>//localhost:1313/post/2005-10-10-ip-address-abuse-and-protect/</link>
+      <pubDate>Mon, 10 Oct 2005 22:57:02 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2005-10-10-ip-address-abuse-and-protect/</guid>
+      <description>一、IP地址盗用方法分析 IP地址的盗用方法多种多样，其常用方法主要有以下几种： 1、静态修改IP地址 对于任何一个TCP/IP实现来 说，IP地址都是其用户配置的必选项。如果用户在配置TCP/IP或修改TCP/IP配置时，使用的不是授权机构分配的IP地址，就形成了IP地址盗用。由于IP</description>
+    </item>
+    
+    <item>
+      <title>主流无线传输技术GPRS与CDMA之对比</title>
+      <link>//localhost:1313/post/2005-10-10-compare-with-gprs-and-cdma/</link>
+      <pubDate>Mon, 10 Oct 2005 22:55:41 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2005-10-10-compare-with-gprs-and-cdma/</guid>
+      <description>目前，基于GPRS/CDMA无线数据传输业务广泛在移动办公、工业控制、远程遥测等多方面应用，网络运营商中国移动GPRS和联通CDMA各有其特点。本文从网络的覆盖、带宽、频谱等方面对GPRS和CDMA进行了对比。 GPRS网络 GPRS(General Packet Radio Service，通用无线分组业务)作为第二代移动通信</description>
+    </item>
+    
+    <item>
+      <title>在无线J2ME设备上实现HTTP协议　</title>
+      <link>//localhost:1313/post/2005-10-10-j2me-create-http-server/</link>
+      <pubDate>Mon, 10 Oct 2005 22:50:36 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2005-10-10-j2me-create-http-server/</guid>
+      <description>随着越来越多手提电话和个人数字助理开始融入到信息高速公路之上，从移动设备上访问Web站点变得越来越重要。Java开创了消费设备中小型的储存容量的先河，它是用于开发手机、传呼机及其他微型设备应用程序的理想语言。 在本文中，我们将学习如何从一个J2ME客户机上向服务器发送一条HTTPG</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JPA on 我的乐与怒</title>
+    <link>//localhost:1313/tags/jpa/</link>
+    <description>Recent content in JPA on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 26 Sep 2019 15:03:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/jpa/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JPA手册(2) -JPA 仓库</title>
+      <link>//localhost:1313/post/2019-09-26-spring-jpa-repository/</link>
+      <pubDate>Thu, 26 Sep 2019 15:03:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2019-09-26-spring-jpa-repository/</guid>
+      <description>5 JPA 仓库 本章指出JPA建立在上一章内容之上的专有的功能.请确保你对此有充分的了解. 5.1 简介 本节介绍通过以下任一方式配置Spring Data JPA的基础知识： “Spring Namespace” (XML configuration) “基于注解的配置” (Java configuration) 5.1.1. Spring 命名空间 Spring Data的JPA模块包含一个允许定义存储库bean的自定义</description>
+    </item>
+    
+    <item>
+      <title>JPA手册(1) - Spring Data Repository</title>
+      <link>//localhost:1313/post/2019-09-26-spring-repository/</link>
+      <pubDate>Thu, 26 Sep 2019 10:16:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2019-09-26-spring-repository/</guid>
+      <description>4 使用Spring Data 仓库 Spring Data 仓库抽象层的目标是为了显著的减少进行数据持久层访问的代码量. 4.1. 核心概念 Spring Data 仓库最重要的抽象接口是Repository,他使用领域类以及领域类的ID作为参数进行管理.这个接口主要扮演一个标记接口.用来捕捉要使用的类型和帮组发现扩展自该接口的接口.Crud</description>
+    </item>
+    
+  </channel>
+</rss>

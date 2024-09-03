@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spring on 我的乐与怒</title>
+    <link>//localhost:1313/tags/spring/</link>
+    <description>Recent content in Spring on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 18 Nov 2022 11:11:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/spring/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>深入使用Spring计划任务框架</title>
+      <link>//localhost:1313/post/2022-11-18-use-spring-schedule-copy/</link>
+      <pubDate>Fri, 18 Nov 2022 11:11:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2022-11-18-use-spring-schedule-copy/</guid>
+      <description>任务执行和计划 Spring框架提供TaskExecutor和TaskSchedule接口对异步任务和计划任务进行抽象。并支持很多框架的特性，比如线程池和委派等。这些接口在不同的运行环境背后通过不同的实现来进行支持。 Spring支持使用Timer和Quartz Scheduler ( https://w</description>
+    </item>
+    
+    <item>
+      <title>使用Querydsl简化Spring JPA的查询</title>
+      <link>//localhost:1313/post/2022-04-29-use-query-dsl-in-spring/</link>
+      <pubDate>Fri, 29 Apr 2022 22:55:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2022-04-29-use-query-dsl-in-spring/</guid>
+      <description>JPA的限制 一般项目中一定会使用到联表查询,使用JPA可以很方便的对单表进行CRUD操作,简单的关联操作通过设置关联关系也很容易实现.但是对于多表的联合查询就比较麻烦.使用Querydsl可以帮助我们很方便的构建复杂查询. MAVEN依赖 添加依赖 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.querydsl&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;querydsl-apt&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;${querydsl.version}&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;provided&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.querydsl&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;querydsl-jpa&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;${querydsl.version}&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 添加MAVEN</description>
+    </item>
+    
+    <item>
+      <title>制作自定义的Spring Starter</title>
+      <link>//localhost:1313/post/2021-04-05-make-a-custom-spring-starter/</link>
+      <pubDate>Mon, 05 Apr 2021 10:53:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2021-04-05-make-a-custom-spring-starter/</guid>
+      <description>国内很多文章讲的不详细 参考: https://www.baeldung.com/spring-boot-custom-starter Spring Boot 自动配置原理 Spring Boot启动时会查找classpath中是否存在一个 spring.factories的文件.这个文件保存在META-INF文件夹. spring-boot-autoconfigure 项目中该文件代码如下. org.springframework.boot.autoconfigure.EnableAutoConfiguration=\ org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration,\ org.springframework.boot.autoconfigure.cassandra.CassandraAutoConfiguration,\ org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration,\ org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration 这个文件配置了Spring Boot将尝试运行的不同配置类.因此上面的</description>
+    </item>
+    
+    <item>
+      <title>使用Spring REST Docs生成项目API文档</title>
+      <link>//localhost:1313/post/2020-07-10-using-spring-restdoc/</link>
+      <pubDate>Fri, 10 Jul 2020 09:55:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2020-07-10-using-spring-restdoc/</guid>
+      <description>配置依赖 增加依赖 pom.xml &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.restdocs&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-restdocs-mockmvc&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; 添加Maven插件 &amp;lt;plugin&amp;gt; &amp;lt;groupId&amp;gt;org.asciidoctor&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;asciidoctor-maven-plugin&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.5.8&amp;lt;/version&amp;gt; &amp;lt;executions&amp;gt; &amp;lt;execution&amp;gt; &amp;lt;id&amp;gt;generate-docs&amp;lt;/id&amp;gt; &amp;lt;phase&amp;gt;prepare-package&amp;lt;/phase&amp;gt; &amp;lt;goals&amp;gt; &amp;lt;goal&amp;gt;process-asciidoc&amp;lt;/goal&amp;gt; &amp;lt;/goals&amp;gt; &amp;lt;configuration&amp;gt; &amp;lt;backend&amp;gt;html&amp;lt;/backend&amp;gt; &amp;lt;doctype&amp;gt;book&amp;lt;/doctype&amp;gt; &amp;lt;/configuration&amp;gt; &amp;lt;/execution&amp;gt; &amp;lt;/executions&amp;gt; &amp;lt;dependencies&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.restdocs&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-restdocs-asciidoctor&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;/dependencies&amp;gt; &amp;lt;/plugin&amp;gt; 如果要将文档打入Jar包中增加一个插件 该插件会打包到static/doc目录中 &amp;lt;plugin&amp;gt; &amp;lt;artifactId&amp;gt;maven-resources-plugin&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.7&amp;lt;/version&amp;gt; &amp;lt;executions&amp;gt; &amp;lt;execution&amp;gt; &amp;lt;id&amp;gt;copy-resources&amp;lt;/id&amp;gt; &amp;lt;phase&amp;gt;prepare-package&amp;lt;/phase&amp;gt; &amp;lt;goals&amp;gt; &amp;lt;goal&amp;gt;copy-resources&amp;lt;/goal&amp;gt; &amp;lt;/goals&amp;gt; &amp;lt;configuration&amp;gt; &amp;lt;outputDirectory&amp;gt; ${project.build.outputDirectory}/static/docs &amp;lt;/outputDirectory&amp;gt; &amp;lt;resources&amp;gt; &amp;lt;resource&amp;gt; &amp;lt;directory&amp;gt; ${project.build.directory}/generated-docs &amp;lt;/directory&amp;gt; &amp;lt;/resource&amp;gt; &amp;lt;/resources&amp;gt; &amp;lt;/configuration&amp;gt; &amp;lt;/execution&amp;gt; &amp;lt;/executions&amp;gt; &amp;lt;/plugin&amp;gt; 待续</description>
+    </item>
+    
+    <item>
+      <title>Feign自定义配置</title>
+      <link>//localhost:1313/post/2020-03-25-feign-customize/</link>
+      <pubDate>Wed, 25 Mar 2020 23:31:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2020-03-25-feign-customize/</guid>
+      <description>背景 微服务重构,使用Spring全家桶.JSON数据传输为了兼容接口规范对Feign进行了定制 启用Feign 加入Feign的Spring starter依赖 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-openfeign&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; Applicaiton中加上注解 @SpringBootApplication @EnableFeignClients public class Application { public static void main(String[] args) { SpringApplication.run(Application.class); } } 定义一个和使用客户端 package com.tourscool.passport; import org.springframework.cloud.openfeign.FeignClient; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RequestMethod; import org.springframework.web.bind.annotation.RequestParam; @FeignClient(name=&amp;#34;authorize&amp;#34; ,url=&amp;#34;http://authorize.dev.philo.in/api/v1/&amp;#34;,configuration = FeignConfiguration.class) public interface AuthorizeClient {</description>
+    </item>
+    
+    <item>
+      <title>JPA手册(2) -JPA 仓库</title>
+      <link>//localhost:1313/post/2019-09-26-spring-jpa-repository/</link>
+      <pubDate>Thu, 26 Sep 2019 15:03:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2019-09-26-spring-jpa-repository/</guid>
+      <description>5 JPA 仓库 本章指出JPA建立在上一章内容之上的专有的功能.请确保你对此有充分的了解. 5.1 简介 本节介绍通过以下任一方式配置Spring Data JPA的基础知识： “Spring Namespace” (XML configuration) “基于注解的配置” (Java configuration) 5.1.1. Spring 命名空间 Spring Data的JPA模块包含一个允许定义存储库bean的自定义</description>
+    </item>
+    
+    <item>
+      <title>JPA手册(1) - Spring Data Repository</title>
+      <link>//localhost:1313/post/2019-09-26-spring-repository/</link>
+      <pubDate>Thu, 26 Sep 2019 10:16:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2019-09-26-spring-repository/</guid>
+      <description>4 使用Spring Data 仓库 Spring Data 仓库抽象层的目标是为了显著的减少进行数据持久层访问的代码量. 4.1. 核心概念 Spring Data 仓库最重要的抽象接口是Repository,他使用领域类以及领域类的ID作为参数进行管理.这个接口主要扮演一个标记接口.用来捕捉要使用的类型和帮组发现扩展自该接口的接口.Crud</description>
+    </item>
+    
+    <item>
+      <title>扩展Thymeleaf 3 - 模板模式</title>
+      <link>//localhost:1313/post/2015-07-23-extending-thymeleaf-part-3/</link>
+      <pubDate>Fri, 24 Jul 2015 10:33:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-07-23-extending-thymeleaf-part-3/</guid>
+      <description>&lt;p&gt;[http://vincentmi.gitbooks.io/extendingthymeleaf/content/][http://vincentmi.gitbooks.io/extendingthymeleaf/content/]&lt;/p&gt;
+&lt;p&gt;模板模式或许是Thymeleaf最强大的扩展点，模板模式实际上定义了什么可以被认为是一个“模板”。创建定制化的模板模式允许我们处理不同于默认的XML,XHTML,HTML5的文档格式。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>扩展Thymeleaf-4 创建我们自己的方言</title>
+      <link>//localhost:1313/post/2015-07-24-extending-thymeleaf-part-4/</link>
+      <pubDate>Fri, 24 Jul 2015 10:33:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-07-24-extending-thymeleaf-part-4/</guid>
+      <description>&lt;p&gt;[http://vincentmi.gitbooks.io/extendingthymeleaf/][http://vincentmi.gitbooks.io/extendingthymeleaf/]&lt;/p&gt;
+&lt;p&gt;足球是麝香草大陆最流行的运动。每个赛季有10对参加联赛，主办方请为我们为它创建一个叫做&amp;quot;Extrathyme&amp;quot;的网站。&lt;/p&gt;
+&lt;p&gt;这个网站将非常简单，就是一个表格。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;队名&lt;/li&gt;
+&lt;li&gt;胜平负的场次，以及获得的总分&lt;/li&gt;
+&lt;li&gt;备注，该队伍当前所处的位置，下赛季保级还是升入高级别联赛&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;然后在表格上显示一个广告和最近比赛的比分。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>扩展Thymeleaf-2  方言和处理器</title>
+      <link>//localhost:1313/post/2015-07-23-extending-thymeleaf-part-2/</link>
+      <pubDate>Thu, 23 Jul 2015 09:27:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-07-23-extending-thymeleaf-part-2/</guid>
+      <description>&lt;p&gt;gitbook [http://vincentmi.gitbooks.io/extendingthymeleaf/content/][1]&lt;/p&gt;
+&lt;p&gt;如果你读过Thymeleaf的入门教程（你应该已经读完了）。你应该知道你之前学的准确的说不是Thymeleaf，而是Thymeleaf的标准方言。（或者，如果你读过Thymeleaf+Spring教程的话就是Spring标准方言）。&lt;/p&gt;
+&lt;p&gt;这是什么意思？意思是你学的th:xattribute只是可以立即使用的标准方言。但是你可以使用你喜欢的名字自己定义一组attribute或者tag在Thymeleaf用来处理你的模板。你可以定义你自己的方言。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>扩展Thymeleaf-1 为什么需要扩展Thymeleaf</title>
+      <link>//localhost:1313/post/2015-07-23-extending-thymeleaf-part-1/</link>
+      <pubDate>Thu, 23 Jul 2015 02:04:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-07-23-extending-thymeleaf-part-1/</guid>
+      <description>&lt;p&gt;gitbook [http://vincentmi.gitbooks.io/extendingthymeleaf/content/][http://vincentmi.gitbooks.io/extendingthymeleaf/content/]&lt;/p&gt;
+&lt;p&gt;Thymeleaf是一个很容易扩展的库。他的关键在于，大部分面向用户的功能不是直接构建在他的核心中，而是通过打包和组件化到一个称为Dialects(方言)的功能集合中。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Spring MVC 的错误处理</title>
+      <link>//localhost:1313/post/2015-06-30-exception-handling-in-spring-mvc/</link>
+      <pubDate>Tue, 30 Jun 2015 17:18:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-06-30-exception-handling-in-spring-mvc/</guid>
+      <description>&lt;p&gt;Spring MVC 提供多种异常处理方式，但是当我在进行Spring MVC培训时，我发现我的学院经常会感到困惑或者不太适应。&lt;/p&gt;
+&lt;p&gt;今天我将为你展示多种可能的选项。我们的目标是如果可能的话不在Controller的方法里显式的处理异常。作为横切关注点分别在专用代码里处理更好。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用Spring创建RESTful 服务</title>
+      <link>//localhost:1313/post/2015-06-25-use-spring-create-a-restful-service/</link>
+      <pubDate>Thu, 25 Jun 2015 13:52:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-06-25-use-spring-create-a-restful-service/</guid>
+      <description>&lt;p&gt;这个指南将引导你使用创建一个&amp;quot;hello world&amp;quot;&lt;a href=&#34;http://spring.io/understanding/REST&#34;&gt; RESTFul 服务&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

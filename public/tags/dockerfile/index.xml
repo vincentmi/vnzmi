@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dockerfile on 我的乐与怒</title>
+    <link>//localhost:1313/tags/dockerfile/</link>
+    <description>Recent content in Dockerfile on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 23 Jul 2020 23:15:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/dockerfile/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VUE项目读取Docker环境变量</title>
+      <link>//localhost:1313/post/2020-07-23-vue-docker-run-with-env/</link>
+      <pubDate>Thu, 23 Jul 2020 23:15:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2020-07-23-vue-docker-run-with-env/</guid>
+      <description>使用场景 前端项目通常编译的时候会配置多个环境的参数,根据环境参数编译不同的文件.无法做到在各个环境使用同一个版本的镜像.使用环境变量可以在创建镜像的时候传递基础参数减少编译确保测试的有效性. 方案 通过将环境变量传递到DOM,在VUE项目中读取DOM来进行使用环境变量. 读取环境变量 const</description>
+    </item>
+    
+  </channel>
+</rss>

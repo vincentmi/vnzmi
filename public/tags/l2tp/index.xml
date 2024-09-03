@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>L2TP on 我的乐与怒</title>
+    <link>//localhost:1313/tags/l2tp/</link>
+    <description>Recent content in L2TP on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 04 Aug 2016 09:49:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/l2tp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CentOS搭建L2TP VPN服务</title>
+      <link>//localhost:1313/post/2016-08-04-l2tp-vpn-setup/</link>
+      <pubDate>Thu, 04 Aug 2016 09:49:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2016-08-04-l2tp-vpn-setup/</guid>
+      <description>参考 : http://longtimenoc.com/archives/centos%E4%B8%8Al2tp%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE 准备 编译会用到的库 yum install -y ppp iptables make gcc gmp-devel xmlto bison flex xmlto libpcap-devel lsof vim-enhanced 安装openswan wget https://download.openswan.org/openswan/openswan-latest.tar.gz tar zxf openswan-latest.tar.gz cd openswan-2.6.48 make programs install 安装xl2tpd yum install xl2tpd 配置 配置/etc/ipsec.conf config setup nat_traversal=yes virtual_private=%v4:10.0.0.0/8,%v4:192.168.0.0/16,%v4:172.16.0.0/12 oe=off protostack=netkey conn L2TP-PSK-NAT rightsubnet=vhost:%priv also=L2TP-PSK-noNAT conn L2TP-PSK-noNAT authby=secret pfs=no auto=add keyingtries=3 rekey=no ikelifetime=8h keylife=1h type=transport left=$vpsip #改你服务器的IP leftprotoport=17/1701 right=%any rightprotoport=17/%any 配置 /etc/ipsec.secrets 你的服务器IP %any: PSK &amp;#34;你的密码&amp;#34; 编辑 /etc/sysctl.conf</description>
+    </item>
+    
+  </channel>
+</rss>

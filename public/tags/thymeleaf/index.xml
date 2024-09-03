@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Thymeleaf on 我的乐与怒</title>
+    <link>//localhost:1313/tags/thymeleaf/</link>
+    <description>Recent content in Thymeleaf on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 24 Jul 2015 10:33:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/thymeleaf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>扩展Thymeleaf 3 - 模板模式</title>
+      <link>//localhost:1313/post/2015-07-23-extending-thymeleaf-part-3/</link>
+      <pubDate>Fri, 24 Jul 2015 10:33:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-07-23-extending-thymeleaf-part-3/</guid>
+      <description>&lt;p&gt;[http://vincentmi.gitbooks.io/extendingthymeleaf/content/][http://vincentmi.gitbooks.io/extendingthymeleaf/content/]&lt;/p&gt;
+&lt;p&gt;模板模式或许是Thymeleaf最强大的扩展点，模板模式实际上定义了什么可以被认为是一个“模板”。创建定制化的模板模式允许我们处理不同于默认的XML,XHTML,HTML5的文档格式。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>扩展Thymeleaf-4 创建我们自己的方言</title>
+      <link>//localhost:1313/post/2015-07-24-extending-thymeleaf-part-4/</link>
+      <pubDate>Fri, 24 Jul 2015 10:33:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-07-24-extending-thymeleaf-part-4/</guid>
+      <description>&lt;p&gt;[http://vincentmi.gitbooks.io/extendingthymeleaf/][http://vincentmi.gitbooks.io/extendingthymeleaf/]&lt;/p&gt;
+&lt;p&gt;足球是麝香草大陆最流行的运动。每个赛季有10对参加联赛，主办方请为我们为它创建一个叫做&amp;quot;Extrathyme&amp;quot;的网站。&lt;/p&gt;
+&lt;p&gt;这个网站将非常简单，就是一个表格。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;队名&lt;/li&gt;
+&lt;li&gt;胜平负的场次，以及获得的总分&lt;/li&gt;
+&lt;li&gt;备注，该队伍当前所处的位置，下赛季保级还是升入高级别联赛&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;然后在表格上显示一个广告和最近比赛的比分。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>扩展Thymeleaf-2  方言和处理器</title>
+      <link>//localhost:1313/post/2015-07-23-extending-thymeleaf-part-2/</link>
+      <pubDate>Thu, 23 Jul 2015 09:27:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-07-23-extending-thymeleaf-part-2/</guid>
+      <description>&lt;p&gt;gitbook [http://vincentmi.gitbooks.io/extendingthymeleaf/content/][1]&lt;/p&gt;
+&lt;p&gt;如果你读过Thymeleaf的入门教程（你应该已经读完了）。你应该知道你之前学的准确的说不是Thymeleaf，而是Thymeleaf的标准方言。（或者，如果你读过Thymeleaf+Spring教程的话就是Spring标准方言）。&lt;/p&gt;
+&lt;p&gt;这是什么意思？意思是你学的th:xattribute只是可以立即使用的标准方言。但是你可以使用你喜欢的名字自己定义一组attribute或者tag在Thymeleaf用来处理你的模板。你可以定义你自己的方言。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>扩展Thymeleaf-1 为什么需要扩展Thymeleaf</title>
+      <link>//localhost:1313/post/2015-07-23-extending-thymeleaf-part-1/</link>
+      <pubDate>Thu, 23 Jul 2015 02:04:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-07-23-extending-thymeleaf-part-1/</guid>
+      <description>&lt;p&gt;gitbook [http://vincentmi.gitbooks.io/extendingthymeleaf/content/][http://vincentmi.gitbooks.io/extendingthymeleaf/content/]&lt;/p&gt;
+&lt;p&gt;Thymeleaf是一个很容易扩展的库。他的关键在于，大部分面向用户的功能不是直接构建在他的核心中，而是通过打包和组件化到一个称为Dialects(方言)的功能集合中。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

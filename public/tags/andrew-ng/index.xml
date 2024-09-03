@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Andrew NG on 我的乐与怒</title>
+    <link>//localhost:1313/tags/andrew-ng/</link>
+    <description>Recent content in Andrew NG on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 05 Jan 2021 22:08:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/andrew-ng/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Coursera - Machine learning 学习笔记(3)  - 支持向量机异常检测和推荐系统</title>
+      <link>//localhost:1313/post/2021-01-05-coursera-andrew-ng-machine-learning-notes-week7/</link>
+      <pubDate>Tue, 05 Jan 2021 22:08:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2021-01-05-coursera-andrew-ng-machine-learning-notes-week7/</guid>
+      <description>课程地址: https://www.coursera.org/learn/machine-learning/home/welcome 作业 Vincent code exercise 第七周 支持向量机(SVM) 7.1 模型 $ \min \limits_{\theta} C \sum \limits_{i=1}^{m} \left[ y^{(i)}cost_1(\theta^Tx^{(i)}) + (1-y^{(i)}cost_0(\theta^Tx^{(i)})) \right] + \frac{1}{2}\sum \limits_{i=1}^n\theta_j^2 $ y = 1 阳性, 则 $\theta^Tx \geq 1 $ y = 0 阴性, 则 $\theta^Tx \leq -1 $ 7.2 核函数 高斯函数 $ f_1=simmilarity(x,l^{(1)}) = \exp \left( - \frac{\Vert x-l^{(1)}\Vert ^2}{2\sigma^2} \right) $ 如果 $x\approx l^{(1)}$ 这$f_1 \approx 1$ 如果$x$与$l^{(1)}$很远这 $f_1 \approx 0 $ $sigma^2$ 越大则函数曲线越平滑 使用核函数当$\theta</description>
+    </item>
+    
+    <item>
+      <title>Coursera - Machine learning 学习笔记(2) - 神经网络</title>
+      <link>//localhost:1313/post/2020-12-10-coursera-andrew-ng-machine-learning-notes-week4/</link>
+      <pubDate>Thu, 10 Dec 2020 23:04:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2020-12-10-coursera-andrew-ng-machine-learning-notes-week4/</guid>
+      <description>课程地址: https://www.coursera.org/learn/machine-learning/home/welcome 作业 Vincent code exercise 第四周 神经网络-模型 4.1 模型 4.1.1 基本元素 激活函数(activation function) , $g(z)$ , $a_i^{(j)}$第$j$层的第$i$个神经元 偏置神经元(bias unit) 权重(Weight) 输入层 Input Layer 结果层 Output Layer 隐藏层 Hidden Layer $a_i^{(j)}$ 表示在$j$层的第$i$ 个单元 $\Theta^j$ 权重矩阵控制$j$到$j+1</description>
+    </item>
+    
+    <item>
+      <title>Coursera - Machine learning 学习笔记(1) - 线性回归和分类器</title>
+      <link>//localhost:1313/post/2020-12-06-coursera-andrew-ng-machine-learning-notes/</link>
+      <pubDate>Sun, 06 Dec 2020 23:04:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2020-12-06-coursera-andrew-ng-machine-learning-notes/</guid>
+      <description>课程地址: https://www.coursera.org/learn/machine-learning/home/welcome 作业 Vincent code exercise 第一周 简介和一元线性回归 1.1 机器学习定义(Tom Mitchell) E : 经验, 指训练样本 T : 目标任务,一类机器学习解决的问题 P : 衡量目标任务T的性能 举例: 关于垃圾邮件的机器学习 T: 将邮件标记为垃圾或者非垃圾 E: 查看当前邮箱中邮件的是否垃圾的标签 P: 标记垃圾邮件的准确率 1.2 机器学习分类 监</description>
+    </item>
+    
+  </channel>
+</rss>

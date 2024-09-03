@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="我的乐与怒">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//localhost:1313//img/tianfu_3_st.jpg">
+    <meta property="twitter:image" content="//localhost:1313//img/tianfu_3_st.jpg" />
+    
+
+    
+    <meta name="title" content="HTTP Client" />
+    <meta property="og:title" content="HTTP Client" />
+    <meta property="twitter:title" content="HTTP Client" />
+    
+
+    
+    <meta name="description" content="In code we trust">
+    <meta property="og:description" content="In code we trust" />
+    <meta property="twitter:description" content="In code we trust" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="我的乐与怒,vincent mi, miwenshu, 电商,  博客, 个人网站, 互联网, Web, 云原生, PaaS, Java, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>HTTP Client | 我的乐与怒 | Vincent&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/2005-10-13-http-client/">
+
+    
+
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">我的乐与怒</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/about/">我</a></li>
+                    
+                        <li><a href="/archive/">归档</a></li>
+                    
+                        <li><a href="/search/">搜索</a></li>
+                    
+                        <li><a href="/codesketch/">CodeSketch</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/bullseye-gradient_blue.svg')
+    }
+    
+    .titleColor {
+        text-align: center;font-size:80px;
+        color: #FFFFFF;
+    }
+   
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2" title="新浪博客">
+                            新浪博客
+                        </a>
+                        
+                        <a class="tag" href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0" title="技术文章">
+                            技术文章
+                        </a>
+                        
+                    </div>
+                    <h1 class="titleColor">HTTP Client</h1>
+                    <h2 class="subheading titleColor"></h2>
+                    <span class="meta titleColor">
+                        
+                            Posted by 
+                            
+                                Vincent
+                             
+                            on 
+                            Thursday, October 13, 2005
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <h2 id="代码">代码</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">java.net.*</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">java.io.*</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">java.util.Properties</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">java.util.Enumeration</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">public</span> <span style="color:#069;font-weight:bold">class</span>  <span style="color:#0a8;font-weight:bold">Http</span><span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">protected</span> Socket client<span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">protected</span> BufferedOutputStream sender<span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">protected</span> BufferedInputStream receiver<span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">protected</span> ByteArrayInputStream byteStream<span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">protected</span> URL target<span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">private</span> <span style="color:#078;font-weight:bold">int</span> responseCode<span style="color:#555">=-</span><span style="color:#f60">1</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">private</span> String responseMessage<span style="color:#555">=</span><span style="color:#c30">&#34;&#34;</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">private</span> String serverVersion<span style="color:#555">=</span><span style="color:#c30">&#34;&#34;</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">private</span> Properties header<span style="color:#555">=</span><span style="color:#069;font-weight:bold">new</span> Properties<span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">public</span> <span style="color:#c0f">Http</span><span style="color:#555">(){}</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">public</span> <span style="color:#c0f">Http</span><span style="color:#555">(</span>String url<span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>        GET<span style="color:#555">(</span>url<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#09f;font-style:italic">/*GET方法根据URL，会请求文件、数据库查询结果、程序运行结果等多种内容*/</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">public</span> <span style="color:#078;font-weight:bold">void</span> <span style="color:#c0f">GET</span><span style="color:#555">(</span>String url<span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">try</span><span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>            checkHTTP<span style="color:#555">(</span>url<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>            openServer<span style="color:#555">(</span>target<span style="color:#555">.</span><span style="color:#309">getHost</span><span style="color:#555">(),</span>target<span style="color:#555">.</span><span style="color:#309">getPort</span><span style="color:#555">());</span>
+</span></span><span style="display:flex;"><span>            String cmd<span style="color:#555">=</span><span style="color:#c30">&#34;GET &#34;</span><span style="color:#555">+</span>getURLFormat<span style="color:#555">(</span>target<span style="color:#555">)+</span><span style="color:#c30">&#34; HTTP/1.0\r\n&#34;</span><span style="color:#555">+</span>getBaseHeads<span style="color:#555">()+</span><span style="color:#c30">&#34;\r\n&#34;</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>            System<span style="color:#555">.</span><span style="color:#309">out</span><span style="color:#555">.</span><span style="color:#309">println</span><span style="color:#555">(</span>cmd<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>            sendMessage<span style="color:#555">(</span>cmd<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>            receiveMessage<span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#555">}</span><span style="color:#069;font-weight:bold">catch</span><span style="color:#555">(</span>ProtocolException p<span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>            p<span style="color:#555">.</span><span style="color:#309">printStackTrace</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">return</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#555">}</span><span style="color:#069;font-weight:bold">catch</span><span style="color:#555">(</span>UnknownHostException e<span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>            e<span style="color:#555">.</span><span style="color:#309">printStackTrace</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">return</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#555">}</span><span style="color:#069;font-weight:bold">catch</span><span style="color:#555">(</span>IOException i<span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>            i<span style="color:#555">.</span><span style="color:#309">printStackTrace</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">return</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">*HEAD方法只请求URL的元信息，不包括URL本身。若怀疑本机和服务器上的
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">*文件相同，用这个方法检查最快捷有效。
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">public</span> <span style="color:#078;font-weight:bold">void</span> <span style="color:#c0f">HEAD</span><span style="color:#555">(</span>String url<span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">try</span><span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>        checkHTTP<span style="color:#555">(</span>url<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>        openServer<span style="color:#555">(</span>target<span style="color:#555">.</span><span style="color:#309">getHost</span><span style="color:#555">(),</span>target<span style="color:#555">.</span><span style="color:#309">getPort</span><span style="color:#555">());</span>
+</span></span><span style="display:flex;"><span>        String cmd<span style="color:#555">=</span><span style="color:#c30">&#34;HEAD &#34;</span><span style="color:#555">+</span>getURLFormat<span style="color:#555">(</span>target<span style="color:#555">)+</span><span style="color:#c30">&#34; HTTP/1.0\r\n&#34;</span><span style="color:#555">+</span>getBaseHeads<span style="color:#555">()+</span><span style="color:#c30">&#34;\r\n&#34;</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>        System<span style="color:#555">.</span><span style="color:#309">out</span><span style="color:#555">.</span><span style="color:#309">println</span><span style="color:#555">(</span>cmd<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>        sendMessage<span style="color:#555">(</span>cmd<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>        receiveMessage<span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}</span><span style="color:#069;font-weight:bold">catch</span><span style="color:#555">(</span>ProtocolException p<span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>        p<span style="color:#555">.</span><span style="color:#309">printStackTrace</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">return</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}</span><span style="color:#069;font-weight:bold">catch</span><span style="color:#555">(</span>UnknownHostException e<span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>        e<span style="color:#555">.</span><span style="color:#309">printStackTrace</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">return</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}</span><span style="color:#069;font-weight:bold">catch</span><span style="color:#555">(</span>IOException i<span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>        i<span style="color:#555">.</span><span style="color:#309">printStackTrace</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">return</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">*POST方法是向服务器传送数据，以便服务器做出相应的处理。例如网页上常用的
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">*提交表格。
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">public</span> <span style="color:#078;font-weight:bold">void</span> <span style="color:#c0f">POST</span><span style="color:#555">(</span>String url<span style="color:#555">,</span>String content<span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">try</span><span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>        checkHTTP<span style="color:#555">(</span>url<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>        openServer<span style="color:#555">(</span>target<span style="color:#555">.</span><span style="color:#309">getHost</span><span style="color:#555">(),</span>target<span style="color:#555">.</span><span style="color:#309">getPort</span><span style="color:#555">());</span>
+</span></span><span style="display:flex;"><span>        String cmd<span style="color:#555">=</span><span style="color:#c30">&#34;POST &#34;</span><span style="color:#555">+</span>getURLFormat<span style="color:#555">(</span>target<span style="color:#555">)+</span><span style="color:#c30">&#34; HTTP/1.0\r\n&#34;</span><span style="color:#555">+</span>getBaseHeads<span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>        cmd<span style="color:#555">+=</span><span style="color:#c30">&#34;Content-type:application/x-www-form-urlencoded\r\n&#34;</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>        cmd<span style="color:#555">+=</span><span style="color:#c30">&#34;Content-length:&#34;</span><span style="color:#555">+</span>content<span style="color:#555">.</span><span style="color:#309">length</span><span style="color:#555">()+</span><span style="color:#c30">&#34;\r\n\r\n&#34;</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>        cmd<span style="color:#555">+=</span>content<span style="color:#555">+</span><span style="color:#c30">&#34;\r\n&#34;</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>  System<span style="color:#555">.</span><span style="color:#309">out</span><span style="color:#555">.</span><span style="color:#309">println</span><span style="color:#555">(</span>cmd<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>        sendMessage<span style="color:#555">(</span>cmd<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>        receiveMessage<span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}</span><span style="color:#069;font-weight:bold">catch</span><span style="color:#555">(</span>ProtocolException p<span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>        p<span style="color:#555">.</span><span style="color:#309">printStackTrace</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">return</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}</span><span style="color:#069;font-weight:bold">catch</span><span style="color:#555">(</span>UnknownHostException e<span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>            e<span style="color:#555">.</span><span style="color:#309">printStackTrace</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">return</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}</span><span style="color:#069;font-weight:bold">catch</span><span style="color:#555">(</span>IOException i<span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>        i<span style="color:#555">.</span><span style="color:#309">printStackTrace</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">return</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">protected</span> <span style="color:#078;font-weight:bold">void</span> <span style="color:#c0f">checkHTTP</span><span style="color:#555">(</span>String url<span style="color:#555">)</span><span style="color:#069;font-weight:bold">throws</span> ProtocolException<span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">try</span><span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>        URL target<span style="color:#555">=</span><span style="color:#069;font-weight:bold">new</span> URL<span style="color:#555">(</span>url<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">if</span><span style="color:#555">(</span>target<span style="color:#555">==</span><span style="color:#069;font-weight:bold">null</span><span style="color:#555">||!</span>target<span style="color:#555">.</span><span style="color:#309">getProtocol</span><span style="color:#555">().</span><span style="color:#309">toUpperCase</span><span style="color:#555">().</span><span style="color:#309">equals</span><span style="color:#555">(</span><span style="color:#c30">&#34;HTTP&#34;</span><span style="color:#555">))</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">throw</span> <span style="color:#069;font-weight:bold">new</span> ProtocolException<span style="color:#555">(</span><span style="color:#c30">&#34;这不是HTTP协议&#34;</span><span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">this</span><span style="color:#555">.</span><span style="color:#309">target</span><span style="color:#555">=</span>target<span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}</span><span style="color:#069;font-weight:bold">catch</span><span style="color:#555">(</span>MalformedURLException m<span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">throw</span> <span style="color:#069;font-weight:bold">new</span> ProtocolException<span style="color:#555">(</span><span style="color:#c30">&#34;协议格式错误&#34;</span><span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">*与Web服务器连接。若找不到Web服务器，InetAddress会引发UnknownHostException
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">*异常。若Socket连接失败，会引发IOException异常。
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">protected</span> <span style="color:#078;font-weight:bold">void</span> <span style="color:#c0f">openServer</span><span style="color:#555">(</span>String host<span style="color:#555">,</span><span style="color:#078;font-weight:bold">int</span> port<span style="color:#555">)</span><span style="color:#069;font-weight:bold">throws</span> UnknownHostException<span style="color:#555">,</span>IOException<span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>    header<span style="color:#555">.</span><span style="color:#309">clear</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>    responseMessage<span style="color:#555">=</span><span style="color:#c30">&#34;&#34;</span><span style="color:#555">;</span>responseCode<span style="color:#555">=-</span><span style="color:#f60">1</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">try</span><span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">if</span><span style="color:#555">(</span>client<span style="color:#555">!=</span><span style="color:#069;font-weight:bold">null</span><span style="color:#555">)</span>closeServer<span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">if</span><span style="color:#555">(</span>byteStream<span style="color:#555">!=</span><span style="color:#069;font-weight:bold">null</span><span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>            byteStream<span style="color:#555">.</span><span style="color:#309">close</span><span style="color:#555">();</span>byteStream<span style="color:#555">=</span><span style="color:#069;font-weight:bold">null</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>        InetAddress address<span style="color:#555">=</span>InetAddress<span style="color:#555">.</span><span style="color:#309">getByName</span><span style="color:#555">(</span>host<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>        client<span style="color:#555">=</span><span style="color:#069;font-weight:bold">new</span> Socket<span style="color:#555">(</span>address<span style="color:#555">,</span>port<span style="color:#555">==-</span><span style="color:#f60">1</span><span style="color:#555">?</span><span style="color:#f60">80</span><span style="color:#555">:</span>port<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>        sender<span style="color:#555">=</span><span style="color:#069;font-weight:bold">new</span> BufferedOutputStream<span style="color:#555">(</span>client<span style="color:#555">.</span><span style="color:#309">getOutputStream</span><span style="color:#555">());</span>
+</span></span><span style="display:flex;"><span>        receiver<span style="color:#555">=</span><span style="color:#069;font-weight:bold">new</span> BufferedInputStream<span style="color:#555">(</span>client<span style="color:#555">.</span><span style="color:#309">getInputStream</span><span style="color:#555">());</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}</span><span style="color:#069;font-weight:bold">catch</span><span style="color:#555">(</span>UnknownHostException u<span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">throw</span> u<span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}</span><span style="color:#069;font-weight:bold">catch</span><span style="color:#555">(</span>IOException i<span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">throw</span> i<span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">/*关闭与Web服务器的连接*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">protected</span> <span style="color:#078;font-weight:bold">void</span> <span style="color:#c0f">closeServer</span><span style="color:#555">()</span><span style="color:#069;font-weight:bold">throws</span> IOException<span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">if</span><span style="color:#555">(</span>client<span style="color:#555">==</span><span style="color:#069;font-weight:bold">null</span><span style="color:#555">)</span><span style="color:#069;font-weight:bold">return</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">try</span><span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>        client<span style="color:#555">.</span><span style="color:#309">close</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>        sender<span style="color:#555">.</span><span style="color:#309">close</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>        receiver<span style="color:#555">.</span><span style="color:#309">close</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}</span><span style="color:#069;font-weight:bold">catch</span><span style="color:#555">(</span>IOException i<span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">throw</span> i<span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    client<span style="color:#555">=</span><span style="color:#069;font-weight:bold">null</span><span style="color:#555">;</span>sender<span style="color:#555">=</span><span style="color:#069;font-weight:bold">null</span><span style="color:#555">;</span>receiver<span style="color:#555">=</span><span style="color:#069;font-weight:bold">null</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">protected</span> String <span style="color:#c0f">getURLFormat</span><span style="color:#555">(</span>URL target<span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>        String spec<span style="color:#555">=</span><span style="color:#c30">&#34;http://&#34;</span><span style="color:#555">+</span>target<span style="color:#555">.</span><span style="color:#309">getHost</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">if</span><span style="color:#555">(</span>target<span style="color:#555">.</span><span style="color:#309">getPort</span><span style="color:#555">()!=-</span><span style="color:#f60">1</span><span style="color:#555">)</span>spec<span style="color:#555">+=</span><span style="color:#c30">&#34;:&#34;</span><span style="color:#555">+</span>target<span style="color:#555">.</span><span style="color:#309">getPort</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">return</span> spec<span style="color:#555">+=</span>target<span style="color:#555">.</span><span style="color:#309">getFile</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">/*向Web服务器传送数据*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">protected</span> <span style="color:#078;font-weight:bold">void</span> <span style="color:#c0f">sendMessage</span><span style="color:#555">(</span>String data<span style="color:#555">)</span><span style="color:#069;font-weight:bold">throws</span> IOException<span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>    System<span style="color:#555">.</span><span style="color:#309">out</span><span style="color:#555">.</span><span style="color:#309">println</span><span style="color:#555">(</span>data<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>    sender<span style="color:#555">.</span><span style="color:#309">write</span><span style="color:#555">(</span>data<span style="color:#555">.</span><span style="color:#309">getBytes</span><span style="color:#555">(),</span><span style="color:#f60">0</span><span style="color:#555">,</span>data<span style="color:#555">.</span><span style="color:#309">length</span><span style="color:#555">());</span>
+</span></span><span style="display:flex;"><span>    sender<span style="color:#555">.</span><span style="color:#309">flush</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">/*接收来自Web服务器的数据*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">protected</span> <span style="color:#078;font-weight:bold">void</span> <span style="color:#c0f">receiveMessage</span><span style="color:#555">()</span><span style="color:#069;font-weight:bold">throws</span> IOException<span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#078;font-weight:bold">byte</span> data<span style="color:#555">[]=</span><span style="color:#069;font-weight:bold">new</span> <span style="color:#078;font-weight:bold">byte</span><span style="color:#555">[</span><span style="color:#f60">1024</span><span style="color:#555">];</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#078;font-weight:bold">int</span> count<span style="color:#555">=</span><span style="color:#f60">0</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#078;font-weight:bold">int</span> word<span style="color:#555">=-</span><span style="color:#f60">1</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#09f;font-style:italic">//解析第一行
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"></span>    <span style="color:#069;font-weight:bold">while</span><span style="color:#555">((</span>word<span style="color:#555">=</span>receiver<span style="color:#555">.</span><span style="color:#309">read</span><span style="color:#555">(</span>data<span style="color:#555">))!=-</span><span style="color:#f60">1</span><span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>        System<span style="color:#555">.</span><span style="color:#309">out</span><span style="color:#555">.</span><span style="color:#309">print</span><span style="color:#555">(</span><span style="color:#069;font-weight:bold">new</span> String<span style="color:#555">(</span>data<span style="color:#555">));</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>    closeServer<span style="color:#555">();</span>      
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">public</span> String <span style="color:#c0f">getResponseMessage</span><span style="color:#555">(){</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> responseMessage<span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">public</span> <span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">getResponseCode</span><span style="color:#555">(){</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> responseCode<span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">public</span> String <span style="color:#c0f">getServerVersion</span><span style="color:#555">(){</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> serverVersion<span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">public</span> InputStream <span style="color:#c0f">getInputStream</span><span style="color:#555">(){</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> byteStream<span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">public</span> <span style="color:#069;font-weight:bold">synchronized</span> String <span style="color:#c0f">getHeaderKey</span><span style="color:#555">(</span><span style="color:#078;font-weight:bold">int</span> i<span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">if</span><span style="color:#555">(</span>i<span style="color:#555">&amp;</span>gt<span style="color:#555">;=</span>header<span style="color:#555">.</span><span style="color:#309">size</span><span style="color:#555">())</span><span style="color:#069;font-weight:bold">return</span> <span style="color:#069;font-weight:bold">null</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    Enumeration enum1<span style="color:#555">=</span>header<span style="color:#555">.</span><span style="color:#309">propertyNames</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>    String key<span style="color:#555">=</span><span style="color:#069;font-weight:bold">null</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">for</span><span style="color:#555">(</span><span style="color:#078;font-weight:bold">int</span> j<span style="color:#555">=</span><span style="color:#f60">0</span><span style="color:#555">;</span>j<span style="color:#555">&amp;</span>lt<span style="color:#555">;=</span>i<span style="color:#555">;</span>j<span style="color:#555">++)</span>
+</span></span><span style="display:flex;"><span>        key<span style="color:#555">=(</span>String<span style="color:#555">)</span>enum1<span style="color:#555">.</span><span style="color:#309">nextElement</span><span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> key<span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">public</span> <span style="color:#069;font-weight:bold">synchronized</span> String <span style="color:#c0f">getHeaderValue</span><span style="color:#555">(</span><span style="color:#078;font-weight:bold">int</span> i<span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">if</span><span style="color:#555">(</span>i<span style="color:#555">&amp;</span>gt<span style="color:#555">;=</span>header<span style="color:#555">.</span><span style="color:#309">size</span><span style="color:#555">())</span><span style="color:#069;font-weight:bold">return</span> <span style="color:#069;font-weight:bold">null</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> header<span style="color:#555">.</span><span style="color:#309">getProperty</span><span style="color:#555">(</span>getHeaderKey<span style="color:#555">(</span>i<span style="color:#555">));</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">public</span> <span style="color:#069;font-weight:bold">synchronized</span> String <span style="color:#c0f">getHeaderValue</span><span style="color:#555">(</span>String key<span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> header<span style="color:#555">.</span><span style="color:#309">getProperty</span><span style="color:#555">(</span>key<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">protected</span> String <span style="color:#c0f">getBaseHeads</span><span style="color:#555">(){</span>
+</span></span><span style="display:flex;"><span>    String inf<span style="color:#555">=</span><span style="color:#c30">&#34;User-Agent:myselfHttp/1.0\r\n&#34;</span><span style="color:#555">+</span><span style="color:#c30">&#34;Accept:www/source;text/html;image/gif;*/*\r\n&#34;</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> inf<span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">private</span> <span style="color:#078;font-weight:bold">byte</span><span style="color:#555">[]</span> <span style="color:#c0f">addCapacity</span><span style="color:#555">(</span><span style="color:#078;font-weight:bold">byte</span> rece<span style="color:#555">[]){</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#078;font-weight:bold">byte</span> temp<span style="color:#555">[]=</span><span style="color:#069;font-weight:bold">new</span> <span style="color:#078;font-weight:bold">byte</span><span style="color:#555">[</span>rece<span style="color:#555">.</span><span style="color:#309">length</span><span style="color:#555">+</span><span style="color:#f60">1024</span><span style="color:#555">];</span>
+</span></span><span style="display:flex;"><span>    System<span style="color:#555">.</span><span style="color:#309">arraycopy</span><span style="color:#555">(</span>rece<span style="color:#555">,</span><span style="color:#f60">0</span><span style="color:#555">,</span>temp<span style="color:#555">,</span><span style="color:#f60">0</span><span style="color:#555">,</span>rece<span style="color:#555">.</span><span style="color:#309">length</span><span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> temp<span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">public</span> <span style="color:#069;font-weight:bold">static</span> <span style="color:#078;font-weight:bold">void</span> <span style="color:#c0f">main</span><span style="color:#555">(</span>String<span style="color:#555">[]</span>args<span style="color:#555">){</span>
+</span></span><span style="display:flex;"><span>    Http http<span style="color:#555">=</span><span style="color:#069;font-weight:bold">new</span> Http<span style="color:#555">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#09f;font-style:italic">//http.GET(&#34;http://192.168.1.5&#34;);
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"></span>    <span style="color:#09f;font-style:italic">//http.HEAD(&#34;http://www.xdol.com.cn/&#34;);
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"></span>    <span style="color:#078;font-weight:bold">int</span> i<span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span> http<span style="color:#555">.</span><span style="color:#309">POST</span><span style="color:#555">(</span><span style="color:#c30">&#34;http://www.7rings.com.cn/crbt/login.php&#34;</span><span style="color:#555">,</span><span style="color:#c30">&#34;userid=89919419&amp;amp;passwd=020752&amp;amp;areacode=00&amp;amp;phone_type=0&#34;</span><span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span> <span style="color:#09f;font-style:italic">//Thread.sleep(5000);
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"></span>    <span style="color:#09f;font-style:italic">//http.GET(&#34;http://localhost/WEB_ROOT/admin/broadcaster.php&#34;);
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"></span>    <span style="color:#069;font-weight:bold">for</span><span style="color:#555">(</span>i<span style="color:#555">=</span><span style="color:#f60">0</span><span style="color:#555">;</span>i<span style="color:#555">&amp;</span>lt<span style="color:#555">;</span><span style="color:#f60">10</span><span style="color:#555">;</span>i<span style="color:#555">++){</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#09f;font-style:italic">//http.POST(&#34;http://www.model-dl.com/modelinfo.asp?modelid=101&#34;,&#34;ratecontd=101&amp;amp;MM_insert=form1&#34;);
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"></span>        <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span>
+</span></span></code></pre></div><p> </p>
+<h2 id="http请求">HTTP请求</h2>
+<p> </p>
+<pre tabindex="0"><code> ----------运行这个java程序并捕获输出 ----------
+POST http://www.7rings.com.cn/crbt/login.php HTTP/1.0
+User-Agent:myself
+Http/1.0
+Accept:www/source;text/html;image/gif;*/*Content-type:application/x-www-form-urlencodedContent-length:54
+
+userid=89919419&amp;amp;passwd=******&amp;amp;areacode=00&amp;amp;phone_type=0
+</code></pre><p> </p>
+<h2 id="响应内容">响应内容</h2>
+<p> </p>
+<pre tabindex="0"><code>HTTP/1.1 200 OK
+Date: Thu, 13 Oct 2005 06:45:03 GMT
+Server: Apache/1.3.33 (Unix) PHP/5.0.3
+X-Powered-By: PHP/5.0.3
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Last-Modified: Thu, 13 Oct 2005 06:45:03
+GMTCache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Pragma: no-cacheSet-Cookie: PHPSESSID=in2k6uuso7ffjkul00n480f1i2; path=/Set-Cookie: crbt_area_code=00; expires=Sat, 12-Nov-2005 06:45:03 GMT; path=/; domain=www.7rings.com.cnConnection: closeContent-Type: text/html; charset=gb2312
+
+&lt;script&gt;&lt;document.frames.top.location=&#39;index02.php?url=myringlist.php&#39;&lt;/script&gt;
+```                             
+</code></pre>
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="//localhost:1313/"><img src="/img/favicon.png" />我的乐与怒</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2005-10-10-ip-address-abuse-and-protect/" data-toggle="tooltip" data-placement="top" title="IP地址盗用技术简介以及防范措施综述"><i class="fa fa-angle-left fa-lg"></i>
+                            Previous</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2005-10-13-fedora-resources/" data-toggle="tooltip" data-placement="top" title="Fedora资源">Next
+                        <i class="fa fa-angle-right fa-lg"></i></a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">目录</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">标签</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/aframe" title="aframe">
+                            aframe
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/andrew-ng" title="andrew-ng">
+                            andrew-ng
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/arduino" title="arduino">
+                            arduino
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                            blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/cgi" title="cgi">
+                            cgi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/consul" title="consul">
+                            consul
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                            docker
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/eth" title="eth">
+                            eth
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ethereum" title="ethereum">
+                            ethereum
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/evm" title="evm">
+                            evm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/feign" title="feign">
+                            feign
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                            golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/hw" title="hw">
+                            hw
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/jpa" title="jpa">
+                            jpa
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/js" title="js">
+                            js
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/k8s" title="k8s">
+                            k8s
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                            kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/linux" title="linux">
+                            linux
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mac" title="mac">
+                            mac
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/machine-learning" title="machine-learning">
+                            machine-learning
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/math" title="math">
+                            math
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mysql" title="mysql">
+                            mysql
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/nginx" title="nginx">
+                            nginx
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/op" title="op">
+                            op
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ops" title="ops">
+                            ops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/poco" title="poco">
+                            poco
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/pptp" title="pptp">
+                            pptp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/rd" title="rd">
+                            rd
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/spring" title="spring">
+                            spring
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/springboot" title="springboot">
+                            springboot
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ssl" title="ssl">
+                            ssl
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/thymeleaf" title="thymeleaf">
+                            thymeleaf
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/type" title="type">
+                            type
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vagrant" title="vagrant">
+                            vagrant
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vpn" title="vpn">
+                            vpn
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/vue" title="vue">
+                            vue
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/webrtc" title="webrtc">
+                            webrtc
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0" title="技术文章">
+                            技术文章
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2" title="新浪博客">
+                            新浪博客
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%97%A0%E8%81%8A" title="无聊">
+                            无聊
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB" title="生活">
+                            生活
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95" title="生活记录">
+                            生活记录
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E8%82%A1%E7%A5%A8" title="股票">
+                            股票
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E8%BF%90%E7%BB%B4" title="运维">
+                            运维
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>链接</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/vegas">青鸟的翅膀</a></li>
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/yoshikilau">Caffeine Park</a></li>
+                        
+                        <li><a target="_blank" href="http://huxpro.github.io">Theme From Hux</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/vincentz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/img/icwt.jpg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/vincentmi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/5311815/vincent-mi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="我的乐与怒" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; 我的乐与怒 2023 | <a href="http://www.beian.miit.gov.cn" style="text-decoration: none;"> 蜀ICP备17040089号-2</a>
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-78738242-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

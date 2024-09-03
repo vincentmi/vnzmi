@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on 我的乐与怒</title>
+    <link>//localhost:1313/tags/git/</link>
+    <description>Recent content in Git on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 08 Jan 2017 18:43:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Git index-pack failed 问题解决</title>
+      <link>//localhost:1313/post/2017-01-08-git-early-eof-index-pack-failed/</link>
+      <pubDate>Sun, 08 Jan 2017 18:43:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2017-01-08-git-early-eof-index-pack-failed/</guid>
+      <description>问题 git 由于提交了比较大的文件，在服务端一直无法拉下来，错误如下 root@iZ94au:/wwwroot/app# git pull remote: Counting objects: 168, done. remote: Compressing objects: 100% (87/87), done. Connection to bitbucket.org closed by remote host.0 KiB/s fatal: The remote end hung up unexpectedly fatal: early EOF fatal: index-pack failed 解决方案 解决1 根据stackoverflow的回答修改comporession=0 修改压缩的程度 compression = 9 设置为 -1， 0 9 均无效 解决2 这个错误可能是由于</description>
+    </item>
+    
+  </channel>
+</rss>

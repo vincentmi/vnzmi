@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kernel on 我的乐与怒</title>
+    <link>//localhost:1313/tags/kernel/</link>
+    <description>Recent content in Kernel on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 23 Jul 2016 05:38:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/kernel/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用Yum快速升级CentOS6.6内核</title>
+      <link>//localhost:1313/post/2016-07-23-centos-yum-update-kernel/</link>
+      <pubDate>Sat, 23 Jul 2016 05:38:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2016-07-23-centos-yum-update-kernel/</guid>
+      <description>因为要装Docker所以需要升级下Linux内核 记录下命令备忘 导入public key rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org 安装ELRepo到CentOS 6.6中 rpm -Uvh http://www.elrepo.org/elrepo-release-6-6.el6.elrepo.noarch.rpm 安装长期支持版本kernel yum --enablerepo=elrepo-kernel install kernel-lt -y 编辑grub.conf文件，修改Grub引导顺序 vim /etc/grub.conf 确认刚刚安装的内核的位置，然后将default修改一下。 default=0 timeout=5</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MAC on 我的乐与怒</title>
+    <link>//localhost:1313/tags/mac/</link>
+    <description>Recent content in MAC on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 17 Sep 2022 22:36:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/mac/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>用karabiner-element来定制你的MAC</title>
+      <link>//localhost:1313/post/2022-09-17-use-karabiner-element-redefine-you-mac-copy/</link>
+      <pubDate>Sat, 17 Sep 2022 22:36:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2022-09-17-use-karabiner-element-redefine-you-mac-copy/</guid>
+      <description>Logi Option 一直买罗技的鼠标搭配MAC使用, Logi Option还挺方便,但是Logi鼠标用一两年要不滚轮失灵要不经常蓝牙断连.换了个Razer 尼玛连鼠标按键定义的软件都没有MAC版. 鼠标厂商已经躺平了么. 硬件厂商不思进取又得研究下 karabiner-element. 安装 官网 : https://karabiner-elements.pqrs.org/ 可视化映射规则配置 : karabiner-complex-rules-generator Razer DA V2X 规则 btn5_alfred 将鼠标键 button5 映射</description>
+    </item>
+    
+    <item>
+      <title>PPTP MAC断线问题</title>
+      <link>//localhost:1313/post/2016-08-01-pptp-issue-of-mac/</link>
+      <pubDate>Mon, 01 Aug 2016 14:45:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2016-08-01-pptp-issue-of-mac/</guid>
+      <description>MAC连接pptp服务经常断线 日志内容如下 Aug 1 14:01:06 s1 pptpd[21666]: CTRL: Client 218.88.x.155 control connection finished Aug 1 14:05:34 s1 pptpd[21965]: CTRL: Client 218.88.x.155 control connection started Aug 1 14:05:34 s1 pptpd[21965]: CTRL: Starting call (launching pppd, opening GRE) Aug 1 14:05:34 s1 pppd[21967]: Warning: can&amp;#39;t open options file /home/xxxx/.ppprc: Permission denied Aug 1 14:05:34 s1 pppd[21967]: Plugin /usr/lib64/pptpd/pptpd-logwtmp.so loaded. Aug 1 14:05:34 s1 pppd[21967]: pptpd-logwtmp: $Version$ Aug 1 14:05:34 s1 pppd[21967]: Using interface ppp0 Aug 1 14:05:34 s1 pppd[21967]: Connect: ppp0 &amp;lt;--&amp;gt; /dev/pts/2 Aug 1 14:05:34 s1 pptpd[21965]: GRE: Bad checksum from pppd. Aug 1 14:05:38 s1 pppd[21967]: MPPE 128-bit stateless compression enabled Aug 1 14:05:41 s1 pppd[21967]: Unsupported protocol &amp;#39;Apple Client Server Protocol Control&amp;#39; (0x8235) received Aug 1 14:05:41 s1 pppd[21967]: Unsupported</description>
+    </item>
+    
+    <item>
+      <title>MAC 转发 80 端口到其他端口配置</title>
+      <link>//localhost:1313/post/2015-05-02-forward-mac-port80/</link>
+      <pubDate>Sat, 02 May 2015 22:36:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-05-02-forward-mac-port80/</guid>
+      <description>MAC OS 本质上还是 Unix 系统, Unix 系统大多默认情况下非root用户是无法使用小于1024的常用端口的.这时候如果你开发中需要在普通用户下用到80端口, 比如 tomcat, 比如 vitualbox 下构建了一个 http 服务, 若你想直接通过 浏览器的 localhost 访问的话(比用加上莫名其妙的”:端口”的话)你就需要做一些系统端口转发的工作. MAC OS 10.10</description>
+    </item>
+    
+    <item>
+      <title>来挽救MBP</title>
+      <link>//localhost:1313/post/2020-08-13-mbp-crash/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2020-08-13-mbp-crash/</guid>
+      <description>悲剧 离职公司电脑交了,自己买了个 MBP16,预装了 Catalina 10.15.6 .从此悲剧开始各种死机.休眠重启. 去售后查来查去也没啥问题. 随便搞个啥风扇就狂转.老版AIR 给我留下的安静坚挺的印象几乎要败光了. Twitter上联系了MAC售后也是各种提交问题.最后没有问题喊我查查软件. 知乎上说因为三哥程序</description>
+    </item>
+    
+  </channel>
+</rss>

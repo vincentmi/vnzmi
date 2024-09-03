@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spring Boot on 我的乐与怒</title>
+    <link>//localhost:1313/tags/spring-boot/</link>
+    <description>Recent content in Spring Boot on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 05 Apr 2021 10:53:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/spring-boot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>制作自定义的Spring Starter</title>
+      <link>//localhost:1313/post/2021-04-05-make-a-custom-spring-starter/</link>
+      <pubDate>Mon, 05 Apr 2021 10:53:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2021-04-05-make-a-custom-spring-starter/</guid>
+      <description>国内很多文章讲的不详细 参考: https://www.baeldung.com/spring-boot-custom-starter Spring Boot 自动配置原理 Spring Boot启动时会查找classpath中是否存在一个 spring.factories的文件.这个文件保存在META-INF文件夹. spring-boot-autoconfigure 项目中该文件代码如下. org.springframework.boot.autoconfigure.EnableAutoConfiguration=\ org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration,\ org.springframework.boot.autoconfigure.cassandra.CassandraAutoConfiguration,\ org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration,\ org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration 这个文件配置了Spring Boot将尝试运行的不同配置类.因此上面的</description>
+    </item>
+    
+  </channel>
+</rss>

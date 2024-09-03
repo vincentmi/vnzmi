@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vagrant on 我的乐与怒</title>
+    <link>//localhost:1313/tags/vagrant/</link>
+    <description>Recent content in Vagrant on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 25 Aug 2015 10:40:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/vagrant/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vagrant Mac 权限问题</title>
+      <link>//localhost:1313/post/2015-08-25-vagrant-file-permission-issue-on-mac/</link>
+      <pubDate>Tue, 25 Aug 2015 10:40:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-08-25-vagrant-file-permission-issue-on-mac/</guid>
+      <description>Vagrant在windows下加载的文件全部是777，但是在Mac 下会是644 这样会导致文件权限问题。 解决方法如下： config.vm.synced_folder &amp;#34;/Users/vincent/www&amp;#34;,&amp;#34;/vagrant&amp;#34;,:mount_options =&amp;gt; [&amp;#34;dmode=777&amp;#34;,&amp;#34;fmode=777&amp;#34;]</description>
+    </item>
+    
+    <item>
+      <title>Vagrant JS文件乱码</title>
+      <link>//localhost:1313/post/2015-05-02-vagrant-issue/</link>
+      <pubDate>Sat, 02 May 2015 23:36:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-05-02-vagrant-issue/</guid>
+      <description>修改虚拟机中的Apache httpd.conf文件 EnableSendfile off</description>
+    </item>
+    
+  </channel>
+</rss>

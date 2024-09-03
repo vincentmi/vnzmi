@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="我的乐与怒">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//localhost:1313//img/tianfu_3_st.jpg">
+    <meta property="twitter:image" content="//localhost:1313//img/tianfu_3_st.jpg" />
+    
+
+    
+    <meta name="title" content="Coursera - Machine learning 学习笔记(1) - 线性回归和分类器" />
+    <meta property="og:title" content="Coursera - Machine learning 学习笔记(1) - 线性回归和分类器" />
+    <meta property="twitter:title" content="Coursera - Machine learning 学习笔记(1) - 线性回归和分类器" />
+    
+
+    
+    <meta name="description" content="In code we trust">
+    <meta property="og:description" content="In code we trust" />
+    <meta property="twitter:description" content="In code we trust" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="我的乐与怒,vincent mi, miwenshu, 电商,  博客, 个人网站, 互联网, Web, 云原生, PaaS, Java, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Coursera - Machine learning 学习笔记(1) - 线性回归和分类器 | 我的乐与怒 | Vincent&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/2020-12-06-coursera-andrew-ng-machine-learning-notes/">
+
+    
+    
+    <link rel="stylesheet" href="/katex/katex.min.css">
+    <script defer src="/katex/katex.min.js"></script>
+
+    <script defer src="/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
+    
+
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">我的乐与怒</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/about/">我</a></li>
+                    
+                        <li><a href="/archive/">归档</a></li>
+                    
+                        <li><a href="/search/">搜索</a></li>
+                    
+                        <li><a href="/codesketch/">CodeSketch</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/post-ml.png')
+    }
+    
+    .titleColor {
+        text-align: center;font-size:80px;
+        color: #FFFFFF;
+    }
+   
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/machine-learning" title="Machine Learning">
+                            Machine Learning
+                        </a>
+                        
+                        <a class="tag" href="/tags/andrew-ng" title="Andrew NG">
+                            Andrew NG
+                        </a>
+                        
+                        <a class="tag" href="/tags/math" title="Math">
+                            Math
+                        </a>
+                        
+                    </div>
+                    <h1 class="titleColor">Coursera - Machine learning 学习笔记(1) - 线性回归和分类器</h1>
+                    <h2 class="subheading titleColor"></h2>
+                    <span class="meta titleColor">
+                        
+                            Posted by 
+                            
+                                Vincent
+                             
+                            on 
+                            Sunday, December 6, 2020
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <p>课程地址: <a href="https://www.coursera.org/learn/machine-learning/home/welcome"> https://www.coursera.org/learn/machine-learning/home/welcome</a></p>
+<p>作业 <a href="https://github.com/vincentmi/machine-learning-exercise">Vincent code exercise</a></p>
+<h1 id="第一周-简介和一元线性回归">第一周 简介和一元线性回归</h1>
+<h3 id="11-机器学习定义tom-mitchell">1.1 机器学习定义(Tom Mitchell)</h3>
+<p><strong>E</strong>  :  经验, 指训练样本<br>
+<strong>T</strong> : 目标任务,一类机器学习解决的问题<br>
+<strong>P</strong> : 衡量目标任务T的性能</p>
+<blockquote>
+<p>举例: 关于垃圾邮件的机器学习
+T: 将邮件标记为垃圾或者非垃圾
+E: 查看当前邮箱中邮件的是否垃圾的标签
+P: 标记垃圾邮件的准确率</p>
+</blockquote>
+<h3 id="12-机器学习分类">1.2 机器学习分类</h3>
+<ul>
+<li>监督学习 (Supervised Learning)
+<ul>
+<li>回归问题 regression , 例如: 根据房屋面积和价格的数据样本预测给定面积的房价的问题,price =fx(area) 房价是关于面积的函数.
+<ul>
+<li>根据给出的正确值 预测连续的输出值</li>
+</ul>
+</li>
+<li>分类问题 classification, 例如: 根据肿瘤大小预测肿瘤是良性还是恶性
+<ul>
+<li>根据输入的值,预测所属分类</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>非监督学习
+<ul>
+<li>没有明确目标的训练方式,例如:对新闻进行分类
+<ul>
+<li>举例:降噪函数 <code>[W,s,v] = svd((repmat(sum(x.*x,1),size(x,1),1).*x)*x')</code> (懵逼)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>其他
+<ul>
+<li>强化学习 Reinforcement Learning  根据反馈进行调整</li>
+<li>Recommender system</li>
+</ul>
+</li>
+</ul>
+<h3 id="13-模型描述">1.3 模型描述</h3>
+<p>$x^{(i)} $ 表示第i 个训练样本,的输入参数
+$y^{(i)}$ 表示第i个训练样本的输出参数
+$m$  训练集样本数量,样本的行数
+$h$ (Hypothesis) 假设函数,预测结果的函数
+$j$  代价函数,描述假设函数与训练样本输出值的差异</p>
+<h3 id="14-一元线性回归">1.4 一元线性回归</h3>
+<p><strong>预测函数</strong></p>
+<p>$h_\theta(x) = \theta_0 + \theta_1x$</p>
+<p><strong>代价函数</strong></p>
+<p>$J(\theta_0,\theta_1)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2$</p>
+<p><strong>目标</strong></p>
+<p>$min_{\theta0,\theta1}(j)$ 获得最小代价</p>
+<p><strong>参数更新</strong></p>
+<p>$\theta_j=\theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta_0,\theta_1)$</p>
+<p>带入函数求导之后:</p>
+<p>$\theta_j=\theta_j - \alpha\frac{1}{m} \sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x^{(i)}$</p>
+<p>使用临时变量.不要使用被更新的$\theta$值带入更新公式</p>
+<h2 id="第二周-多元线性回归">第二周 多元线性回归</h2>
+<h3 id="21-公式">2.1 公式</h3>
+<p><strong>样本</strong></p>
+<p>$x=[x_0 \ x_1\ x_2\ x_3\ &hellip; \ x_n]$</p>
+<p>$x_0 = 1 $</p>
+<p><strong>参数</strong></p>
+<p>$\theta=\begin{bmatrix}
+\theta_0 \\<br>
+\theta_1 \\<br>
+\theta_2 \\
+&hellip; \\
+\theta_n \\
+\end{bmatrix}
+$</p>
+<p>$y=\begin{bmatrix}
+y_0 \\<br>
+y_1 \\<br>
+y_2 \\
+&hellip; \\
+y_n \\
+\end{bmatrix}
+$</p>
+<p>$X=\begin{bmatrix}
+1 &amp; x^{(1)}_1 &amp; x^{(1)}_2 &amp; x^{(1)}_3&amp;&hellip;x^{(1)}_n \\
+1 &amp; x^{(2)}_1 &amp; x^{(2)}_2 &amp; x^{(2)}_3 &amp;&hellip;x^{(2)}_n\\
+&hellip;\\
+1 &amp; x^{(m)}_1 &amp; x^{(m)}_2 &amp; x^{(m)}_3 &amp;&hellip;x^{(m)}_n\\
+\end{bmatrix}
+$</p>
+<p><strong>预测函数</strong></p>
+<p>$h_\theta(x) = \theta_0x_0 + \theta_1x_1 &hellip; \theta_nx_n=\theta^Tx$</p>
+<p>转换为向量:</p>
+<p>$h_\theta(x) = X\theta$</p>
+<p><strong>代价函数</strong></p>
+<p>$J(\theta)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2$</p>
+<p><strong>目标</strong></p>
+<p>$min_{\theta0,\theta1 &hellip; \theta_n}(j)$ 获得最小代价</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-matlab" data-lang="matlab"><span style="display:flex;"><span>J = <span style="color:#f60">1</span><span style="color:#555">/</span>(<span style="color:#f60">2</span><span style="color:#555">*</span>m) <span style="color:#555">*</span> sum((X<span style="color:#555">*</span>theta <span style="color:#555">-</span> y)<span style="color:#555">.^</span><span style="color:#f60">2</span>);
+</span></span></code></pre></div><p><strong>参数更新</strong></p>
+<p>$\theta_j=\theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta_0,\theta_1 &hellip; \theta_n) = \theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta)$</p>
+<p>带入函数求导之后:</p>
+<p>$\theta_j=\theta_j - \alpha\frac{1}{m} \sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)}$</p>
+<p>转换为向量
+$\theta = \theta -  \frac{\alpha}{m} X^T(X\theta - y)$</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-matlab" data-lang="matlab"><span style="display:flex;"><span>theta = theta <span style="color:#555">-</span> (alpha<span style="color:#555">/</span>m) <span style="color:#555">*</span> (X<span style="color:#555">&#39;*</span>(X<span style="color:#555">*</span>theta <span style="color:#555">-</span>y))
+</span></span></code></pre></div><h3 id="22-特征缩放">2.2 特征缩放</h3>
+<ul>
+<li>将特征值限制在近似范围,降低梯度下降的步数.进行特征缩放后轮廓图将会更规则提高梯度下降的效率.</li>
+<li>将特征值缩放到 $-1 \le x_i \le 1$</li>
+<li>均值归一 常用公式 $x_i=\frac{x_i-avg(x)}{max(x)-min(x)}$</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-matlab" data-lang="matlab"><span style="display:flex;"><span><span style="color:#09f;font-style:italic">%  均值归一</span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">% x-均值/标准差</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">function</span><span style="color:#bbb"> </span>xi=<span style="color:#bbb"> </span><span style="color:#c0f">normalization</span>(x)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>avg=sum(x)<span style="color:#555">/</span><span style="color:#366">length</span>(x);
+</span></span><span style="display:flex;"><span>s=max(x) <span style="color:#555">-</span> min(x);
+</span></span><span style="display:flex;"><span>xi=(x <span style="color:#555">-</span> avg)<span style="color:#555">/</span>s;
+</span></span></code></pre></div><h3 id="23-学习速率alpha">2.3 学习速率$\alpha$</h3>
+<ul>
+<li>太小会导致收敛过慢</li>
+<li>太大J函数不会在每次迭代进行减少.无法收敛</li>
+<li>尝试 0.001,0.01,0.1,1,0.03等</li>
+<li>绘制成本迭代图形观察收敛情况 ( x=迭代次数,y=j函数的值)</li>
+<li>自动收敛测试,成本减少少于 $10^{-3}$则可以认为函数收敛收敛
+<ul>
+<li>无法收敛尝试调低学习速率$\alpha$</li>
+</ul>
+</li>
+</ul>
+<h3 id="24-多项式回归">2.4 多项式回归</h3>
+<p>多项式回归更好的拟合数据</p>
+<ul>
+<li>根据数据可以选择合适的多项式回归 $h(\theta)=\theta_0+\theta_1x+\theta_1x^2$</li>
+<li>根据数据可以选择合适的多项式回归 $h(\theta)=\theta_0+\theta_1x+\theta_1\sqrt{x}$</li>
+</ul>
+<h3 id="25-正规方程">2.5 正规方程</h3>
+<p>求$J$函数的偏导数,并置为0,即曲线斜率为0的点.即可算出对应的$\theta$值. (补微积分:()</p>
+<ul>
+<li>优点
+<ul>
+<li>一次即可算出最优解</li>
+<li>不需要进行特征缩放</li>
+<li>不需要选择学习速率</li>
+<li>适合线性回归</li>
+</ul>
+</li>
+<li>缺点
+<ul>
+<li>如果$n$非常大,效率会急剧降低</li>
+<li>如果特征类型大于10000建议尝试梯度下降算法</li>
+<li>不太适合比较复杂的学习算法</li>
+</ul>
+</li>
+<li>矩阵不可逆的情况,
+<ul>
+<li>删除一些有线性相关的特征量.</li>
+<li>删除重复特征</li>
+</ul>
+</li>
+</ul>
+<p>设计矩阵$X$ 为 $\mathbb{R}^{m\times(n+1)}$
+$
+X=\begin{bmatrix}
+1 &amp; x_1^{(1)} &amp; x_2^{(1)} &amp; x_3^{(1)} \\
+1 &amp;  x_1^{(2)}&amp; x_2^{(2)} &amp; x_3^{(2)} \\
+1 &amp;  x_1^{(3)}&amp; x_2^{(3)} &amp; x_3^{(3)} \\
+\end{bmatrix}
+$</p>
+<p>y为 $\mathbb{R}^{m}$</p>
+<p>$\theta=(T^TX)^{-1}X^Ty$</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-matlab" data-lang="matlab"><span style="display:flex;"><span>pinv(X<span style="color:#555">&#39;*</span>X)<span style="color:#555">*</span>X<span style="color:#555">&#39;*</span>y
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">%X&#39; X的转置 X&#39;=transpose(X)</span>
+</span></span></code></pre></div><h3 id="26-octave-使用">2.6 Octave 使用</h3>
+<p>这部分比较简单,部分函数</p>
+<ul>
+<li><code>disp</code>打印变量</li>
+<li><code>pinv</code> 求逆矩阵,一定会返回</li>
+<li><code>inv</code>求逆矩阵,奇异矩阵会报错</li>
+<li><code>transpose</code> 转置 ,和 <code>A'</code>效果一样</li>
+<li><code>eye(m)</code>生成单元矩阵</li>
+<li><code>ones(m,n)</code>生成均为1 的矩阵或者向量</li>
+<li><code>zeros(m,n)</code>生成均为0的矩阵或向量</li>
+<li><code>rand(m,n)</code>生成随机矩阵</li>
+<li><code>A(:,1) </code> 取列向量</li>
+<li><code>A(2,:) </code> 取一行</li>
+<li><code>plot(x,y)</code> 绘制平面图</li>
+<li><code>surf(x,y,z)</code>绘制表面图</li>
+<li><code>contour (x,y,z)</code>绘制轮廓图</li>
+<li><code>whos</code>查看当前定义变量</li>
+<li><code>who</code>查看当前定义的变量名</li>
+<li><code>mean</code>求平均值</li>
+<li><code>std</code>求标准差</li>
+</ul>
+<p>循环语句</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-matlab" data-lang="matlab"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">for</span> <span style="color:#366">i</span>=<span style="color:#f60">1</span>:<span style="color:#f60">10</span>,
+</span></span><span style="display:flex;"><span>    v(<span style="color:#366">i</span>)=<span style="color:#f60">2</span>^<span style="color:#366">i</span>;
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">end</span>;
+</span></span></code></pre></div><p>条件判断</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-matlab" data-lang="matlab"><span style="display:flex;"><span><span style="color:#555">&gt;&gt;</span> <span style="color:#069;font-weight:bold">if</span> v(<span style="color:#f60">1</span>) <span style="color:#555">==</span> <span style="color:#f60">1</span>,
+</span></span><span style="display:flex;"><span><span style="color:#555">&gt;</span>    <span style="color:#366">disp</span>(<span style="color:#c30">&#39;the value is one&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#555">&gt;</span>  <span style="color:#069;font-weight:bold">elseif</span> v(<span style="color:#f60">1</span>) <span style="color:#555">==</span> <span style="color:#f60">2</span>,
+</span></span><span style="display:flex;"><span><span style="color:#555">&gt;</span>    <span style="color:#366">disp</span>(<span style="color:#c30">&#39;the value is two&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#555">&gt;</span>  <span style="color:#069;font-weight:bold">else</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">&gt;</span>    <span style="color:#366">disp</span>(<span style="color:#c30">&#39;the value is not one or two&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#555">&gt;</span>  <span style="color:#069;font-weight:bold">end</span>;
+</span></span></code></pre></div><h3 id="27-数学知识补充">2.7 数学知识补充</h3>
+<h4 id="271-求导数">2.7.1 求导数</h4>
+<p>导数的计算在曲线某个点的斜率</p>
+<p>例如 : 求 $f(x)=x^2$的导数 $f&rsquo;(x)$</p>
+<p>$
+f&rsquo;(x)= \frac{f(x+\delta) - f(x)}{\delta} \\
+f&rsquo;(x)= \frac{(x+\delta)^2 - x^2}{\delta} \\
+f&rsquo;(x)= \frac{x^2+\delta^2 + 2x\delta- x^2}{\delta} \\
+f&rsquo;(x)= \frac{\delta^2 + 2x\delta}{\delta} \\
+f&rsquo;(x)= 2x \\
+$</p>
+<h4 id="272-导数法则">2.7.2 导数法则</h4>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>导数</th>
+<th>-</th>
+<th>法则</th>
+<th>函数</th>
+<th>导数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$c$(常数)</td>
+<td>$0$</td>
+<td></td>
+<td>乘以常数</td>
+<td>$cf$</td>
+<td>$cf'$</td>
+</tr>
+<tr>
+<td>$x$ (直线)</td>
+<td>$1 $</td>
+<td></td>
+<td>幂次方法则</td>
+<td>$x^n$</td>
+<td>$nx^{n-1}$</td>
+</tr>
+<tr>
+<td>$ax$</td>
+<td>$a$</td>
+<td></td>
+<td>加法法则</td>
+<td>$f+g$</td>
+<td>$f&rsquo;+g'$</td>
+</tr>
+<tr>
+<td>$x^2$(平方)</td>
+<td>$2x$</td>
+<td></td>
+<td>减法法则</td>
+<td>$f-g$</td>
+<td>$f&rsquo;-g'$</td>
+</tr>
+<tr>
+<td>$\sqrt{x}$(平方根)</td>
+<td>$\frac{1}{2}x^{\frac{-1}{2}}$</td>
+<td></td>
+<td>积法则</td>
+<td>$fg$</td>
+<td>$fg&rsquo;+f&rsquo;g$</td>
+</tr>
+<tr>
+<td>$\sqrt[n]{x}$</td>
+<td>$\frac{1}{n}x^{-\frac{1-n}{n}}$</td>
+<td></td>
+<td>积法则</td>
+<td>$fg$</td>
+<td>$fg&rsquo;+f&rsquo;g$</td>
+</tr>
+<tr>
+<td>$e^x$(指数)</td>
+<td>$e^x$</td>
+<td></td>
+<td>商法则</td>
+<td>$\frac{f}{g}$</td>
+<td>$\frac{f&rsquo;g-g&rsquo;f}{g^2}$</td>
+</tr>
+<tr>
+<td>$a^x$</td>
+<td>$\ln(a)a^x$</td>
+<td></td>
+<td>倒数法则</td>
+<td>$\frac{1}{f}$</td>
+<td>$\frac{-f&rsquo;}{f^2}$</td>
+</tr>
+<tr>
+<td>$\ln(x)$(对数)</td>
+<td>$\frac{1}{x}$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>$\log_a(x)$</td>
+<td>$\frac{1}{x\ln(a)}$</td>
+<td></td>
+<td>链式法则（为 &ldquo;复合函数&rdquo;）</td>
+<td>$f^{\circ}g$</td>
+<td>$(f&rsquo;^{\circ}g)g'$</td>
+</tr>
+<tr>
+<td>$\sin(x)(三角)$</td>
+<td>$\cos(x)$</td>
+<td></td>
+<td>链式法则</td>
+<td>$f(g(x))$</td>
+<td>$ f&rsquo;(g(x))g&rsquo;(x)$</td>
+</tr>
+<tr>
+<td>$\cos(x)	$</td>
+<td>$−\sin(x)$</td>
+<td></td>
+<td>链式法则</td>
+<td></td>
+<td>$\frac{dy}{dx}=\frac{dy}{du}\frac{du}{dx}$</td>
+</tr>
+<tr>
+<td>$\tan(x)$</td>
+<td>$sec{2(x)}$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>$\sin^{-1}(x)$</td>
+<td>$\frac{1}{\sqrt{1-x^2}}$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>$\cos^{-1}(x)$</td>
+<td>$\frac{-1}{\sqrt{1-x^2}}$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>$\tan^{-1}(x)$</td>
+<td>$\frac{1}{\sqrt{1+x^2}}$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>参考 <a href="https://baike.baidu.com/item/%E5%AF%BC%E6%95%B0%E8%A1%A8">导数表</a></p>
+<h4 id="273-矩阵乘法">2.7.3 矩阵乘法</h4>
+<p>$
+A=\begin{bmatrix}
+a_{1,1} &amp;  a_{1,2} &amp;  a_{1,3}\\
+a_{2,1} &amp;  a_{2,2} &amp;  a_{2,3}\\
+\end{bmatrix}
+$</p>
+<p>$
+B=\begin{bmatrix}
+b_{1,1} &amp;  b_{1,2}  \\
+b_{2,1} &amp;  b_{2,2} \\
+b_{3,1} &amp;  b_{3,2} \\
+\end{bmatrix}
+$</p>
+<p>$
+C = AB = \begin{bmatrix}
+a_{1,1}b_{1,1}+a_{1,2}b_{2,1} + a_{1,3}b_{3,1} &amp; a_{1,1}b_{1,2}+a_{1,2}b_{2,2} + a_{1,3}b_{3,2} \\
+a_{2,1}b_{1,1}+a_{2,2}b_{2,1} + a_{2,3}b_{3,1} &amp; a_{2,1}b_{1,2}+a_{2,2}b_{2,2} + a_{2,3}b_{3,2} \\
+\end{bmatrix}
+$</p>
+<ul>
+<li>当矩阵A的列数（column）等于矩阵B的行数（row）时，A与B可以相乘。</li>
+<li>矩阵C的行数等于矩阵A的行数，C的列数等于B的列数。</li>
+<li>乘积C的第m行第n列的元素等于矩阵A的第m行的元素与矩阵B的第n列对应元素乘积之和。</li>
+</ul>
+<blockquote>
+<p><strong>用A的行去乘B的列.</strong></p>
+</blockquote>
+<p>#第三周 逻辑回归</p>
+<h3 id="31-二元分类">3.1 二元分类</h3>
+<ul>
+<li>h函数$ h(\theta)=\theta^Tx$</li>
+<li>逻辑函数$g$(sigmoid function) ; $g(z) = \frac{1}{1+e^{-z}}$</li>
+<li>将$g$应用到预测函数 $h(\theta) = \frac{1}{1+e^{-\theta^Tx}}$</li>
+<li>决策边界
+<ul>
+<li>$\theta^Tx &gt; 0 =&gt; y=1$</li>
+<li>非线性决策边界 $h(\theta)=g(\theta_0 + \theta_1x_1 + \theta_2x_2+\theta_3x_1^2+\theta_4x_2^2$) 当$\theta=[-1 \  0 \ 0 \ 1\ 1]$则是个圆.</li>
+<li>根据数据集选择合适的假设函数</li>
+<li>通过多项式获取更复杂的决策边界</li>
+</ul>
+</li>
+<li>代价函数,将y=1和y=0两种情况合并为一个方程$Cost(h(\theta(x),y)) = -y\log( {h_{\theta}(x)} ) - (1-y)\log(1-h_{\theta}(x))$</li>
+</ul>
+<h3 id="32-预测函数">3.2 预测函数</h3>
+<p>$ h(\theta)=g(\theta^Tx)$
+$z=\theta^Tx$
+$g(z) = \frac{1}{1+e^{-z}}$
+$h(\theta) = \frac{1}{1+e^{-\theta^Tx}}$</p>
+<h3 id="33-代价函数">3.3 代价函数</h3>
+<p>$j(\theta)=-\frac{1}{m} \sum_{i=1}^m[y^{(i)}\log(h_\theta(x^{(i)}))+(1-y^{(i)})\log(1-h_\theta(x^{(i)}))]$</p>
+<p>转换为向量
+$h=g(X\theta)$
+$j(\theta) =\frac{1}{m}  (-y^T\log(h) - (1-y)^T\log(1-h))$</p>
+<h3 id="34-梯度下降公式">3.4 梯度下降公式</h3>
+<p>$
+\theta_j := \theta_j - \frac{\alpha}{m} \sum_{i=1}^m[(h_\theta(x^{(i)}) - y^{(i)})x^{(i)}_j]
+$</p>
+<p>转换为向量:
+$\theta := \theta - \frac{\alpha}{m}X^T(g(X\theta)-\vec y)$</p>
+<h3 id="35-多元分类">3.5 多元分类</h3>
+<ul>
+<li>创建多个分类器并进行拟合</li>
+</ul>
+<h3 id="36-过度拟合">3.6 过度拟合</h3>
+<ul>
+<li>underfit (high bais) 高偏差</li>
+<li>overfit 过度拟合
+<ul>
+<li>出现的问题
+<ul>
+<li>J代价函数趋近于0</li>
+<li>无法正确对新的数据进行好的预测</li>
+</ul>
+</li>
+<li>解决
+<ul>
+<li>减少特征数量
+<ul>
+<li>手动删除</li>
+<li>使用算法选择</li>
+</ul>
+</li>
+<li>正规化
+<ul>
+<li>减小$\theta$</li>
+<li>当有很多稍微有点用的特性时效果很好</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="37-正规化">3.7 正规化</h3>
+<p>用来解决过度拟合(overfitting)问题.引入$\lambda$来降低$\theta$的影响.</p>
+<blockquote>
+<p><strong>特别注意: 在代价函数和梯度下降函数中,正规化都需要排除$\theta_0$</strong></p>
+</blockquote>
+<h4 id="371-正规化线性回归">3.7.1 正规化线性回归</h4>
+<ul>
+<li>
+<p>代价函数
+正规化的$j$ 函数后面加入,正规化参数 $\lambda \sum_{j=1}^n\theta_j^2$</p>
+<p>$J(\theta)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2 + \lambda \sum_{j=1}^n\theta_j^2 $</p>
+</li>
+<li>
+<p>梯度下降函数</p>
+<p><strong>正规化不处理$\theta_0$</strong></p>
+<p>$
+\theta_0=
+\theta_0 - \alpha [\frac{1}{m}\sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x_0^{(i)}
+$</p>
+<p><strong>当前$j \gt 0$ 时</strong></p>
+<p>$
+\theta_j=
+\theta_j - \alpha [\frac{1}{m}\sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)}
++\frac{ \lambda}{m}\theta_j]  $
+进行
+$
+\theta_j= \theta_j(1-\alpha\frac{\lambda}{m} )- \alpha \frac{1}{m}\sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)})
+$</p>
+</li>
+<li>
+<p>正规方程解法</p>
+</li>
+</ul>
+<p>$$
+\begin{aligned}
+L_{n+1\times n+1}=\begin{bmatrix}
+0 \\
+\ &amp; 1 \\
+\ &amp; &amp; 1 \\
+&hellip;\\
+\ &amp; &amp; &amp; &amp; 1 \\
+\end{bmatrix} \\
+\theta =(X^TX + \lambda\cdot L)^{-1}X^Ty
+\end{aligned}
+$$</p>
+<p><strong>如果$m&lt;n$</strong> $X^TX$ 不可逆.但是加上$ \lambda\cdot L$ 则是可逆的.大佬已经证明了.</p>
+<h4 id="372-正规化逻辑回归">3.7.2 正规化逻辑回归</h4>
+<h5 id="--代价函数">- 代价函数</h5>
+<p>$j(\theta)=-\frac{1}{m} \sum_{i=1}^m[y^{(i)}\log(h_\theta(x^{(i)}))+(1-y^{(i)})\log(1-h_\theta(x^{(i)}))] + \frac{\lambda}{2m} \sum_{i=1}^n\theta_j^2$</p>
+<p>向量化:</p>
+<p>$ z =g(X\theta)$</p>
+<p>$J(\theta) = \frac{1}{m}( -y^T \log(z) - (1-y)^T \log(1-z) + \frac{\lambda}{2m}(\theta^T \theta)$</p>
+<p><strong>第二个公式$\theta_0=0$</strong></p>
+<h5 id="--梯度下降函数">- 梯度下降函数</h5>
+<p>$\theta= \theta_j(1-\alpha\frac{\lambda}{m} )- \alpha \frac{1}{m}\sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)})
+$</p>
+<p>向量化:</p>
+<p>$
+\theta=\frac{1}{m} X^T(z-y) + \frac{\lambda}{m} \cdot \theta
+$</p>
+<p>第二个公式$θ_0$=0,用于移除$\theta_0$的影响</p>
+<h4 id="373-使用内建优化函数fminunc">3.7.3 使用内建优化函数<code>fminunc</code></h4>
+<p>创建用于优化的函数返回,代价值和$\theta$的微分值,<code>function [J, grad] = costFunction(theta, X, y)</code>. 内部会选择算法
+算出最优化的$\theta$值</p>
+<p>$
+\theta =\frac{1}{m}\sum_{i=1}^m(h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)}
+$</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-matlab" data-lang="matlab"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">%代价函数</span>
+</span></span><span style="display:flex;"><span>J=(<span style="color:#f60">1</span><span style="color:#555">/</span>m) <span style="color:#555">*</span> ( <span style="color:#555">-</span>y<span style="color:#555">&#39;</span> <span style="color:#555">*</span> <span style="color:#366">log</span>(z) <span style="color:#555">-</span> (<span style="color:#f60">1</span><span style="color:#555">-</span>y)<span style="color:#555">&#39;</span> <span style="color:#555">*</span> <span style="color:#366">log</span>(<span style="color:#f60">1</span><span style="color:#555">-</span>z) ) <span style="color:#555">+</span> (lambda<span style="color:#555">/</span>(<span style="color:#f60">2</span><span style="color:#555">*</span>m)) <span style="color:#555">*</span> (theta_0<span style="color:#555">&#39;</span> <span style="color:#555">*</span> theta_0);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">%梯度函数</span>
+</span></span><span style="display:flex;"><span>grad = <span style="color:#f60">1</span><span style="color:#555">/</span>m <span style="color:#555">*</span> X<span style="color:#555">&#39;*</span>(z <span style="color:#555">-</span> y) <span style="color:#555">+</span>  (lambda <span style="color:#555">/</span> m) <span style="color:#555">.*</span> theta_0;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">%  Set options for fminunc</span>
+</span></span><span style="display:flex;"><span>options = optimset(<span style="color:#c30">&#39;GradObj&#39;</span>, <span style="color:#c30">&#39;on&#39;</span>, <span style="color:#c30">&#39;MaxIter&#39;</span>, <span style="color:#f60">400</span>);
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">% Run fminunc to obtain the optimal theta</span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">% This function will return theta and the cost [theta, cost] = ...</span>
+</span></span><span style="display:flex;"><span>fminunc(@(t)(costFunction(t, X, y)), initial theta, options);
+</span></span></code></pre></div><h4 id="374-选择合适的lambda">3.7.4 选择合适的$\lambda$</h4>
+<ul>
+<li>如果$\lambda$设置过大无法拟合数据,因为对于$\theta$的调整对整体的影响力有限.</li>
+<li>如果$\lambda$设置过小则会过拟合,没有起作用</li>
+<li>可以通过对训练集进行预测查看准确率来选择合适的值</li>
+</ul>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="//localhost:1313/"><img src="/img/favicon.png" />我的乐与怒</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2020-08-25-linux-tips/" data-toggle="tooltip" data-placement="top" title="Linux 18.04 Tips"><i class="fa fa-angle-left fa-lg"></i>
+                            Previous</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2020-12-10-coursera-andrew-ng-machine-learning-notes-week4/" data-toggle="tooltip" data-placement="top" title="Coursera - Machine learning 学习笔记(2) - 神经网络">Next
+                        <i class="fa fa-angle-right fa-lg"></i></a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">目录</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">标签</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/aframe" title="aframe">
+                            aframe
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/andrew-ng" title="andrew-ng">
+                            andrew-ng
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/arduino" title="arduino">
+                            arduino
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                            blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/cgi" title="cgi">
+                            cgi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/consul" title="consul">
+                            consul
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                            docker
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/eth" title="eth">
+                            eth
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ethereum" title="ethereum">
+                            ethereum
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/evm" title="evm">
+                            evm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/feign" title="feign">
+                            feign
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                            golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/hw" title="hw">
+                            hw
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/jpa" title="jpa">
+                            jpa
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/js" title="js">
+                            js
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/k8s" title="k8s">
+                            k8s
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                            kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/linux" title="linux">
+                            linux
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mac" title="mac">
+                            mac
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/machine-learning" title="machine-learning">
+                            machine-learning
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/math" title="math">
+                            math
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mysql" title="mysql">
+                            mysql
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/nginx" title="nginx">
+                            nginx
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/op" title="op">
+                            op
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ops" title="ops">
+                            ops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/poco" title="poco">
+                            poco
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/pptp" title="pptp">
+                            pptp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/rd" title="rd">
+                            rd
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/spring" title="spring">
+                            spring
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/springboot" title="springboot">
+                            springboot
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ssl" title="ssl">
+                            ssl
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/thymeleaf" title="thymeleaf">
+                            thymeleaf
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/type" title="type">
+                            type
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vagrant" title="vagrant">
+                            vagrant
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vpn" title="vpn">
+                            vpn
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/vue" title="vue">
+                            vue
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/webrtc" title="webrtc">
+                            webrtc
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0" title="技术文章">
+                            技术文章
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2" title="新浪博客">
+                            新浪博客
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%97%A0%E8%81%8A" title="无聊">
+                            无聊
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB" title="生活">
+                            生活
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95" title="生活记录">
+                            生活记录
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E8%82%A1%E7%A5%A8" title="股票">
+                            股票
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E8%BF%90%E7%BB%B4" title="运维">
+                            运维
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>链接</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/vegas">青鸟的翅膀</a></li>
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/yoshikilau">Caffeine Park</a></li>
+                        
+                        <li><a target="_blank" href="http://huxpro.github.io">Theme From Hux</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/vincentz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/img/icwt.jpg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/vincentmi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/5311815/vincent-mi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="我的乐与怒" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; 我的乐与怒 2023 | <a href="http://www.beian.miit.gov.cn" style="text-decoration: none;"> 蜀ICP备17040089号-2</a>
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-78738242-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="我的乐与怒">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//localhost:1313//img/tianfu_3_st.jpg">
+    <meta property="twitter:image" content="//localhost:1313//img/tianfu_3_st.jpg" />
+    
+
+    
+    <meta name="title" content="Java动态程序设计：反射介绍" />
+    <meta property="og:title" content="Java动态程序设计：反射介绍" />
+    <meta property="twitter:title" content="Java动态程序设计：反射介绍" />
+    
+
+    
+    <meta name="description" content="In code we trust">
+    <meta property="og:description" content="In code we trust" />
+    <meta property="twitter:description" content="In code we trust" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="我的乐与怒,vincent mi, miwenshu, 电商,  博客, 个人网站, 互联网, Web, 云原生, PaaS, Java, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Java动态程序设计：反射介绍 | 我的乐与怒 | Vincent&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/2006-04-21-java-reflect-guide/">
+
+    
+
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">我的乐与怒</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/about/">我</a></li>
+                    
+                        <li><a href="/archive/">归档</a></li>
+                    
+                        <li><a href="/search/">搜索</a></li>
+                    
+                        <li><a href="/codesketch/">CodeSketch</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/post-bg-dot.jpg')
+    }
+    
+    .titleColor {
+        text-align: center;font-size:80px;
+        color: #FFFFFF;
+    }
+   
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2" title="新浪博客">
+                            新浪博客
+                        </a>
+                        
+                        <a class="tag" href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0" title="技术文章">
+                            技术文章
+                        </a>
+                        
+                    </div>
+                    <h1 class="titleColor">Java动态程序设计：反射介绍</h1>
+                    <h2 class="subheading titleColor"></h2>
+                    <span class="meta titleColor">
+                        
+                            Posted by 
+                            
+                                Vincent
+                             
+                            on 
+                            Friday, April 21, 2006
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <p>使用运行的类的信息使你的程序设计更加灵活反射授予了你的代码访问装载进JVM内的Java类的内部信息的权限，并且允许你编写在程序执行期间与所选择的类的一同工作的代码，而不是在源代码中。这种机制使得反射成为创建灵活的应用程序的强大工具，但是要小心的是，如果使用不恰当，反射会带来很大的副作用。</p>
+<p>在这篇文章中，软件咨询顾问Dennis Sosnoski 介绍了反射的使用，同时还介绍了一些使用反射所要付出的代价。在这里，你可以找到Java反射API是如何在运行时让你钩入对象的。在第一部分，我向你介绍了Java程序设计的类以及类的装载。</p>
+<p>那篇文章中描述了很多出现在Java二进制类格式中的信息，现在我来介绍在运行时使用反射API访问和使用这些信息的基础。为了使那些已经了解反射基础的开发人员对这些事情感兴趣，我还会介绍一些反射与直接访问的在性能方面的比较。使用反射与和metadata(描述其它数据的数据)一些工作的Java程序设计是不同的。通过Java语言反射来访问的元数据的特殊类型是在JVM内部的类和对象的描述。反射使你可以在运行时访问各种类信息，它甚至可以你让在运行时读写属性字段、调用所选择的类的方法。</p>
+<p>反射是一个强大的工具，它让你建立灵活能够在运行时组装的代码，而不需要连接组件间的源代码。反射的一些特征也带来一些问题。在这章中，我将会探究在应用程序中不打算使用反射的原因，以为什么使用它的原因。在你了解到这些利弊之后，你就会在好处大于缺点的时候做出决定。初识class使用反射的起点总时一个<code>java.lang.Class</code>类的实例。如果你与一个预先确定的类一同工作，Java语言为直接获得Class类的实例提供了一个简单的快捷方式。例如：<code>Class clas = MyClass.class;</code>当你使用这项技术的时候，所有与装载类有关的工作都发生在幕后。如果你需要在运行时从外部的资源中读取类名，使用上面这种方法是不会达到目的的，相反你需要使用类装载器来查找类的信息，方法如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#09f;font-style:italic">// &#34;name&#34; is the class name to loadClass 
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"></span>clas<span style="color:#a00;background-color:#faa"> </span><span style="color:#555">=</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#069;font-weight:bold">null</span><span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">try</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#555">{</span><span style="color:#a00;background-color:#faa">  </span>
+</span></span><span style="display:flex;"><span>    clas<span style="color:#a00;background-color:#faa"> </span><span style="color:#555">=</span><span style="color:#a00;background-color:#faa"> </span>Class<span style="color:#555">.</span><span style="color:#309">forName</span><span style="color:#555">(</span>name<span style="color:#555">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#069;font-weight:bold">catch</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#555">(</span>ClassNotFoundException<span style="color:#a00;background-color:#faa"> </span>ex<span style="color:#555">)</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a00;background-color:#faa">  </span><span style="color:#09f;font-style:italic">// handle exception case
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"></span><span style="color:#555">}</span><span style="color:#09f;font-style:italic">// use the loaded class
+</span></span></span></code></pre></div><p>如果类已经装载，你将会找到当前在在的类的信息。如果类还没有被装载，那么类装载器将会装载它，并且返回最近创建的类的实例。关于类的反射Class对象给予你了所有的用于反射访问类的元数据的基本钩子。这些元数据包括有关类的自身信息，例如象类的包和子类，还有这个类所实现的接口，还包括这个类所定义的构造器、属性字段以及方法的详细信息。后面的这些项是我们在程序设计过种经常使用的，因此在这一节的后面我会给出一些用这些信息来工作的例子。对于类的构造中的每一种类型（构造器、属性字段、方法），<code>java.lang.Class</code>提供了四种独立的反射调用以不的方式来访问类的信息。下面列出了这四种调用的标准形式，它是一组用于查找构造器的调用。<code>Constructor getConstructor(Class[] params)</code>使用指定的参数类型来获得公共的构造器；Constructor[] getConstructors()    获得这个类的所有构造器；<code>Constructor getDeclaredConstructor(Class[] params)</code> 使用指定的参数类型来获得构造器（忽略访问的级别）<code>Constructor[] getDeclaredConstructors()</code>  获得这个类的所有的构造器（忽略访问的级别）上述的每一种方法都返回一或多个<code>java.lang.reflect.Constructor</code>的实例。Constructor类定义了一个需要一个对象数据做为唯一参数的newInstance方法，然后返回一个最近创建的原始类的实例。对象数组是在构造器调用时所使用的参数值。</p>
+<p>例如，假设你有一个带有一对String 类型做为参数的构造器的TwoString类，代码如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">public</span><span style="color:#a00;background-color:#faa"> </span>class<span style="color:#a00;background-color:#faa"> </span>TwoString<span style="color:#a00;background-color:#faa"> </span><span style="color:#555">{</span><span style="color:#a00;background-color:#faa">    </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">private</span><span style="color:#a00;background-color:#faa"> </span>String<span style="color:#a00;background-color:#faa"> </span>m_s1<span style="color:#555">,</span><span style="color:#a00;background-color:#faa"> </span>m_s2<span style="color:#555">;</span><span style="color:#a00;background-color:#faa">    </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">public</span><span style="color:#a00;background-color:#faa"> </span>TwoString<span style="color:#555">(</span>String<span style="color:#a00;background-color:#faa"> </span>s1<span style="color:#555">,</span><span style="color:#a00;background-color:#faa"> </span>String<span style="color:#a00;background-color:#faa"> </span>s2<span style="color:#555">)</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#555">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a00;background-color:#faa">        </span>m_s1<span style="color:#a00;background-color:#faa"> </span><span style="color:#555">=</span><span style="color:#a00;background-color:#faa"> </span>s1<span style="color:#555">;</span><span style="color:#a00;background-color:#faa">        </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a00;background-color:#faa">        </span>m_s2<span style="color:#a00;background-color:#faa"> </span><span style="color:#555">=</span><span style="color:#a00;background-color:#faa"> </span>s2<span style="color:#555">;</span><span style="color:#a00;background-color:#faa">    </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span>
+</span></span></code></pre></div><p>下面的代码显示如何获得TwoString类的构造器，并使用字符串“a”和“b”来创建一个实例：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Class<span style="color:#555">[]</span><span style="color:#a00;background-color:#faa"> </span>types<span style="color:#a00;background-color:#faa"> </span><span style="color:#555">=</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#069;font-weight:bold">new</span><span style="color:#a00;background-color:#faa"> </span>Class<span style="color:#555">[]</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#555">{</span><span style="color:#a00;background-color:#faa"> </span>String<span style="color:#555">.</span><span style="color:#309">class</span><span style="color:#555">,</span><span style="color:#a00;background-color:#faa"> </span>String<span style="color:#555">.</span><span style="color:#309">class</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#555">};</span><span style="color:#a00;background-color:#faa">    </span>
+</span></span><span style="display:flex;"><span>Constructor<span style="color:#a00;background-color:#faa"> </span>cons<span style="color:#a00;background-color:#faa"> </span><span style="color:#555">=</span><span style="color:#a00;background-color:#faa"> </span>TwoString<span style="color:#555">.</span><span style="color:#309">class</span><span style="color:#555">.</span><span style="color:#309">getConstructor</span><span style="color:#555">(</span>types<span style="color:#555">);</span><span style="color:#a00;background-color:#faa">    </span>
+</span></span><span style="display:flex;"><span>Object<span style="color:#555">[]</span><span style="color:#a00;background-color:#faa"> </span>args<span style="color:#a00;background-color:#faa"> </span><span style="color:#555">=</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#069;font-weight:bold">new</span><span style="color:#a00;background-color:#faa"> </span>Object<span style="color:#555">[]</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#555">{</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#c30">&#34;a&#34;</span><span style="color:#555">,</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#c30">&#34;b&#34;</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#555">};</span><span style="color:#a00;background-color:#faa">    </span>
+</span></span><span style="display:flex;"><span>TwoString<span style="color:#a00;background-color:#faa"> </span>ts<span style="color:#a00;background-color:#faa"> </span><span style="color:#555">=</span><span style="color:#a00;background-color:#faa"> </span>cons<span style="color:#555">.</span><span style="color:#309">newInstance</span><span style="color:#555">(</span>args<span style="color:#555">);</span>
+</span></span></code></pre></div><p>上面的代码忽略了几种可能的被不同的反射方法抛出的异常检查的类型。这些异常在Javadoc　API中有详细的描述，因此为简便起见，我会在所有的代码中忽略它们。在我涉及到构造器这个主题时，Java语言也定义了一个特殊的没有参数的（或默认）构造器快捷方法，你能使用它来创建一个类的实例。这个快捷方法象下面的代码这样被嵌入到类的自定义中：<code>Object newInstance() </code> . 使用默认的构造器创建新的实例。尽管这种方法只让你使用一个特殊的构造器，但是如果你需要的话，它是非常便利的快捷方式。这项技术在使用JavaBeans工作的时候尤其有用，因为JavaBeans需要定义一个公共的、没有参数的构造器。通过反射来查找属性字段Class类反射调用访问属性字段信息与那些用于访问构造器的方法类似，在有数组类型的参数的使用属性字段名来替代：
+使用方法如下所示：</p>
+<p><code>Field getField(String name)</code>  &ndash;获得由name指定的具有public级别的属性字段<code>Field getFields()</code> 获得一个类的所有具有public级别的属性字段<code>Field getDeclaredField(String name)</code> ?获得由name指定的被类声明的属性字段<code>Field getDeclaredFields() </code>获得由类定义的所有的属性字段尽管与构造器的调用很相似，</p>
+<p>但是在提到属性字段的时候，有一个重要的差别：前两个方法返回能过类来访问的公共（public）属性字段的信息（包括那些来自于超类的属性字段），后两个方法返回由类直接声明的所有的属性字段（忽略了属性字段的访问类型）。</p>
+<p><code>Java.lang.reflect.Field</code> 的实例通过调用定义好的getXXX和setXXX方法来返回所有的原始的数据类型，就像普通的与对象引用一起工作的get和set方法一样。尽管getXXX方法会自动地处理数据类型转换（例如使用getInt方法来获取一个byte类型的值），但使用一个适当基于实际的属性字段类型的方法是应该优先考虑的。</p>
+<p>下面的代码显示了如何使用属性字段的反射方法，通过指定属性字段名，找到一个对象的int类型的属性字段，并给这个属性字段值加1。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">public</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#078;font-weight:bold">int</span><span style="color:#a00;background-color:#faa"> </span>incrementField<span style="color:#555">(</span>String<span style="color:#a00;background-color:#faa"> </span>name<span style="color:#555">,</span><span style="color:#a00;background-color:#faa"> </span>Object<span style="color:#a00;background-color:#faa"> </span>obj<span style="color:#555">)</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#069;font-weight:bold">throws</span><span style="color:#555">...</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#555">{</span><span style="color:#a00;background-color:#faa">    </span>
+</span></span><span style="display:flex;"><span>    Field<span style="color:#a00;background-color:#faa"> </span>field<span style="color:#a00;background-color:#faa"> </span><span style="color:#555">=</span><span style="color:#a00;background-color:#faa"> </span>obj<span style="color:#555">.</span><span style="color:#309">getClass</span><span style="color:#555">().</span><span style="color:#309">getDeclaredField</span><span style="color:#555">(</span>name<span style="color:#555">);</span><span style="color:#a00;background-color:#faa">    </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#078;font-weight:bold">int</span><span style="color:#a00;background-color:#faa"> </span>value<span style="color:#a00;background-color:#faa"> </span><span style="color:#555">=</span><span style="color:#a00;background-color:#faa"> </span>field<span style="color:#555">.</span><span style="color:#309">getInt</span><span style="color:#555">(</span>obj<span style="color:#555">)</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#555">+</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#f60">1</span><span style="color:#555">;</span><span style="color:#a00;background-color:#faa">    </span>
+</span></span><span style="display:flex;"><span>    field<span style="color:#555">.</span><span style="color:#309">setInt</span><span style="color:#555">(</span>obj<span style="color:#555">,</span><span style="color:#a00;background-color:#faa"> </span>value<span style="color:#555">);</span><span style="color:#a00;background-color:#faa">    </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span><span style="color:#a00;background-color:#faa"> </span>value<span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span>
+</span></span></code></pre></div><p>这个方法开始展现一些使用反射所可能带来的灵活性，它优于与一个特定的类一同工作，incrementField方法把要查找的类信息的对象传递给getClass方法，然后直接在那个类中查找命名的属性字段。通过反射来查找方法Class反射调用访问方法的信息与访问构造器和字段属性的方法非常相似</p>
+<p><code>Method getMethod(String name,Class[] params)</code> &ndash;使用指定的参数类型获得由name参数指定的public类型的方法。</p>
+<p><code>Mehtod[] getMethods()</code> 获得一个类的所有的public类型的方法
+<code>Mehtod getDeclaredMethod(String name, Class[] params)</code> 使用指定的参数类型获得由name参数所指定的由这个类声明的方法。</p>
+<p><code>Method[] getDeclaredMethods()</code> 获得这个类所声明的所有的方法与属性字段的调用一样，</p>
+<p>前两个方法返回通过这个类的实例可以访问的<code>public</code>类型的方法?包括那些继承于超类的方法。
+后两个方法返回由这个类直接声明的方法的信息，而不管方法的访问类型。通过调用返回的<code>Java.lang.reflect.Mehtod</code>实例定义了一个<code>invoke</code>方法，你可以使用它来调用定义类的有关实例。这个invoke方法需要两个参数，一个是提供这个方法的类的实例，一个是调用这个方法所需要的参数值的数组。下面给出了比属性字段的例子更加深入的例子，它显示了一个的方法反射的例子，这个方法使用get和set方法来给JavaBean定义的int类型的属性做增量操作。例如，如果对象为一个整数类型count属性定义了getCount和setCount方法，那么为了给这个属性做增量运算，你就可以把“count”做为参数名传递给调用的这个方法中。</p>
+<p>示例代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">public</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#078;font-weight:bold">int</span><span style="color:#a00;background-color:#faa"> </span>incrementProperty<span style="color:#555">(</span>String<span style="color:#a00;background-color:#faa"> </span>name<span style="color:#555">,</span><span style="color:#a00;background-color:#faa"> </span>Object<span style="color:#a00;background-color:#faa"> </span>obj<span style="color:#555">)</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#555">{</span><span style="color:#a00;background-color:#faa">    </span>
+</span></span><span style="display:flex;"><span>    String<span style="color:#a00;background-color:#faa"> </span>prop<span style="color:#a00;background-color:#faa"> </span><span style="color:#555">=</span><span style="color:#a00;background-color:#faa"> </span>Character<span style="color:#555">.</span><span style="color:#309">toUpperCase</span><span style="color:#555">(</span>name<span style="color:#555">.</span><span style="color:#309">charAt</span><span style="color:#555">(</span><span style="color:#f60">0</span><span style="color:#555">))</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#555">+</span> name<span style="color:#555">.</span><span style="color:#309">substring</span><span style="color:#555">(</span><span style="color:#f60">1</span><span style="color:#555">);</span><span style="color:#a00;background-color:#faa">    </span>
+</span></span><span style="display:flex;"><span>    String<span style="color:#a00;background-color:#faa"> </span>mname<span style="color:#a00;background-color:#faa"> </span><span style="color:#555">=</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#c30">&#34;get&#34;</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#555">+</span><span style="color:#a00;background-color:#faa"> </span>prop<span style="color:#555">;</span><span style="color:#a00;background-color:#faa">    </span>Class<span style="color:#555">[]</span><span style="color:#a00;background-color:#faa"> </span>types<span style="color:#a00;background-color:#faa"> </span><span style="color:#555">=</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#069;font-weight:bold">new</span><span style="color:#a00;background-color:#faa"> </span>Class<span style="color:#555">[]</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#555">{};</span><span style="color:#a00;background-color:#faa">   </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a00;background-color:#faa"> </span>Method<span style="color:#a00;background-color:#faa"> </span>method<span style="color:#a00;background-color:#faa"> </span><span style="color:#555">=</span><span style="color:#a00;background-color:#faa"> </span>obj<span style="color:#555">.</span><span style="color:#309">getClass</span><span style="color:#555">().</span><span style="color:#309">getMethod</span><span style="color:#555">(</span>mname<span style="color:#555">,</span><span style="color:#a00;background-color:#faa"> </span>types<span style="color:#555">);</span><span style="color:#a00;background-color:#faa">    </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a00;background-color:#faa"> </span>Object<span style="color:#a00;background-color:#faa"> </span>result<span style="color:#a00;background-color:#faa"> </span><span style="color:#555">=</span><span style="color:#a00;background-color:#faa"> </span>method<span style="color:#555">.</span><span style="color:#309">invoke</span><span style="color:#555">(</span>obj<span style="color:#555">,</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#069;font-weight:bold">new</span><span style="color:#a00;background-color:#faa"> </span>Object<span style="color:#555">[</span><span style="color:#f60">0</span><span style="color:#555">]);</span><span style="color:#a00;background-color:#faa">    </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a00;background-color:#faa"> </span><span style="color:#078;font-weight:bold">int</span><span style="color:#a00;background-color:#faa"> </span>value<span style="color:#a00;background-color:#faa"> </span><span style="color:#555">=</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#555">((</span>Integer<span style="color:#555">)</span>result<span style="color:#555">).</span><span style="color:#309">intValue</span><span style="color:#555">()</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#555">+</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#f60">1</span><span style="color:#555">;</span><span style="color:#a00;background-color:#faa">    </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a00;background-color:#faa"> </span>mname<span style="color:#a00;background-color:#faa"> </span><span style="color:#555">=</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#c30">&#34;set&#34;</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#555">+</span><span style="color:#a00;background-color:#faa"> </span>prop<span style="color:#555">;</span><span style="color:#a00;background-color:#faa">    </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a00;background-color:#faa"> </span>types<span style="color:#a00;background-color:#faa"> </span><span style="color:#555">=</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#069;font-weight:bold">new</span><span style="color:#a00;background-color:#faa"> </span>Class<span style="color:#555">[]</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#555">{</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#078;font-weight:bold">int</span><span style="color:#555">.</span><span style="color:#309">class</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#555">};</span><span style="color:#a00;background-color:#faa"> </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a00;background-color:#faa"> </span>method<span style="color:#a00;background-color:#faa"> </span><span style="color:#555">=</span><span style="color:#a00;background-color:#faa"> </span>obj<span style="color:#555">.</span><span style="color:#309">getClass</span><span style="color:#555">().</span><span style="color:#309">getMethod</span><span style="color:#555">(</span>mname<span style="color:#555">,</span><span style="color:#a00;background-color:#faa"> </span>types<span style="color:#555">);</span><span style="color:#a00;background-color:#faa">    </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a00;background-color:#faa"> </span>method<span style="color:#555">.</span><span style="color:#309">invoke</span><span style="color:#555">(</span>obj<span style="color:#555">,</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#069;font-weight:bold">new</span><span style="color:#a00;background-color:#faa"> </span>Object<span style="color:#555">[]</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#555">{</span><span style="color:#069;font-weight:bold">new</span><span style="color:#a00;background-color:#faa"> </span>Integer<span style="color:#555">(</span>value<span style="color:#555">)</span><span style="color:#a00;background-color:#faa"> </span><span style="color:#555">});</span><span style="color:#a00;background-color:#faa">    </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a00;background-color:#faa"> </span>   <span style="color:#069;font-weight:bold">return</span><span style="color:#a00;background-color:#faa"> </span>value<span style="color:#555">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#555">}</span>
+</span></span></code></pre></div><p>根据JavaBeans的规范，我把属性名的第一个字母转换为大写，然后在前面加上“get”来建立读取属性值的方法名，在属性名前加上“set”来建立设置属性值的方法名。JavaBeans的读方法只返回属性值，写方法只需要要写入的值做为参数，因此我指定了与这个方法相匹配的参数类型。最后规范规定这两个方法应该是public类型的，因此我使用了查找相关类的public类型方法的调用形式。这个例子我首先使用反射传递一个原始类型的值，因此让我们来看一下它是怎样工作的。基本的原理是简单的：无论什么时候，你需要传递一个原始类型的值，你只要替换相应的封装原始类型的（在java.lang 包中定义的）的类的实例就可以了。这种方法可应用于调用和返回。因此在我的例子中调用get方法时，我预期的结果是一个由java.lang.Integer类所封装的实际的int类型的属性值。</p>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="//localhost:1313/"><img src="/img/favicon.png" />我的乐与怒</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2006-04-14-let-php-support-utf8/" data-toggle="tooltip" data-placement="top" title="用PHP开发基于unicode(utf-8)的程序"><i class="fa fa-angle-left fa-lg"></i>
+                            Previous</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2007-09-02-sunshine-and-tea/" data-toggle="tooltip" data-placement="top" title="阳光 公园 茶">Next
+                        <i class="fa fa-angle-right fa-lg"></i></a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">目录</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">标签</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/aframe" title="aframe">
+                            aframe
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/andrew-ng" title="andrew-ng">
+                            andrew-ng
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/arduino" title="arduino">
+                            arduino
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                            blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/cgi" title="cgi">
+                            cgi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/consul" title="consul">
+                            consul
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                            docker
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/eth" title="eth">
+                            eth
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ethereum" title="ethereum">
+                            ethereum
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/evm" title="evm">
+                            evm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/feign" title="feign">
+                            feign
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                            golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/hw" title="hw">
+                            hw
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/jpa" title="jpa">
+                            jpa
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/js" title="js">
+                            js
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/k8s" title="k8s">
+                            k8s
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                            kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/linux" title="linux">
+                            linux
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mac" title="mac">
+                            mac
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/machine-learning" title="machine-learning">
+                            machine-learning
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/math" title="math">
+                            math
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mysql" title="mysql">
+                            mysql
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/nginx" title="nginx">
+                            nginx
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/op" title="op">
+                            op
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ops" title="ops">
+                            ops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/poco" title="poco">
+                            poco
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/pptp" title="pptp">
+                            pptp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/rd" title="rd">
+                            rd
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/spring" title="spring">
+                            spring
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/springboot" title="springboot">
+                            springboot
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ssl" title="ssl">
+                            ssl
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/thymeleaf" title="thymeleaf">
+                            thymeleaf
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/type" title="type">
+                            type
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vagrant" title="vagrant">
+                            vagrant
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vpn" title="vpn">
+                            vpn
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/vue" title="vue">
+                            vue
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/webrtc" title="webrtc">
+                            webrtc
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0" title="技术文章">
+                            技术文章
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2" title="新浪博客">
+                            新浪博客
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%97%A0%E8%81%8A" title="无聊">
+                            无聊
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB" title="生活">
+                            生活
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95" title="生活记录">
+                            生活记录
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E8%82%A1%E7%A5%A8" title="股票">
+                            股票
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E8%BF%90%E7%BB%B4" title="运维">
+                            运维
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>链接</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/vegas">青鸟的翅膀</a></li>
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/yoshikilau">Caffeine Park</a></li>
+                        
+                        <li><a target="_blank" href="http://huxpro.github.io">Theme From Hux</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/vincentz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/img/icwt.jpg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/vincentmi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/5311815/vincent-mi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="我的乐与怒" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; 我的乐与怒 2023 | <a href="http://www.beian.miit.gov.cn" style="text-decoration: none;"> 蜀ICP备17040089号-2</a>
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-78738242-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>POCO on 我的乐与怒</title>
+    <link>//localhost:1313/tags/poco/</link>
+    <description>Recent content in POCO on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 03 Jun 2008 01:06:24 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/poco/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>可爱的小妹妹</title>
+      <link>//localhost:1313/post/2008-06-03-zhang-qi/</link>
+      <pubDate>Tue, 03 Jun 2008 01:06:24 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2008-06-03-zhang-qi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>周末去洛带逛了下</title>
+      <link>//localhost:1313/post/2007-12-08-weekend-luodai/</link>
+      <pubDate>Sat, 08 Dec 2007 23:39:54 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2007-12-08-weekend-luodai/</guid>
+      <description>周末去了洛带.吃了下伤心凉粉,舌头尖尖辣的生痛,倒不觉得有多伤心.长城也不是很长.每个古镇都有相似的东西,比如穿古装照相、卖花环的小贩、骑马、一个小庙还有基本差不多的小店。唯一不同的就是旅游管理部门的介入程度。相比黄龙溪洛带古镇不是很有意思。而且黄龙溪还有杀手级服务。。。</description>
+    </item>
+    
+    <item>
+      <title>F1 and John Walker </title>
+      <link>//localhost:1313/post/2007-09-25-f1-and-john-walker/</link>
+      <pubDate>Tue, 25 Sep 2007 22:43:03 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2007-09-25-f1-and-john-walker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>自己拍的成都车展照片</title>
+      <link>//localhost:1313/post/2007-09-25-cd-motor-show-2017-1/</link>
+      <pubDate>Tue, 25 Sep 2007 22:43:03 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2007-09-25-cd-motor-show-2017-1/</guid>
+      <description>POCO http://my.poco.cn/id-129395.shtml</description>
+    </item>
+    
+    <item>
+      <title>自己拍的成都车展照片(2)</title>
+      <link>//localhost:1313/post/2007-09-25-cd-motor-show-2017-2/</link>
+      <pubDate>Tue, 25 Sep 2007 22:43:03 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2007-09-25-cd-motor-show-2017-2/</guid>
+      <description>POCO http://my.poco.cn/id-129395.shtml</description>
+    </item>
+    
+    <item>
+      <title>望江公园-白鹭</title>
+      <link>//localhost:1313/post/2007-09-15-wangjiang-park/</link>
+      <pubDate>Sat, 15 Sep 2007 22:43:03 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2007-09-15-wangjiang-park/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>猫咪</title>
+      <link>//localhost:1313/post/2007-10-04-a-sad-cat/</link>
+      <pubDate>Sun, 02 Sep 2007 22:43:03 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2007-10-04-a-sad-cat/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>阳光 公园 茶</title>
+      <link>//localhost:1313/post/2007-09-02-sunshine-and-tea/</link>
+      <pubDate>Sun, 02 Sep 2007 22:43:03 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2007-09-02-sunshine-and-tea/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RD on 我的乐与怒</title>
+    <link>//localhost:1313/tags/rd/</link>
+    <description>Recent content in RD on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 22 Jun 2016 14:15:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/rd/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Golang:错误即值 Errors are values</title>
+      <link>//localhost:1313/post/2016-06-22-golang-errors-are-values/</link>
+      <pubDate>Wed, 22 Jun 2016 14:15:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2016-06-22-golang-errors-are-values/</guid>
+      <description>英文原版见此 https://blog.golang.org/errors-are-values 作者 :Rob Pike 翻译 :Vincent Mi 前言 最近用Go写了一下程序,没有try-catch不太适应。因此翻到了这篇文章. 顺手翻译了过来.可能翻译不太好纯为了自己加深理解. 正文 如何进行错误处理,这是一个Go程序员之间,特别是一些新的Go程序员,会经常讨论的问题.讨论到最后往往由于以下代码的多</description>
+    </item>
+    
+    <item>
+      <title>Eclipse 相同方法变量颜色修改</title>
+      <link>//localhost:1313/post/2015-12-04-eclipse-occurrence-color-change/</link>
+      <pubDate>Fri, 04 Dec 2015 13:56:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-12-04-eclipse-occurrence-color-change/</guid>
+      <description>&lt;p&gt;Eclipse 选择Dark主题会出现白底白字高亮的情况 基本看不到.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>扩展Thymeleaf 3 - 模板模式</title>
+      <link>//localhost:1313/post/2015-07-23-extending-thymeleaf-part-3/</link>
+      <pubDate>Fri, 24 Jul 2015 10:33:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-07-23-extending-thymeleaf-part-3/</guid>
+      <description>&lt;p&gt;[http://vincentmi.gitbooks.io/extendingthymeleaf/content/][http://vincentmi.gitbooks.io/extendingthymeleaf/content/]&lt;/p&gt;
+&lt;p&gt;模板模式或许是Thymeleaf最强大的扩展点，模板模式实际上定义了什么可以被认为是一个“模板”。创建定制化的模板模式允许我们处理不同于默认的XML,XHTML,HTML5的文档格式。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>扩展Thymeleaf-4 创建我们自己的方言</title>
+      <link>//localhost:1313/post/2015-07-24-extending-thymeleaf-part-4/</link>
+      <pubDate>Fri, 24 Jul 2015 10:33:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-07-24-extending-thymeleaf-part-4/</guid>
+      <description>&lt;p&gt;[http://vincentmi.gitbooks.io/extendingthymeleaf/][http://vincentmi.gitbooks.io/extendingthymeleaf/]&lt;/p&gt;
+&lt;p&gt;足球是麝香草大陆最流行的运动。每个赛季有10对参加联赛，主办方请为我们为它创建一个叫做&amp;quot;Extrathyme&amp;quot;的网站。&lt;/p&gt;
+&lt;p&gt;这个网站将非常简单，就是一个表格。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;队名&lt;/li&gt;
+&lt;li&gt;胜平负的场次，以及获得的总分&lt;/li&gt;
+&lt;li&gt;备注，该队伍当前所处的位置，下赛季保级还是升入高级别联赛&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;然后在表格上显示一个广告和最近比赛的比分。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>扩展Thymeleaf-2  方言和处理器</title>
+      <link>//localhost:1313/post/2015-07-23-extending-thymeleaf-part-2/</link>
+      <pubDate>Thu, 23 Jul 2015 09:27:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-07-23-extending-thymeleaf-part-2/</guid>
+      <description>&lt;p&gt;gitbook [http://vincentmi.gitbooks.io/extendingthymeleaf/content/][1]&lt;/p&gt;
+&lt;p&gt;如果你读过Thymeleaf的入门教程（你应该已经读完了）。你应该知道你之前学的准确的说不是Thymeleaf，而是Thymeleaf的标准方言。（或者，如果你读过Thymeleaf+Spring教程的话就是Spring标准方言）。&lt;/p&gt;
+&lt;p&gt;这是什么意思？意思是你学的th:xattribute只是可以立即使用的标准方言。但是你可以使用你喜欢的名字自己定义一组attribute或者tag在Thymeleaf用来处理你的模板。你可以定义你自己的方言。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>扩展Thymeleaf-1 为什么需要扩展Thymeleaf</title>
+      <link>//localhost:1313/post/2015-07-23-extending-thymeleaf-part-1/</link>
+      <pubDate>Thu, 23 Jul 2015 02:04:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-07-23-extending-thymeleaf-part-1/</guid>
+      <description>&lt;p&gt;gitbook [http://vincentmi.gitbooks.io/extendingthymeleaf/content/][http://vincentmi.gitbooks.io/extendingthymeleaf/content/]&lt;/p&gt;
+&lt;p&gt;Thymeleaf是一个很容易扩展的库。他的关键在于，大部分面向用户的功能不是直接构建在他的核心中，而是通过打包和组件化到一个称为Dialects(方言)的功能集合中。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Spring MVC 的错误处理</title>
+      <link>//localhost:1313/post/2015-06-30-exception-handling-in-spring-mvc/</link>
+      <pubDate>Tue, 30 Jun 2015 17:18:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-06-30-exception-handling-in-spring-mvc/</guid>
+      <description>&lt;p&gt;Spring MVC 提供多种异常处理方式，但是当我在进行Spring MVC培训时，我发现我的学院经常会感到困惑或者不太适应。&lt;/p&gt;
+&lt;p&gt;今天我将为你展示多种可能的选项。我们的目标是如果可能的话不在Controller的方法里显式的处理异常。作为横切关注点分别在专用代码里处理更好。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用Spring创建RESTful 服务</title>
+      <link>//localhost:1313/post/2015-06-25-use-spring-create-a-restful-service/</link>
+      <pubDate>Thu, 25 Jun 2015 13:52:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-06-25-use-spring-create-a-restful-service/</guid>
+      <description>&lt;p&gt;这个指南将引导你使用创建一个&amp;quot;hello world&amp;quot;&lt;a href=&#34;http://spring.io/understanding/REST&#34;&gt; RESTFul 服务&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>在CentOS下安装PPTP的VPN</title>
+      <link>//localhost:1313/post/2015-06-09-centos-pptp/</link>
+      <pubDate>Tue, 09 Jun 2015 23:16:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-06-09-centos-pptp/</guid>
+      <description>http://www.black-xstar.com/blog/691.html 最近买了个基于xen的VPS玩玩，安装LAMP没啥意思。国内网络环境不好，干脆安装个VPN试试。 对于Linux其实我什么都不会的，在google老师的帮助下，总算给我安装好了，记录下来以便查阅。 VPN常用有两种，一种是openvpn，另一种PPTP。前者开源跨平台功能强大，后者</description>
+    </item>
+    
+    <item>
+      <title>CXF添加Header</title>
+      <link>//localhost:1313/post/2015-06-04-cxf-header/</link>
+      <pubDate>Sun, 10 May 2015 23:16:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-06-04-cxf-header/</guid>
+      <description>CXF的header处理了半天。。。 添加拦截器 public class HotelHeaderInterceptor extends AbstractSoapInterceptor { public void handleMessage(SoapMessage message) throws Fault { List&amp;lt;Header&amp;gt; headers = message.getHeaders(); AuthenticationHeader aheader = new AuthenticationHeader(); aheader.setCulture(com.tourico.schemas.webservices.authentication.Culture.EN_US); aheader.setLoginName(username); aheader.setPassword(password); aheader.setVersion(new JAXBElement&amp;lt;String&amp;gt;(new QName(&amp;#34;&amp;#34;, &amp;#34;version&amp;#34;), String.class, version)); JAXBElement&amp;lt;AuthenticationHeader&amp;gt; authHeaders = new ObjectFactory().createAuthenticationHeader(aheader); Header header; try { header = new Header(authHeaders.getName(), aheader,new JAXBDataBinding(AuthenticationHeader.class)); headers.add(header); message.put(Header.HEADER_LIST, headers); } catch (JAXBException e) { e.printStackTrace(); } } 调用服务之前处理 IDestinationContracts port = service.getIISDestinationHosting() ; Client cxfClient = ClientProxy.getClient(port); cxfClient.getOutInterceptors().add(new HeaderInterceptor(Phase.WRITE));</description>
+    </item>
+    
+    <item>
+      <title>关于矩阵</title>
+      <link>//localhost:1313/post/2015-05-03-matrix/</link>
+      <pubDate>Mon, 04 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-05-03-matrix/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;转的啊&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;人总是会为自己找捷径，而往往捷径是要付出不一般的代价。
+呵呵&amp;mdash;说说矩阵的事：
+通过坐标变换将3D空间的图元转换成2D图元的过程：主要为世界变换-&amp;gt;视图变换-&amp;gt;投影变换-&amp;gt;视口变换
+3D场景中的任何物体，都是由一个一个三角形组成的。而三角形位置信息的就是其各个顶点的三维坐标。这是用来在模型中存储的，而要把物体显示在屏幕上，还需要将它们转换成显示器上的二维坐标。这就需要对每个点实施一套 3 to 2 的转换公式，在Direct3D中叫做“几何流水线”（Geometry Pipeline)。
+一般创建的mesh处于自己的局部坐标系。基本是屏幕正中放置。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>几个常见的语音交互平台的简介和比较</title>
+      <link>//localhost:1313/post/2015-05-03-speech-signal-processing/</link>
+      <pubDate>Mon, 04 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-05-03-speech-signal-processing/</guid>
+      <description>&lt;p&gt;转自 &lt;a href=&#34;http://ibillxia.github.io/blog/2012/11/24/several-plantforms-on-audio-and-speech-signal-processing/&#34;&gt;http://ibillxia.github.io/blog/2012/11/24/several-plantforms-on-audio-and-speech-signal-processing/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;1.概述
+最近做了两个与语音识别相关的项目，两个项目的主要任务虽然都是语音识别，或者更确切的说是关键字识别，但开发的平台不同， 一个是windows下的，另一个是android平台的，于是也就选用了不同的语音识别平台，前者选的是微软的Speech API开发的，后者则选用 的是CMU的pocketsphinx，本文主要将一些常见的语音交互平台进行简单的介绍和对比。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Clayman的3D学习指南</title>
+      <link>//localhost:1313/post/2015-05-03-clayman-3d-guide/</link>
+      <pubDate>Sun, 03 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-05-03-clayman-3d-guide/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://www.cnblogs.com/clayman/archive/2009/05/17/1459001.html&#34;&gt;http://www.cnblogs.com/clayman/archive/2009/05/17/1459001.html&lt;/a&gt;
+仅供个人学习使用，请勿转载，勿用于任何商业用途。
+作者：Clayman
+与玩游戏相比,写游戏要复杂上千万倍,除了需要掌握通用的编程技巧以外，还要有相当的图形学，物理，数学基础，特别是在国内，由于相关资料的缺乏，更是让初学者无从下手。下面总结了一些入门方法和比较容易入手的资料。
+首先你要精通一门高级语言，比如C++或者C#，其次，要有良好的英文阅读能力。对游戏开发者来说英文阅读能力是最重要也是最基本的工具之一，因为你遇到的大部分资源都将是英文的，不要总等着别人为你翻译。慢慢尝试着阅读英文资料，你会发现其实也并没有那么难:)&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MySQL和MSSQL 查询比较</title>
+      <link>//localhost:1313/post/2015-05-03-mysql-mssql-compare/</link>
+      <pubDate>Sun, 03 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-05-03-mysql-mssql-compare/</guid>
+      <description>Current Date and Time MS: SELECT GETDATE() MY: SELECT NOW() Optionally: Use CURDATE() for the date only.Limiting Results MS: SELECT TOP 10 * FROM table WHERE id = 1 MY: SELECT * FROM table WHERE id = 1 LIMIT 10Date Field Default Value MS: DATETIME DEFAULT GETDATE() MY: DATETIME fields cannot have a default value, i.e. &amp;ldquo;GETDATE()&amp;rdquo; You must use your INSERT statement to specify CURDATE() for the field. Optionally: Use datatype TIMESTAMP DEFAULT CURRENT_TIMESTAMPCharacter Length MS: LEN() MY: CHARACTER_LENGTH() Aliases: CHAR_LENGTH(), LENGTH()Character Replace MS: REPLACE() works case insensitively MY: REPLACE() works case sensitivelyTrim Functions MS: LTRIM() and RTRIM() MY: TRIM()String Concatenation MS: CONCATENATION USING + (Does not automatically cast operands to compatible types) MY: CONCAT(string, string), which accepts two or more arguments. (Automatically casts values into types which can be concatenated)Auto Increment Field Definition MS: tablename_id INT IDENTITY PRIMARY</description>
+    </item>
+    
+    <item>
+      <title>Unicode、GB2312、GBK和GB18030中的汉字</title>
+      <link>//localhost:1313/post/2015-05-03-chinese-encoding/</link>
+      <pubDate>Sun, 03 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-05-03-chinese-encoding/</guid>
+      <description>来源 http://www.fmddlmyy.cn/text24.html Unicode、GB2312、GBK和GB18030中的汉字GB18030有两个版本：GB18030-2000和GB18030-2005。GB18030-2000是GBK的取代版本，它的主要特点是在GBK 基础上增加了CJK统一汉字扩充A的汉字。GB18030-2005的主要</description>
+    </item>
+    
+    <item>
+      <title>UTF8 简体繁体转换字库2561</title>
+      <link>//localhost:1313/post/2015-05-03-chinese-utf8-simp-trad-translate/</link>
+      <pubDate>Sun, 03 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/post/2015-05-03-chinese-utf8-simp-trad-translate/</guid>
+      <description>繁体 &amp;#39;醃錒愛礙藹皚嬡璦曖噯鎄靄剴靉磑閡廠廣銨諳鵪垵幹鉗陰頇襖奧囂媼驁鼇嶴澆磽罷壩鮁鈀鮊擺敗唄韝辦頒絆阪鈑並辯幫綁鎊謗崗紡報飽寶剝鮑齙鴇備貝輩鋇狽憊鵯錛賁體繃鏰筆閉畢幣斃篳蓽鉍蹕潷嗶複紕慮詖費贔閈鰏邊變編貶辮鯿籩緶標颮飆鰾飆鑣驃鏢驫別鱉癟賓瀕擯濱臏殯繽髕儐檳鬢鑌贇頻餅稟綆撥</description>
+    </item>
+    
+  </channel>
+</rss>
