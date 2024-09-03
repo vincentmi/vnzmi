@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>workflow on 我的乐与怒</title>
+    <link>/tags/workflow/</link>
+    <description>Recent content in workflow on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 26 Apr 2024 15:13:00 +0000</lastBuildDate><atom:link href="/tags/workflow/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>工作流服务设计</title>
+      <link>/post/2024-04-26-workflow-design/</link>
+      <pubDate>Fri, 26 Apr 2024 15:13:00 +0000</pubDate>
+      
+      <guid>/post/2024-04-26-workflow-design/</guid>
+      <description>背景 企业和政府工作中很多业务都涉及到审批流或者工作流，在审批流或者工作流中完成各个部门的工作协调，任务指派，进度跟踪，公司现有审批设计的比较烂，计划重新进行审批的设计实现。目标覆盖OA审批和政府垮部门的工作流服务。 功能设计 审批人： 值审批任务指定的 人员，审批组，部门，角色 当审批人是</description>
+    </item>
+    
+    <item>
+      <title>对比工作流引擎和状态机</title>
+      <link>/post/2023-10-19-workflow-engine-vs-state-machine/</link>
+      <pubDate>Thu, 19 Oct 2023 14:25:00 +0000</pubDate>
+      
+      <guid>/post/2023-10-19-workflow-engine-vs-state-machine/</guid>
+      <description>前言 互联网研发大量转型B端，我接触了大量的ToB业务系统，各行业的信息化转型第一步多会考虑将业务流程进行电子化，因此业务流程的线上处理是各个业务系统的基础功能，也是业务部门使用最多的功能模块。其余的几大模块则是自定义表单、数据集成以及可视化大屏。后续都进行一下研究，希望设计一组通</description>
+    </item>
+    
+  </channel>
+</rss>

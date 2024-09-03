@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="我的乐与怒">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//img/car2.jpg">
+    <meta property="twitter:image" content="//img/car2.jpg" />
+    
+
+    
+    <meta name="title" content="使用OpenCV（1）基础" />
+    <meta property="og:title" content="使用OpenCV（1）基础" />
+    <meta property="twitter:title" content="使用OpenCV（1）基础" />
+    
+
+    
+    <meta name="description" content="In code we trust">
+    <meta property="og:description" content="In code we trust" />
+    <meta property="twitter:description" content="In code we trust" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="我的乐与怒,vincent mi, miwenshu, 电商,  博客, 个人网站, 互联网, Web, 云原生, PaaS, Java, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>使用OpenCV（1）基础 | 我的乐与怒 | Vincent&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/2023-12-08-learn-opencv-part-1/">
+
+    
+
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">我的乐与怒</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/about/">我</a></li>
+                    
+                        <li><a href="/archive/">归档</a></li>
+                    
+                        <li><a href="/search/">搜索</a></li>
+                    
+                        <li><a href="/codesketch/">CodeSketch</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/post-bg-python.png')
+    }
+    
+    .titleColor {
+        text-align: center;font-size:80px;
+        color: #FFFFFF;
+    }
+   
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/opentcv" title="opentcv">
+                            opentcv
+                        </a>
+                        
+                        <a class="tag" href="/tags/python" title="python">
+                            python
+                        </a>
+                        
+                    </div>
+                    <h1 class="titleColor">使用OpenCV（1）基础</h1>
+                    <h2 class="subheading titleColor"></h2>
+                    <span class="meta titleColor">
+                        
+                            Posted by 
+                            
+                                Vincent
+                             
+                            on 
+                            Friday, December 8, 2023
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <h1 id="安装">安装</h1>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span> pip install opencv-python
+</span></span></code></pre></div><h1 id="验证安装">验证安装</h1>
+<p>通过使用opencv 打开一个图片来验证安装是否成功。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">cv2</span> <span style="color:#069;font-weight:bold">as</span> <span style="color:#0cf;font-weight:bold">cv</span>
+</span></span><span style="display:flex;"><span>img <span style="color:#555">=</span> cv<span style="color:#555">.</span>imread(<span style="color:#c30">&#34;./bird.png&#34;</span>)
+</span></span><span style="display:flex;"><span>cv<span style="color:#555">.</span>imshow(<span style="color:#c30">&#34;Display window&#34;</span>, img)
+</span></span><span style="display:flex;"><span>k <span style="color:#555">=</span> cv<span style="color:#555">.</span>waitKey(<span style="color:#f60">0</span>) 
+</span></span></code></pre></div><p>运行后会打开文件，点击任何键退出窗口。</p>
+<h1 id="图形基础">图形基础</h1>
+<h2 id="数据结构mat">数据结构<code>mat</code></h2>
+<p>低版本的OpenCV使用来自于C语言的 <code>IplImage</code> 结构体来存储图形资料，该结构的问题在于需要手动进行内容管理，OpenCV2.0引入了一个新的数据结构<code>Mat</code>来进行图形的存储。用户不用再手动进行内存分配和回收。已经存在的<code>mat</code>对象重用。</p>
+<p><code>mat</code>是一个包含两部分数据的类：矩阵头（包含诸如矩阵大小、用于存储的方法、存储矩阵的地址等信息）和指向包含象素矩阵的指针。 矩阵头大小是恒定的，但是矩阵本身的大小可能因图像而异，并且通常会大几个数量级。</p>
+<h2 id="读取图片">读取图片</h2>
+<p><code>cv.imread(&quot;./bird.png&quot;)</code>读取图片到<code>mat</code>数据结构。</p>
+<p><code>img = cv.imread(&quot;./bird.png&quot;,IMREAD_UNCHANGED)</code>的第二个参数</p>
+<ul>
+<li>IMREAD_COLOR 加载成BGR格式，默认选项</li>
+<li>IMREAD_UNCHANGED 载入原始图片，如果有ALPHA通道则加载ALPHA通道</li>
+<li>IMREAD_GRAYSCALE 加载灰度图</li>
+</ul>
+<blockquote>
+<p>OpenCV 支持图像格式 Windows 位图 (bmp)、便携式图像格式（pbm、pgm、ppm）和 Sun 光栅（sr、ras）。 在插件的帮助下（如果您自己构建库，则需要指定使用它们，但在我们默认提供的软件包中）您还可以加载图像格式，例如 JPEG（jpeg、jpg、jpe）、JPEG 2000（jp2 - 在 CMake 中的代号为 Jasper）、TIFF 文件（tiff、tif）和可移植网络图形（png）。 此外，OpenEXR 也是一种可能性。</p>
+</blockquote>
+<h2 id="保存图片">保存图片</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span> cv<span style="color:#555">.</span>imwrite(<span style="color:#c30">&#34;sample.png&#34;</span>, img)
+</span></span></code></pre></div><p>将图片写入到文件中。</p>
+<h2 id="捕捉摄像头视频流">捕捉摄像头视频流</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">numpy</span> <span style="color:#069;font-weight:bold">as</span> <span style="color:#0cf;font-weight:bold">np</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">cv2</span> <span style="color:#069;font-weight:bold">as</span> <span style="color:#0cf;font-weight:bold">cv</span>
+</span></span><span style="display:flex;"><span>cap <span style="color:#555">=</span> cv<span style="color:#555">.</span>VideoCapture(<span style="color:#f60">0</span>)
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> cap<span style="color:#555">.</span>isOpened():
+</span></span><span style="display:flex;"><span>   <span style="color:#366">print</span>(<span style="color:#c30">&#34;无法获取摄像头&#34;</span>)
+</span></span><span style="display:flex;"><span>   exit()
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">while</span> <span style="color:#069;font-weight:bold">True</span>:
+</span></span><span style="display:flex;"><span>   <span style="color:#09f;font-style:italic"># 一帧一帧读取图片</span>
+</span></span><span style="display:flex;"><span>   ret, frame <span style="color:#555">=</span> cap<span style="color:#555">.</span>read()
+</span></span><span style="display:flex;"><span>   <span style="color:#09f;font-style:italic"># 读取成功进行展示</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#069;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> ret:
+</span></span><span style="display:flex;"><span>       <span style="color:#366">print</span>(<span style="color:#c30">&#34;无法读取帧 (可能流结束了?). 退出 ...&#34;</span>)
+</span></span><span style="display:flex;"><span>       <span style="color:#069;font-weight:bold">break</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#09f;font-style:italic"># 帧处理代码</span>
+</span></span><span style="display:flex;"><span>   gray <span style="color:#555">=</span> cv<span style="color:#555">.</span>cvtColor(frame, cv<span style="color:#555">.</span>COLOR_BGR2GRAY)
+</span></span><span style="display:flex;"><span>   <span style="color:#09f;font-style:italic"># 展示帧内容</span>
+</span></span><span style="display:flex;"><span>   cv<span style="color:#555">.</span>imshow(<span style="color:#c30">&#39;frame&#39;</span>, gray)
+</span></span><span style="display:flex;"><span>   <span style="color:#069;font-weight:bold">if</span> cv<span style="color:#555">.</span>waitKey(<span style="color:#f60">1</span>) <span style="color:#555">==</span> <span style="color:#366">ord</span>(<span style="color:#c30">&#39;q&#39;</span>):
+</span></span><span style="display:flex;"><span>       <span style="color:#069;font-weight:bold">break</span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># 完成后释放摄像头</span>
+</span></span><span style="display:flex;"><span>cap<span style="color:#555">.</span>release()
+</span></span><span style="display:flex;"><span>cv<span style="color:#555">.</span>destroyAllWindows()
+</span></span></code></pre></div><p>你也可以对摄像头进行设置，通过 <code>cap.get(propId)</code> 检查特性，<a href="https://docs.opencv.org/4.x/d4/d15/group__videoio__flags__base.html#gaeb8dd9c89c10a5c63c139bf7c4f5704d">特性列表见此</a>，然后通过<code>cap.set(propId, value)</code>设置。 例如：使用 <code>cap.get(cv.CAP_PROP_FRAME_WIDTH)</code>或者视频宽度，然后修改 <code>ret = cap.set(cv.CAP_PROP_FRAME_WIDTH,320)</code></p>
+<h2 id="播放视频">播放视频</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">numpy</span> <span style="color:#069;font-weight:bold">as</span> <span style="color:#0cf;font-weight:bold">np</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">cv2</span> <span style="color:#069;font-weight:bold">as</span> <span style="color:#0cf;font-weight:bold">cv</span>
+</span></span><span style="display:flex;"><span>cap <span style="color:#555">=</span> cv<span style="color:#555">.</span>VideoCapture(<span style="color:#c30">&#34;video.avi&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#555">...</span>
+</span></span></code></pre></div><p>和获取摄像头的代码一样只是将 <code>cv.VideoCapture</code>内容改成视频文件保存的位置即可。</p>
+<h2 id="保存视频">保存视频</h2>
+<p>保存视频需要创建<code>VideoWriter(file,FourCC,fps,frame_resolution)</code>对象。指定保存的文件位置，编码器，帧率，分辨率参数进行保存。<code>isColor</code>标识用于指定是否转换成黑白画面。</p>
+<p>FourCC 是由4个字节指定的编码，编码器支持的编码可以从 <a href="http://fourcc.org">fourcc.org</a>查看. 平台无关，下面在各个操作系统可以正常工作的编码如下：</p>
+<ul>
+<li>Fedora: DIVX, XVID, MJPG, X264, WMV1, WMV2. (XVID 建议使用. MJPG 文件较大. X264 可以更好的压缩视频)</li>
+<li>Windows: DIVX</li>
+<li>MAC : MJPG (.mp4), DIVX (.avi), X264 (.mkv).</li>
+</ul>
+<p>FourCC 构建 <code>cv.VideoWriter_fourcc('M','J','P','G')or cv.VideoWriter_fourcc(*'MJPG')</code>创建一个 MJPG编码器.</p>
+<p>下面代码捕捉摄像头的视频流，对视频内容进行纵向翻转并进行保存。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">cv2</span>
+</span></span><span style="display:flex;"><span>cap <span style="color:#555">=</span> cv2<span style="color:#555">.</span>VideoCapture(<span style="color:#f60">0</span>) 
+</span></span><span style="display:flex;"><span><span style="color:#366">print</span>(<span style="color:#c30">&#34;</span><span style="color:#a00">{}</span><span style="color:#c30">x</span><span style="color:#a00">{}</span><span style="color:#c30">@</span><span style="color:#a00">{}</span><span style="color:#c30">fps&#34;</span><span style="color:#555">.</span>format(cap<span style="color:#555">.</span>get(cv2<span style="color:#555">.</span>CAP_PROP_FRAME_WIDTH),cap<span style="color:#555">.</span>get(cv2<span style="color:#555">.</span>CAP_PROP_FRAME_HEIGHT),cap<span style="color:#555">.</span>get(cv2<span style="color:#555">.</span>CAP_PROP_FPS)))
+</span></span><span style="display:flex;"><span>fourcc <span style="color:#555">=</span> cv2<span style="color:#555">.</span>VideoWriter_fourcc(<span style="color:#555">*</span><span style="color:#c30">&#39;X264&#39;</span>)
+</span></span><span style="display:flex;"><span>out <span style="color:#555">=</span> cv2<span style="color:#555">.</span>VideoWriter(<span style="color:#c30">&#34;./cap.mkv&#34;</span>,fourcc,<span style="color:#f60">30.0</span>,(<span style="color:#f60">1280</span>,<span style="color:#f60">720</span>))
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># 读取摄像头中的帧</span>
+</span></span><span style="display:flex;"><span>ret, frame <span style="color:#555">=</span> cap<span style="color:#555">.</span>read()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">while</span> cap<span style="color:#555">.</span>isOpened():
+</span></span><span style="display:flex;"><span>    <span style="color:#09f;font-style:italic"># 读取摄像头中的帧</span>
+</span></span><span style="display:flex;"><span>    ret, frame <span style="color:#555">=</span> cap<span style="color:#555">.</span>read()
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> ret:
+</span></span><span style="display:flex;"><span>        <span style="color:#366">print</span>(<span style="color:#c30">&#34;Can&#39;t receive frame (stream end?). Exiting ...&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">break</span>
+</span></span><span style="display:flex;"><span>    frame <span style="color:#555">=</span> cv2<span style="color:#555">.</span>flip(frame,<span style="color:#f60">0</span>)
+</span></span><span style="display:flex;"><span>    out<span style="color:#555">.</span>write(frame)
+</span></span><span style="display:flex;"><span>    cv2<span style="color:#555">.</span>imshow(<span style="color:#c30">&#39;frame&#39;</span>, frame)
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">if</span> cv2<span style="color:#555">.</span>waitKey(<span style="color:#f60">1</span>) <span style="color:#555">==</span> <span style="color:#366">ord</span>(<span style="color:#c30">&#39;q&#39;</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">break</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cap<span style="color:#555">.</span>release()
+</span></span><span style="display:flex;"><span>out<span style="color:#555">.</span>release()
+</span></span><span style="display:flex;"><span>cv2<span style="color:#555">.</span>destroyAllWindows()
+</span></span></code></pre></div><p>如果出现保存的视频只有几K无法播放的情况，请检查FPS，分辨率数据是否正确，可以通过
+获取摄像机参数打印出当前的分辨率情况，修改配置即可.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#366">print</span>(<span style="color:#c30">&#34;</span><span style="color:#a00">{}</span><span style="color:#c30">x</span><span style="color:#a00">{}</span><span style="color:#c30">@</span><span style="color:#a00">{}</span><span style="color:#c30">fps&#34;</span><span style="color:#555">.</span>format(cap<span style="color:#555">.</span>get(cv2<span style="color:#555">.</span>CAP_PROP_FRAME_WIDTH),cap<span style="color:#555">.</span>get(cv2<span style="color:#555">.</span>CAP_PROP_FRAME_HEIGHT),cap<span style="color:#555">.</span>get(cv2<span style="color:#555">.</span>CAP_PROP_FPS)))
+</span></span></code></pre></div><blockquote>
+<p>编码器可能不支持部分功能遇到无法输出可以关闭 isColor 选项，编码器接受BGR色彩空间</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>frame <span style="color:#555">=</span> cv2<span style="color:#555">.</span>cvtColor(frame, cv2<span style="color:#555">.</span>COLOR_BGR2GRAY)
+</span></span><span style="display:flex;"><span>frame <span style="color:#555">=</span> cv2<span style="color:#555">.</span>cvtColor(frame,cv2<span style="color:#555">.</span>COLOR_GRAY2BGR)
+</span></span></code></pre></div></blockquote>
+<h2 id="绘制">绘制</h2>
+<h4 id="绘制线段">绘制线段</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">numpy</span> <span style="color:#069;font-weight:bold">as</span> <span style="color:#0cf;font-weight:bold">np</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">cv2</span> <span style="color:#069;font-weight:bold">as</span> <span style="color:#0cf;font-weight:bold">cv</span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># 创建空白图形 创建512x512的零矩阵，用于描述图形的颜色</span>
+</span></span><span style="display:flex;"><span>img <span style="color:#555">=</span> np<span style="color:#555">.</span>zeros((<span style="color:#f60">512</span>,<span style="color:#f60">512</span>,<span style="color:#f60">3</span>), np<span style="color:#555">.</span>uint8)
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># 在图形对象绘制 从 0,0 -&gt; 511,511宽度为 5 象素的直线</span>
+</span></span><span style="display:flex;"><span>cv<span style="color:#555">.</span>line(img,(<span style="color:#f60">0</span>,<span style="color:#f60">0</span>),(<span style="color:#f60">511</span>,<span style="color:#f60">511</span>),(<span style="color:#f60">255</span>,<span style="color:#f60">0</span>,<span style="color:#f60">0</span>),<span style="color:#f60">5</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cv<span style="color:#555">.</span>imshow(<span style="color:#c30">&#34;draw&#34;</span>,img)
+</span></span><span style="display:flex;"><span>k <span style="color:#555">=</span> cv<span style="color:#555">.</span>waitKey(<span style="color:#f60">0</span>) 
+</span></span></code></pre></div><blockquote>
+<p>NumPy是用Python进行科学计算的基础软件包，该包被广泛用于科学计算，机器学习，图形处理中。其中<code>ndarray</code>是该包用于保存n维数组的结构。在numpy中可以找到很多Octave和MATlab中对应的函数。
+相关知识查看 <a href="https://www.numpy.org.cn/user/">https://www.numpy.org.cn/user/</a></p>
+</blockquote>
+<h4 id="绘制矩形">绘制矩形</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>cv<span style="color:#555">.</span>rectangle(img,(<span style="color:#f60">384</span>,<span style="color:#f60">0</span>),(<span style="color:#f60">510</span>,<span style="color:#f60">128</span>),(<span style="color:#f60">0</span>,<span style="color:#f60">255</span>,<span style="color:#f60">0</span>),<span style="color:#f60">3</span>)
+</span></span></code></pre></div><p>只需指定左上角和右下角的座标即可。</p>
+<h4 id="绘制圆形">绘制圆形</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>cv<span style="color:#555">.</span>circle(img,(<span style="color:#f60">447</span>,<span style="color:#f60">63</span>), <span style="color:#f60">63</span>, (<span style="color:#f60">0</span>,<span style="color:#f60">0</span>,<span style="color:#f60">255</span>), <span style="color:#555">-</span><span style="color:#f60">1</span>)
+</span></span></code></pre></div><p>圆形指定圆心和半径即可。</p>
+<h4 id="绘制椭圆">绘制椭圆</h4>
+<p>要绘制椭圆，我们需要传递几个参数。一个参数是中心位置 （x，y）。下一个参数是轴长度（长轴长度、短轴长度）。角度是椭圆逆时针方向的旋转角度。startAngle 和 endAngle 表示从长轴顺时针方向测量的椭圆弧的起点和终点。即给出值 0 和 360 给出完整的椭圆。有关更多详细信息，请查看<a href="https://docs.opencv.org/4.x/d6/d6e/group__imgproc__draw.html#ga28b2267d35786f5f890ca167236cbc69">cv.ellipse（）</a> 的文档。以下示例在图像中心绘制一个半椭圆。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>cv<span style="color:#555">.</span>ellipse(img,(<span style="color:#f60">256</span>,<span style="color:#f60">256</span>),(<span style="color:#f60">100</span>,<span style="color:#f60">50</span>),<span style="color:#f60">0</span>,<span style="color:#f60">0</span>,<span style="color:#f60">180</span>,<span style="color:#f60">255</span>,<span style="color:#555">-</span><span style="color:#f60">1</span>)
+</span></span></code></pre></div><h4 id="绘制多边形">绘制多边形</h4>
+<p>绘制多边形需要先准备好各个顶点。将这些点转换为形状为 ROWSx1x2 的数组，其中 ROWS 是顶点数，其类型应为 int32。在这里，我们绘制一个具有四个黄色顶点的小多边形。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>pts <span style="color:#555">=</span> np<span style="color:#555">.</span>array([[<span style="color:#f60">10</span>,<span style="color:#f60">5</span>],[<span style="color:#f60">20</span>,<span style="color:#f60">30</span>],[<span style="color:#f60">70</span>,<span style="color:#f60">20</span>],[<span style="color:#f60">50</span>,<span style="color:#f60">10</span>]], np<span style="color:#555">.</span>int32)
+</span></span><span style="display:flex;"><span>pts <span style="color:#555">=</span> pts<span style="color:#555">.</span>reshape((<span style="color:#555">-</span><span style="color:#f60">1</span>,<span style="color:#f60">1</span>,<span style="color:#f60">2</span>))
+</span></span><span style="display:flex;"><span>cv<span style="color:#555">.</span>polylines(img,[pts],<span style="color:#069;font-weight:bold">True</span>,(<span style="color:#f60">0</span>,<span style="color:#f60">255</span>,<span style="color:#f60">255</span>))
+</span></span></code></pre></div><p>原始顶点数据</p>
+<p>$
+pts=\begin{bmatrix}
+(10,5) (20,30) (70,20) (50,10)
+\end{bmatrix}
+$</p>
+<p>对数组进行<code>reshape</code>之后</p>
+<p>$
+pts=\begin{bmatrix}
+(10,5) \\
+(20,30) \\
+(70,20) \\
+(50,10)
+\end{bmatrix}
+$</p>
+<blockquote>
+<p>如果第三个参数为 <code>False</code>，您将得到连接所有点的折线，而不是闭合形状。
+<code>cv.polylines（）</code> 可用于绘制多条线。只需创建一个要绘制的所有线条的列表并将其传递给函数即可。所有线条将单独绘制。绘制一组线比为每行调用 <code>cv.line（）</code> 更好、更快的方法。</p>
+</blockquote>
+<h4 id="绘制文本">绘制文本</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>font <span style="color:#555">=</span> cv<span style="color:#555">.</span>FONT_HERSHEY_SIMPLEX
+</span></span><span style="display:flex;"><span>cv<span style="color:#555">.</span>putText(img,<span style="color:#c30">&#39;OpenCV&#39;</span>,(<span style="color:#f60">10</span>,<span style="color:#f60">500</span>), font, <span style="color:#f60">4</span>,(<span style="color:#f60">255</span>,<span style="color:#f60">255</span>,<span style="color:#f60">255</span>),<span style="color:#f60">2</span>,cv<span style="color:#555">.</span>LINE_AA)
+</span></span></code></pre></div><p>参数可以查看文档，<a href="https://zhuanlan.zhihu.com/p/615815756">中文无法正确绘制参考这里</a></p>
+<h2 id="处理鼠标事件">处理鼠标事件</h2>
+<p>通过函数 <code> cv.setMouseCallback()</code>可以设置鼠标事件监听。或者鼠标的当前座标。</p>
+<p>要打印opencv 包含的事件 使用如下代码:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">cv2</span> <span style="color:#069;font-weight:bold">as</span> <span style="color:#0cf;font-weight:bold">cv</span>
+</span></span><span style="display:flex;"><span>events <span style="color:#555">=</span> [i <span style="color:#069;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#366">dir</span>(cv) <span style="color:#069;font-weight:bold">if</span> <span style="color:#c30">&#39;EVENT&#39;</span> <span style="color:#000;font-weight:bold">in</span> i]
+</span></span><span style="display:flex;"><span><span style="color:#366">print</span>( events )
+</span></span></code></pre></div><p>示例：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">numpy</span> <span style="color:#069;font-weight:bold">as</span> <span style="color:#0cf;font-weight:bold">np</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">cv2</span> <span style="color:#069;font-weight:bold">as</span> <span style="color:#0cf;font-weight:bold">cv</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># 构建空白图形的象素数组</span>
+</span></span><span style="display:flex;"><span>img <span style="color:#555">=</span> np<span style="color:#555">.</span>zeros((<span style="color:#f60">512</span>,<span style="color:#f60">512</span>,<span style="color:#f60">3</span>), np<span style="color:#555">.</span>uint8)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># 定义鼠标事件回调函数</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">draw_circle</span>(event,x,y,flags,param):
+</span></span><span style="display:flex;"><span>   <span style="color:#069;font-weight:bold">if</span> event <span style="color:#555">==</span> cv<span style="color:#555">.</span>EVENT_LBUTTONUP:
+</span></span><span style="display:flex;"><span>       <span style="color:#09f;font-style:italic"># 检查是鼠标左键点击则在当前座标绘制一个圆形</span>
+</span></span><span style="display:flex;"><span>       cv<span style="color:#555">.</span>circle(img,(x,y),<span style="color:#f60">100</span>,(<span style="color:#f60">255</span>,<span style="color:#f60">0</span>,<span style="color:#f60">0</span>),<span style="color:#555">-</span><span style="color:#f60">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># 窗口命名</span>
+</span></span><span style="display:flex;"><span>cv<span style="color:#555">.</span>namedWindow(<span style="color:#c30">&#39;image&#39;</span>)
+</span></span><span style="display:flex;"><span>cv<span style="color:#555">.</span>setMouseCallback(<span style="color:#c30">&#39;image&#39;</span>,draw_circle) <span style="color:#09f;font-style:italic"># 设置回调函数</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">while</span>(<span style="color:#f60">1</span>):
+</span></span><span style="display:flex;"><span>   cv<span style="color:#555">.</span>imshow(<span style="color:#c30">&#39;image&#39;</span>,img)
+</span></span><span style="display:flex;"><span>   <span style="color:#069;font-weight:bold">if</span> cv<span style="color:#555">.</span>waitKey(<span style="color:#f60">20</span>) <span style="color:#555">&amp;</span> <span style="color:#f60">0xFF</span> <span style="color:#555">==</span> <span style="color:#f60">27</span>: <span style="color:#09f;font-style:italic"># 按ESC 退出程序</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#069;font-weight:bold">break</span>
+</span></span><span style="display:flex;"><span>cv<span style="color:#555">.</span>destroyAllWindows()
+</span></span></code></pre></div><h2 id="添加滑动调节控件">添加滑动调节控件</h2>
+<p>使用<code>cv.createTrackbar（） </code> 可以给显示窗口添加调节滑动条。下面示例添加了滑动条来调节图形象素的颜色。使用 <code>img[:]</code>来设置矩阵中所有象素的颜色值。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">numpy</span> <span style="color:#069;font-weight:bold">as</span> <span style="color:#0cf;font-weight:bold">np</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">cv2</span> <span style="color:#069;font-weight:bold">as</span> <span style="color:#0cf;font-weight:bold">cv</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">nothing</span>(x):
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">pass</span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># 创建象素矩阵</span>
+</span></span><span style="display:flex;"><span>img <span style="color:#555">=</span> np<span style="color:#555">.</span>zeros((<span style="color:#f60">300</span>,<span style="color:#f60">512</span>,<span style="color:#f60">3</span>), np<span style="color:#555">.</span>uint8)
+</span></span><span style="display:flex;"><span>cv<span style="color:#555">.</span>namedWindow(<span style="color:#c30">&#39;image&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># create trackbars for color change</span>
+</span></span><span style="display:flex;"><span>cv<span style="color:#555">.</span>createTrackbar(<span style="color:#c30">&#39;R&#39;</span>,<span style="color:#c30">&#39;image&#39;</span>,<span style="color:#f60">0</span>,<span style="color:#f60">255</span>,nothing)
+</span></span><span style="display:flex;"><span>cv<span style="color:#555">.</span>createTrackbar(<span style="color:#c30">&#39;G&#39;</span>,<span style="color:#c30">&#39;image&#39;</span>,<span style="color:#f60">0</span>,<span style="color:#f60">255</span>,nothing)
+</span></span><span style="display:flex;"><span>cv<span style="color:#555">.</span>createTrackbar(<span style="color:#c30">&#39;B&#39;</span>,<span style="color:#c30">&#39;image&#39;</span>,<span style="color:#f60">0</span>,<span style="color:#f60">255</span>,nothing)
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># 设置开关滑条</span>
+</span></span><span style="display:flex;"><span>switch <span style="color:#555">=</span> <span style="color:#c30">&#39;0 : OFF </span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">1 : ON&#39;</span>
+</span></span><span style="display:flex;"><span>cv<span style="color:#555">.</span>createTrackbar(switch, <span style="color:#c30">&#39;image&#39;</span>,<span style="color:#f60">0</span>,<span style="color:#f60">1</span>,nothing)
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">while</span>(<span style="color:#f60">1</span>):
+</span></span><span style="display:flex;"><span>    cv<span style="color:#555">.</span>imshow(<span style="color:#c30">&#39;image&#39;</span>,img)
+</span></span><span style="display:flex;"><span>    k <span style="color:#555">=</span> cv<span style="color:#555">.</span>waitKey(<span style="color:#f60">1</span>) <span style="color:#555">&amp;</span> <span style="color:#f60">0xFF</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">if</span> k <span style="color:#555">==</span> <span style="color:#f60">27</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">break</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#09f;font-style:italic"># 获取当前的RGB取值</span>
+</span></span><span style="display:flex;"><span>    r <span style="color:#555">=</span> cv<span style="color:#555">.</span>getTrackbarPos(<span style="color:#c30">&#39;R&#39;</span>,<span style="color:#c30">&#39;image&#39;</span>)
+</span></span><span style="display:flex;"><span>    g <span style="color:#555">=</span> cv<span style="color:#555">.</span>getTrackbarPos(<span style="color:#c30">&#39;G&#39;</span>,<span style="color:#c30">&#39;image&#39;</span>)
+</span></span><span style="display:flex;"><span>    b <span style="color:#555">=</span> cv<span style="color:#555">.</span>getTrackbarPos(<span style="color:#c30">&#39;B&#39;</span>,<span style="color:#c30">&#39;image&#39;</span>)
+</span></span><span style="display:flex;"><span>    s <span style="color:#555">=</span> cv<span style="color:#555">.</span>getTrackbarPos(switch,<span style="color:#c30">&#39;image&#39;</span>) <span style="color:#09f;font-style:italic">#获取开关取值</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">if</span> s <span style="color:#555">==</span> <span style="color:#f60">0</span>:
+</span></span><span style="display:flex;"><span>        img[:] <span style="color:#555">=</span> <span style="color:#f60">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>        img[:] <span style="color:#555">=</span> [b,g,r]
+</span></span><span style="display:flex;"><span>cv<span style="color:#555">.</span>destroyAllWindows()
+</span></span></code></pre></div><p>下一篇学习如何对图片进行各种变换和操作。</p>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="/"><img src="/img/favicon.png" />我的乐与怒</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2023-10-19-workflow-engine-vs-state-machine/" data-toggle="tooltip" data-placement="top" title="对比工作流引擎和状态机"><i class="fa fa-angle-left fa-lg"></i>
+                            Previous</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2023-12-08-learn-opencv-part-2/" data-toggle="tooltip" data-placement="top" title="使用OpenCV（2）核心函数">Next
+                        <i class="fa fa-angle-right fa-lg"></i></a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">目录</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">标签</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/aframe" title="aframe">
+                            aframe
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/andrew-ng" title="andrew-ng">
+                            andrew-ng
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/arduino" title="arduino">
+                            arduino
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                            blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/cgi" title="cgi">
+                            cgi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/consul" title="consul">
+                            consul
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                            docker
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/eth" title="eth">
+                            eth
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ethereum" title="ethereum">
+                            ethereum
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/evm" title="evm">
+                            evm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/feign" title="feign">
+                            feign
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/flask" title="flask">
+                            flask
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                            golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/hw" title="hw">
+                            hw
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/jpa" title="jpa">
+                            jpa
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/js" title="js">
+                            js
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/k8s" title="k8s">
+                            k8s
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                            kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/linux" title="linux">
+                            linux
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mac" title="mac">
+                            mac
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/machine-learning" title="machine-learning">
+                            machine-learning
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/math" title="math">
+                            math
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mysql" title="mysql">
+                            mysql
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/nginx" title="nginx">
+                            nginx
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/op" title="op">
+                            op
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/opentcv" title="opentcv">
+                            opentcv
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ops" title="ops">
+                            ops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/poco" title="poco">
+                            poco
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/pptp" title="pptp">
+                            pptp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/python" title="python">
+                            python
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/rd" title="rd">
+                            rd
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/spring" title="spring">
+                            spring
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/springboot" title="springboot">
+                            springboot
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ssl" title="ssl">
+                            ssl
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/thymeleaf" title="thymeleaf">
+                            thymeleaf
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/type" title="type">
+                            type
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vagrant" title="vagrant">
+                            vagrant
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vpn" title="vpn">
+                            vpn
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/vue" title="vue">
+                            vue
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/webrtc" title="webrtc">
+                            webrtc
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/workflow" title="workflow">
+                            workflow
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0" title="技术文章">
+                            技术文章
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2" title="新浪博客">
+                            新浪博客
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%97%A0%E8%81%8A" title="无聊">
+                            无聊
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB" title="生活">
+                            生活
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95" title="生活记录">
+                            生活记录
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E8%82%A1%E7%A5%A8" title="股票">
+                            股票
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E8%BF%90%E7%BB%B4" title="运维">
+                            运维
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>链接</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/vegas">青鸟的翅膀</a></li>
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/yoshikilau">Caffeine Park</a></li>
+                        
+                        <li><a target="_blank" href="http://huxpro.github.io">Theme From Hux</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/vincentz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/img/icwt.jpg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/vincentmi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/5311815/vincent-mi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="我的乐与怒" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; 我的乐与怒 2024 | <a href="http://www.beian.miit.gov.cn" style="text-decoration: none;"> 蜀ICP备17040089号-2</a>
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https'){
+       bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else{
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+<script>
+    
+    var _baId = '2b745fdb2d90955bdfb8ad1194277073';
+
+    
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-78738242-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

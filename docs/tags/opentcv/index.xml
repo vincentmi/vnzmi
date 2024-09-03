@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>opentcv on 我的乐与怒</title>
+    <link>/tags/opentcv/</link>
+    <description>Recent content in opentcv on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 26 Dec 2023 09:15:00 +0000</lastBuildDate><atom:link href="/tags/opentcv/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用OpenCV（2）核心函数</title>
+      <link>/post/2023-12-08-learn-opencv-part-2/</link>
+      <pubDate>Tue, 26 Dec 2023 09:15:00 +0000</pubDate>
+      
+      <guid>/post/2023-12-08-learn-opencv-part-2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>使用OpenCV（1）基础</title>
+      <link>/post/2023-12-08-learn-opencv-part-1/</link>
+      <pubDate>Fri, 08 Dec 2023 17:15:00 +0000</pubDate>
+      
+      <guid>/post/2023-12-08-learn-opencv-part-1/</guid>
+      <description>安装 pip install opencv-python 验证安装 通过使用opencv 打开一个图片来验证安装是否成功。 import cv2 as cv img = cv.imread(&amp;#34;./bird.png&amp;#34;) cv.imshow(&amp;#34;Display window&amp;#34;, img) k = cv.waitKey(0) 运行后会打开文件，点击任何键退出窗口。 图形基础 数据结构mat 低版本的OpenCV使用来自于C语言的 IplImage 结构体来存储图形资料，该结构的问题在于需要手动进行内容管理，OpenCV2.0引入了</description>
+    </item>
+    
+  </channel>
+</rss>

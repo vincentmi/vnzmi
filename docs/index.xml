@@ -1,0 +1,1765 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>我的乐与怒</title>
+    <link>/</link>
+    <description>Recent content on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 31 May 2024 15:13:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>创建响应式的Flutter应用</title>
+      <link>/post/2024-05-31-make-a-responsive-flutter-app/</link>
+      <pubDate>Fri, 31 May 2024 15:13:00 +0000</pubDate>
+      
+      <guid>/post/2024-05-31-make-a-responsive-flutter-app/</guid>
+      <description>创建configmap</description>
+    </item>
+    
+    <item>
+      <title>在k8s中使用configmap保存配置文件</title>
+      <link>/post/2024-05-28-k8s-use-configmap/</link>
+      <pubDate>Tue, 28 May 2024 15:13:00 +0000</pubDate>
+      
+      <guid>/post/2024-05-28-k8s-use-configmap/</guid>
+      <description>简介 ConfigMap 是一种API 对象，用来将非机密性的数据保存到键值对中。 使用时， Pod 可以将其用作环境变量、命令行参数或者存储卷中的配置文件。 ConfigMap 将你的环境配置信息和容器镜像解耦，便于应用配置的修改和复用。在不同命名空间或不同环境中可以方便的切换配置，并且对开发透明，可以实时更新。 创建config</description>
+    </item>
+    
+    <item>
+      <title>工作流服务设计</title>
+      <link>/post/2024-04-26-workflow-design/</link>
+      <pubDate>Fri, 26 Apr 2024 15:13:00 +0000</pubDate>
+      
+      <guid>/post/2024-04-26-workflow-design/</guid>
+      <description>背景 企业和政府工作中很多业务都涉及到审批流或者工作流，在审批流或者工作流中完成各个部门的工作协调，任务指派，进度跟踪，公司现有审批设计的比较烂，计划重新进行审批的设计实现。目标覆盖OA审批和政府垮部门的工作流服务。 功能设计 审批人： 值审批任务指定的 人员，审批组，部门，角色 当审批人是</description>
+    </item>
+    
+    <item>
+      <title>修改Items2的Tab颜色</title>
+      <link>/post/2024-04-07-change-items-tab-color/</link>
+      <pubDate>Sun, 07 Apr 2024 16:26:00 +0000</pubDate>
+      
+      <guid>/post/2024-04-07-change-items-tab-color/</guid>
+      <description>增加一个items插件 # /Users/vincentmi/.oh-my-zsh-custom if [[ -n &amp;#34;$ITERM_SESSION_ID&amp;#34; ]]; then tab-color() { echo -ne &amp;#34;\033]6;1;bg;red;brightness;$1\a&amp;#34; echo -ne &amp;#34;\033]6;1;bg;green;brightness;$2\a&amp;#34; echo -ne &amp;#34;\033]6;1;bg;blue;brightness;$3\a&amp;#34; } tab-red() { tab-color 255 0 0 } tab-green() { tab-color 0 255 0 } tab-blue() { tab-color 0 0 255 } tab-reset() { echo -ne &amp;#34;\033]6;1;bg;*;default\a&amp;#34; } function iterm2_tab_precmd() { tab-reset } # function iterm2_tab_preexec() { # if [[ &amp;#34;$1&amp;#34; =~ &amp;#34;^ssh &amp;#34; ]]; then # if [[ &amp;#34;$1&amp;#34; =~ &amp;#34;prod&amp;#34; ]]; then # tab-color 255 160 160 # else # tab-color 160 255 160 # fi # else # tab-color 160 160 255 # fi # } function iterm2_tab_preexec() { if [[ &amp;#34;$1&amp;#34; =~ &amp;#34;^ssh &amp;#34; ]]; then if [[ &amp;#34;$1&amp;#34; =~ &amp;#34;prod&amp;#34; || &amp;#34;$1&amp;#34; =~ &amp;#34;live&amp;#34; ]]; then tab-color 220 20 60 else if [[ &amp;#34;$1&amp;#34; =~</description>
+    </item>
+    
+    <item>
+      <title>使用OpenCV（2）核心函数</title>
+      <link>/post/2023-12-08-learn-opencv-part-2/</link>
+      <pubDate>Tue, 26 Dec 2023 09:15:00 +0000</pubDate>
+      
+      <guid>/post/2023-12-08-learn-opencv-part-2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>使用OpenCV（1）基础</title>
+      <link>/post/2023-12-08-learn-opencv-part-1/</link>
+      <pubDate>Fri, 08 Dec 2023 17:15:00 +0000</pubDate>
+      
+      <guid>/post/2023-12-08-learn-opencv-part-1/</guid>
+      <description>安装 pip install opencv-python 验证安装 通过使用opencv 打开一个图片来验证安装是否成功。 import cv2 as cv img = cv.imread(&amp;#34;./bird.png&amp;#34;) cv.imshow(&amp;#34;Display window&amp;#34;, img) k = cv.waitKey(0) 运行后会打开文件，点击任何键退出窗口。 图形基础 数据结构mat 低版本的OpenCV使用来自于C语言的 IplImage 结构体来存储图形资料，该结构的问题在于需要手动进行内容管理，OpenCV2.0引入了</description>
+    </item>
+    
+    <item>
+      <title>对比工作流引擎和状态机</title>
+      <link>/post/2023-10-19-workflow-engine-vs-state-machine/</link>
+      <pubDate>Thu, 19 Oct 2023 14:25:00 +0000</pubDate>
+      
+      <guid>/post/2023-10-19-workflow-engine-vs-state-machine/</guid>
+      <description>前言 互联网研发大量转型B端，我接触了大量的ToB业务系统，各行业的信息化转型第一步多会考虑将业务流程进行电子化，因此业务流程的线上处理是各个业务系统的基础功能，也是业务部门使用最多的功能模块。其余的几大模块则是自定义表单、数据集成以及可视化大屏。后续都进行一下研究，希望设计一组通</description>
+    </item>
+    
+    <item>
+      <title>使用Flask开发应用程序（4）- 使用SQLAlchemy </title>
+      <link>/post/2023-07-29-build-application-with-flask-part4/</link>
+      <pubDate>Sat, 29 Jul 2023 10:44:00 +0000</pubDate>
+      
+      <guid>/post/2023-07-29-build-application-with-flask-part4/</guid>
+      <description>ORM ORM 对象关系映射，通过将数据库映射到业务对象中，可以简化对数据库的操作，提高开发效率。我们把我们的应用改造成使用ORM来实现数据库交互。 SQLAlchemy https://www.sqlalchemy.org/ https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/ 安装 使用Flask-SQLAlchemy为Flask集成了SQLAlchemy. pip install -U Flask-SQLAlchemy 配置 SQLAlchemy 最少只需要一个配置项 SQLALCHEMY_D</description>
+    </item>
+    
+    <item>
+      <title>用树莓派实现局域网打印和扫描</title>
+      <link>/post/2023-07-23-air-print-and-scan-with-raspberry-pi/</link>
+      <pubDate>Sun, 23 Jul 2023 21:44:00 +0000</pubDate>
+      
+      <guid>/post/2023-07-23-air-print-and-scan-with-raspberry-pi/</guid>
+      <description>准备 买了个树莓派一没怎么用，现在家里有2台打印机，太占用桌面了，用树莓派给他们加上远程。这样可以搬远点。 选择系统 首先给树莓派烧录一个系统，我选择的是debian.可以从这里 https://www.raspberrypi.com/software/ 下载。 我选择的Debian uname -a Linux raspberrypi 4.14.98-v7+ #1200 SMP Tue Feb 12 20:27:48 GMT 2019 armv7l GNU/Linux 打开相关的一些服务ssh,vnc打开可以远程操作，</description>
+    </item>
+    
+    <item>
+      <title>使用Flask开发应用程序(1) - 基础</title>
+      <link>/post/2023-07-21-build-application-with-flask-part1/</link>
+      <pubDate>Fri, 21 Jul 2023 10:44:00 +0000</pubDate>
+      
+      <guid>/post/2023-07-21-build-application-with-flask-part1/</guid>
+      <description>安装FLASK 先安装Pyhton，https://www.python.org/downloads/macos/ FLASK支持 3.8+版本的python 为啥不用Django ,由于目前前后端分离，Django的很多功能用不上，Flask更简单小巧一点。 配置虚拟环境 使用虚拟环境可以将</description>
+    </item>
+    
+    <item>
+      <title>使用Flask开发应用程序（2）- 搭建博客网站</title>
+      <link>/post/2023-07-21-build-application-with-flask-part2/</link>
+      <pubDate>Fri, 21 Jul 2023 10:44:00 +0000</pubDate>
+      
+      <guid>/post/2023-07-21-build-application-with-flask-part2/</guid>
+      <description>数据库访问 我们先使用SQLlite数据库来看看如何初始化一些资源。python内建了sqlite3 模块。我们使用这个模块来进行一些数据的保存。使用SQLite 可以不用启动独立的数据库服务器，比较适合小型的应用和嵌入式设备等。 连接数据库 flaskr/db.py文件 import sqlite3 import click from flask import current_app, g</description>
+    </item>
+    
+    <item>
+      <title>使用Flask开发应用程序（3）- 测试和部署</title>
+      <link>/post/2023-07-21-build-application-with-flask-part3/</link>
+      <pubDate>Fri, 21 Jul 2023 10:44:00 +0000</pubDate>
+      
+      <guid>/post/2023-07-21-build-application-with-flask-part3/</guid>
+      <description>让应用可安装 让应用可安装可以让我们很方便的在不同环境快速部署我们的应用，让应用能像Flask一样进行安装和测试 pyproject.toml 项目描述文件 pyproject.toml 用于描述项目如果运行和安装 pyproject.toml [project] name = &amp;#34;flaskr&amp;#34; version = &amp;#34;1.0.0&amp;#34; description = &amp;#34;简单的博客系统&amp;#34; dependencies = [ &amp;#34;flask&amp;#34;, ] [build-system] requires = [&amp;#34;flit_core&amp;lt;4&amp;#34;] build-backend = &amp;#34;flit_core.buildapi&amp;#34; 查看pyproject.toml详细说明 安装测试 pip</description>
+    </item>
+    
+    <item>
+      <title>使用tile-server搭建离线地图服务</title>
+      <link>/post/2023-07-08-use-tileserver-to-server-offline-map/</link>
+      <pubDate>Sat, 08 Jul 2023 09:44:00 +0000</pubDate>
+      
+      <guid>/post/2023-07-08-use-tileserver-to-server-offline-map/</guid>
+      <description>1 获取地图数据 1.1 从Maptiler下载 下载地址 https://data.maptiler.com/downloads/planet/ 直接下载你需要的地图数据，其中各类数据包含数据如下： OpenStreetMap ： 包含建筑，道路，自然景观，行政边界 Contour lines ： 矢量等高线 hillshading ： 山体阴影 Satellite ： 卫星地图 另外一些数据 Satellite 2021, Terrain RGB, Terrain 3D - Cesium quantized mesh, MapTiler Planet Lite, or Landcover 只能下载星球层级的数据. 1.2 下载PBF文件进行转换 PBF文件可</description>
+    </item>
+    
+    <item>
+      <title>一些运维脚本</title>
+      <link>/post/2023-05-19-ops-scripts/</link>
+      <pubDate>Fri, 19 May 2023 23:48:00 +0000</pubDate>
+      
+      <guid>/post/2023-05-19-ops-scripts/</guid>
+      <description>Yearning SQL审核平台 拉代码 git clone git@github.com:cookieY/Yearning.git 打包镜像 cd Yearning.git &amp;amp;&amp;amp; docker build -t yearning . docker run -it --rm -e MYSQL_USER=root -e MYSQL_ADDR=172.17.0.1:3307 -e MYSQL_PASSWORD=root -e MYSQL_DB=yearning yearning /opt/Yearning install docker run --restart=always -d --name yearning -p 9001:8000 -e MYSQL_USER=root -e MYSQL_ADDR=172.17.0.1:3307 -e MYSQL_PASSWORD=root -e SECRET_KEY=mws1118888888888 -e MYSQL_DB=yearning yearning Docker #查询当前容器状态 docker stats --no-stream docker stats $(docker ps --format={{.Names}}) #只输出指定容器 docker stats --no-stream registry mysql #格式化输出结果 docker stats --format &amp;#34;table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}&amp;#34; 变量 说明 .Container 根据用户指定的名称显示容器的名称或 ID .Name 容器名称 .ID 容器 ID .CPUPerc CPU 使用</description>
+    </item>
+    
+    <item>
+      <title>搭建一个推荐系统</title>
+      <link>/post/2023-02-14-build-a-recommand-system/</link>
+      <pubDate>Tue, 14 Feb 2023 16:01:00 +0000</pubDate>
+      
+      <guid>/post/2023-02-14-build-a-recommand-system/</guid>
+      <description>准备 公司需要针对网站搭建一个基于用户反馈的推荐系统。重温下吴恩达大佬的课程。使用Python来个实战。 文章将会讲解基于内容的推荐以及协同过滤算法的原理，并使用Python和Pandas库来实现一个简单的推荐系统。 您需要有基础的数学和Pyhton知识。 基础知识 线性回归（Linear</description>
+    </item>
+    
+    <item>
+      <title>2023新的一年</title>
+      <link>/post/2023-01-19-in-dark/</link>
+      <pubDate>Thu, 19 Jan 2023 10:00:00 +0000</pubDate>
+      
+      <guid>/post/2023-01-19-in-dark/</guid>
+      <description>1668.12.26.40</description>
+    </item>
+    
+    <item>
+      <title>开发一个基于WEB的AR应用</title>
+      <link>/post/2022-12-01-implement-a-web-ar-app/</link>
+      <pubDate>Thu, 01 Dec 2022 10:00:00 +0000</pubDate>
+      
+      <guid>/post/2022-12-01-implement-a-web-ar-app/</guid>
+      <description>AR.js AR.js 是用于 Web 增强现实的轻量级库，具有图像跟踪、基于位置的 AR 和标记跟踪等功能。 github 地址 : https://github.com/AR-js-org/AR.js 文档: https://ar-js-org.github.io/AR.js-Docs/ 基于位置的AR gps-camera 组件 场景中允许一个该对象,将该对象绑定到 camera 实体.用于捕捉设备的运动和摄像机进行关联,处理旋转 位置等变化. &amp;lt;a-camera gps-camera rotation-reader&amp;gt;&amp;lt;/a-camera&amp;gt; rotation-reader 用于处理旋转事件.参考AFrame文档 https://aframe.io/docs/0.9.0/components/camera.html#reading-position-or-rotation-of-the-camera gps-entity-place 组件 场景中允许多</description>
+    </item>
+    
+    <item>
+      <title>深入使用Spring计划任务框架</title>
+      <link>/post/2022-11-18-use-spring-schedule/</link>
+      <pubDate>Fri, 18 Nov 2022 11:11:00 +0000</pubDate>
+      
+      <guid>/post/2022-11-18-use-spring-schedule/</guid>
+      <description>任务执行和计划 Spring框架提供TaskExecutor和TaskSchedule接口对异步任务和计划任务进行抽象。并支持很多框架的特性，比如线程池和委派等。这些接口在不同的运行环境背后通过不同的实现来进行支持。 Spring支持使用Timer和Quartz Scheduler ( https://w</description>
+    </item>
+    
+    <item>
+      <title>用karabiner-element来定制你的MAC</title>
+      <link>/post/2022-09-17-use-karabiner-element-redefine-you-mac/</link>
+      <pubDate>Sat, 17 Sep 2022 22:36:00 +0000</pubDate>
+      
+      <guid>/post/2022-09-17-use-karabiner-element-redefine-you-mac/</guid>
+      <description>Logi Option 一直买罗技的鼠标搭配MAC使用, Logi Option还挺方便,但是Logi鼠标用一两年要不滚轮失灵要不经常蓝牙断连.换了个Razer 尼玛连鼠标按键定义的软件都没有MAC版. 鼠标厂商已经躺平了么. 硬件厂商不思进取又得研究下 karabiner-element. 安装 官网 : https://karabiner-elements.pqrs.org/ 可视化映射规则配置 : karabiner-complex-rules-generator Razer DA V2X 规则 btn5_alfred 将鼠标键 button5 映射</description>
+    </item>
+    
+    <item>
+      <title>以太坊开发入门 - 实现ERC20合约</title>
+      <link>/post/2022-07-06-develop-with-ethereum-erc20-copy/</link>
+      <pubDate>Wed, 06 Jul 2022 00:36:00 +0000</pubDate>
+      
+      <guid>/post/2022-07-06-develop-with-ethereum-erc20-copy/</guid>
+      <description>Truffle和ganache Truffle提供一个集成环境以简化合约的开发以及进行工程化.genache-cli则提供一个模拟的链上环境以便我们可以方便的进行测试.测试完成后再部署到私链或者测试链进行真正的测试和验证.提高我们的开发效率 安装 开始之前请升级到较新的node版本 npm install</description>
+    </item>
+    
+    <item>
+      <title>以太坊开发入门 - EVM</title>
+      <link>/post/2022-07-05-develop-with-ethereum-evm/</link>
+      <pubDate>Tue, 05 Jul 2022 18:12:00 +0000</pubDate>
+      
+      <guid>/post/2022-07-05-develop-with-ethereum-evm/</guid>
+      <description>简介 在以太坊上最重要的活动除了转账以外，就是编译、运行智能合约(Smart Contract)。 智能合约代表了一个以太坊世界里的独立管家。它按照自身代码指示进行以太币的收入，支出活动，也具有一定存储空间可以存储一些数据。 而智能合约就是运行于以太坊虚拟机 (Ethereum Virtual Machine, EVM) 之上. 虚拟机上执行的操</description>
+    </item>
+    
+    <item>
+      <title>以太坊开发入门 - 智能合约</title>
+      <link>/post/2022-07-02-develop-with-ethereum-contract/</link>
+      <pubDate>Sat, 02 Jul 2022 09:46:00 +0000</pubDate>
+      
+      <guid>/post/2022-07-02-develop-with-ethereum-contract/</guid>
+      <description>Solidity 语言 智能合约使用Solidity语言进行开发, Solidity语法参考 Solidity 语言的一些特点: 没有浮点数 使用${wei}$来规避浮点运算. $ 1 \times {ether} = 1 \times 10^{18}{wei} $ 指数运算符 10**18 = 10^18 函数权限关键字在最后 函数默认是public 约定 private修饰的函数名字前缀加上下划线 _ internal 修饰符可以让合约继承</description>
+    </item>
+    
+    <item>
+      <title>以太坊开发入门 - 搭建私链</title>
+      <link>/post/2022-07-01-develop-with-ethereum-private-chain/</link>
+      <pubDate>Fri, 01 Jul 2022 09:46:00 +0000</pubDate>
+      
+      <guid>/post/2022-07-01-develop-with-ethereum-private-chain/</guid>
+      <description>背景 以太坊，英文全称 Ethereum，是一个全球协作的开源区块链项目。 该项目流通的加密货币称为以太币 (Ether)，是全球仅次于比特币的第二大流通加密货币。 它最大的特色是具有一个运行时环境：以太坊虚拟机 (Ethereum Virtual Machine,简称 EVM)， 为大规模分布式开放应用提供了运行的平台。我们</description>
+    </item>
+    
+    <item>
+      <title>使用Kind搭建K8S学习环境</title>
+      <link>/post/2022-05-27-use-kind/</link>
+      <pubDate>Fri, 27 May 2022 10:46:00 +0000</pubDate>
+      
+      <guid>/post/2022-05-27-use-kind/</guid>
+      <description>背景 K8S集群的搭建由于墙的存在比较麻烦而且也比较占用资源,个人学习搭建K8S学习使用和做一些测试推荐使用Kind来在本地搭建. 安装 前置条件需要先安装golang 1.16 或更新的版本. 低版本需要加上 GO111MODULE=&amp;quot;on&amp;quot; 如果包无法下载,因为墙可以添加Go package的国内镜像, 设置阿里的镜像 go env -w GOPROXY=https://mirrors.aliyun.com/goproxy/,direct go install</description>
+    </item>
+    
+    <item>
+      <title>使用Querydsl简化Spring JPA的查询</title>
+      <link>/post/2022-04-29-use-query-dsl-in-spring/</link>
+      <pubDate>Fri, 29 Apr 2022 22:55:00 +0000</pubDate>
+      
+      <guid>/post/2022-04-29-use-query-dsl-in-spring/</guid>
+      <description>JPA的限制 一般项目中一定会使用到联表查询,使用JPA可以很方便的对单表进行CRUD操作,简单的关联操作通过设置关联关系也很容易实现.但是对于多表的联合查询就比较麻烦.使用Querydsl可以帮助我们很方便的构建复杂查询. MAVEN依赖 添加依赖 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.querydsl&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;querydsl-apt&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;${querydsl.version}&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;provided&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.querydsl&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;querydsl-jpa&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;${querydsl.version}&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 添加MAVEN</description>
+    </item>
+    
+    <item>
+      <title>Maven的POM文件</title>
+      <link>/post/2021-12-16-introduction-pom/</link>
+      <pubDate>Thu, 16 Dec 2021 17:36:00 +0000</pubDate>
+      
+      <guid>/post/2021-12-16-introduction-pom/</guid>
+      <description>根POM pom.xml文件包含了项目的信息和配置细节,指导Maven 如何进行构建.他通过继承根 pom来载入Maven的默认配置, 在这个文件中包含了大部分项目会使用到的默认值. 比如对target目录的定义,源文件src/main/java以及测试代码源文件src/test/java</description>
+    </item>
+    
+    <item>
+      <title>银联卡收单机构账户信息安全管理标准</title>
+      <link>/post/2021-11-18-adss/</link>
+      <pubDate>Thu, 18 Nov 2021 17:12:00 +0000</pubDate>
+      
+      <guid>/post/2021-11-18-adss/</guid>
+      <description>ADSS简介 ADSS全称Account Data Security Standard ，即银联卡收单机构账户信息安全管理标准，由中国银联风险管理委员会审核通过，旨在加强银联卡收单网络账户信息安全管理，进一步明确和细化对收单业务各参与方账户信息安全管理要求，防范账户信息泄漏风险。 根据中国银联制定和发布的《银联卡收单机构账户</description>
+    </item>
+    
+    <item>
+      <title>网络安全等级保护</title>
+      <link>/post/2021-11-16-gb22240/</link>
+      <pubDate>Tue, 16 Nov 2021 17:12:00 +0000</pubDate>
+      
+      <guid>/post/2021-11-16-gb22240/</guid>
+      <description>等保定级 根据等级保护对象在国家安全、经济建设、社会生活中的重要程度，以及一旦遭到破坏、丧失功能或者数据被篡改、泄露、丢失、损毁后，对国家安全、社会秩序、公共利益以及公民、法人和其他组织的合法权益的侵害程度等因素，等级保护对象的安全保护等级分为以下五级： 第一级，等级保护对象受到破坏</description>
+    </item>
+    
+    <item>
+      <title>golang协程和channel使用</title>
+      <link>/post/2021-11-04-use-channel/</link>
+      <pubDate>Thu, 04 Nov 2021 17:12:00 +0000</pubDate>
+      
+      <guid>/post/2021-11-04-use-channel/</guid>
+      <description>简介 协程是golang的一大特色和卖点. 协程(goroutine) 是轻量级的执行线程,使用go关键字到函数或者lamba表达式可以快速启动协程.协程函数的返回值会被抛弃.线程的调度由操作系统来管理，是抢占式调度。而协程不同，协程需要互相配合，主动交出执行权。 配置 GOMAXPROCS 设置逻辑CPU数</description>
+    </item>
+    
+    <item>
+      <title>使用A-Frame搭建360VR</title>
+      <link>/post/2021-07-29-use-aframe/</link>
+      <pubDate>Thu, 29 Jul 2021 17:53:00 +0000</pubDate>
+      
+      <guid>/post/2021-07-29-use-aframe/</guid>
+      <description>简介 A-Frame是一个用于构建虚拟现实(VR)体验的Web框架。 A-Frame基于HTML之上，使其更加易于上手。但是A-Frame不仅仅是3D场景图或标记语言；他的核心是一个强大的实体组件框架，它对three.js进行扩展,提供了一个声明性的、可扩展的和可组合的结构。A-Fr</description>
+    </item>
+    
+    <item>
+      <title>学习下Netty</title>
+      <link>/post/2021-07-15-use-netty/</link>
+      <pubDate>Thu, 15 Jul 2021 10:53:00 +0000</pubDate>
+      
+      <guid>/post/2021-07-15-use-netty/</guid>
+      <description>前言 很久以前跟电信对接短信和彩信,然后要跟移动同步订购关系,移动要访问我们的WEB服务器,当时struct一堆XML看得头大,就自己写了个WEBSERVER,当时是用的 ServerSocket加多线程,比较原始不过自己实现了部分HTTP协议,整个过程自己对网络通讯的技术有了很深刻</description>
+    </item>
+    
+    <item>
+      <title>制作自定义的Spring Starter</title>
+      <link>/post/2021-04-05-make-a-custom-spring-starter/</link>
+      <pubDate>Mon, 05 Apr 2021 10:53:00 +0000</pubDate>
+      
+      <guid>/post/2021-04-05-make-a-custom-spring-starter/</guid>
+      <description>国内很多文章讲的不详细 参考: https://www.baeldung.com/spring-boot-custom-starter Spring Boot 自动配置原理 Spring Boot启动时会查找classpath中是否存在一个 spring.factories的文件.这个文件保存在META-INF文件夹. spring-boot-autoconfigure 项目中该文件代码如下. org.springframework.boot.autoconfigure.EnableAutoConfiguration=\ org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration,\ org.springframework.boot.autoconfigure.cassandra.CassandraAutoConfiguration,\ org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration,\ org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration 这个文件配置了Spring Boot将尝试运行的不同配置类.因此上面的</description>
+    </item>
+    
+    <item>
+      <title>雄风不减当年 ;)</title>
+      <link>/post/2021-02-02-my-old-bros/</link>
+      <pubDate>Tue, 02 Feb 2021 21:53:00 +0000</pubDate>
+      
+      <guid>/post/2021-02-02-my-old-bros/</guid>
+      <description>雄风不减当年 ;) 深水炸弹</description>
+    </item>
+    
+    <item>
+      <title>小伙子的画越来越像样了</title>
+      <link>/post/2021-01-28-micheal-artwork/</link>
+      <pubDate>Thu, 28 Jan 2021 21:53:00 +0000</pubDate>
+      
+      <guid>/post/2021-01-28-micheal-artwork/</guid>
+      <description>植物线描 塔 静物写生</description>
+    </item>
+    
+    <item>
+      <title>Coursera - Machine learning 学习笔记(3)  - 支持向量机异常检测和推荐系统</title>
+      <link>/post/2021-01-05-coursera-andrew-ng-machine-learning-notes-week7/</link>
+      <pubDate>Tue, 05 Jan 2021 22:08:00 +0000</pubDate>
+      
+      <guid>/post/2021-01-05-coursera-andrew-ng-machine-learning-notes-week7/</guid>
+      <description>课程地址: https://www.coursera.org/learn/machine-learning/home/welcome 作业 Vincent code exercise 第七周 支持向量机(SVM) 7.1 模型 $ \min \limits_{\theta} C \sum \limits_{i=1}^{m} \left[ y^{(i)}cost_1(\theta^Tx^{(i)}) + (1-y^{(i)}cost_0(\theta^Tx^{(i)})) \right] + \frac{1}{2}\sum \limits_{i=1}^n\theta_j^2 $ y = 1 阳性, 则 $\theta^Tx \geq 1 $ y = 0 阴性, 则 $\theta^Tx \leq -1 $ 7.2 核函数 高斯函数 $ f_1=simmilarity(x,l^{(1)}) = \exp \left( - \frac{\Vert x-l^{(1)}\Vert ^2}{2\sigma^2} \right) $ 如果 $x\approx l^{(1)}$ 这$f_1 \approx 1$ 如果$x$与$l^{(1)}$很远这 $f_1 \approx 0 $ $sigma^2$ 越大则函数曲线越平滑 使用核函数当$\theta</description>
+    </item>
+    
+    <item>
+      <title>Coursera - Machine learning 学习笔记(2) - 神经网络</title>
+      <link>/post/2020-12-10-coursera-andrew-ng-machine-learning-notes-week4/</link>
+      <pubDate>Thu, 10 Dec 2020 23:04:00 +0000</pubDate>
+      
+      <guid>/post/2020-12-10-coursera-andrew-ng-machine-learning-notes-week4/</guid>
+      <description>课程地址: https://www.coursera.org/learn/machine-learning/home/welcome 作业 Vincent code exercise 第四周 神经网络-模型 4.1 模型 4.1.1 基本元素 激活函数(activation function) , $g(z)$ , $a_i^{(j)}$第$j$层的第$i$个神经元 偏置神经元(bias unit) 权重(Weight) 输入层 Input Layer 结果层 Output Layer 隐藏层 Hidden Layer $a_i^{(j)}$ 表示在$j$层的第$i$ 个单元 $\Theta^j$ 权重矩阵控制$j$到$j+1</description>
+    </item>
+    
+    <item>
+      <title>Coursera - Machine learning 学习笔记(1) - 线性回归和分类器</title>
+      <link>/post/2020-12-06-coursera-andrew-ng-machine-learning-notes/</link>
+      <pubDate>Sun, 06 Dec 2020 23:04:00 +0000</pubDate>
+      
+      <guid>/post/2020-12-06-coursera-andrew-ng-machine-learning-notes/</guid>
+      <description>课程地址: https://www.coursera.org/learn/machine-learning/home/welcome 作业 Vincent code exercise 第一周 简介和一元线性回归 1.1 机器学习定义(Tom Mitchell) E : 经验, 指训练样本 T : 目标任务,一类机器学习解决的问题 P : 衡量目标任务T的性能 举例: 关于垃圾邮件的机器学习 T: 将邮件标记为垃圾或者非垃圾 E: 查看当前邮箱中邮件的是否垃圾的标签 P: 标记垃圾邮件的准确率 1.2 机器学习分类 监</description>
+    </item>
+    
+    <item>
+      <title>Linux 18.04 Tips</title>
+      <link>/post/2020-08-25-linux-tips/</link>
+      <pubDate>Wed, 26 Aug 2020 23:04:00 +0000</pubDate>
+      
+      <guid>/post/2020-08-25-linux-tips/</guid>
+      <description>1. 设置启动界面 网上很多文章都是旧的,18.04 使用下列命令生效/. 切换为图形启动 sudo systemctl set-default runlevel5.target 切换为文本命令模式 sudo systemctl set-default runlevel3.target 命令行启动图形界面 使用startx</description>
+    </item>
+    
+    <item>
+      <title>Antd-v读取和设置后端的错误信息</title>
+      <link>/post/2020-07-31-antdv-set-validate-error/</link>
+      <pubDate>Fri, 31 Jul 2020 23:05:00 +0000</pubDate>
+      
+      <guid>/post/2020-07-31-antdv-set-validate-error/</guid>
+      <description>场景 最近用Antd-v做后台,自带的验证框架.提供了很多的前台验证方法,找了一圈没有找到结合后端验证的,比较纳闷现在前端同学都自己验证不用后端的验证信息了吗?最终的数据验证应该还是以后端为准.自己写了几个函数. 使用 后端返回数据结构 { code: 600412, msg: &amp;#34;数据验证失败&amp;#34;, data: { userName: &amp;</description>
+    </item>
+    
+    <item>
+      <title>VUE项目读取Docker环境变量</title>
+      <link>/post/2020-07-23-vue-docker-run-with-env/</link>
+      <pubDate>Thu, 23 Jul 2020 23:15:00 +0000</pubDate>
+      
+      <guid>/post/2020-07-23-vue-docker-run-with-env/</guid>
+      <description>使用场景 前端项目通常编译的时候会配置多个环境的参数,根据环境参数编译不同的文件.无法做到在各个环境使用同一个版本的镜像.使用环境变量可以在创建镜像的时候传递基础参数减少编译确保测试的有效性. 方案 通过将环境变量传递到DOM,在VUE项目中读取DOM来进行使用环境变量. 读取环境变量 const</description>
+    </item>
+    
+    <item>
+      <title>使用Spring REST Docs生成项目API文档</title>
+      <link>/post/2020-07-10-using-spring-restdoc/</link>
+      <pubDate>Fri, 10 Jul 2020 09:55:00 +0000</pubDate>
+      
+      <guid>/post/2020-07-10-using-spring-restdoc/</guid>
+      <description>配置依赖 增加依赖 pom.xml &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.restdocs&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-restdocs-mockmvc&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; 添加Maven插件 &amp;lt;plugin&amp;gt; &amp;lt;groupId&amp;gt;org.asciidoctor&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;asciidoctor-maven-plugin&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.5.8&amp;lt;/version&amp;gt; &amp;lt;executions&amp;gt; &amp;lt;execution&amp;gt; &amp;lt;id&amp;gt;generate-docs&amp;lt;/id&amp;gt; &amp;lt;phase&amp;gt;prepare-package&amp;lt;/phase&amp;gt; &amp;lt;goals&amp;gt; &amp;lt;goal&amp;gt;process-asciidoc&amp;lt;/goal&amp;gt; &amp;lt;/goals&amp;gt; &amp;lt;configuration&amp;gt; &amp;lt;backend&amp;gt;html&amp;lt;/backend&amp;gt; &amp;lt;doctype&amp;gt;book&amp;lt;/doctype&amp;gt; &amp;lt;/configuration&amp;gt; &amp;lt;/execution&amp;gt; &amp;lt;/executions&amp;gt; &amp;lt;dependencies&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.restdocs&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-restdocs-asciidoctor&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;/dependencies&amp;gt; &amp;lt;/plugin&amp;gt; 如果要将文档打入Jar包中增加一个插件 该插件会打包到static/doc目录中 &amp;lt;plugin&amp;gt; &amp;lt;artifactId&amp;gt;maven-resources-plugin&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.7&amp;lt;/version&amp;gt; &amp;lt;executions&amp;gt; &amp;lt;execution&amp;gt; &amp;lt;id&amp;gt;copy-resources&amp;lt;/id&amp;gt; &amp;lt;phase&amp;gt;prepare-package&amp;lt;/phase&amp;gt; &amp;lt;goals&amp;gt; &amp;lt;goal&amp;gt;copy-resources&amp;lt;/goal&amp;gt; &amp;lt;/goals&amp;gt; &amp;lt;configuration&amp;gt; &amp;lt;outputDirectory&amp;gt; ${project.build.outputDirectory}/static/docs &amp;lt;/outputDirectory&amp;gt; &amp;lt;resources&amp;gt; &amp;lt;resource&amp;gt; &amp;lt;directory&amp;gt; ${project.build.directory}/generated-docs &amp;lt;/directory&amp;gt; &amp;lt;/resource&amp;gt; &amp;lt;/resources&amp;gt; &amp;lt;/configuration&amp;gt; &amp;lt;/execution&amp;gt; &amp;lt;/executions&amp;gt; &amp;lt;/plugin&amp;gt; 待续</description>
+    </item>
+    
+    <item>
+      <title>Ingress添加权限验证</title>
+      <link>/post/2020-04-30-ingress-tips/</link>
+      <pubDate>Thu, 30 Apr 2020 14:20:00 +0000</pubDate>
+      
+      <guid>/post/2020-04-30-ingress-tips/</guid>
+      <description>生成密码文件 ~ htpasswd -c httpauth admin New password: Re-type new password: Adding password for user admin 添加密文 apiVersion: v1 kind: Secret metadata: name: httpauth data: auth: admin:$apr1$RjgQNPDx$e9htPYO4fELnCxOb07GIK0 配置 对你需要增加权限验证的INgress设置注释 nginx.ingress.kubernetes.io/auth-realm: &amp;#39;&amp;#34;Authentication Required - admin&amp;#34;&amp;#39; nginx.ingress.kubernetes.io/auth-secret: httpauth nginx.ingress.kubernetes.io/auth-type: basic INgress YAML如下 apiVersion: extensions/v1beta1 kind: Ingress metadata: annotations: field.cattle.io/creatorId: user-ng7cm field.cattle.io/ingressState: &amp;#39;{&amp;#34;Y29uc3VsL2xvY2FsL2NvbnN1bC5sb2NhbC5waGlsby5pbi8vaHR0cA==&amp;#34;:&amp;#34;&amp;#34;}&amp;#39; field.cattle.io/publicEndpoints: &amp;#39;[{&amp;#34;addresses&amp;#34;:[&amp;#34;10.10.0.31&amp;#34;],&amp;#34;port&amp;#34;:80,&amp;#34;protocol&amp;#34;:&amp;#34;HTTP&amp;#34;,&amp;#34;serviceName&amp;#34;:&amp;#34;local:consul&amp;#34;,&amp;#34;ingressName&amp;#34;:&amp;#34;local:consul&amp;#34;,&amp;#34;hostname&amp;#34;:&amp;#34;consul.local.philo.in&amp;#34;,&amp;#34;allNodes&amp;#34;:true}]&amp;#39; nginx.ingress.kubernetes.io/auth-realm: &amp;#39;&amp;#34;Authentication Required - admin&amp;#34;&amp;#39; nginx.ingress.kubernetes.io/auth-secret: httpauth nginx.ingress.kubernetes.io/auth-type: basic creationTimestamp: &amp;#34;2020-04-23T05:52:00Z&amp;#34; generation: 2 labels: cattle.io/creator: norman name: consul namespace: local resourceVersion: &amp;#34;1102762&amp;#34; selfLink: /apis/extensions/v1beta1/namespaces/local/ingresses/consul uid: a55e4299-2552-401b-91a8-a595fd3ff7e3 spec: rules: - host: consul.local.philo.in http: paths: - backend: serviceName: consul servicePort: http status: loadBalancer: ingress: - ip: 10.10.0.31 - ip: 10.10.0.32 - ip: 10.10.0.41 - ip:</description>
+    </item>
+    
+    <item>
+      <title>Lets Encrypt 申请免费SSL证书</title>
+      <link>/post/2020-04-08-lets_encrypt/</link>
+      <pubDate>Wed, 08 Apr 2020 21:48:00 +0000</pubDate>
+      
+      <guid>/post/2020-04-08-lets_encrypt/</guid>
+      <description>申请SSL docker run -it --rm -v /Users/vincentmi/cert:/etc/letsencrypt certbot/certbot certonly --manual --preferred-challenges dns 路径 SSL保存路径为 /Users/vincentmi/cert/live/philo.in NGINX 配置 server { listen 443 ssl http2; server_name *.dev.philo.in; ssl_certificate /Users/vincentmi/cert/live/philo.in/fullchain.pem; ssl_certificate_key /Users/vincentmi/cert/live/philo.in/privkey.pem; } 更新SSL docker run -it --rm -v /Users/vincentmi/cert:/etc/letsencrypt certbot/certbot renew</description>
+    </item>
+    
+    <item>
+      <title>Feign自定义配置</title>
+      <link>/post/2020-03-25-feign-customize/</link>
+      <pubDate>Wed, 25 Mar 2020 23:31:00 +0000</pubDate>
+      
+      <guid>/post/2020-03-25-feign-customize/</guid>
+      <description>背景 微服务重构,使用Spring全家桶.JSON数据传输为了兼容接口规范对Feign进行了定制 启用Feign 加入Feign的Spring starter依赖 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-openfeign&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; Applicaiton中加上注解 @SpringBootApplication @EnableFeignClients public class Application { public static void main(String[] args) { SpringApplication.run(Application.class); } } 定义一个和使用客户端 package com.tourscool.passport; import org.springframework.cloud.openfeign.FeignClient; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RequestMethod; import org.springframework.web.bind.annotation.RequestParam; @FeignClient(name=&amp;#34;authorize&amp;#34; ,url=&amp;#34;http://authorize.dev.philo.in/api/v1/&amp;#34;,configuration = FeignConfiguration.class) public interface AuthorizeClient {</description>
+    </item>
+    
+    <item>
+      <title>使用OkHttp进行HTTPS连接</title>
+      <link>/post/2020-03-11-okhttp-ssl-support/</link>
+      <pubDate>Wed, 11 Mar 2020 11:31:00 +0000</pubDate>
+      
+      <guid>/post/2020-03-11-okhttp-ssl-support/</guid>
+      <description>背景 Java 搞个SSL居然还这么麻烦,翻了下官方文档.翻译下HTTPS 相关章节 OkHttp努力平滑下面的两个点 连接性 尽可能的连接各种主机.这包含运行 boringssl 最新版本的高级主机以及运行OpenSSL的旧主机. 连接的安全性 这包括使用证书验证远程web服务器，以及使用强密码交换数据的隐私。 当协商连</description>
+    </item>
+    
+    <item>
+      <title>搭建本地KVM和K8S集群</title>
+      <link>/post/2020-01-09-local-kvm-cluster/</link>
+      <pubDate>Thu, 09 Jan 2020 18:24:00 +0000</pubDate>
+      
+      <guid>/post/2020-01-09-local-kvm-cluster/</guid>
+      <description>准备工作 版本 Ubuntu 16.04.6 LTS Linux version 4.4.0-142-generic qemu-img version 2.5.0 (Debian 1:2.5+dfsg-5ubuntu10.42) 检查 检查是否支持虚拟化 egrep -c &amp;#39;(svm|vmx)&amp;#39; /proc/cpuinfo 返回 0 则不支持,需要看下BIOS里是否没有打开虚拟化支持. 安装KVM sudo apt update sudo apt install qemu qemu-kvm libvirt-bin bridge-utils virt-manager virt-sysperp 配置自启动 sudo systemctl start libvirtd.service sudo systemctl enable libvirtd.service 配置桥接网络 修改 /etc/network/interfaces # The loopback network interface auto lo iface lo inet loopback # The bridge interface auto br0 iface br0 inet static address 10.10.0.3 netmask 255.255.255.0 network 10.10.0.1 broadcast 10.10.0.255 gateway 10.10.0.1 dns-nameservers 10.10.0.1 bridge_ports enp1s0 bridge_stp off bridge_fd 0 ubuntu</description>
+    </item>
+    
+    <item>
+      <title>JPA手册(2) -JPA 仓库</title>
+      <link>/post/2019-09-26-spring-jpa-repository/</link>
+      <pubDate>Thu, 26 Sep 2019 15:03:00 +0000</pubDate>
+      
+      <guid>/post/2019-09-26-spring-jpa-repository/</guid>
+      <description>5 JPA 仓库 本章指出JPA建立在上一章内容之上的专有的功能.请确保你对此有充分的了解. 5.1 简介 本节介绍通过以下任一方式配置Spring Data JPA的基础知识： “Spring Namespace” (XML configuration) “基于注解的配置” (Java configuration) 5.1.1. Spring 命名空间 Spring Data的JPA模块包含一个允许定义存储库bean的自定义</description>
+    </item>
+    
+    <item>
+      <title>JPA手册(1) - Spring Data Repository</title>
+      <link>/post/2019-09-26-spring-repository/</link>
+      <pubDate>Thu, 26 Sep 2019 10:16:00 +0000</pubDate>
+      
+      <guid>/post/2019-09-26-spring-repository/</guid>
+      <description>4 使用Spring Data 仓库 Spring Data 仓库抽象层的目标是为了显著的减少进行数据持久层访问的代码量. 4.1. 核心概念 Spring Data 仓库最重要的抽象接口是Repository,他使用领域类以及领域类的ID作为参数进行管理.这个接口主要扮演一个标记接口.用来捕捉要使用的类型和帮组发现扩展自该接口的接口.Crud</description>
+    </item>
+    
+    <item>
+      <title>安装Kubernetes集群(3) - Prometheus</title>
+      <link>/post/2019-04-10-k8s-prometheus/</link>
+      <pubDate>Wed, 10 Apr 2019 15:31:00 +0000</pubDate>
+      
+      <guid>/post/2019-04-10-k8s-prometheus/</guid>
+      <description>Prometheus 可以原生监控K8s ,节点和它本身.Prometheus Operator 可以简化Prometheus在K8S 中的安装.使用Prometheus adapter 可以使用自定义指标参数. Prometheus 也提供内建的控制台和查询语言来查询数据和可视化.Prometheus也可以做为Grafana的数据源. 安装Prometheu</description>
+    </item>
+    
+    <item>
+      <title>搭建Kubernetes集群(2) - Ingress</title>
+      <link>/post/2019-04-04-k8s-ingress/</link>
+      <pubDate>Thu, 04 Apr 2019 15:31:00 +0000</pubDate>
+      
+      <guid>/post/2019-04-04-k8s-ingress/</guid>
+      <description>Ingress Ingress允许你配置运行于K8S上的HTTP负载均衡器对服务进行负载均衡. Ingress支持以下功能 基于内容的路由 基于主机名的路由 基于路径的路由 支持TLS/SSL请求 查看官网对Ingress简介 Ingress 控制器 Ingress控制器是运行在集群中根据Ingress资源进行配置的HTT</description>
+    </item>
+    
+    <item>
+      <title>搭建Kubernetes集群(1) - 安装集群</title>
+      <link>/post/2019-03-23-install-kubernetes/</link>
+      <pubDate>Sun, 24 Mar 2019 15:31:00 +0000</pubDate>
+      
+      <guid>/post/2019-03-23-install-kubernetes/</guid>
+      <description>1.准备 环境 Ubuntu 16.04 Docker CE 18.09.3 安装Kubeadm,Kubelet,Kubectl 使用 kubeadm config images list 命令.列出当前版本中用到的镜像. 输入如下 k8s.gcr.io/kube-apiserver:v1.13.4 k8s.gcr.io/kube-controller-manager:v1.13.4 k8s.gcr.io/kube-scheduler:v1.13.4 k8s.gcr.io/kube-proxy:v1.13.4 k8s.gcr.io/pause:3.1 k8s.gcr.io/etcd:3.2.24 k8s.gcr.io/coredns:1.2.6 使用脚本拉取国内镜像 #!/bin/bash images=( kube-apiserver:v1.13.4 kube-controller-manager:v1.13.4 kube-scheduler:v1.13.4 kube-proxy:v1.13.4 pause:3.1 etcd:3.2.24 coredns:1.2.6 ) for imageName in ${images[@]} ; do docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName k8s.gcr.io/$imageName done 重新载入服务 systemctl daemon-reload systemctl restart kubelet 安装flannel插件 安装 ETCD 配置网络: /coreos.com/network/config 写入flan</description>
+    </item>
+    
+    <item>
+      <title>WebRTC技术简介-RTCDataChannel</title>
+      <link>/post/2018-12-14-get-start-with-webrtc-data-channel/</link>
+      <pubDate>Fri, 14 Dec 2018 15:31:00 +0000</pubDate>
+      
+      <guid>/post/2018-12-14-get-start-with-webrtc-data-channel/</guid>
+      <description>RTCDataChannel WebRTC可以像音频和视频一样支持实时通讯来传输其他类型的数据. RTCDataChannel API可以使端到端进行任意数据的交换,保持低延迟和高吞吐量.这里有一些单页DEMO可供参考. webrtc.github.io/samples/#datachannel 和 WebRTC codelab 展示了如何建立一个简单的文件传输应用. 这个API可以应用到很多业务场景: 游戏 远程控制应用 实时文字聊天 文件传输 去</description>
+    </item>
+    
+    <item>
+      <title>WebRTC技术简介-RTCPeerConnection</title>
+      <link>/post/2018-11-14-get-start-with-webrtc-peer-connection/</link>
+      <pubDate>Wed, 14 Nov 2018 15:31:00 +0000</pubDate>
+      
+      <guid>/post/2018-11-14-get-start-with-webrtc-peer-connection/</guid>
+      <description>第一个WebRPC应用 WebRPC 需要做以下的几件事: 获取音频,视频或者其他数据 获取网络信息比如IP地址,端口,并与其他的WebRTC客户端进行交换,穿过NAT合防火墙进行连接. 处理信号以便发起请求报告错误或者关闭会话 交换客户端支持的媒体信息,比如分辨率,解码器 传输音频视频流或者数据 为了获</description>
+    </item>
+    
+    <item>
+      <title>WebRTC技术简介-获取媒体</title>
+      <link>/post/2018-11-09-get-start-with-webrtc-get-media/</link>
+      <pubDate>Fri, 09 Nov 2018 15:31:00 +0000</pubDate>
+      
+      <guid>/post/2018-11-09-get-start-with-webrtc-get-media/</guid>
+      <description>Google I/O 的介绍 https://youtu.be/p2HzZkd2A40 1 .通过getUserMedia()使用摄像头和麦克风 通过 getUserMedia()我们可以在不使用任何插件的情况下访问到摄像头和麦克风. 特性检查 只需要检查navigator.mediaDevices.getUserMedia对象是否存在就可以了 function hasGetUserMedia() { return !!(navigator.mediaDevices &amp;amp;&amp;amp; navigator.mediaDevices.getUserMedia); } if (hasGetUserMedia())</description>
+    </item>
+    
+    <item>
+      <title>搬到GitHub了</title>
+      <link>/post/2018-04-14-move-to-github/</link>
+      <pubDate>Sat, 14 Apr 2018 22:07:00 +0000</pubDate>
+      
+      <guid>/post/2018-04-14-move-to-github/</guid>
+      <description>国内的服务始终是让人不放心.不晓得啥时候又会关闭. 新浪博客算非常不错的服务了. 改天写个程序转移到GitHub去 http://vnzmi.com</description>
+    </item>
+    
+    <item>
+      <title>Docker&#43;Consul&#43;Ngxin配置脚本</title>
+      <link>/post/2018-04-13-server-setup-scripts/</link>
+      <pubDate>Fri, 13 Apr 2018 11:20:00 +0000</pubDate>
+      
+      <guid>/post/2018-04-13-server-setup-scripts/</guid>
+      <description>Docker #!/bin/sh sudo apt-get remove docker docker-engine docker.io sudo apt-get update sudo apt-get install \ apt-transport-https \ ca-certificates \ curl \ software-properties-common curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - sudo apt-key fingerprint 0EBFCD88 sudo add-apt-repository \ &amp;#34;deb [arch=amd64] https://download.docker.com/linux/ubuntu \ $(lsb_release -cs) \ stable&amp;#34; sudo apt-get update sudo apt-get -y install docker-ce apt-cache madison docker-ce sudo apt-get install docker-ce=&amp;lt;VERSION&amp;gt; NGINX server { listen 80 default_server; listen [::]:80 default_server ipv6only=on; root /usr/share/nginx/html; index index.html index.htm; server_name localhost; location / { proxy_pass http://127.0.0.1:8009; proxy_redirect off; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504; proxy_max_temp_file_size 0; proxy_connect_timeout 90; proxy_send_timeout 90; proxy_read_timeout 90; proxy_buffer_size 4k; proxy_buffers 4 32k; proxy_busy_buffers_size 64k; proxy_temp_file_write_size 64k; } } 容器 #mysql docker run \ --name mysql-primary \ -v /alidata/mysqldb:/var/lib/mysql \ -p 3306:3306 \ -e MYSQL_ROOT_PASSWORD=xxxx \ -e &amp;#34;SERVICE_NAME=mysql_promary&amp;#34;</description>
+    </item>
+    
+    <item>
+      <title>树莓派OSMC使用Shadowsocks提供安全的代理</title>
+      <link>/post/2018-03-07-osmc-install-shadowsocks/</link>
+      <pubDate>Wed, 07 Mar 2018 10:07:00 +0000</pubDate>
+      
+      <guid>/post/2018-03-07-osmc-install-shadowsocks/</guid>
+      <description>最近购买了一台NAS.电影和家庭录像都保存到了NAS.也可以使用NAS的APP进行电影下载.电视或手机通过DLNA进行播放.但是存在一个问题,电视的视频解码可能由于专利之类的原因,无法对大部分下载的电影的音频进行解码.手头有个闲置的树莓派,安装OSMC进行视频的解码.然后顺便配置</description>
+    </item>
+    
+    <item>
+      <title>CCM通用计算工具</title>
+      <link>/post/2018-01-04-ccm/</link>
+      <pubDate>Thu, 04 Jan 2018 18:02:00 +0000</pubDate>
+      
+      <guid>/post/2018-01-04-ccm/</guid>
+      <description>工作中遇到的需求,对一些投资项目进行收益评估.其中涉及到各种财务数据的计算.分析人员需要通过输入不同的参数来对投资收益进行对比以此来决定对项目如何进行投资以及如何控制各项成本. 问题和解决思路 因为涉及到很多公式,不同的公式需要带入其他公式运算的结果,因此用代码和函数来处理变得非常复</description>
+    </item>
+    
+    <item>
+      <title>Golang net/rpc 开发jsonrpc服务</title>
+      <link>/post/2017-04-17-golang-json-rpc/</link>
+      <pubDate>Mon, 17 Apr 2017 16:01:00 +0000</pubDate>
+      
+      <guid>/post/2017-04-17-golang-json-rpc/</guid>
+      <description>RPC RPC作为微服务框架下的各个模块的通讯协议进行系统内部各个服务之间的沟通。随着业务量的增大和系统的复杂度增加，可能还需要使用系统总线对各个消息进行路由、异步调用以及流量控制。Go提供了net/rpc包来实现对RPC的支持,通过启动一个服务器，注册一个对象暴露他的公共方法来允许远</description>
+    </item>
+    
+    <item>
+      <title>VirtualBox调整磁盘空间</title>
+      <link>/post/2017-03-29-vm-disk-resize/</link>
+      <pubDate>Wed, 29 Mar 2017 16:00:00 +0000</pubDate>
+      
+      <guid>/post/2017-03-29-vm-disk-resize/</guid>
+      <description>调整VM磁盘文件大小 vm 版本需要4.0以上 VBoxManage modifyhd you_disk_file –resize 40960 也可以使用 uuid 替换 you_disk_file , 使用VBoxManage list hdds可以列出你的当前磁盘。 建立物理分区 先查看当前分区情况 [root@p2 ~]# df -h Filesystem Size Used Avail Use% Mounted on /dev/mapper/VolGroup-lv_root 6.5G 5.0G 1.2G 81% / tmpfs 372M 12K 372M 1% /dev/shm /dev/sda1 477M 49M 399M 11% /boot 目前 /有6.5G 查看当前物理磁盘空间 [root@p2 ~]# fdisk -l /dev/sda Disk /dev/sda: 14.7 GB,</description>
+    </item>
+    
+    <item>
+      <title>使用Consul Docker微服务平台实践</title>
+      <link>/post/2017-03-24-consul-and-docker-service-discover/</link>
+      <pubDate>Fri, 24 Mar 2017 10:26:00 +0000</pubDate>
+      
+      <guid>/post/2017-03-24-consul-and-docker-service-discover/</guid>
+      <description>基础环境 - CentOS6.6 内核升级 因为虚拟机的centos内核无法达到docker稳定运行，因此升级到3.1,执行 #导入key rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org #安装ELRepo到CentOS 6.6中 rpm -Uvh http://www.elrepo.org/elrepo-release-6-6.el6.elrepo.noarch.rpm #安装长期支持版本kernel yum --enablerepo=elrepo-kernel install kernel-lt -y #编辑grub.conf文件，修改Grub引导顺序,选择3.1版本的内容(一</description>
+    </item>
+    
+    <item>
+      <title>Git index-pack failed 问题解决</title>
+      <link>/post/2017-01-08-git-early-eof-index-pack-failed/</link>
+      <pubDate>Sun, 08 Jan 2017 18:43:00 +0000</pubDate>
+      
+      <guid>/post/2017-01-08-git-early-eof-index-pack-failed/</guid>
+      <description>问题 git 由于提交了比较大的文件，在服务端一直无法拉下来，错误如下 root@iZ94au:/wwwroot/app# git pull remote: Counting objects: 168, done. remote: Compressing objects: 100% (87/87), done. Connection to bitbucket.org closed by remote host.0 KiB/s fatal: The remote end hung up unexpectedly fatal: early EOF fatal: index-pack failed 解决方案 解决1 根据stackoverflow的回答修改comporession=0 修改压缩的程度 compression = 9 设置为 -1， 0 9 均无效 解决2 这个错误可能是由于</description>
+    </item>
+    
+    <item>
+      <title>服务发现,Consul入门</title>
+      <link>/post/2016-08-16-consul-quick-guide/</link>
+      <pubDate>Tue, 16 Aug 2016 18:56:00 +0000</pubDate>
+      
+      <guid>/post/2016-08-16-consul-quick-guide/</guid>
+      <description>翻译自官方文档 . 欢迎进入Consul的入门指南!这个指南是开始使用Consul的起点,通过这个指南了解Consul是什么,他可以解决哪些问题.它与现有软件的比较和怎么开始使用它.如果你对Consul已经有基本的了解,可以阅读 文档 ,它提供更多可用特性的参考. ###英文原版 https://www.consul.io/intro/ 翻译 工作</description>
+    </item>
+    
+    <item>
+      <title>CentOS搭建L2TP VPN服务</title>
+      <link>/post/2016-08-04-l2tp-vpn-setup/</link>
+      <pubDate>Thu, 04 Aug 2016 09:49:00 +0000</pubDate>
+      
+      <guid>/post/2016-08-04-l2tp-vpn-setup/</guid>
+      <description>参考 : http://longtimenoc.com/archives/centos%E4%B8%8Al2tp%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE 准备 编译会用到的库 yum install -y ppp iptables make gcc gmp-devel xmlto bison flex xmlto libpcap-devel lsof vim-enhanced 安装openswan wget https://download.openswan.org/openswan/openswan-latest.tar.gz tar zxf openswan-latest.tar.gz cd openswan-2.6.48 make programs install 安装xl2tpd yum install xl2tpd 配置 配置/etc/ipsec.conf config setup nat_traversal=yes virtual_private=%v4:10.0.0.0/8,%v4:192.168.0.0/16,%v4:172.16.0.0/12 oe=off protostack=netkey conn L2TP-PSK-NAT rightsubnet=vhost:%priv also=L2TP-PSK-noNAT conn L2TP-PSK-noNAT authby=secret pfs=no auto=add keyingtries=3 rekey=no ikelifetime=8h keylife=1h type=transport left=$vpsip #改你服务器的IP leftprotoport=17/1701 right=%any rightprotoport=17/%any 配置 /etc/ipsec.secrets 你的服务器IP %any: PSK &amp;#34;你的密码&amp;#34; 编辑 /etc/sysctl.conf</description>
+    </item>
+    
+    <item>
+      <title>安装生成环境的Swarm集群</title>
+      <link>/post/2016-08-03-install-swarm-for-prodduction/</link>
+      <pubDate>Wed, 03 Aug 2016 14:03:00 +0000</pubDate>
+      
+      <guid>/post/2016-08-03-install-swarm-for-prodduction/</guid>
+      <description>参考 : https://docs.docker.com/swarm/install-manual/ 网络规划 规划如下 节点描述 名称 Swarm 主机和备份机 p4 , hdp1 Swarm 节点 hdp2,hdp3 发现后台 p4</description>
+    </item>
+    
+    <item>
+      <title>PPTP MAC断线问题</title>
+      <link>/post/2016-08-01-pptp-issue-of-mac/</link>
+      <pubDate>Mon, 01 Aug 2016 14:45:00 +0000</pubDate>
+      
+      <guid>/post/2016-08-01-pptp-issue-of-mac/</guid>
+      <description>MAC连接pptp服务经常断线 日志内容如下 Aug 1 14:01:06 s1 pptpd[21666]: CTRL: Client 218.88.x.155 control connection finished Aug 1 14:05:34 s1 pptpd[21965]: CTRL: Client 218.88.x.155 control connection started Aug 1 14:05:34 s1 pptpd[21965]: CTRL: Starting call (launching pppd, opening GRE) Aug 1 14:05:34 s1 pppd[21967]: Warning: can&amp;#39;t open options file /home/xxxx/.ppprc: Permission denied Aug 1 14:05:34 s1 pppd[21967]: Plugin /usr/lib64/pptpd/pptpd-logwtmp.so loaded. Aug 1 14:05:34 s1 pppd[21967]: pptpd-logwtmp: $Version$ Aug 1 14:05:34 s1 pppd[21967]: Using interface ppp0 Aug 1 14:05:34 s1 pppd[21967]: Connect: ppp0 &amp;lt;--&amp;gt; /dev/pts/2 Aug 1 14:05:34 s1 pptpd[21965]: GRE: Bad checksum from pppd. Aug 1 14:05:38 s1 pppd[21967]: MPPE 128-bit stateless compression enabled Aug 1 14:05:41 s1 pppd[21967]: Unsupported protocol &amp;#39;Apple Client Server Protocol Control&amp;#39; (0x8235) received Aug 1 14:05:41 s1 pppd[21967]: Unsupported</description>
+    </item>
+    
+    <item>
+      <title>使用Yum快速升级CentOS6.6内核</title>
+      <link>/post/2016-07-23-centos-yum-update-kernel/</link>
+      <pubDate>Sat, 23 Jul 2016 05:38:00 +0000</pubDate>
+      
+      <guid>/post/2016-07-23-centos-yum-update-kernel/</guid>
+      <description>因为要装Docker所以需要升级下Linux内核 记录下命令备忘 导入public key rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org 安装ELRepo到CentOS 6.6中 rpm -Uvh http://www.elrepo.org/elrepo-release-6-6.el6.elrepo.noarch.rpm 安装长期支持版本kernel yum --enablerepo=elrepo-kernel install kernel-lt -y 编辑grub.conf文件，修改Grub引导顺序 vim /etc/grub.conf 确认刚刚安装的内核的位置，然后将default修改一下。 default=0 timeout=5</description>
+    </item>
+    
+    <item>
+      <title>Jenkins集成jekyll</title>
+      <link>/post/2016-07-21-jenkins-jekyll-integration/</link>
+      <pubDate>Thu, 21 Jul 2016 09:49:00 +0000</pubDate>
+      
+      <guid>/post/2016-07-21-jenkins-jekyll-integration/</guid>
+      <description>Jekyll 3 需要ruby 2.0 以上,CentOS上的yum包比较老.使用rvm进行安装 curl -L get.rvm.io | bash -s stable 导入 # root用户安装执行 source /usr/local/rvm/rvm.sh # 其他用户安装 source ~/.rvm/rvm.sh 安装Ruby rvm 2.0.0 Jekyll的路径如下 /usr/local/rvm/gems/ruby-2.0.0-p648/bin/jekyll 但是要正常运行需要用wrappers脚本处理下环境变量等等, 包裹下如下 cd $WORKSPACE /usr/local/rvm/gems/ruby-2.0.0-p648/wrappers/jekyll build --source $WORKSPACE --destination $WORKSPACE/_sites 构建后scp拷贝到</description>
+    </item>
+    
+    <item>
+      <title>集群安装Hadoop系列组件</title>
+      <link>/post/2016-07-11-install-hadoop-hbase-kafka/</link>
+      <pubDate>Mon, 11 Jul 2016 18:44:00 +0000</pubDate>
+      
+      <guid>/post/2016-07-11-install-hadoop-hbase-kafka/</guid>
+      <description>公司日志系统扩容,考虑到后续数据暴增,选用HBase来进行存储,在本地VM进行一下演练 记录下安装过程备查 配置之前请查阅兼容列表 目前安装的版本 HADOOP-2.5.2 HBASE-1.1.5 Hadoop 安装 1.配置 选择4台虚拟机作整个集群,配置如下 hdp1 10.0.0.30 #master hdp2 10.0.0.31 #datanode hdp3 10.0.0.32 #datanode hdp4 10.0.0.33 #datanode 2.工具 远程执行命令 #!/bin/sh #/opt/hdp/hdp_ssh for i in 31 32 33 41 42 43; do echo -e &amp;#34;\033[33m - 10.0.0.${i} - \033[0m&amp;#34; ssh root@10.0.0.$i $*</description>
+    </item>
+    
+    <item>
+      <title>Golang:错误即值 Errors are values</title>
+      <link>/post/2016-06-22-golang-errors-are-values/</link>
+      <pubDate>Wed, 22 Jun 2016 14:15:00 +0000</pubDate>
+      
+      <guid>/post/2016-06-22-golang-errors-are-values/</guid>
+      <description>英文原版见此 https://blog.golang.org/errors-are-values 作者 :Rob Pike 翻译 :Vincent Mi 前言 最近用Go写了一下程序,没有try-catch不太适应。因此翻到了这篇文章. 顺手翻译了过来.可能翻译不太好纯为了自己加深理解. 正文 如何进行错误处理,这是一个Go程序员之间,特别是一些新的Go程序员,会经常讨论的问题.讨论到最后往往由于以下代码的多</description>
+    </item>
+    
+    <item>
+      <title>换到Github</title>
+      <link>/post/2016-06-02-hello-2016/</link>
+      <pubDate>Thu, 02 Jun 2016 12:00:00 +0000</pubDate>
+      
+      <guid>/post/2016-06-02-hello-2016/</guid>
+      <description>“Yeah It&amp;rsquo;s on. ” 前言 又换了一个博客。 习惯了Markdown和git所以还是换到github来比较靠谱 正文 使用Jekyll构建这个博客,感谢Hex修改的模版. 后记 搬文章了,蛋疼.希望这是最后一次 —— 2016.6</description>
+    </item>
+    
+    <item>
+      <title>安装Zabbix监控</title>
+      <link>/post/2016-05-15-install-zabbix/</link>
+      <pubDate>Sun, 15 May 2016 20:44:00 +0000</pubDate>
+      
+      <guid>/post/2016-05-15-install-zabbix/</guid>
+      <description>服务器 CentOS 6.5 安装 因为Zabbix使用到了MySQL和PHP所以需要先安装MySQL 安装MySQL yum -y install mysql-server 安装Zabbix 服务器CentOS 6.6 安装如下 yum -y install zabbix22-web-mysql zabbix22-server-mysql zabbix22-agent 创建zabbix数据库和用户,然后创建基本的数据结构 mysql&amp;gt; source /usr/share/zabbix-mysql/schema.sql mysql&amp;gt; source /usr/share/zabbix-mysql/images.sql mysql&amp;gt; source /usr/share/zabbix-mysql/data.sql 运行apache service httpd start 进入 http://localh</description>
+    </item>
+    
+    <item>
+      <title>让iTerm2支持rz sz命令</title>
+      <link>/post/2016-02-17-iterm2-zmodem-support/</link>
+      <pubDate>Wed, 17 Feb 2016 21:30:00 +0000</pubDate>
+      
+      <guid>/post/2016-02-17-iterm2-zmodem-support/</guid>
+      <description>&lt;h2 id=&#34;安装lrzsz-支持&#34;&gt;安装lrzsz 支持&lt;/h2&gt;
+&lt;p&gt;使用brew安装&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;brew install lrzsz
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果brew下载可能会被墙。如果可以手动进行下载。可以这样处理&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Eclipse 相同方法变量颜色修改</title>
+      <link>/post/2015-12-04-eclipse-occurrence-color-change/</link>
+      <pubDate>Fri, 04 Dec 2015 13:56:00 +0000</pubDate>
+      
+      <guid>/post/2015-12-04-eclipse-occurrence-color-change/</guid>
+      <description>&lt;p&gt;Eclipse 选择Dark主题会出现白底白字高亮的情况 基本看不到.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Vagrant Mac 权限问题</title>
+      <link>/post/2015-08-25-vagrant-file-permission-issue-on-mac/</link>
+      <pubDate>Tue, 25 Aug 2015 10:40:00 +0000</pubDate>
+      
+      <guid>/post/2015-08-25-vagrant-file-permission-issue-on-mac/</guid>
+      <description>Vagrant在windows下加载的文件全部是777，但是在Mac 下会是644 这样会导致文件权限问题。 解决方法如下： config.vm.synced_folder &amp;#34;/Users/vincent/www&amp;#34;,&amp;#34;/vagrant&amp;#34;,:mount_options =&amp;gt; [&amp;#34;dmode=777&amp;#34;,&amp;#34;fmode=777&amp;#34;]</description>
+    </item>
+    
+    <item>
+      <title>扩展Thymeleaf 3 - 模板模式</title>
+      <link>/post/2015-07-23-extending-thymeleaf-part-3/</link>
+      <pubDate>Fri, 24 Jul 2015 10:33:00 +0000</pubDate>
+      
+      <guid>/post/2015-07-23-extending-thymeleaf-part-3/</guid>
+      <description>&lt;p&gt;[http://vincentmi.gitbooks.io/extendingthymeleaf/content/][http://vincentmi.gitbooks.io/extendingthymeleaf/content/]&lt;/p&gt;
+&lt;p&gt;模板模式或许是Thymeleaf最强大的扩展点，模板模式实际上定义了什么可以被认为是一个“模板”。创建定制化的模板模式允许我们处理不同于默认的XML,XHTML,HTML5的文档格式。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>扩展Thymeleaf-4 创建我们自己的方言</title>
+      <link>/post/2015-07-24-extending-thymeleaf-part-4/</link>
+      <pubDate>Fri, 24 Jul 2015 10:33:00 +0000</pubDate>
+      
+      <guid>/post/2015-07-24-extending-thymeleaf-part-4/</guid>
+      <description>&lt;p&gt;[http://vincentmi.gitbooks.io/extendingthymeleaf/][http://vincentmi.gitbooks.io/extendingthymeleaf/]&lt;/p&gt;
+&lt;p&gt;足球是麝香草大陆最流行的运动。每个赛季有10对参加联赛，主办方请为我们为它创建一个叫做&amp;quot;Extrathyme&amp;quot;的网站。&lt;/p&gt;
+&lt;p&gt;这个网站将非常简单，就是一个表格。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;队名&lt;/li&gt;
+&lt;li&gt;胜平负的场次，以及获得的总分&lt;/li&gt;
+&lt;li&gt;备注，该队伍当前所处的位置，下赛季保级还是升入高级别联赛&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;然后在表格上显示一个广告和最近比赛的比分。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>扩展Thymeleaf-2  方言和处理器</title>
+      <link>/post/2015-07-23-extending-thymeleaf-part-2/</link>
+      <pubDate>Thu, 23 Jul 2015 09:27:00 +0000</pubDate>
+      
+      <guid>/post/2015-07-23-extending-thymeleaf-part-2/</guid>
+      <description>&lt;p&gt;gitbook [http://vincentmi.gitbooks.io/extendingthymeleaf/content/][1]&lt;/p&gt;
+&lt;p&gt;如果你读过Thymeleaf的入门教程（你应该已经读完了）。你应该知道你之前学的准确的说不是Thymeleaf，而是Thymeleaf的标准方言。（或者，如果你读过Thymeleaf+Spring教程的话就是Spring标准方言）。&lt;/p&gt;
+&lt;p&gt;这是什么意思？意思是你学的th:xattribute只是可以立即使用的标准方言。但是你可以使用你喜欢的名字自己定义一组attribute或者tag在Thymeleaf用来处理你的模板。你可以定义你自己的方言。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>扩展Thymeleaf-1 为什么需要扩展Thymeleaf</title>
+      <link>/post/2015-07-23-extending-thymeleaf-part-1/</link>
+      <pubDate>Thu, 23 Jul 2015 02:04:00 +0000</pubDate>
+      
+      <guid>/post/2015-07-23-extending-thymeleaf-part-1/</guid>
+      <description>&lt;p&gt;gitbook [http://vincentmi.gitbooks.io/extendingthymeleaf/content/][http://vincentmi.gitbooks.io/extendingthymeleaf/content/]&lt;/p&gt;
+&lt;p&gt;Thymeleaf是一个很容易扩展的库。他的关键在于，大部分面向用户的功能不是直接构建在他的核心中，而是通过打包和组件化到一个称为Dialects(方言)的功能集合中。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Spring MVC 的错误处理</title>
+      <link>/post/2015-06-30-exception-handling-in-spring-mvc/</link>
+      <pubDate>Tue, 30 Jun 2015 17:18:00 +0000</pubDate>
+      
+      <guid>/post/2015-06-30-exception-handling-in-spring-mvc/</guid>
+      <description>&lt;p&gt;Spring MVC 提供多种异常处理方式，但是当我在进行Spring MVC培训时，我发现我的学院经常会感到困惑或者不太适应。&lt;/p&gt;
+&lt;p&gt;今天我将为你展示多种可能的选项。我们的目标是如果可能的话不在Controller的方法里显式的处理异常。作为横切关注点分别在专用代码里处理更好。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用Spring创建RESTful 服务</title>
+      <link>/post/2015-06-25-use-spring-create-a-restful-service/</link>
+      <pubDate>Thu, 25 Jun 2015 13:52:00 +0000</pubDate>
+      
+      <guid>/post/2015-06-25-use-spring-create-a-restful-service/</guid>
+      <description>&lt;p&gt;这个指南将引导你使用创建一个&amp;quot;hello world&amp;quot;&lt;a href=&#34;http://spring.io/understanding/REST&#34;&gt; RESTFul 服务&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>dockerpool CA 证书错误</title>
+      <link>/post/2015-06-14-docker-pool-ca-issue/</link>
+      <pubDate>Sun, 14 Jun 2015 09:13:00 +0000</pubDate>
+      
+      <guid>/post/2015-06-14-docker-pool-ca-issue/</guid>
+      <description>docker被墙后用，拉dockerpool的镜像会出现这个错误 &amp;gt; sudo docker pull dl.dockerpool.com:5000/centos:7 FATA[0000] Error response from daemon: v1 ping attempt failed with error: Get https://dl.dockerpool.com:5000/v1/_ping: tls: oversized record received with length 28012. If this private registry supports only HTTP or HTTPS with an unknown CA certificate, please add `--insecure-registry dl.dockerpool.com:5000` to the daemon&amp;#39;s arguments. In the case of HTTPS, if you have access to the registry&amp;#39;s CA certificate, no need for the flag; simply place the CA certificate at /etc/docker/certs.d/dl.dockerpool.com:5000/ca.crt 解决方法，在/etc/sysconfig/docker添加 INSECURE_REGISTRY=&amp;#39;--insecure-registry dl.dockerpool.com:5000&amp;#39; 版本如下</description>
+    </item>
+    
+    <item>
+      <title>使用Mesos和Docker构建你的私有云平台</title>
+      <link>/post/2015-06-12-use-mesos-and-docker-build-paas/</link>
+      <pubDate>Fri, 12 Jun 2015 23:11:00 +0000</pubDate>
+      
+      <guid>/post/2015-06-12-use-mesos-and-docker-build-paas/</guid>
+      <description>&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+&lt;p&gt;如果没有安装epel源先安装&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum install epel-release
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;先添加mesosphere源&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo rpm -Uvh http://repos.mesosphere.io/el/7/noarch/RPMS/mesosphere-el-repo-7-1.noarch.rpm
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;安装mesos 以及运算框架marathon&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum install mesos 
+yum install marathon 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;安装zookeeper&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum install mesosphere-zookeeper
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>CentOS 6.5 docker 错误</title>
+      <link>/post/2015-06-10-docker-issue/</link>
+      <pubDate>Wed, 10 Jun 2015 17:16:00 +0000</pubDate>
+      
+      <guid>/post/2015-06-10-docker-issue/</guid>
+      <description>Docker 在centos6.5中安装因为 device-mapper 不正确会报这个错 \n三 6月 10 16:46:56 CST 2015\n time=&amp;#34;2015-06-10T16:46:56+08:00&amp;#34; level=&amp;#34;info&amp;#34; msg=&amp;#34;+job serveapi(unix:///var/run/docker.sock)&amp;#34; time=&amp;#34;2015-06-10T16:46:56+08:00&amp;#34; level=&amp;#34;info&amp;#34; msg=&amp;#34;WARNING: You are running linux kernel version 2.6.32-431.el6.x86_64, which might be unstable running docker. Please upgrade your kernel to 3.8.0.&amp;#34; time=&amp;#34;2015-06-10T16:46:56+08:00&amp;#34; level=&amp;#34;info&amp;#34; msg=&amp;#34;Listening for HTTP on unix (/var/run/docker.sock)&amp;#34; /usr/bin/docker: relocation error: /usr/bin/docker: symbol dm_task_get_info_with_deferred_remove, version Base not defined in file libdevmapper.so.1.02 with link time reference 解决方法 sudo yum install device-mapper-event-libs sudo yum reinstall docker</description>
+    </item>
+    
+    <item>
+      <title>在CentOS下安装PPTP的VPN</title>
+      <link>/post/2015-06-09-centos-pptp/</link>
+      <pubDate>Tue, 09 Jun 2015 23:16:00 +0000</pubDate>
+      
+      <guid>/post/2015-06-09-centos-pptp/</guid>
+      <description>http://www.black-xstar.com/blog/691.html 最近买了个基于xen的VPS玩玩，安装LAMP没啥意思。国内网络环境不好，干脆安装个VPN试试。 对于Linux其实我什么都不会的，在google老师的帮助下，总算给我安装好了，记录下来以便查阅。 VPN常用有两种，一种是openvpn，另一种PPTP。前者开源跨平台功能强大，后者</description>
+    </item>
+    
+    <item>
+      <title>CXF添加Header</title>
+      <link>/post/2015-06-04-cxf-header/</link>
+      <pubDate>Sun, 10 May 2015 23:16:00 +0000</pubDate>
+      
+      <guid>/post/2015-06-04-cxf-header/</guid>
+      <description>CXF的header处理了半天。。。 添加拦截器 public class HotelHeaderInterceptor extends AbstractSoapInterceptor { public void handleMessage(SoapMessage message) throws Fault { List&amp;lt;Header&amp;gt; headers = message.getHeaders(); AuthenticationHeader aheader = new AuthenticationHeader(); aheader.setCulture(com.tourico.schemas.webservices.authentication.Culture.EN_US); aheader.setLoginName(username); aheader.setPassword(password); aheader.setVersion(new JAXBElement&amp;lt;String&amp;gt;(new QName(&amp;#34;&amp;#34;, &amp;#34;version&amp;#34;), String.class, version)); JAXBElement&amp;lt;AuthenticationHeader&amp;gt; authHeaders = new ObjectFactory().createAuthenticationHeader(aheader); Header header; try { header = new Header(authHeaders.getName(), aheader,new JAXBDataBinding(AuthenticationHeader.class)); headers.add(header); message.put(Header.HEADER_LIST, headers); } catch (JAXBException e) { e.printStackTrace(); } } 调用服务之前处理 IDestinationContracts port = service.getIISDestinationHosting() ; Client cxfClient = ClientProxy.getClient(port); cxfClient.getOutInterceptors().add(new HeaderInterceptor(Phase.WRITE));</description>
+    </item>
+    
+    <item>
+      <title>用RF24创建无线传感器网络</title>
+      <link>/post/2015-05-10-rf24network-for-wireless-sensor-networking/</link>
+      <pubDate>Sun, 10 May 2015 23:16:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-10-rf24network-for-wireless-sensor-networking/</guid>
+      <description>&lt;p&gt;英文原版 &lt;a href=&#34;https://maniacbug.wordpress.com/2012/03/30/rf24network/&#34;&gt;https://maniacbug.wordpress.com/2012/03/30/rf24network/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;翻译: Vincent Mi &lt;a href=&#34;http://vnzmi.com/rf24network-for-wireless-sensor-networking.html&#34;&gt;http://vnzmi.com/rf24network-for-wireless-sensor-networking.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;
+  &lt;img src=&#34;/img/in-post/3153790176.jpg&#34; alt=&#34;7013108743_416996c44c_z.jpg&#34;&gt;
+
+&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://maniacbug.github.io/RF24Network/&#34;&gt;RF24Network&lt;/a&gt;网络是一个使用Nordic nRF24L01+ 无线，运行在Arduino兼容硬件的网络层。他的目标是成为Arduino单元通信的除Xbee外的另外一个选择。他提供一个主机地址空间和消息路由最高支持6000个节点，形成一个有能力和可扩展的无线传感器网络系统。 同时让两个节点之间的通讯更加简单。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>ENC28J60接线</title>
+      <link>/post/2015-05-08-enc28j60/</link>
+      <pubDate>Fri, 08 May 2015 23:16:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-08-enc28j60/</guid>
+      <description>drivers.rar HanRun HR911105A 14/20 CLKOUT INT WOL SO SI SCK CS RESET VCC GND 接线 ENC28J60 Arduino Due/UNO Arduino Mega VCC 3V3 3V3 CLKOUT ENC-WOL RESET RESET RESET ENC-INT 2 2 GND GND GND SCK 13 52 MISO 12 50 MOSI 11 51 CS 10 53 另外一个库的接法 https://github.com/jcw/ethercard 该库支持DNS,DHCP 测试可用。 &amp;ndash; &amp;ndash; VCC 3.3V GND GND SCK Pin 13 SO Pin 12 SI Pin 11 CS Pin 8 # Selectable with the ether.begin() function</description>
+    </item>
+    
+    <item>
+      <title>Arduino－各种无线方案的对比</title>
+      <link>/post/2015-05-08-arduino-wireless-transmission-solution/</link>
+      <pubDate>Fri, 08 May 2015 14:16:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-08-arduino-wireless-transmission-solution/</guid>
+      <description>&lt;p&gt;电磁波
+初中物理
+振荡的电场和磁场在空间中以波的形式传播就形成了电磁波，gamma射线、X光、紫外光、可见光、红外光、微波、无线电波和长波无线电，这些都是电磁波。电磁波具有波粒二象性，光子就是量子化的电磁波，是电磁波能量的最小单位。光子的能量和电磁波的波长成反比，比如说，波长最短的gamma射线光子能量高达百万甚至数亿电子伏，医疗和安检用的x光光子能量一般在数百到上万电子伏，紫外光的能量一般在数个到数十电子伏，可见光的能量在1.8（700纳米的红色光）到3.1电子伏（400纳米的蓝色光）之间，红外、微波和无线电波的光子能量就小的多。在电磁波和物质相互作用时，物质只能吸收或者放出整个的光子。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>外置采集温度_让arduino用2颗5号电池运行1年以上 </title>
+      <link>/post/2015-05-08-arduino-power-save/</link>
+      <pubDate>Fri, 08 May 2015 14:16:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-08-arduino-power-save/</guid>
+      <description>&lt;p&gt;文章来自极客工坊，因此加密了只自己能看纯收藏
+&lt;a href=&#34;http://www.geek-workshop.com/thread-12261-1-1.html&#34;&gt;http://www.geek-workshop.com/thread-12261-1-1.html&lt;/a&gt;
+作者：mylife1213&lt;/p&gt;
+&lt;p&gt;这次讲功耗.&lt;/p&gt;
+&lt;p&gt;如果你想把arduino avr类的开发项目用来便携式设置上,不管商业还是个人DIY,那么你头一个要对付的问题就是设备功耗!&lt;/p&gt;
+&lt;p&gt;我测试atmega328p(大部分arduino 都是基于这个处理器) 最小系统下(16Mhz)运行功耗是10ma,那么如果不对处理器进行任何节电处理的话一块手机1500mah的电池只能不间断运行  1500/10/24=6.5天 ,这个还是在没有任何外围元器件的情况下的运行时间!&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>关于矩阵</title>
+      <link>/post/2015-05-03-matrix/</link>
+      <pubDate>Mon, 04 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-03-matrix/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;转的啊&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;人总是会为自己找捷径，而往往捷径是要付出不一般的代价。
+呵呵&amp;mdash;说说矩阵的事：
+通过坐标变换将3D空间的图元转换成2D图元的过程：主要为世界变换-&amp;gt;视图变换-&amp;gt;投影变换-&amp;gt;视口变换
+3D场景中的任何物体，都是由一个一个三角形组成的。而三角形位置信息的就是其各个顶点的三维坐标。这是用来在模型中存储的，而要把物体显示在屏幕上，还需要将它们转换成显示器上的二维坐标。这就需要对每个点实施一套 3 to 2 的转换公式，在Direct3D中叫做“几何流水线”（Geometry Pipeline)。
+一般创建的mesh处于自己的局部坐标系。基本是屏幕正中放置。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>几个常见的语音交互平台的简介和比较</title>
+      <link>/post/2015-05-03-speech-signal-processing/</link>
+      <pubDate>Mon, 04 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-03-speech-signal-processing/</guid>
+      <description>&lt;p&gt;转自 &lt;a href=&#34;http://ibillxia.github.io/blog/2012/11/24/several-plantforms-on-audio-and-speech-signal-processing/&#34;&gt;http://ibillxia.github.io/blog/2012/11/24/several-plantforms-on-audio-and-speech-signal-processing/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;1.概述
+最近做了两个与语音识别相关的项目，两个项目的主要任务虽然都是语音识别，或者更确切的说是关键字识别，但开发的平台不同， 一个是windows下的，另一个是android平台的，于是也就选用了不同的语音识别平台，前者选的是微软的Speech API开发的，后者则选用 的是CMU的pocketsphinx，本文主要将一些常见的语音交互平台进行简单的介绍和对比。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Apache option选项</title>
+      <link>/post/2015-05-03-httpd-option/</link>
+      <pubDate>Sun, 03 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-03-httpd-option/</guid>
+      <description>Options指令控制了在特定目录中将使用哪些服务器特性。 option可以为None，在这种情况下，将不启用任何额外特性。或设置为以下选项中的一个或多个： All除MultiViews之外的所有特性。这是默认设置。ExecCGI允许使用 mod_cgi执行CGI脚本。FollowSy</description>
+    </item>
+    
+    <item>
+      <title>Clayman的3D学习指南</title>
+      <link>/post/2015-05-03-clayman-3d-guide/</link>
+      <pubDate>Sun, 03 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-03-clayman-3d-guide/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://www.cnblogs.com/clayman/archive/2009/05/17/1459001.html&#34;&gt;http://www.cnblogs.com/clayman/archive/2009/05/17/1459001.html&lt;/a&gt;
+仅供个人学习使用，请勿转载，勿用于任何商业用途。
+作者：Clayman
+与玩游戏相比,写游戏要复杂上千万倍,除了需要掌握通用的编程技巧以外，还要有相当的图形学，物理，数学基础，特别是在国内，由于相关资料的缺乏，更是让初学者无从下手。下面总结了一些入门方法和比较容易入手的资料。
+首先你要精通一门高级语言，比如C++或者C#，其次，要有良好的英文阅读能力。对游戏开发者来说英文阅读能力是最重要也是最基本的工具之一，因为你遇到的大部分资源都将是英文的，不要总等着别人为你翻译。慢慢尝试着阅读英文资料，你会发现其实也并没有那么难:)&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MySQL Featured</title>
+      <link>/post/2015-05-03-mysql-featured/</link>
+      <pubDate>Sun, 03 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-03-mysql-featured/</guid>
+      <description>今天又经历了一起MYSQL错误，系统日志中是“服务 mysql 意外停止” Mysql日志中则是：“Plugin &amp;lsquo;FEDERATED&amp;rsquo; is disabled” 网站找到第一条解决方案： 1、在MY.INI文件中的 [mysqld] 中增加一行 tmpdir=&amp;quot;D:/MySQL/data/&amp;quot; 修改后，还是启动不了，接着我做了第二步，重启正常。 2、删除DATA目录下除数据库文件夹外的其他文</description>
+    </item>
+    
+    <item>
+      <title>MySQL和MSSQL 查询比较</title>
+      <link>/post/2015-05-03-mysql-mssql-compare/</link>
+      <pubDate>Sun, 03 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-03-mysql-mssql-compare/</guid>
+      <description>Current Date and Time MS: SELECT GETDATE() MY: SELECT NOW() Optionally: Use CURDATE() for the date only.Limiting Results MS: SELECT TOP 10 * FROM table WHERE id = 1 MY: SELECT * FROM table WHERE id = 1 LIMIT 10Date Field Default Value MS: DATETIME DEFAULT GETDATE() MY: DATETIME fields cannot have a default value, i.e. &amp;ldquo;GETDATE()&amp;rdquo; You must use your INSERT statement to specify CURDATE() for the field. Optionally: Use datatype TIMESTAMP DEFAULT CURRENT_TIMESTAMPCharacter Length MS: LEN() MY: CHARACTER_LENGTH() Aliases: CHAR_LENGTH(), LENGTH()Character Replace MS: REPLACE() works case insensitively MY: REPLACE() works case sensitivelyTrim Functions MS: LTRIM() and RTRIM() MY: TRIM()String Concatenation MS: CONCATENATION USING + (Does not automatically cast operands to compatible types) MY: CONCAT(string, string), which accepts two or more arguments. (Automatically casts values into types which can be concatenated)Auto Increment Field Definition MS: tablename_id INT IDENTITY PRIMARY</description>
+    </item>
+    
+    <item>
+      <title>Unicode、GB2312、GBK和GB18030中的汉字</title>
+      <link>/post/2015-05-03-chinese-encoding/</link>
+      <pubDate>Sun, 03 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-03-chinese-encoding/</guid>
+      <description>来源 http://www.fmddlmyy.cn/text24.html Unicode、GB2312、GBK和GB18030中的汉字GB18030有两个版本：GB18030-2000和GB18030-2005。GB18030-2000是GBK的取代版本，它的主要特点是在GBK 基础上增加了CJK统一汉字扩充A的汉字。GB18030-2005的主要</description>
+    </item>
+    
+    <item>
+      <title>UTF8 简体繁体转换字库2561</title>
+      <link>/post/2015-05-03-chinese-utf8-simp-trad-translate/</link>
+      <pubDate>Sun, 03 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-03-chinese-utf8-simp-trad-translate/</guid>
+      <description>繁体 &amp;#39;醃錒愛礙藹皚嬡璦曖噯鎄靄剴靉磑閡廠廣銨諳鵪垵幹鉗陰頇襖奧囂媼驁鼇嶴澆磽罷壩鮁鈀鮊擺敗唄韝辦頒絆阪鈑並辯幫綁鎊謗崗紡報飽寶剝鮑齙鴇備貝輩鋇狽憊鵯錛賁體繃鏰筆閉畢幣斃篳蓽鉍蹕潷嗶複紕慮詖費贔閈鰏邊變編貶辮鯿籩緶標颮飆鰾飆鑣驃鏢驫別鱉癟賓瀕擯濱臏殯繽髕儐檳鬢鑌贇頻餅稟綆撥</description>
+    </item>
+    
+    <item>
+      <title>LVS配置命令</title>
+      <link>/post/2015-05-02-lvs-network/</link>
+      <pubDate>Sat, 02 May 2015 23:36:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-02-lvs-network/</guid>
+      <description>DirectorServer ifconfig eth0:0 192.168.0.251 broadcast 192.168.0.251 netmask 255.255.255.255 up route add -host 192.168.0.251 dev eth0:0 echo &amp;#34;1&amp;#34; &amp;gt;/proc/sys/net/ipv4/ip_forward realserver ifconfig lo:0 192.168.0.251 broadcast 192.168.0.251 netmask 255.255.255.255 up vi /etc/sysctl.conf net.ipv4.conf.all.arp_ignore = 1 net.ipv4.conf.all.arp_announce = 2 net.ipv4.conf.tunl0.arp_ignore = 1 net.ipv4.conf.tunl0.arp_announce = 2 2014-02-21</description>
+    </item>
+    
+    <item>
+      <title>Vagrant JS文件乱码</title>
+      <link>/post/2015-05-02-vagrant-issue/</link>
+      <pubDate>Sat, 02 May 2015 23:36:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-02-vagrant-issue/</guid>
+      <description>修改虚拟机中的Apache httpd.conf文件 EnableSendfile off</description>
+    </item>
+    
+    <item>
+      <title>MAC 转发 80 端口到其他端口配置</title>
+      <link>/post/2015-05-02-forward-mac-port80/</link>
+      <pubDate>Sat, 02 May 2015 22:36:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-02-forward-mac-port80/</guid>
+      <description>MAC OS 本质上还是 Unix 系统, Unix 系统大多默认情况下非root用户是无法使用小于1024的常用端口的.这时候如果你开发中需要在普通用户下用到80端口, 比如 tomcat, 比如 vitualbox 下构建了一个 http 服务, 若你想直接通过 浏览器的 localhost 访问的话(比用加上莫名其妙的”:端口”的话)你就需要做一些系统端口转发的工作. MAC OS 10.10</description>
+    </item>
+    
+    <item>
+      <title>SElinux 又蛋疼</title>
+      <link>/post/2015-05-02-selinux-folder-permissions/</link>
+      <pubDate>Sat, 02 May 2015 22:36:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-02-selinux-folder-permissions/</guid>
+      <description>(13) Permission Denied https://wiki.apache.org/httpd/13PermissionDenied Apache一直报这个错误。权限都是对的。原来是SElinux的问题 增加该目录即可 chcon -R -h -t httpd_sys_content_t /home/folder/ 这个是解决socket无法连接 setsebool -P httpd_can_network_connect 1 SELinux 详解 http://wiki.centos.org/zh/HowTos/SELinux PHP fsocketopen permission denied 该问题是因为SElinux引起 使用 getsebool -a 获取当前的selinux设置状态 setsebool -P httpd_can_network_connect on 设置运行创建网络连接 这个命令执行会花一些时间请</description>
+    </item>
+    
+    <item>
+      <title>MemCache : could not compress错误</title>
+      <link>/post/2015-05-02-memcache-could-not-uncompress/</link>
+      <pubDate>Sat, 02 May 2015 22:35:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-02-memcache-could-not-uncompress/</guid>
+      <description>问题 今天遇到这个坑爹的问题。产生问题的原因是不同版本的memcache客户端，PHP会报这个警告。 原因 集群里有一台5.5的机器 没有在LVS里，其他机器都是5.3。但是有job 因此关闭nginx 关闭yii的schema cache重启memcache和备份机恢复正常。</description>
+    </item>
+    
+    <item>
+      <title>被垃圾淹没</title>
+      <link>/post/2014-05-15-shit-mountain/</link>
+      <pubDate>Thu, 15 May 2014 11:45:02 +0000</pubDate>
+      
+      <guid>/post/2014-05-15-shit-mountain/</guid>
+      <description>这是我每天要改的代码,还要不要人活啊, 让垃圾PHP程序员去死吧. 妈逼的你学过编程没有 我要自己搞东西 草..不然会死在这里</description>
+    </item>
+    
+    <item>
+      <title>我们终将带着我们的故事老去</title>
+      <link>/post/2014-05-09-we-will-die-with-our-stories/</link>
+      <pubDate>Fri, 09 May 2014 23:07:00 +0000</pubDate>
+      
+      <guid>/post/2014-05-09-we-will-die-with-our-stories/</guid>
+      <description>PConline搞了个XP回忆专题。满满的回忆，已经记不清多久没有踢球。当我又捡起新浪博客的时候。我想我是不是真的老了。再也没有敲鼓电脑和代码的激情。多年后我们会真的老去，和正在消散着的人们一样。。。</description>
+    </item>
+    
+    <item>
+      <title>MySQL InnoDB表的限制</title>
+      <link>/post/2013-03-08-mysql-innerdb-limits/</link>
+      <pubDate>Fri, 08 Mar 2013 17:18:00 +0000</pubDate>
+      
+      <guid>/post/2013-03-08-mysql-innerdb-limits/</guid>
+      <description>一个表不能包含超过1000列。 内部最大键长度是3500字节，但MySQL自己限制这个到1024字节。 除了VARCHAR, BLOB和TEXT列，最大行长度稍微小于数据库页的一半。即，最大行长度大约8000字节。LONGBLOB和LONGTEXT列必须小于4GB, 总的行长度，页包括B</description>
+    </item>
+    
+    <item>
+      <title>春天还没来就要过了。。。 </title>
+      <link>/post/2011-04-19-spring-with-micheal/</link>
+      <pubDate>Sat, 09 Apr 2011 19:17:53 +0000</pubDate>
+      
+      <guid>/post/2011-04-19-spring-with-micheal/</guid>
+      <description>今天又去了浣花溪，人满为患。春天还没来都要过了。带宸宸去抓下春天的尾巴.</description>
+    </item>
+    
+    <item>
+      <title>难道虾子没吃饱</title>
+      <link>/post/2011-01-18-seem-micheal-not-enough/</link>
+      <pubDate>Tue, 18 Jan 2011 21:55:11 +0000</pubDate>
+      
+      <guid>/post/2011-01-18-seem-micheal-not-enough/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>我家光头仔</title>
+      <link>/post/2010-12-12-my-baby/</link>
+      <pubDate>Sun, 12 Dec 2010 21:24:14 +0000</pubDate>
+      
+      <guid>/post/2010-12-12-my-baby/</guid>
+      <description>出生才没多久 好小好小啊！ super baby ..没牙齿的 小弟 露点了 马赛克是必须的 光头仔困了</description>
+    </item>
+    
+    <item>
+      <title>哈哈</title>
+      <link>/post/2010-10-11-emmm/</link>
+      <pubDate>Mon, 11 Oct 2010 22:23:28 +0000</pubDate>
+      
+      <guid>/post/2010-10-11-emmm/</guid>
+      <description>在一个潮湿的地下室里.一个双眉紧锁的青年，手里拿着干涩的面包，聚精会神地看着桌子上世-界地图，他深深地陷入了沉思：国-家下一步的发展策略是什么？ 国-际形式会怎样发展？怎样处理好国际关系？如何对美-军、日-本、台-湾、印-度、越-南全面作战？一个个难题他需要思索，需要抉择。 正在这时</description>
+    </item>
+    
+    <item>
+      <title>起个大早</title>
+      <link>/post/2010-07-02-lost-sleep/</link>
+      <pubDate>Fri, 02 Jul 2010 08:30:15 +0000</pubDate>
+      
+      <guid>/post/2010-07-02-lost-sleep/</guid>
+      <description>昨天晚上忘记插蚊香片 悲剧的我5点就被蚊子叫醒了。。睡不着 WOW SS号TBC接近毕业了 ，是不是该练个法师耍耍，哎我更喜欢ss 的邪恶暴力！可是再练个ss 真是蛋疼。 最近出于对wow的兴趣,到joyo上买了本 《DirectX 9.0 3D游戏开发基础》，研究了几天发现研究3D算法的先驱真不是人！他们</description>
+    </item>
+    
+    <item>
+      <title>禁闭岛Shutter Island</title>
+      <link>/post/2010-04-29-shutter-island/</link>
+      <pubDate>Thu, 29 Apr 2010 09:56:05 +0000</pubDate>
+      
+      <guid>/post/2010-04-29-shutter-island/</guid>
+      <description>导演： 马丁·斯科塞斯 主演： 莱昂纳多·迪卡普里奥 马 克·鲁弗洛 本·金斯利 好久没看电影，昨天看了这个！如果你喜欢 《致命ID》 《搏击俱乐部》 那这个一定值得一看 ！ PS:PPS上有这部片子</description>
+    </item>
+    
+    <item>
+      <title>好久没更新了，发照片吧</title>
+      <link>/post/2010-01-25-life-pictures/</link>
+      <pubDate>Mon, 25 Jan 2010 19:17:28 +0000</pubDate>
+      
+      <guid>/post/2010-01-25-life-pictures/</guid>
+      <description>其实那天我真的不紧张 丽江天很蓝 大水车许愿 一个牌子不知道卖5块还是10块 拉市海 找自在的感觉 恩 阳光洒下来 抓鸡小队 谢谢</description>
+    </item>
+    
+    <item>
+      <title>一出太阳就去浣花溪</title>
+      <link>/post/2009-11-03-huanhua-park/</link>
+      <pubDate>Tue, 03 Nov 2009 23:27:44 +0000</pubDate>
+      
+      <guid>/post/2009-11-03-huanhua-park/</guid>
+      <description>这儿年成都的蓝天真是多，周日去浣花溪逛，自己都已经不记得去过浣花溪好多次了。明天要去考路考但愿顺利过关哈。 多可爱的小loli 不配合 哎 只有这一张了</description>
+    </item>
+    
+    <item>
+      <title>脆弱的人啊</title>
+      <link>/post/2009-08-24-sick/</link>
+      <pubDate>Mon, 24 Aug 2009 10:48:02 +0000</pubDate>
+      
+      <guid>/post/2009-08-24-sick/</guid>
+      <description>时隔八个月 没有锻炼身体，上周和同事去踢球，这几天肌肉痛得要命，更郁闷的是去盲人按摩 师傅太大力弄的右手关节受伤，现在还得喷云南白药。。。。再不锻炼的话骨头就全松掉了。 朝九晚五的生活相当无趣。而其中一件有趣的事情就是单车骑行川藏线。。。。不过看现在的样子得从长计议。</description>
+    </item>
+    
+    <item>
+      <title>我相信他们到过月球</title>
+      <link>/post/2009-07-25-us-applo-plan/</link>
+      <pubDate>Sat, 25 Jul 2009 10:45:13 +0000</pubDate>
+      
+      <guid>/post/2009-07-25-us-applo-plan/</guid>
+      <description>登月40年，向勇敢的人类先驱致敬！ 分享个笑话： 第一个登上月球的宇航员阿姆斯特朗说了举世闻名的一句话：“一个人的一小步，却是人类的一大步”。在他返回登陆舱时，他说了一句莫名其妙的话：“祝你好运，戈斯基先生。” 美国宇航局的大多数人都以为这句话没什么深意，可能是指某个苏联宇航员。可是查</description>
+    </item>
+    
+    <item>
+      <title>哪个B设计的指路标志</title>
+      <link>/post/2009-05-08-confused-signel-board/</link>
+      <pubDate>Fri, 08 May 2009 23:41:59 +0000</pubDate>
+      
+      <guid>/post/2009-05-08-confused-signel-board/</guid>
+      <description>准备道法考试，遇到一个很难理解的指路标志 一个是左侧通行 一个事右侧通行 真不知道当初设计这个标志的脑残是怎么理解的</description>
+    </item>
+    
+    <item>
+      <title>过去的事</title>
+      <link>/post/2009-02-13-memory/</link>
+      <pubDate>Fri, 13 Feb 2009 22:21:37 +0000</pubDate>
+      
+      <guid>/post/2009-02-13-memory/</guid>
+      <description>今天无聊翻了翻之前MSN space,看06年自己写的blog，很幼稚，很温馨 也很有意思 喝醉了就会被人整！ 孤单街灯 06年的元宵 元宵大团圆 这东西叫汤圆 叫“元宵”的话很奇怪 每天要走的路 塔利班女悍匪 醉卧芳草的来由 同上 此菜我未吃一口 抱歉</description>
+    </item>
+    
+    <item>
+      <title>子时香</title>
+      <link>/post/2009-01-27-first-incense-of-new-year/</link>
+      <pubDate>Tue, 27 Jan 2009 16:00:55 +0000</pubDate>
+      
+      <guid>/post/2009-01-27-first-incense-of-new-year/</guid>
+      <description>年是一年不如一年，唯一比较有趣的是烧香，家乡有烧子时香的传统，每年初一子时各个有名望的庙宇都会人山人海。来自四面八方的人们都扛着大大的高香，人们相信子时烧的高香会给自己和家人带来幸运和平安。 当然也不全都是善男信女像我这样凑热闹的其实占很大一部分。昨年我和家人去了附近的观音岩，今年</description>
+    </item>
+    
+    <item>
+      <title>2008</title>
+      <link>/post/2008-12-31-2008/</link>
+      <pubDate>Wed, 31 Dec 2008 09:33:37 +0000</pubDate>
+      
+      <guid>/post/2008-12-31-2008/</guid>
+      <description>悲伤的一年,浮华的一年,无所作为的一年. 希望2009没有地震 没有危机 我和我的朋友们都健康快乐&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>天冷了</title>
+      <link>/post/2008-12-22-winter-is-coming/</link>
+      <pubDate>Mon, 22 Dec 2008 14:22:58 +0000</pubDate>
+      
+      <guid>/post/2008-12-22-winter-is-coming/</guid>
+      <description>昨天冬至,今天就是瑟瑟寒风.天天无聊.看搜房看天涯经济版,搜房是开发商的狗,经济版又太愤,想改看八卦版呢越看越三八.电视台就天天吹嘘改革开发30年如何如何伟大,现在还真羡慕那些啥都不管天天搓点小麻将看肥皂剧的人. PS:论坛牛人的话: 中国有风险 投胎需谨慎</description>
+    </item>
+    
+    <item>
+      <title>骑士风范</title>
+      <link>/post/2008-10-15-be-a-knight/</link>
+      <pubDate>Wed, 15 Oct 2008 19:07:27 +0000</pubDate>
+      
+      <guid>/post/2008-10-15-be-a-knight/</guid>
+      <description>茫茫人海中，每个人都为了自己而四处奔波， 难道，这就是我们唯一的前进方向么？ 不！ 让我们为荣耀干杯！ 为绅士风度得以长久流传，为心怀他人并乐于伸出援手，为恪守承诺干杯！ 为我们中的勇士，为真正懂得何为人生财富， 为共同拥有这种行为方式在世俗中脱颖而出干杯！ 为我们干杯！ 芝华士，活出骑士风范。</description>
+    </item>
+    
+    <item>
+      <title>伊藤COSPLAY</title>
+      <link>/post/2008-10-02-cosplay/</link>
+      <pubDate>Thu, 02 Oct 2008 12:37:45 +0000</pubDate>
+      
+      <guid>/post/2008-10-02-cosplay/</guid>
+      <description>更多图片 http://my.poco.cn/lastphoto_v2.htx&amp;amp;amp;id=1107262&amp;amp;amp;user_id=129395&amp;amp;amp;p=7</description>
+    </item>
+    
+    <item>
+      <title>做中国人真惨</title>
+      <link>/post/2008-09-20-bad-country/</link>
+      <pubDate>Sat, 20 Sep 2008 22:58:44 +0000</pubDate>
+      
+      <guid>/post/2008-09-20-bad-country/</guid>
+      <description>三聚氰胺！ 下一个 会不会是 溴化盐. d给我们的是怎么样的一个世界&amp;hellip;.</description>
+    </item>
+    
+    <item>
+      <title>it&#39;s time to ... ?</title>
+      <link>/post/2008-09-10-my-life/</link>
+      <pubDate>Wed, 10 Sep 2008 23:24:04 +0000</pubDate>
+      
+      <guid>/post/2008-09-10-my-life/</guid>
+      <description>&amp;hellip; Nero没日没夜的砍杀 someting tired &amp;ldquo;春夏秋冬&amp;quot;又想起一片回忆</description>
+    </item>
+    
+    <item>
+      <title>080808</title>
+      <link>/post/2008-08-08-080808/</link>
+      <pubDate>Fri, 08 Aug 2008 09:53:37 +0000</pubDate>
+      
+      <guid>/post/2008-08-08-080808/</guid>
+      <description>如此吉利的数字， 愿我中华从此国运昌盛、国泰民安。</description>
+    </item>
+    
+    <item>
+      <title>没有回忆的夏天</title>
+      <link>/post/2008-08-03-no-memory-in-this-summer/</link>
+      <pubDate>Sun, 03 Aug 2008 16:07:51 +0000</pubDate>
+      
+      <guid>/post/2008-08-03-no-memory-in-this-summer/</guid>
+      <description>快乐真是越来越难找。夏天的最后一个周末去了宽巷子。其实宽巷子就是大一点的锦里，我已经烦透了这些人造景点。这个夏天匆匆而过，而我只记得今年天特别蓝&amp;hellip;&amp;hellip;也很可惜</description>
+    </item>
+    
+    <item>
+      <title>可爱的小妹妹</title>
+      <link>/post/2008-06-03-zhang-qi/</link>
+      <pubDate>Tue, 03 Jun 2008 01:06:24 +0000</pubDate>
+      
+      <guid>/post/2008-06-03-zhang-qi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>天佑中华</title>
+      <link>/post/2008-05-22-god-bless-china/</link>
+      <pubDate>Thu, 22 May 2008 09:48:11 +0000</pubDate>
+      
+      <guid>/post/2008-05-22-god-bless-china/</guid>
+      <description>雪灾 、撞车、 十天前的黑色瞬间，奥运年的我们已经历太多苦难。天佑中华！让我们以后的头条新闻不再黑色。</description>
+    </item>
+    
+    <item>
+      <title>粗糙的手</title>
+      <link>/post/2008-05-08-hand/</link>
+      <pubDate>Thu, 08 May 2008 19:06:52 +0000</pubDate>
+      
+      <guid>/post/2008-05-08-hand/</guid>
+      <description>清蒸X鱼终于研制成功，花花绿绿的还是有那么点点卖相。 最近就是天天在家，时间表的参数不知不觉的发生着不好的变化。</description>
+    </item>
+    
+    <item>
+      <title>失败是成功他妈</title>
+      <link>/post/2008-04-08-cook-but-failed/</link>
+      <pubDate>Tue, 08 Apr 2008 23:14:29 +0000</pubDate>
+      
+      <guid>/post/2008-04-08-cook-but-failed/</guid>
+      <description>弄了几天终于把飞机糊好了.于是兴匆匆的跑到八一家具城停车场去试飞.可惜没爽到5秒钟 ..由于地面不平又打错了舵 , 浆打到地面..哎&amp;hellip;.第一次试飞就这样结束了.另外一个第一次就是是做清蒸鲈鱼.也弄成如图这样子.</description>
+    </item>
+    
+    <item>
+      <title>一个人的春天</title>
+      <link>/post/2008-04-02-lonely-spring/</link>
+      <pubDate>Wed, 02 Apr 2008 22:13:17 +0000</pubDate>
+      
+      <guid>/post/2008-04-02-lonely-spring/</guid>
+      <description>一个人出去拍照,原来百花潭根本就没什么花&amp;hellip;又是一个没多大意思的周末</description>
+    </item>
+    
+    <item>
+      <title>醉卧芳草</title>
+      <link>/post/2008-03-07-fang-cao/</link>
+      <pubDate>Fri, 07 Mar 2008 10:45:09 +0000</pubDate>
+      
+      <guid>/post/2008-03-07-fang-cao/</guid>
+      <description>掐指一算醉卧了芳草近4年，该离开了。K歌小分队、小河沟的撒野、好又多公园、灰扑扑的钵钵鸡。。。关于7号的记忆，永远留在那里。</description>
+    </item>
+    
+    <item>
+      <title>逗号 冒号 微软是不是要解释下 靠</title>
+      <link>/post/2008-02-29-mssql-issue/</link>
+      <pubDate>Fri, 29 Feb 2008 22:00:47 +0000</pubDate>
+      
+      <guid>/post/2008-02-29-mssql-issue/</guid>
+      <description>弄了一晚上php连接mssql 2005 总是 无法连接 Google了才晓得 微软有多变态，居然只需要将 mssql_connect(&amp;lsquo;127.0.0.1:1433&amp;rsquo;,&amp;lsquo;sa&amp;rsquo;,&amp;rsquo;&amp;rsquo;)换成 mssql_connect(&amp;lsquo;127.0.0.1,1433&amp;rsquo;,&amp;lsquo;sa&amp;rsquo;,&amp;rsquo;&amp;rsquo;) 不知道这个变化是怎末一个传奇的由来</description>
+    </item>
+    
+    <item>
+      <title>假又耍完了。。。</title>
+      <link>/post/2008-02-11-oh-need-back-to-work/</link>
+      <pubDate>Mon, 11 Feb 2008 19:17:35 +0000</pubDate>
+      
+      <guid>/post/2008-02-11-oh-need-back-to-work/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>冷啊</title>
+      <link>/post/2008-01-17-cold/</link>
+      <pubDate>Thu, 17 Jan 2008 22:50:30 +0000</pubDate>
+      
+      <guid>/post/2008-01-17-cold/</guid>
+      <description>这几天成都真TMD冷啊，除了下雨就是将要下雨。春天在哪里丫？最近物价上涨吃碗过桥米线都要8块钱。。。再这样下去饭都吃不起了。。还买个鬼的房子哦。。冬天快点完吧 可能到时候心情会好点</description>
+    </item>
+    
+    <item>
+      <title>郁闷到了</title>
+      <link>/post/2007-12-28-bad-days/</link>
+      <pubDate>Fri, 28 Dec 2007 20:05:34 +0000</pubDate>
+      
+      <guid>/post/2007-12-28-bad-days/</guid>
+      <description>租房子真TMD不爽,好想有个自己得房子·现在要拼命赚钱天天上班。。靠</description>
+    </item>
+    
+    <item>
+      <title>IE 6 真是个小贱人</title>
+      <link>/post/2007-12-13-ie6-should-go-to-die/</link>
+      <pubDate>Thu, 13 Dec 2007 23:42:28 +0000</pubDate>
+      
+      <guid>/post/2007-12-13-ie6-should-go-to-die/</guid>
+      <description>今天敲鼓了大半天HTML,firefox让人很省心，ie弄死要装怪。常看论坛啊博客大家恨IE恨的咬牙切齿的。查啊查终于找到原因了,Css控制如下内容 &amp;lt;div style=&amp;ldquo;overflow:hidden&amp;rdquo;&amp;gt;&amp;lt;div style=&amp;ldquo;position:relative&amp;rdquo;&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt</description>
+    </item>
+    
+    <item>
+      <title>周末去洛带逛了下</title>
+      <link>/post/2007-12-08-weekend-luodai/</link>
+      <pubDate>Sat, 08 Dec 2007 23:39:54 +0000</pubDate>
+      
+      <guid>/post/2007-12-08-weekend-luodai/</guid>
+      <description>周末去了洛带.吃了下伤心凉粉,舌头尖尖辣的生痛,倒不觉得有多伤心.长城也不是很长.每个古镇都有相似的东西,比如穿古装照相、卖花环的小贩、骑马、一个小庙还有基本差不多的小店。唯一不同的就是旅游管理部门的介入程度。相比黄龙溪洛带古镇不是很有意思。而且黄龙溪还有杀手级服务。。。</description>
+    </item>
+    
+    <item>
+      <title>上天太公平</title>
+      <link>/post/2007-11-30-fine-it-s-fair/</link>
+      <pubDate>Fri, 30 Nov 2007 10:14:17 +0000</pubDate>
+      
+      <guid>/post/2007-11-30-fine-it-s-fair/</guid>
+      <description>最近刀割一样的难受,一个小小的结石在我的肚子里肆虐。上天就是太公平掉了手机会赐给我一个DV,犯了错也一样毫不留情。以后要多喝水多运动多吃菜</description>
+    </item>
+    
+    <item>
+      <title>折财免灾</title>
+      <link>/post/2007-10-31-stupid-time/</link>
+      <pubDate>Wed, 31 Oct 2007 23:31:56 +0000</pubDate>
+      
+      <guid>/post/2007-10-31-stupid-time/</guid>
+      <description>今天TMD极衰，冲电话费一不小心按错了号码冲到了一个陌生的号码里，一不小心就遭了150.。这次的电话费1块要当3块用才能不折本。明天恒宝要涨停不然老子真的要气死了。。。。。</description>
+    </item>
+    
+    <item>
+      <title>选择</title>
+      <link>/post/2007-10-13-decition/</link>
+      <pubDate>Sat, 13 Oct 2007 01:06:24 +0000</pubDate>
+      
+      <guid>/post/2007-10-13-decition/</guid>
+      <description>生活总是不段的做出艰难的选择,而现在回想起上学时做选择题那是何等幸福的事情。因为那时候我知道总有一个答案是正确的。现在哪个答案是正确的呢！ 周4的时候，郎姐带来家里没几天的小猫死了。。本打算好好把他埋了，可确实找不到好的地方只好骑车到郊外处理掉了。昨天晚上都做了个噩梦。。。。 股票依</description>
+    </item>
+    
+    <item>
+      <title>国庆七日</title>
+      <link>/post/2007-10-07-nation-days/</link>
+      <pubDate>Sun, 07 Oct 2007 20:53:03 +0000</pubDate>
+      
+      <guid>/post/2007-10-07-nation-days/</guid>
+      <description>每年国庆都回家,不过计划的拍点家里的农村因为天气不好也没拍成。回成都郎姐弄了只小猫咪当我们的新室友。7号无聊去锦里拍了些图片。</description>
+    </item>
+    
+    <item>
+      <title>论坛真是充满创造力</title>
+      <link>/post/2007-10-03-funny-man/</link>
+      <pubDate>Wed, 03 Oct 2007 23:20:28 +0000</pubDate>
+      
+      <guid>/post/2007-10-03-funny-man/</guid>
+      <description>最贪婪的： 晃 最直接的： 昆 最西方的： 咬 最自豪的： 鹅 最不怕烫的： 炅 最处女情结的： 晷 最想以数量取胜的：晁 最变态的： 嬲 最牛X的： 昊 最无处发泄的：间 最刺激宗教人士的：昵 最痛苦的：旱 最象形的：个</description>
+    </item>
+    
+    <item>
+      <title>F1 and John Walker </title>
+      <link>/post/2007-09-25-f1-and-john-walker/</link>
+      <pubDate>Tue, 25 Sep 2007 22:43:03 +0000</pubDate>
+      
+      <guid>/post/2007-09-25-f1-and-john-walker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>自己拍的成都车展照片</title>
+      <link>/post/2007-09-25-cd-motor-show-2017-1/</link>
+      <pubDate>Tue, 25 Sep 2007 22:43:03 +0000</pubDate>
+      
+      <guid>/post/2007-09-25-cd-motor-show-2017-1/</guid>
+      <description>POCO http://my.poco.cn/id-129395.shtml</description>
+    </item>
+    
+    <item>
+      <title>自己拍的成都车展照片(2)</title>
+      <link>/post/2007-09-25-cd-motor-show-2017-2/</link>
+      <pubDate>Tue, 25 Sep 2007 22:43:03 +0000</pubDate>
+      
+      <guid>/post/2007-09-25-cd-motor-show-2017-2/</guid>
+      <description>POCO http://my.poco.cn/id-129395.shtml</description>
+    </item>
+    
+    <item>
+      <title>10秒的意义</title>
+      <link>/post/2007-09-22-the-mean-of-ten-seconds/</link>
+      <pubDate>Sat, 22 Sep 2007 07:49:33 +0000</pubDate>
+      
+      <guid>/post/2007-09-22-the-mean-of-ten-seconds/</guid>
+      <description>网上看到一段文字 不知道是不是真的. 上交所(Level2行情)面临严重的舆论危机，信任危机 l2行情的出现，掀起了一股舆论海啸，人们质疑的不是l2的收费，也不是l2的分笔明细，而是l2的本质问题，那就是行情速度快10秒，准确地说是l1行情被人为地延迟了10秒，上交所公开说的快10秒，</description>
+    </item>
+    
+    <item>
+      <title>一个成功投资者必看的20本书</title>
+      <link>/post/2007-09-22-invest-books/</link>
+      <pubDate>Sat, 22 Sep 2007 00:08:12 +0000</pubDate>
+      
+      <guid>/post/2007-09-22-invest-books/</guid>
+      <description>http://blog.tianya.cn/blogger/post_show.asp?idWriter=0&amp;amp;Key=0&amp;amp;BlogID=1109063&amp;amp;PostID=10541502 股市风云动荡，散户朋友们往往在市场面前迷失了自己和方向，一不小心就稀里糊涂的成为了庄家的炮灰，一个投资者要想长期立于股市不败，必须加强内功的修炼，就象本人一直倡导的“智者立市，知识创造财富”，思路决定出路，为了让大家少走一些弯路，尽快提高自己的内功，本人把自己10年来经常阅读的</description>
+    </item>
+    
+    <item>
+      <title>JavaScript的9个陷阱及评点</title>
+      <link>/post/2007-09-21-javascript-traps/</link>
+      <pubDate>Fri, 21 Sep 2007 23:07:04 +0000</pubDate>
+      
+      <guid>/post/2007-09-21-javascript-traps/</guid>
+      <description>来自 Nine Javascript Gotchas , 以下是JavaScript容易犯错的九个陷阱。虽然不是什么很高深的技术问题，但注意一下，会使您的编程轻松些，即所谓make life easier. 笔者对某些陷阱会混杂一些评点。 1. 最后一个逗号 如这段代码，注意最后一个逗号，按语言学角度来说应该是不错的（python的类似数据类型辞典dict</description>
+    </item>
+    
+    <item>
+      <title>Li Lei，Han Meimei，和Jim Green缠绵悱恻的爱情故事</title>
+      <link>/post/2007-09-21-lilei-hanmeimei-jim-the-love-story/</link>
+      <pubDate>Fri, 21 Sep 2007 15:44:22 +0000</pubDate>
+      
+      <guid>/post/2007-09-21-lilei-hanmeimei-jim-the-love-story/</guid>
+      <description>http://club.life.sohu.com/r-bar-241846-0-1-0.html 这多少让80-85年生人有无限的遐思，初中时代的美好回忆又如画卷般展现在了我的眼前。在回忆往昔的时候，我总是很惊叹人民教育出版社的叔叔阿姨们还有那位专到中国来编英语教材的Alexander先生，怎么会起了几个如此经典的名字，让几千万甚至上亿的中国学生反复传诵至今。 读初中时已然有</description>
+    </item>
+    
+    <item>
+      <title>极衰的一天</title>
+      <link>/post/2007-09-20-a-bad-day/</link>
+      <pubDate>Thu, 20 Sep 2007 09:30:30 +0000</pubDate>
+      
+      <guid>/post/2007-09-20-a-bad-day/</guid>
+      <description>大清早爆胎，出门摔车&amp;hellip;.幸亏我身手敏捷弃车了不然就摔的不好看了。郁闷！原因是补胎的时候师傅把后刹车调松了，上街沿的时候速度就快那么一点点~~~于是“彭..&amp;quot;.原来一直觉得F1老调试赛车，哪那么多调的嘛！现在才深刻体会到调试确实至关重要一门学问。</description>
+    </item>
+    
+    <item>
+      <title>教您最短时间内学会操盘</title>
+      <link>/post/2007-09-17-invest-guide/</link>
+      <pubDate>Mon, 17 Sep 2007 23:01:00 +0000</pubDate>
+      
+      <guid>/post/2007-09-17-invest-guide/</guid>
+      <description>一、股市一日 要在股票市场上赚钱除了“消息准”外还要加上“会看盘”。目前的固然受消息面所主导，但盘面最真实，如果您会看盘，就会买到低价，卖到高价，如果您不会看就只能追高杀低，一买就跌，一卖就涨。兹介绍几种最基本的看盘技巧供投资者参考： 1、开盘9:00～9:15之动作。孙子兵法有云：</description>
+    </item>
+    
+    <item>
+      <title>杀伤力男人: 短线攻略六法则</title>
+      <link>/post/2007-09-17-inverst-tips/</link>
+      <pubDate>Mon, 17 Sep 2007 11:24:39 +0000</pubDate>
+      
+      <guid>/post/2007-09-17-inverst-tips/</guid>
+      <description>短线攻略六法则： 法则一：买股票前先进行大势研判 1、大盘是否处于上升周期的初期。2、宏观经济政策、舆论导向有利于哪一个板块，该板块的代表性股票是哪几个，成交量是否明显大于其它板块。确定5-10个目标个股。3、收集目标个股的全部资料，包括公司地域、流通盘、经营动向、年报、中报，股东大</description>
+    </item>
+    
+    <item>
+      <title>望江公园-白鹭</title>
+      <link>/post/2007-09-15-wangjiang-park/</link>
+      <pubDate>Sat, 15 Sep 2007 22:43:03 +0000</pubDate>
+      
+      <guid>/post/2007-09-15-wangjiang-park/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>猫咪</title>
+      <link>/post/2007-10-04-a-sad-cat/</link>
+      <pubDate>Sun, 02 Sep 2007 22:43:03 +0000</pubDate>
+      
+      <guid>/post/2007-10-04-a-sad-cat/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>阳光 公园 茶</title>
+      <link>/post/2007-09-02-sunshine-and-tea/</link>
+      <pubDate>Sun, 02 Sep 2007 22:43:03 +0000</pubDate>
+      
+      <guid>/post/2007-09-02-sunshine-and-tea/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java动态程序设计：反射介绍</title>
+      <link>/post/2006-04-21-java-reflect-guide/</link>
+      <pubDate>Fri, 21 Apr 2006 15:30:16 +0000</pubDate>
+      
+      <guid>/post/2006-04-21-java-reflect-guide/</guid>
+      <description>使用运行的类的信息使你的程序设计更加灵活反射授予了你的代码访问装载进JVM内的Java类的内部信息的权限，并且允许你编写在程序执行期间与所选择的类的一同工作的代码，而不是在源代码中。这种机制使得反射成为创建灵活的应用程序的强大工具，但是要小心的是，如果使用不恰当，反射会带来很大的</description>
+    </item>
+    
+    <item>
+      <title>用PHP开发基于unicode(utf-8)的程序</title>
+      <link>/post/2006-04-14-let-php-support-utf8/</link>
+      <pubDate>Fri, 14 Apr 2006 17:32:05 +0000</pubDate>
+      
+      <guid>/post/2006-04-14-let-php-support-utf8/</guid>
+      <description>Author:朱辉(ice)phpx.com ID: ice日期:2005-3-19 11:20因朋友(teacherli)的再三要求, 所以我终于定下心来, 写一篇关于这方面的文章.让大家轻松的从本地编码的程序过度到unicode程序.Unicode又被称之为&amp;quot;万国码&amp;quot;,</description>
+    </item>
+    
+    <item>
+      <title>多语言网站开发 不完全技术分析收录</title>
+      <link>/post/2006-03-07-develop-with-i18n/</link>
+      <pubDate>Tue, 07 Mar 2006 01:24:52 +0000</pubDate>
+      
+      <guid>/post/2006-03-07-develop-with-i18n/</guid>
+      <description>语言是信息传播的主要障碍。 多语言网站，顾名思义就是能够以多种语言（而不是单种语言）为用户提供信息服务，让使用不同语言的用户都能够从同个网站获得内容相同的信息。 多语言网站实现方案 1，静态：就是为每种语言分别准备一套页面文件，要么通过文件后缀名来区分不同语言，要么通过子目录来区分不同</description>
+    </item>
+    
+    <item>
+      <title>MySQL与ASP.NET配合更强大</title>
+      <link>/post/2006-02-22-mysql-and-asp/</link>
+      <pubDate>Wed, 22 Feb 2006 09:41:01 +0000</pubDate>
+      
+      <guid>/post/2006-02-22-mysql-and-asp/</guid>
+      <description>前言 由于富有竞争力的价格和易于使用，MySQL在市场占有率方面逐步提升。开放源代码社区为了扩展MySQL的使用范围，开发出了.Net框架(.NET Framework)中可以使用的数据库连接器。我们就来学习一下如何在.Net应用程序中使用MySQL。 每周三发布的TechRepubl</description>
+    </item>
+    
+    <item>
+      <title>php错误处理</title>
+      <link>/post/2006-02-08-error-handle-with-php/</link>
+      <pubDate>Wed, 08 Feb 2006 15:22:38 +0000</pubDate>
+      
+      <guid>/post/2006-02-08-error-handle-with-php/</guid>
+      <description>PHP 有如下几种错误和警告： 表格 16-1. PHP 错误类型 值 常量 描述 备注 1 E_ERROR 运行时致命错误 2 E_WARNING 运行时警告（非致命错误） 4 E_PARSE 编译时解析错误 8 E_NOTICE 运行时提醒（比 Warning 的严重性更低） 16 E_CORE_ERROR 在 PHP 初始化过程中发生的致命错误 仅 PHP 4 有效 32 E_CORE_WARNING 在 PHP 初始化过程中发生的警告（非指明错误） 仅 PHP 4 有效 64 E_COMPILE_ERROR 编译时指明错误 仅 PHP 4 有效 128</description>
+    </item>
+    
+    <item>
+      <title>播放器</title>
+      <link>/post/2006-01-14-video-player/</link>
+      <pubDate>Sat, 14 Jan 2006 12:44:42 +0000</pubDate>
+      
+      <guid>/post/2006-01-14-video-player/</guid>
+      <description>匹配 &amp;lt;tr....&amp;gt;....&amp;lt;/tr&amp;gt; 标签 /&amp;lt;tr(&amp;gt;|\s[^&amp;gt;]{0,}&amp;gt;).{0,}?&amp;lt;\/tr&amp;gt;/ 不知这播放器相关参数说明能否帮上你的忙(默认0为否,-1或1为是) &amp;lt;object classid=&amp;#34;clsid:22D6F312-B0F6-11D0-94AB-0080C74C7E95&amp;#34; id=&amp;#34;MediaPlayer1&amp;#34; width=&amp;#34;286&amp;#34; height=&amp;#34;225&amp;#34;&amp;gt; &amp;lt;param name=&amp;#34;AudioStream&amp;#34; value=&amp;#34;-1&amp;#34;&amp;gt; &amp;lt;param name=&amp;#34;AutoSize&amp;#34; value=&amp;#34;-1&amp;#34;&amp;gt; &amp;lt;!--是否自动调整播放大小--&amp;gt; &amp;lt;param name=&amp;#34;AutoStart&amp;#34; value=&amp;#34;-1&amp;#34;&amp;gt; &amp;lt;!--是否自动播放--&amp;gt; &amp;lt;param name=&amp;#34;AnimationAtStart&amp;#34; value=&amp;#34;-1&amp;#34;&amp;gt; &amp;lt;param name=&amp;#34;AllowScan&amp;#34; value=&amp;#34;-1&amp;#34;&amp;gt; &amp;lt;param name=&amp;#34;AllowChangeDisplaySize&amp;#34; value=&amp;#34;-1&amp;#34;&amp;gt; &amp;lt;param name=&amp;#34;AutoRewind&amp;#34; value=&amp;#34;0&amp;#34;&amp;gt; &amp;lt;param name=&amp;#34;Balance&amp;#34; value=&amp;#34;0&amp;#34;&amp;gt; &amp;lt;!--左右声道平衡,最左-9640,最右9640--</description>
+    </item>
+    
+    <item>
+      <title>我爱精神分裂</title>
+      <link>/post/2006-01-14-i-like-schizophrenia-movies/</link>
+      <pubDate>Sat, 14 Jan 2006 12:28:41 +0000</pubDate>
+      
+      <guid>/post/2006-01-14-i-like-schizophrenia-movies/</guid>
+      <description>【片名】Identity 【译名】致命ID 【年代】2003 【国家】美国 【类别】惊悚/恐怖/犯罪 【语言】英语 【字幕】外挂中/英文 【评分】7.1/10 (4,195 votes) 【链接】http://us.imdb.com/Title?0309698 【导演】詹姆斯·曼高德 James Mangold 【主演】雷·利奥塔 Ray Liotta 阿曼达·皮特</description>
+    </item>
+    
+    <item>
+      <title>Google Hacking 的实现以及应用</title>
+      <link>/post/2006-01-14-google-search-hack/</link>
+      <pubDate>Sat, 14 Jan 2006 12:27:58 +0000</pubDate>
+      
+      <guid>/post/2006-01-14-google-search-hack/</guid>
+      <description>http://soft.yesky.com/security/hkjj/389/2082889.shtml 前言 google hacking其实并算不上什么新东西，在早几年我在一些国外站点上就看见过相关的介绍，但是由于当时并没有重视这种技术，认为最多就只是用来找找未改名的mdb或者别人留下的webshell什么的，并无太大实际用途。但是前段时间仔细啃了些资料才猛然发觉google hacking其</description>
+    </item>
+    
+    <item>
+      <title>java读取和保存对象</title>
+      <link>/post/2006-01-14-j-a-v-a-du-qu-he-bao-cun-dui-xiang/</link>
+      <pubDate>Sat, 14 Jan 2006 12:26:43 +0000</pubDate>
+      
+      <guid>/post/2006-01-14-j-a-v-a-du-qu-he-bao-cun-dui-xiang/</guid>
+      <description>有这个东西，做缓存就很方便了 Map map = new HashMap(); FileOutputStream fos = new FileOutputStream(&amp;#34;d:\\111.conf&amp;#34;); ObjectOutputStream o = new ObjectOutputStream(fos); o.writeObject(map); fos.close(); o.close(); FileInputStream fis = new FileInputStream(new File(&amp;#34;d:\\111.conf&amp;#34;)); ObjectInputStream ois = new ObjectInputStream(fis); Map map = (Map)ois.readObject(); System.out.println(map.size()); fis.close(); ois.close();</description>
+    </item>
+    
+    <item>
+      <title>用JAVA中的动态代理实现数据库连接池</title>
+      <link>/post/2006-01-14-java-use-dynamic-proxy-connection-pool/</link>
+      <pubDate>Sat, 14 Jan 2006 12:25:17 +0000</pubDate>
+      
+      <guid>/post/2006-01-14-java-use-dynamic-proxy-connection-pool/</guid>
+      <description>developerWorks 时事通讯 刘冬珠 海市创我科技发展有限公司软件工程师 2002 年 12 月 05 日 作者通过使用JAVA中的动态代理实现数据库连接池，使使用者可以以普通的jdbc连接的使用习惯来使用连接池。数据库连接池在编写应用服务是经常需要用到的模块，太过频繁的连接数据库对服务性能来讲是一个瓶颈，使用缓冲池技术可以</description>
+    </item>
+    
+    <item>
+      <title>Java UDP 简单程序</title>
+      <link>/post/2006-01-14-java-udp-test/</link>
+      <pubDate>Sat, 14 Jan 2006 12:22:49 +0000</pubDate>
+      
+      <guid>/post/2006-01-14-java-udp-test/</guid>
+      <description>Server /* * Miwenshu Created on 2005-9-15 * */ import java.net.*; import java.io.*; class DatagramServer{ private static int PORT=8122; public static void main(String[] args) { try{ System.out.println(&amp;#34;Datagram Server.&amp;#34;); byte[] buf = new byte[1000]; DatagramSocket ds = new DatagramSocket(PORT); //开始监视12345端口 DatagramPacket ip = new DatagramPacket(buf, buf.length); //创建接收数据报的实例 int i=0; String base=&amp;#34;&amp;#34;; while (true) { ds.receive(ip); //阻塞，直到收到数据报后将数据装入IP中 String info=new String(buf); if(i==1) base=info; if(base.equals(info)){ }else{ System.out.println(&amp;#34;-------------&amp;#34;); System.out.println(info.trim()); base=info; } i++; } }catch(SocketException e1){ System.out.println(&amp;#34;SocketException&amp;#34;); }catch( UnknownHostException e11){ System.out.println(&amp;#34;UnknownHostException&amp;#34;); }catch(IOException e){ System.out.println(&amp;#34;IOException&amp;#34;); } } } Client import java.net.*; import java.util.Enumeration; import java.io.*; class DatagramClient{ private static int PORT=8122;//listen..... private static int</description>
+    </item>
+    
+    <item>
+      <title>AJAX资源 PHP</title>
+      <link>/post/2006-01-14-ajax-doc/</link>
+      <pubDate>Sat, 14 Jan 2006 12:21:00 +0000</pubDate>
+      
+      <guid>/post/2006-01-14-ajax-doc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>网友帖子:我的初恋女友和 现任女友。。。咳</title>
+      <link>/post/2005-11-21-my-girlfrend-and-my-exgirlfrend/</link>
+      <pubDate>Mon, 21 Nov 2005 16:11:23 +0000</pubDate>
+      
+      <guid>/post/2005-11-21-my-girlfrend-and-my-exgirlfrend/</guid>
+      <description>网友的帖子 我的初恋女友和 现任女友。。。咳 我的初恋女友初恋时19岁. 我的现任女友初恋时16岁. 我的初恋女友是我的大学同学. 我的现任女友是我在泡吧时认识的. 我连哄带骗花半个月后与我初恋女友发生了关系. 我与现任女友认识的当天就在一起. 我和初恋女友发生关系的地点在我们宿舍. 我和现任女友在</description>
+    </item>
+    
+    <item>
+      <title>Sitepoint资源</title>
+      <link>/post/2005-11-11-sitepoint-resources/</link>
+      <pubDate>Fri, 11 Nov 2005 10:50:23 +0000</pubDate>
+      
+      <guid>/post/2005-11-11-sitepoint-resources/</guid>
+      <description>http://www.sitepoint.com/forums/showthread.php?t=78687#post1141938</description>
+    </item>
+    
+    <item>
+      <title>为什么PHP令人不爽</title>
+      <link>/post/2005-11-01-why-php-not-so-good/</link>
+      <pubDate>Tue, 01 Nov 2005 11:07:34 +0000</pubDate>
+      
+      <guid>/post/2005-11-01-why-php-not-so-good/</guid>
+      <description>翻译：ShiningRay @ Nirvana Studio 我在过去的四年里一直致力于PHP应用的开发。PHP确实十分容易编写。但是PHP也有一些十分严重的缺陷。 下面我会给出我的理由，为什么PHP不适合于比小型业余网站更大的网站。 1. 对递归的不良支持 递归是一种函数调用自身的机制。这是一种强大的特性可以把某些复</description>
+    </item>
+    
+    <item>
+      <title>Struts中文文档</title>
+      <link>/post/2005-11-01-structs-doc/</link>
+      <pubDate>Tue, 01 Nov 2005 10:52:43 +0000</pubDate>
+      
+      <guid>/post/2005-11-01-structs-doc/</guid>
+      <description>http://www.matrix.org.cn/subjects/Wiki.jsp?page=JakartaStruts</description>
+    </item>
+    
+    <item>
+      <title>Grub安装,配置及使用汇总</title>
+      <link>/post/2005-10-27-grub-tips/</link>
+      <pubDate>Thu, 27 Oct 2005 01:25:00 +0000</pubDate>
+      
+      <guid>/post/2005-10-27-grub-tips/</guid>
+      <description>(一)安装linux时安装grub. 安装redhat linux时会提示安装引导程序,如果选择grub为引导程序,建议把grub安装到硬盘的引导扇区MBR.grub 还可以引导其它操作系统，如 FreeBSD、NetBSD、OpenBSD、GNU HURD 和 DOS，以及 Windows 95、98、NT、20</description>
+    </item>
+    
+    <item>
+      <title>Grub</title>
+      <link>/post/2005-10-27-grub/</link>
+      <pubDate>Thu, 27 Oct 2005 01:01:15 +0000</pubDate>
+      
+      <guid>/post/2005-10-27-grub/</guid>
+      <description>http://www.linuxsir.org/bbs/showthread.php?t=181878 win/linux双系统安装grub 2004-04-23 15:18 pm 作者：作者来自：Linux知识宝库现载：http://www.douzhe.com/linuxtips/534.html地址：无名 我的是windows2000+linux, 当我重装windows，格式化c:后，会把MBR的grub格掉，</description>
+    </item>
+    
+    <item>
+      <title>系统引导资料</title>
+      <link>/post/2005-10-27-system-boot-doc/</link>
+      <pubDate>Thu, 27 Oct 2005 00:19:33 +0000</pubDate>
+      
+      <guid>/post/2005-10-27-system-boot-doc/</guid>
+      <description>系统引导过程及硬盘分区结构论述 作者： zhy2111314来自： LinuxSir.Org ouc.edu.cn摘要： 本文是理论性文档，主要讲述系统引导过程以及硬盘的物理结构； ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++正文++++++</description>
+    </item>
+    
+    <item>
+      <title>grub三步通</title>
+      <link>/post/2005-10-20-grub-guide/</link>
+      <pubDate>Thu, 20 Oct 2005 11:58:47 +0000</pubDate>
+      
+      <guid>/post/2005-10-20-grub-guide/</guid>
+      <description>grub三步通 ################## GRUB的优点 ################## GRUB 是引导装入器(boot loader) &amp;ndash; 它负责装入内核并引导 Linux 系统。GRUB 还可以引导其它操作系统，如 FreeBSD、NetBSD、OpenBSD、GNU HURD 和 DOS，以及 Windows 95、98、NT 和 2000。尽管引导操作系统看上去是件平凡且琐碎的任务，但它实际上很重要</description>
+    </item>
+    
+    <item>
+      <title>靠 电子商务示例</title>
+      <link>/post/2005-10-18-e-biz-sample/</link>
+      <pubDate>Tue, 18 Oct 2005 17:12:24 +0000</pubDate>
+      
+      <guid>/post/2005-10-18-e-biz-sample/</guid>
+      <description>http://club.yesky.com/bbs/jsp/view.jsp?articleID=2048315</description>
+    </item>
+    
+    <item>
+      <title>怀下旧</title>
+      <link>/post/2005-10-18-my-memory/</link>
+      <pubDate>Tue, 18 Oct 2005 00:49:58 +0000</pubDate>
+      
+      <guid>/post/2005-10-18-my-memory/</guid>
+      <description>吴奇隆-追风少年 让一切随风 钟镇涛</description>
+    </item>
+    
+    <item>
+      <title>Fedora资源</title>
+      <link>/post/2005-10-13-fedora-resources/</link>
+      <pubDate>Thu, 13 Oct 2005 15:05:52 +0000</pubDate>
+      
+      <guid>/post/2005-10-13-fedora-resources/</guid>
+      <description>Fedora http://fedora.redhat.com/ FTP:ftp.applios.net/pub/fedora/linux/core</description>
+    </item>
+    
+    <item>
+      <title>HTTP Client</title>
+      <link>/post/2005-10-13-http-client/</link>
+      <pubDate>Thu, 13 Oct 2005 14:56:38 +0000</pubDate>
+      
+      <guid>/post/2005-10-13-http-client/</guid>
+      <description>代码 import java.net.*; import java.io.*; import java.util.Properties; import java.util.Enumeration; public class Http{ protected Socket client; protected BufferedOutputStream sender; protected BufferedInputStream receiver; protected ByteArrayInputStream byteStream; protected URL target; private int responseCode=-1; private String responseMessage=&amp;#34;&amp;#34;; private String serverVersion=&amp;#34;&amp;#34;; private Properties header=new Properties(); public Http(){} public Http(String url){ GET(url); } /*GET方法根据URL，会请求文件、数据库查询结果、程序运行结果等多种内容*/ public void GET(String url){ try{ checkHTTP(url); openServer(target.getHost(),target.getPort()); String cmd=&amp;#34;GET &amp;#34;+getURLFormat(target)+&amp;#34; HTTP/1.0\r\n&amp;#34;+getBaseHeads()+&amp;#34;\r\n&amp;#34;; System.out.println(cmd); sendMessage(cmd); receiveMessage(); }catch(ProtocolException p){ p.printStackTrace(); return; }catch(UnknownHostException e){ e.printStackTrace(); return; }catch(IOException i){ i.printStackTrace(); return; } } /* *HEAD方法只请求URL的元信息，不包括UR</description>
+    </item>
+    
+    <item>
+      <title>IP地址盗用技术简介以及防范措施综述</title>
+      <link>/post/2005-10-10-ip-address-abuse-and-protect/</link>
+      <pubDate>Mon, 10 Oct 2005 22:57:02 +0000</pubDate>
+      
+      <guid>/post/2005-10-10-ip-address-abuse-and-protect/</guid>
+      <description>一、IP地址盗用方法分析 IP地址的盗用方法多种多样，其常用方法主要有以下几种： 1、静态修改IP地址 对于任何一个TCP/IP实现来 说，IP地址都是其用户配置的必选项。如果用户在配置TCP/IP或修改TCP/IP配置时，使用的不是授权机构分配的IP地址，就形成了IP地址盗用。由于IP</description>
+    </item>
+    
+    <item>
+      <title>主流无线传输技术GPRS与CDMA之对比</title>
+      <link>/post/2005-10-10-compare-with-gprs-and-cdma/</link>
+      <pubDate>Mon, 10 Oct 2005 22:55:41 +0000</pubDate>
+      
+      <guid>/post/2005-10-10-compare-with-gprs-and-cdma/</guid>
+      <description>目前，基于GPRS/CDMA无线数据传输业务广泛在移动办公、工业控制、远程遥测等多方面应用，网络运营商中国移动GPRS和联通CDMA各有其特点。本文从网络的覆盖、带宽、频谱等方面对GPRS和CDMA进行了对比。 GPRS网络 GPRS(General Packet Radio Service，通用无线分组业务)作为第二代移动通信</description>
+    </item>
+    
+    <item>
+      <title>在无线J2ME设备上实现HTTP协议　</title>
+      <link>/post/2005-10-10-j2me-create-http-server/</link>
+      <pubDate>Mon, 10 Oct 2005 22:50:36 +0000</pubDate>
+      
+      <guid>/post/2005-10-10-j2me-create-http-server/</guid>
+      <description>随着越来越多手提电话和个人数字助理开始融入到信息高速公路之上，从移动设备上访问Web站点变得越来越重要。Java开创了消费设备中小型的储存容量的先河，它是用于开发手机、传呼机及其他微型设备应用程序的理想语言。 在本文中，我们将学习如何从一个J2ME客户机上向服务器发送一条HTTPG</description>
+    </item>
+    
+    <item>
+      <title>CodeSketch</title>
+      <link>/codesketch/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/codesketch/</guid>
+      <description>Code Sketch Vincent Mi (miwenshu@gmail.com) 下载 | 项目主页 用于根据数据库设计生成骨架代码. 使用 将模板文件拷贝到 ~/.codesketch/templates下. 模板变量 模板使用 FreeMarker 语法请参考参考 http://freemarker.foofun.cn/ref.html 符号 变量 类型 示例 说明 ${TAG_LEFT} String &amp;lt; 标签符号左 ${TAG_RIGHT} String &amp;gt; 标签符号右 ${TAG_DALLAR} String $ 美元符号 ${TAG_WELL} String # 井号 ${TIME} String 2020-03-12 18:26:40 654 CST 文件生成的时间 基本变量 变量 类型 示</description>
+    </item>
+    
+    <item>
+      <title>Posts Archive</title>
+      <link>/archive/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/archive/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>我</title>
+      <link>/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>Vincent 一个简单的博客,记录了一些工作中遇到的问题.记录一些生活.</description>
+    </item>
+    
+    <item>
+      <title>搜索</title>
+      <link>/search/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/search/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>来挽救MBP</title>
+      <link>/post/2020-08-13-mbp-crash/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2020-08-13-mbp-crash/</guid>
+      <description>悲剧 离职公司电脑交了,自己买了个 MBP16,预装了 Catalina 10.15.6 .从此悲剧开始各种死机.休眠重启. 去售后查来查去也没啥问题. 随便搞个啥风扇就狂转.老版AIR 给我留下的安静坚挺的印象几乎要败光了. Twitter上联系了MAC售后也是各种提交问题.最后没有问题喊我查查软件. 知乎上说因为三哥程序</description>
+    </item>
+    
+  </channel>
+</rss>

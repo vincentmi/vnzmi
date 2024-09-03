@@ -1,0 +1,1316 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on 我的乐与怒</title>
+    <link>/tags/</link>
+    <description>Recent content in Tags on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 31 May 2024 15:13:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>app</title>
+      <link>/tags/app/</link>
+      <pubDate>Fri, 31 May 2024 15:13:00 +0000</pubDate>
+      
+      <guid>/tags/app/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dart</title>
+      <link>/tags/dart/</link>
+      <pubDate>Fri, 31 May 2024 15:13:00 +0000</pubDate>
+      
+      <guid>/tags/dart/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>flutter</title>
+      <link>/tags/flutter/</link>
+      <pubDate>Fri, 31 May 2024 15:13:00 +0000</pubDate>
+      
+      <guid>/tags/flutter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>响应式</title>
+      <link>/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/</link>
+      <pubDate>Fri, 31 May 2024 15:13:00 +0000</pubDate>
+      
+      <guid>/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>k8s</title>
+      <link>/tags/k8s/</link>
+      <pubDate>Tue, 28 May 2024 15:13:00 +0000</pubDate>
+      
+      <guid>/tags/k8s/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>yaml</title>
+      <link>/tags/yaml/</link>
+      <pubDate>Tue, 28 May 2024 15:13:00 +0000</pubDate>
+      
+      <guid>/tags/yaml/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>/tags/java/</link>
+      <pubDate>Fri, 26 Apr 2024 15:13:00 +0000</pubDate>
+      
+      <guid>/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>workflow</title>
+      <link>/tags/workflow/</link>
+      <pubDate>Fri, 26 Apr 2024 15:13:00 +0000</pubDate>
+      
+      <guid>/tags/workflow/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>items2</title>
+      <link>/tags/items2/</link>
+      <pubDate>Sun, 07 Apr 2024 16:26:00 +0000</pubDate>
+      
+      <guid>/tags/items2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>shell</title>
+      <link>/tags/shell/</link>
+      <pubDate>Sun, 07 Apr 2024 16:26:00 +0000</pubDate>
+      
+      <guid>/tags/shell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>zsh</title>
+      <link>/tags/zsh/</link>
+      <pubDate>Sun, 07 Apr 2024 16:26:00 +0000</pubDate>
+      
+      <guid>/tags/zsh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>opentcv</title>
+      <link>/tags/opentcv/</link>
+      <pubDate>Tue, 26 Dec 2023 09:15:00 +0000</pubDate>
+      
+      <guid>/tags/opentcv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>/tags/python/</link>
+      <pubDate>Tue, 26 Dec 2023 09:15:00 +0000</pubDate>
+      
+      <guid>/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>state machine</title>
+      <link>/tags/state-machine/</link>
+      <pubDate>Thu, 19 Oct 2023 14:25:00 +0000</pubDate>
+      
+      <guid>/tags/state-machine/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>工作流</title>
+      <link>/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/</link>
+      <pubDate>Thu, 19 Oct 2023 14:25:00 +0000</pubDate>
+      
+      <guid>/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>flask</title>
+      <link>/tags/flask/</link>
+      <pubDate>Sat, 29 Jul 2023 10:44:00 +0000</pubDate>
+      
+      <guid>/tags/flask/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sqlalchemy</title>
+      <link>/tags/sqlalchemy/</link>
+      <pubDate>Sat, 29 Jul 2023 10:44:00 +0000</pubDate>
+      
+      <guid>/tags/sqlalchemy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cups</title>
+      <link>/tags/cups/</link>
+      <pubDate>Sun, 23 Jul 2023 21:44:00 +0000</pubDate>
+      
+      <guid>/tags/cups/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>printer</title>
+      <link>/tags/printer/</link>
+      <pubDate>Sun, 23 Jul 2023 21:44:00 +0000</pubDate>
+      
+      <guid>/tags/printer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rasphberry PI</title>
+      <link>/tags/rasphberry-pi/</link>
+      <pubDate>Sun, 23 Jul 2023 21:44:00 +0000</pubDate>
+      
+      <guid>/tags/rasphberry-pi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sane</title>
+      <link>/tags/sane/</link>
+      <pubDate>Sun, 23 Jul 2023 21:44:00 +0000</pubDate>
+      
+      <guid>/tags/sane/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>scan</title>
+      <link>/tags/scan/</link>
+      <pubDate>Sun, 23 Jul 2023 21:44:00 +0000</pubDate>
+      
+      <guid>/tags/scan/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>map</title>
+      <link>/tags/map/</link>
+      <pubDate>Sat, 08 Jul 2023 09:44:00 +0000</pubDate>
+      
+      <guid>/tags/map/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tileserver</title>
+      <link>/tags/tileserver/</link>
+      <pubDate>Sat, 08 Jul 2023 09:44:00 +0000</pubDate>
+      
+      <guid>/tags/tileserver/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>webgis</title>
+      <link>/tags/webgis/</link>
+      <pubDate>Sat, 08 Jul 2023 09:44:00 +0000</pubDate>
+      
+      <guid>/tags/webgis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Docker</title>
+      <link>/tags/docker/</link>
+      <pubDate>Fri, 19 May 2023 23:48:00 +0000</pubDate>
+      
+      <guid>/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>/tags/linux/</link>
+      <pubDate>Fri, 19 May 2023 23:48:00 +0000</pubDate>
+      
+      <guid>/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>AI</title>
+      <link>/tags/ai/</link>
+      <pubDate>Tue, 14 Feb 2023 16:01:00 +0000</pubDate>
+      
+      <guid>/tags/ai/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MachineLearning</title>
+      <link>/tags/machinelearning/</link>
+      <pubDate>Tue, 14 Feb 2023 16:01:00 +0000</pubDate>
+      
+      <guid>/tags/machinelearning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>openAI</title>
+      <link>/tags/openai/</link>
+      <pubDate>Tue, 14 Feb 2023 16:01:00 +0000</pubDate>
+      
+      <guid>/tags/openai/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Recommand System</title>
+      <link>/tags/recommand-system/</link>
+      <pubDate>Tue, 14 Feb 2023 16:01:00 +0000</pubDate>
+      
+      <guid>/tags/recommand-system/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>life</title>
+      <link>/tags/life/</link>
+      <pubDate>Thu, 19 Jan 2023 10:00:00 +0000</pubDate>
+      
+      <guid>/tags/life/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>memory</title>
+      <link>/tags/memory/</link>
+      <pubDate>Thu, 19 Jan 2023 10:00:00 +0000</pubDate>
+      
+      <guid>/tags/memory/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>AFrame</title>
+      <link>/tags/aframe/</link>
+      <pubDate>Thu, 01 Dec 2022 10:00:00 +0000</pubDate>
+      
+      <guid>/tags/aframe/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>AR.js</title>
+      <link>/tags/ar.js/</link>
+      <pubDate>Thu, 01 Dec 2022 10:00:00 +0000</pubDate>
+      
+      <guid>/tags/ar.js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>js</title>
+      <link>/tags/js/</link>
+      <pubDate>Thu, 01 Dec 2022 10:00:00 +0000</pubDate>
+      
+      <guid>/tags/js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>webrtc</title>
+      <link>/tags/webrtc/</link>
+      <pubDate>Thu, 01 Dec 2022 10:00:00 +0000</pubDate>
+      
+      <guid>/tags/webrtc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Schedule</title>
+      <link>/tags/schedule/</link>
+      <pubDate>Fri, 18 Nov 2022 11:11:00 +0000</pubDate>
+      
+      <guid>/tags/schedule/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spring</title>
+      <link>/tags/spring/</link>
+      <pubDate>Fri, 18 Nov 2022 11:11:00 +0000</pubDate>
+      
+      <guid>/tags/spring/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>springboot</title>
+      <link>/tags/springboot/</link>
+      <pubDate>Fri, 18 Nov 2022 11:11:00 +0000</pubDate>
+      
+      <guid>/tags/springboot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>karabiner-element</title>
+      <link>/tags/karabiner-element/</link>
+      <pubDate>Sat, 17 Sep 2022 22:36:00 +0000</pubDate>
+      
+      <guid>/tags/karabiner-element/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MAC</title>
+      <link>/tags/mac/</link>
+      <pubDate>Sat, 17 Sep 2022 22:36:00 +0000</pubDate>
+      
+      <guid>/tags/mac/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>blockchain</title>
+      <link>/tags/blockchain/</link>
+      <pubDate>Wed, 06 Jul 2022 00:36:00 +0000</pubDate>
+      
+      <guid>/tags/blockchain/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ERC20</title>
+      <link>/tags/erc20/</link>
+      <pubDate>Wed, 06 Jul 2022 00:36:00 +0000</pubDate>
+      
+      <guid>/tags/erc20/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Eth</title>
+      <link>/tags/eth/</link>
+      <pubDate>Wed, 06 Jul 2022 00:36:00 +0000</pubDate>
+      
+      <guid>/tags/eth/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ethereum</title>
+      <link>/tags/ethereum/</link>
+      <pubDate>Wed, 06 Jul 2022 00:36:00 +0000</pubDate>
+      
+      <guid>/tags/ethereum/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>EVM</title>
+      <link>/tags/evm/</link>
+      <pubDate>Wed, 06 Jul 2022 00:36:00 +0000</pubDate>
+      
+      <guid>/tags/evm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Contract</title>
+      <link>/tags/contract/</link>
+      <pubDate>Sat, 02 Jul 2022 09:46:00 +0000</pubDate>
+      
+      <guid>/tags/contract/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Geth</title>
+      <link>/tags/geth/</link>
+      <pubDate>Fri, 01 Jul 2022 09:46:00 +0000</pubDate>
+      
+      <guid>/tags/geth/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kind</title>
+      <link>/tags/kind/</link>
+      <pubDate>Fri, 27 May 2022 10:46:00 +0000</pubDate>
+      
+      <guid>/tags/kind/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ops</title>
+      <link>/tags/ops/</link>
+      <pubDate>Fri, 27 May 2022 10:46:00 +0000</pubDate>
+      
+      <guid>/tags/ops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Querydsl</title>
+      <link>/tags/querydsl/</link>
+      <pubDate>Fri, 29 Apr 2022 22:55:00 +0000</pubDate>
+      
+      <guid>/tags/querydsl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Maven</title>
+      <link>/tags/maven/</link>
+      <pubDate>Thu, 16 Dec 2021 17:36:00 +0000</pubDate>
+      
+      <guid>/tags/maven/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pom</title>
+      <link>/tags/pom/</link>
+      <pubDate>Thu, 16 Dec 2021 17:36:00 +0000</pubDate>
+      
+      <guid>/tags/pom/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ADSS</title>
+      <link>/tags/adss/</link>
+      <pubDate>Thu, 18 Nov 2021 17:12:00 +0000</pubDate>
+      
+      <guid>/tags/adss/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PCI-DSS</title>
+      <link>/tags/pci-dss/</link>
+      <pubDate>Thu, 18 Nov 2021 17:12:00 +0000</pubDate>
+      
+      <guid>/tags/pci-dss/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>等保</title>
+      <link>/tags/%E7%AD%89%E4%BF%9D/</link>
+      <pubDate>Tue, 16 Nov 2021 17:12:00 +0000</pubDate>
+      
+      <guid>/tags/%E7%AD%89%E4%BF%9D/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>channel</title>
+      <link>/tags/channel/</link>
+      <pubDate>Thu, 04 Nov 2021 17:12:00 +0000</pubDate>
+      
+      <guid>/tags/channel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Golang</title>
+      <link>/tags/golang/</link>
+      <pubDate>Thu, 04 Nov 2021 17:12:00 +0000</pubDate>
+      
+      <guid>/tags/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>goroutine</title>
+      <link>/tags/goroutine/</link>
+      <pubDate>Thu, 04 Nov 2021 17:12:00 +0000</pubDate>
+      
+      <guid>/tags/goroutine/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>three.js</title>
+      <link>/tags/three.js/</link>
+      <pubDate>Thu, 29 Jul 2021 17:53:00 +0000</pubDate>
+      
+      <guid>/tags/three.js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Netty</title>
+      <link>/tags/netty/</link>
+      <pubDate>Thu, 15 Jul 2021 10:53:00 +0000</pubDate>
+      
+      <guid>/tags/netty/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spring Boot</title>
+      <link>/tags/spring-boot/</link>
+      <pubDate>Mon, 05 Apr 2021 10:53:00 +0000</pubDate>
+      
+      <guid>/tags/spring-boot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>生活记录</title>
+      <link>/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Tue, 02 Feb 2021 21:53:00 +0000</pubDate>
+      
+      <guid>/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>artwork</title>
+      <link>/tags/artwork/</link>
+      <pubDate>Thu, 28 Jan 2021 21:53:00 +0000</pubDate>
+      
+      <guid>/tags/artwork/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Micheal</title>
+      <link>/tags/micheal/</link>
+      <pubDate>Thu, 28 Jan 2021 21:53:00 +0000</pubDate>
+      
+      <guid>/tags/micheal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Andrew NG</title>
+      <link>/tags/andrew-ng/</link>
+      <pubDate>Tue, 05 Jan 2021 22:08:00 +0000</pubDate>
+      
+      <guid>/tags/andrew-ng/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Machine Learning</title>
+      <link>/tags/machine-learning/</link>
+      <pubDate>Tue, 05 Jan 2021 22:08:00 +0000</pubDate>
+      
+      <guid>/tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Math</title>
+      <link>/tags/math/</link>
+      <pubDate>Tue, 05 Jan 2021 22:08:00 +0000</pubDate>
+      
+      <guid>/tags/math/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ubuntu</title>
+      <link>/tags/ubuntu/</link>
+      <pubDate>Wed, 26 Aug 2020 23:04:00 +0000</pubDate>
+      
+      <guid>/tags/ubuntu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Antd</title>
+      <link>/tags/antd/</link>
+      <pubDate>Fri, 31 Jul 2020 23:05:00 +0000</pubDate>
+      
+      <guid>/tags/antd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Validate</title>
+      <link>/tags/validate/</link>
+      <pubDate>Fri, 31 Jul 2020 23:05:00 +0000</pubDate>
+      
+      <guid>/tags/validate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vue</title>
+      <link>/tags/vue/</link>
+      <pubDate>Fri, 31 Jul 2020 23:05:00 +0000</pubDate>
+      
+      <guid>/tags/vue/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dockerfile</title>
+      <link>/tags/dockerfile/</link>
+      <pubDate>Thu, 23 Jul 2020 23:15:00 +0000</pubDate>
+      
+      <guid>/tags/dockerfile/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>RESTFul</title>
+      <link>/tags/restful/</link>
+      <pubDate>Fri, 10 Jul 2020 09:55:00 +0000</pubDate>
+      
+      <guid>/tags/restful/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Swagger</title>
+      <link>/tags/swagger/</link>
+      <pubDate>Fri, 10 Jul 2020 09:55:00 +0000</pubDate>
+      
+      <guid>/tags/swagger/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Feign</title>
+      <link>/tags/feign/</link>
+      <pubDate>Thu, 30 Apr 2020 14:20:00 +0000</pubDate>
+      
+      <guid>/tags/feign/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nginx</title>
+      <link>/tags/nginx/</link>
+      <pubDate>Thu, 30 Apr 2020 14:20:00 +0000</pubDate>
+      
+      <guid>/tags/nginx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>type</title>
+      <link>/tags/type/</link>
+      <pubDate>Thu, 30 Apr 2020 14:20:00 +0000</pubDate>
+      
+      <guid>/tags/type/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SSL</title>
+      <link>/tags/ssl/</link>
+      <pubDate>Wed, 08 Apr 2020 21:48:00 +0000</pubDate>
+      
+      <guid>/tags/ssl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>OkHttp</title>
+      <link>/tags/okhttp/</link>
+      <pubDate>Wed, 11 Mar 2020 11:31:00 +0000</pubDate>
+      
+      <guid>/tags/okhttp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>KVM</title>
+      <link>/tags/kvm/</link>
+      <pubDate>Thu, 09 Jan 2020 18:24:00 +0000</pubDate>
+      
+      <guid>/tags/kvm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rancher</title>
+      <link>/tags/rancher/</link>
+      <pubDate>Thu, 09 Jan 2020 18:24:00 +0000</pubDate>
+      
+      <guid>/tags/rancher/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>JPA</title>
+      <link>/tags/jpa/</link>
+      <pubDate>Thu, 26 Sep 2019 15:03:00 +0000</pubDate>
+      
+      <guid>/tags/jpa/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kubernetes</title>
+      <link>/tags/kubernetes/</link>
+      <pubDate>Wed, 10 Apr 2019 15:31:00 +0000</pubDate>
+      
+      <guid>/tags/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Prometheus</title>
+      <link>/tags/prometheus/</link>
+      <pubDate>Wed, 10 Apr 2019 15:31:00 +0000</pubDate>
+      
+      <guid>/tags/prometheus/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ingress</title>
+      <link>/tags/ingress/</link>
+      <pubDate>Thu, 04 Apr 2019 15:31:00 +0000</pubDate>
+      
+      <guid>/tags/ingress/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kubeadm</title>
+      <link>/tags/kubeadm/</link>
+      <pubDate>Sun, 24 Mar 2019 15:31:00 +0000</pubDate>
+      
+      <guid>/tags/kubeadm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>生活</title>
+      <link>/tags/%E7%94%9F%E6%B4%BB/</link>
+      <pubDate>Sat, 14 Apr 2018 22:07:00 +0000</pubDate>
+      
+      <guid>/tags/%E7%94%9F%E6%B4%BB/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Consul</title>
+      <link>/tags/consul/</link>
+      <pubDate>Fri, 13 Apr 2018 11:20:00 +0000</pubDate>
+      
+      <guid>/tags/consul/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Go</title>
+      <link>/tags/go/</link>
+      <pubDate>Wed, 07 Mar 2018 10:07:00 +0000</pubDate>
+      
+      <guid>/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HW</title>
+      <link>/tags/hw/</link>
+      <pubDate>Wed, 07 Mar 2018 10:07:00 +0000</pubDate>
+      
+      <guid>/tags/hw/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Raspberrypi</title>
+      <link>/tags/raspberrypi/</link>
+      <pubDate>Wed, 07 Mar 2018 10:07:00 +0000</pubDate>
+      
+      <guid>/tags/raspberrypi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Shaodwsocks</title>
+      <link>/tags/shaodwsocks/</link>
+      <pubDate>Wed, 07 Mar 2018 10:07:00 +0000</pubDate>
+      
+      <guid>/tags/shaodwsocks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PHP</title>
+      <link>/tags/php/</link>
+      <pubDate>Thu, 04 Jan 2018 18:02:00 +0000</pubDate>
+      
+      <guid>/tags/php/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rpc</title>
+      <link>/tags/rpc/</link>
+      <pubDate>Mon, 17 Apr 2017 16:01:00 +0000</pubDate>
+      
+      <guid>/tags/rpc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>LVM</title>
+      <link>/tags/lvm/</link>
+      <pubDate>Wed, 29 Mar 2017 16:00:00 +0000</pubDate>
+      
+      <guid>/tags/lvm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>OP</title>
+      <link>/tags/op/</link>
+      <pubDate>Wed, 29 Mar 2017 16:00:00 +0000</pubDate>
+      
+      <guid>/tags/op/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>VirtualBox</title>
+      <link>/tags/virtualbox/</link>
+      <pubDate>Wed, 29 Mar 2017 16:00:00 +0000</pubDate>
+      
+      <guid>/tags/virtualbox/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Consul-template</title>
+      <link>/tags/consul-template/</link>
+      <pubDate>Fri, 24 Mar 2017 10:26:00 +0000</pubDate>
+      
+      <guid>/tags/consul-template/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Registrator</title>
+      <link>/tags/registrator/</link>
+      <pubDate>Fri, 24 Mar 2017 10:26:00 +0000</pubDate>
+      
+      <guid>/tags/registrator/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Git</title>
+      <link>/tags/git/</link>
+      <pubDate>Sun, 08 Jan 2017 18:43:00 +0000</pubDate>
+      
+      <guid>/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SOA</title>
+      <link>/tags/soa/</link>
+      <pubDate>Tue, 16 Aug 2016 18:56:00 +0000</pubDate>
+      
+      <guid>/tags/soa/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>L2TP</title>
+      <link>/tags/l2tp/</link>
+      <pubDate>Thu, 04 Aug 2016 09:49:00 +0000</pubDate>
+      
+      <guid>/tags/l2tp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>VPN</title>
+      <link>/tags/vpn/</link>
+      <pubDate>Thu, 04 Aug 2016 09:49:00 +0000</pubDate>
+      
+      <guid>/tags/vpn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Swarm</title>
+      <link>/tags/swarm/</link>
+      <pubDate>Wed, 03 Aug 2016 14:03:00 +0000</pubDate>
+      
+      <guid>/tags/swarm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pptp</title>
+      <link>/tags/pptp/</link>
+      <pubDate>Mon, 01 Aug 2016 14:45:00 +0000</pubDate>
+      
+      <guid>/tags/pptp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CentOS</title>
+      <link>/tags/centos/</link>
+      <pubDate>Sat, 23 Jul 2016 05:38:00 +0000</pubDate>
+      
+      <guid>/tags/centos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kernel</title>
+      <link>/tags/kernel/</link>
+      <pubDate>Sat, 23 Jul 2016 05:38:00 +0000</pubDate>
+      
+      <guid>/tags/kernel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Yum</title>
+      <link>/tags/yum/</link>
+      <pubDate>Sat, 23 Jul 2016 05:38:00 +0000</pubDate>
+      
+      <guid>/tags/yum/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jekyll</title>
+      <link>/tags/jekyll/</link>
+      <pubDate>Thu, 21 Jul 2016 09:49:00 +0000</pubDate>
+      
+      <guid>/tags/jekyll/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jenkins</title>
+      <link>/tags/jenkins/</link>
+      <pubDate>Thu, 21 Jul 2016 09:49:00 +0000</pubDate>
+      
+      <guid>/tags/jenkins/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hadoop</title>
+      <link>/tags/hadoop/</link>
+      <pubDate>Mon, 11 Jul 2016 18:44:00 +0000</pubDate>
+      
+      <guid>/tags/hadoop/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HBase</title>
+      <link>/tags/hbase/</link>
+      <pubDate>Mon, 11 Jul 2016 18:44:00 +0000</pubDate>
+      
+      <guid>/tags/hbase/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kafka</title>
+      <link>/tags/kafka/</link>
+      <pubDate>Mon, 11 Jul 2016 18:44:00 +0000</pubDate>
+      
+      <guid>/tags/kafka/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ZooKeeper</title>
+      <link>/tags/zookeeper/</link>
+      <pubDate>Mon, 11 Jul 2016 18:44:00 +0000</pubDate>
+      
+      <guid>/tags/zookeeper/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>大数据</title>
+      <link>/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/</link>
+      <pubDate>Mon, 11 Jul 2016 18:44:00 +0000</pubDate>
+      
+      <guid>/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>RD</title>
+      <link>/tags/rd/</link>
+      <pubDate>Wed, 22 Jun 2016 14:15:00 +0000</pubDate>
+      
+      <guid>/tags/rd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>监控</title>
+      <link>/tags/%E7%9B%91%E6%8E%A7/</link>
+      <pubDate>Sun, 15 May 2016 20:44:00 +0000</pubDate>
+      
+      <guid>/tags/%E7%9B%91%E6%8E%A7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>iTerm</title>
+      <link>/tags/iterm/</link>
+      <pubDate>Wed, 17 Feb 2016 21:30:00 +0000</pubDate>
+      
+      <guid>/tags/iterm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Eclipse</title>
+      <link>/tags/eclipse/</link>
+      <pubDate>Fri, 04 Dec 2015 13:56:00 +0000</pubDate>
+      
+      <guid>/tags/eclipse/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vagrant</title>
+      <link>/tags/vagrant/</link>
+      <pubDate>Tue, 25 Aug 2015 10:40:00 +0000</pubDate>
+      
+      <guid>/tags/vagrant/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Thymeleaf</title>
+      <link>/tags/thymeleaf/</link>
+      <pubDate>Fri, 24 Jul 2015 10:33:00 +0000</pubDate>
+      
+      <guid>/tags/thymeleaf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>运维</title>
+      <link>/tags/%E8%BF%90%E7%BB%B4/</link>
+      <pubDate>Sun, 14 Jun 2015 09:13:00 +0000</pubDate>
+      
+      <guid>/tags/%E8%BF%90%E7%BB%B4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mesos</title>
+      <link>/tags/mesos/</link>
+      <pubDate>Fri, 12 Jun 2015 23:11:00 +0000</pubDate>
+      
+      <guid>/tags/mesos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Arduino</title>
+      <link>/tags/arduino/</link>
+      <pubDate>Sun, 10 May 2015 23:16:00 +0000</pubDate>
+      
+      <guid>/tags/arduino/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CXF</title>
+      <link>/tags/cxf/</link>
+      <pubDate>Sun, 10 May 2015 23:16:00 +0000</pubDate>
+      
+      <guid>/tags/cxf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nRF24L01</title>
+      <link>/tags/nrf24l01/</link>
+      <pubDate>Sun, 10 May 2015 23:16:00 +0000</pubDate>
+      
+      <guid>/tags/nrf24l01/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>WS</title>
+      <link>/tags/ws/</link>
+      <pubDate>Sun, 10 May 2015 23:16:00 +0000</pubDate>
+      
+      <guid>/tags/ws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ENC28J60</title>
+      <link>/tags/enc28j60/</link>
+      <pubDate>Fri, 08 May 2015 23:16:00 +0000</pubDate>
+      
+      <guid>/tags/enc28j60/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Anduino</title>
+      <link>/tags/anduino/</link>
+      <pubDate>Fri, 08 May 2015 14:16:00 +0000</pubDate>
+      
+      <guid>/tags/anduino/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CGI</title>
+      <link>/tags/cgi/</link>
+      <pubDate>Mon, 04 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>/tags/cgi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Voice</title>
+      <link>/tags/voice/</link>
+      <pubDate>Mon, 04 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>/tags/voice/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MSSQL</title>
+      <link>/tags/mssql/</link>
+      <pubDate>Sun, 03 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>/tags/mssql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MySQL</title>
+      <link>/tags/mysql/</link>
+      <pubDate>Sun, 03 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>/tags/mysql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>LVS</title>
+      <link>/tags/lvs/</link>
+      <pubDate>Sat, 02 May 2015 23:36:00 +0000</pubDate>
+      
+      <guid>/tags/lvs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SElinux</title>
+      <link>/tags/selinux/</link>
+      <pubDate>Sat, 02 May 2015 22:36:00 +0000</pubDate>
+      
+      <guid>/tags/selinux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Memcached</title>
+      <link>/tags/memcached/</link>
+      <pubDate>Sat, 02 May 2015 22:35:00 +0000</pubDate>
+      
+      <guid>/tags/memcached/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>新浪博客</title>
+      <link>/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2/</link>
+      <pubDate>Tue, 18 Jan 2011 21:55:11 +0000</pubDate>
+      
+      <guid>/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>POCO</title>
+      <link>/tags/poco/</link>
+      <pubDate>Tue, 03 Jun 2008 01:06:24 +0000</pubDate>
+      
+      <guid>/tags/poco/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Javascript</title>
+      <link>/tags/javascript/</link>
+      <pubDate>Thu, 13 Dec 2007 23:42:28 +0000</pubDate>
+      
+      <guid>/tags/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>无聊</title>
+      <link>/tags/%E6%97%A0%E8%81%8A/</link>
+      <pubDate>Wed, 03 Oct 2007 23:20:28 +0000</pubDate>
+      
+      <guid>/tags/%E6%97%A0%E8%81%8A/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>股票</title>
+      <link>/tags/%E8%82%A1%E7%A5%A8/</link>
+      <pubDate>Sat, 22 Sep 2007 07:49:33 +0000</pubDate>
+      
+      <guid>/tags/%E8%82%A1%E7%A5%A8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>技术文章</title>
+      <link>/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/</link>
+      <pubDate>Fri, 21 Apr 2006 15:30:16 +0000</pubDate>
+      
+      <guid>/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Catalina</title>
+      <link>/tags/catalina/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/catalina/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

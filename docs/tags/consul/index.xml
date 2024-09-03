@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Consul on 我的乐与怒</title>
+    <link>/tags/consul/</link>
+    <description>Recent content in Consul on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 13 Apr 2018 11:20:00 +0000</lastBuildDate><atom:link href="/tags/consul/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker&#43;Consul&#43;Ngxin配置脚本</title>
+      <link>/post/2018-04-13-server-setup-scripts/</link>
+      <pubDate>Fri, 13 Apr 2018 11:20:00 +0000</pubDate>
+      
+      <guid>/post/2018-04-13-server-setup-scripts/</guid>
+      <description>Docker #!/bin/sh sudo apt-get remove docker docker-engine docker.io sudo apt-get update sudo apt-get install \ apt-transport-https \ ca-certificates \ curl \ software-properties-common curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - sudo apt-key fingerprint 0EBFCD88 sudo add-apt-repository \ &amp;#34;deb [arch=amd64] https://download.docker.com/linux/ubuntu \ $(lsb_release -cs) \ stable&amp;#34; sudo apt-get update sudo apt-get -y install docker-ce apt-cache madison docker-ce sudo apt-get install docker-ce=&amp;lt;VERSION&amp;gt; NGINX server { listen 80 default_server; listen [::]:80 default_server ipv6only=on; root /usr/share/nginx/html; index index.html index.htm; server_name localhost; location / { proxy_pass http://127.0.0.1:8009; proxy_redirect off; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504; proxy_max_temp_file_size 0; proxy_connect_timeout 90; proxy_send_timeout 90; proxy_read_timeout 90; proxy_buffer_size 4k; proxy_buffers 4 32k; proxy_busy_buffers_size 64k; proxy_temp_file_write_size 64k; } } 容器 #mysql docker run \ --name mysql-primary \ -v /alidata/mysqldb:/var/lib/mysql \ -p 3306:3306 \ -e MYSQL_ROOT_PASSWORD=xxxx \ -e &amp;#34;SERVICE_NAME=mysql_promary&amp;#34;</description>
+    </item>
+    
+    <item>
+      <title>使用Consul Docker微服务平台实践</title>
+      <link>/post/2017-03-24-consul-and-docker-service-discover/</link>
+      <pubDate>Fri, 24 Mar 2017 10:26:00 +0000</pubDate>
+      
+      <guid>/post/2017-03-24-consul-and-docker-service-discover/</guid>
+      <description>基础环境 - CentOS6.6 内核升级 因为虚拟机的centos内核无法达到docker稳定运行，因此升级到3.1,执行 #导入key rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org #安装ELRepo到CentOS 6.6中 rpm -Uvh http://www.elrepo.org/elrepo-release-6-6.el6.elrepo.noarch.rpm #安装长期支持版本kernel yum --enablerepo=elrepo-kernel install kernel-lt -y #编辑grub.conf文件，修改Grub引导顺序,选择3.1版本的内容(一</description>
+    </item>
+    
+    <item>
+      <title>服务发现,Consul入门</title>
+      <link>/post/2016-08-16-consul-quick-guide/</link>
+      <pubDate>Tue, 16 Aug 2016 18:56:00 +0000</pubDate>
+      
+      <guid>/post/2016-08-16-consul-quick-guide/</guid>
+      <description>翻译自官方文档 . 欢迎进入Consul的入门指南!这个指南是开始使用Consul的起点,通过这个指南了解Consul是什么,他可以解决哪些问题.它与现有软件的比较和怎么开始使用它.如果你对Consul已经有基本的了解,可以阅读 文档 ,它提供更多可用特性的参考. ###英文原版 https://www.consul.io/intro/ 翻译 工作</description>
+    </item>
+    
+  </channel>
+</rss>

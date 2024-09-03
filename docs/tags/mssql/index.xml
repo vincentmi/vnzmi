@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MSSQL on 我的乐与怒</title>
+    <link>/tags/mssql/</link>
+    <description>Recent content in MSSQL on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 03 May 2015 08:36:00 +0000</lastBuildDate><atom:link href="/tags/mssql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MySQL和MSSQL 查询比较</title>
+      <link>/post/2015-05-03-mysql-mssql-compare/</link>
+      <pubDate>Sun, 03 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-03-mysql-mssql-compare/</guid>
+      <description>Current Date and Time MS: SELECT GETDATE() MY: SELECT NOW() Optionally: Use CURDATE() for the date only.Limiting Results MS: SELECT TOP 10 * FROM table WHERE id = 1 MY: SELECT * FROM table WHERE id = 1 LIMIT 10Date Field Default Value MS: DATETIME DEFAULT GETDATE() MY: DATETIME fields cannot have a default value, i.e. &amp;ldquo;GETDATE()&amp;rdquo; You must use your INSERT statement to specify CURDATE() for the field. Optionally: Use datatype TIMESTAMP DEFAULT CURRENT_TIMESTAMPCharacter Length MS: LEN() MY: CHARACTER_LENGTH() Aliases: CHAR_LENGTH(), LENGTH()Character Replace MS: REPLACE() works case insensitively MY: REPLACE() works case sensitivelyTrim Functions MS: LTRIM() and RTRIM() MY: TRIM()String Concatenation MS: CONCATENATION USING + (Does not automatically cast operands to compatible types) MY: CONCAT(string, string), which accepts two or more arguments. (Automatically casts values into types which can be concatenated)Auto Increment Field Definition MS: tablename_id INT IDENTITY PRIMARY</description>
+    </item>
+    
+  </channel>
+</rss>

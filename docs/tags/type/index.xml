@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>type on 我的乐与怒</title>
+    <link>/tags/type/</link>
+    <description>Recent content in type on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 30 Apr 2020 14:20:00 +0000</lastBuildDate><atom:link href="/tags/type/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ingress添加权限验证</title>
+      <link>/post/2020-04-30-ingress-tips/</link>
+      <pubDate>Thu, 30 Apr 2020 14:20:00 +0000</pubDate>
+      
+      <guid>/post/2020-04-30-ingress-tips/</guid>
+      <description>生成密码文件 ~ htpasswd -c httpauth admin New password: Re-type new password: Adding password for user admin 添加密文 apiVersion: v1 kind: Secret metadata: name: httpauth data: auth: admin:$apr1$RjgQNPDx$e9htPYO4fELnCxOb07GIK0 配置 对你需要增加权限验证的INgress设置注释 nginx.ingress.kubernetes.io/auth-realm: &amp;#39;&amp;#34;Authentication Required - admin&amp;#34;&amp;#39; nginx.ingress.kubernetes.io/auth-secret: httpauth nginx.ingress.kubernetes.io/auth-type: basic INgress YAML如下 apiVersion: extensions/v1beta1 kind: Ingress metadata: annotations: field.cattle.io/creatorId: user-ng7cm field.cattle.io/ingressState: &amp;#39;{&amp;#34;Y29uc3VsL2xvY2FsL2NvbnN1bC5sb2NhbC5waGlsby5pbi8vaHR0cA==&amp;#34;:&amp;#34;&amp;#34;}&amp;#39; field.cattle.io/publicEndpoints: &amp;#39;[{&amp;#34;addresses&amp;#34;:[&amp;#34;10.10.0.31&amp;#34;],&amp;#34;port&amp;#34;:80,&amp;#34;protocol&amp;#34;:&amp;#34;HTTP&amp;#34;,&amp;#34;serviceName&amp;#34;:&amp;#34;local:consul&amp;#34;,&amp;#34;ingressName&amp;#34;:&amp;#34;local:consul&amp;#34;,&amp;#34;hostname&amp;#34;:&amp;#34;consul.local.philo.in&amp;#34;,&amp;#34;allNodes&amp;#34;:true}]&amp;#39; nginx.ingress.kubernetes.io/auth-realm: &amp;#39;&amp;#34;Authentication Required - admin&amp;#34;&amp;#39; nginx.ingress.kubernetes.io/auth-secret: httpauth nginx.ingress.kubernetes.io/auth-type: basic creationTimestamp: &amp;#34;2020-04-23T05:52:00Z&amp;#34; generation: 2 labels: cattle.io/creator: norman name: consul namespace: local resourceVersion: &amp;#34;1102762&amp;#34; selfLink: /apis/extensions/v1beta1/namespaces/local/ingresses/consul uid: a55e4299-2552-401b-91a8-a595fd3ff7e3 spec: rules: - host: consul.local.philo.in http: paths: - backend: serviceName: consul servicePort: http status: loadBalancer: ingress: - ip: 10.10.0.31 - ip: 10.10.0.32 - ip: 10.10.0.41 - ip:</description>
+    </item>
+    
+    <item>
+      <title>Lets Encrypt 申请免费SSL证书</title>
+      <link>/post/2020-04-08-lets_encrypt/</link>
+      <pubDate>Wed, 08 Apr 2020 21:48:00 +0000</pubDate>
+      
+      <guid>/post/2020-04-08-lets_encrypt/</guid>
+      <description>申请SSL docker run -it --rm -v /Users/vincentmi/cert:/etc/letsencrypt certbot/certbot certonly --manual --preferred-challenges dns 路径 SSL保存路径为 /Users/vincentmi/cert/live/philo.in NGINX 配置 server { listen 443 ssl http2; server_name *.dev.philo.in; ssl_certificate /Users/vincentmi/cert/live/philo.in/fullchain.pem; ssl_certificate_key /Users/vincentmi/cert/live/philo.in/privkey.pem; } 更新SSL docker run -it --rm -v /Users/vincentmi/cert:/etc/letsencrypt certbot/certbot renew</description>
+    </item>
+    
+    <item>
+      <title>Feign自定义配置</title>
+      <link>/post/2020-03-25-feign-customize/</link>
+      <pubDate>Wed, 25 Mar 2020 23:31:00 +0000</pubDate>
+      
+      <guid>/post/2020-03-25-feign-customize/</guid>
+      <description>背景 微服务重构,使用Spring全家桶.JSON数据传输为了兼容接口规范对Feign进行了定制 启用Feign 加入Feign的Spring starter依赖 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-openfeign&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; Applicaiton中加上注解 @SpringBootApplication @EnableFeignClients public class Application { public static void main(String[] args) { SpringApplication.run(Application.class); } } 定义一个和使用客户端 package com.tourscool.passport; import org.springframework.cloud.openfeign.FeignClient; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RequestMethod; import org.springframework.web.bind.annotation.RequestParam; @FeignClient(name=&amp;#34;authorize&amp;#34; ,url=&amp;#34;http://authorize.dev.philo.in/api/v1/&amp;#34;,configuration = FeignConfiguration.class) public interface AuthorizeClient {</description>
+    </item>
+    
+  </channel>
+</rss>

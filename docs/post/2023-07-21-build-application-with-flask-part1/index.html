@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="我的乐与怒">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//img/car2.jpg">
+    <meta property="twitter:image" content="//img/car2.jpg" />
+    
+
+    
+    <meta name="title" content="使用Flask开发应用程序(1) - 基础" />
+    <meta property="og:title" content="使用Flask开发应用程序(1) - 基础" />
+    <meta property="twitter:title" content="使用Flask开发应用程序(1) - 基础" />
+    
+
+    
+    <meta name="description" content="In code we trust">
+    <meta property="og:description" content="In code we trust" />
+    <meta property="twitter:description" content="In code we trust" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="我的乐与怒,vincent mi, miwenshu, 电商,  博客, 个人网站, 互联网, Web, 云原生, PaaS, Java, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>使用Flask开发应用程序(1) - 基础 | 我的乐与怒 | Vincent&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/2023-07-21-build-application-with-flask-part1/">
+
+    
+
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">我的乐与怒</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/about/">我</a></li>
+                    
+                        <li><a href="/archive/">归档</a></li>
+                    
+                        <li><a href="/search/">搜索</a></li>
+                    
+                        <li><a href="/codesketch/">CodeSketch</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/post-bg-python.png')
+    }
+    
+    .titleColor {
+        text-align: center;font-size:80px;
+        color: #FFFFFF;
+    }
+   
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/python" title="python">
+                            python
+                        </a>
+                        
+                        <a class="tag" href="/tags/flask" title="flask">
+                            flask
+                        </a>
+                        
+                    </div>
+                    <h1 class="titleColor">使用Flask开发应用程序(1) - 基础</h1>
+                    <h2 class="subheading titleColor"></h2>
+                    <span class="meta titleColor">
+                        
+                            Posted by 
+                            
+                                Vincent
+                             
+                            on 
+                            Friday, July 21, 2023
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <h1 id="安装flask">安装FLASK</h1>
+<p>先安装Pyhton，<a href="https://www.python.org/downloads/macos/">https://www.python.org/downloads/macos/</a></p>
+<p>FLASK支持 3.8+版本的python</p>
+<p>为啥不用Django ,由于目前前后端分离，Django的很多功能用不上，Flask更简单小巧一点。</p>
+<h2 id="配置虚拟环境">配置虚拟环境</h2>
+<p>使用虚拟环境可以将你的项目依赖和其他项目进行隔离，更好的进行依赖管理，使用venv工具来进行管理。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>mkdir qa-panel
+</span></span><span style="display:flex;"><span> <span style="color:#366">cd</span> qa-panel
+</span></span><span style="display:flex;"><span> python3 -m venv .venv
+</span></span></code></pre></div><h2 id="激活虚拟环境">激活虚拟环境</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>chmod a+x ./.venv/bin/activate
+</span></span><span style="display:flex;"><span> ./.venv/bin/activate
+</span></span></code></pre></div><h2 id="安装flask-1">安装flask</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>pip install Flask
+</span></span><span style="display:flex;"><span>Looking in indexes: https://pypi.tuna.tsinghua.edu.cn/simple
+</span></span><span style="display:flex;"><span>Requirement already satisfied: Flask in /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages <span style="color:#555">(</span>2.3.2<span style="color:#555">)</span>
+</span></span><span style="display:flex;"><span>....
+</span></span></code></pre></div><h1 id="目录结构">目录结构</h1>
+<p>Flask 项目可以只简单的包含一个文件：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">from</span> <span style="color:#0cf;font-weight:bold">flask</span> <span style="color:#069;font-weight:bold">import</span> Flask
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>app <span style="color:#555">=</span> Flask(__name__)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#99f">@app.route</span>(<span style="color:#c30">&#39;/&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">hello</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> <span style="color:#c30">&#39;Hello, World!&#39;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>flask --app hello run
+</span></span></code></pre></div><p>然后浏览器访问 <a href="http://127.0.0.1:5000">http://127.0.0.1:5000</a> 就可以看到你的第一个Flask应用程序了。</p>
+<p>随着项目的增大，我们不可能把代码都放到一个文件里。所以python使用package来对代码进行组织在需要的时候才进行导入。</p>
+<p>根据社区各位大佬的经验和建议，Flask应用推荐如下项目结构：</p>
+<ul>
+<li><code>flaskr</code> 目录，一个python的包，包含你的应用的代码和相关文件。</li>
+<li><code>tests</code> 目录，包含测试代码</li>
+<li><code>.venv</code> python 虚拟环境的目录，Flask和他的依赖安装到这里</li>
+<li><code>.git</code> GIT版本控制配置目录</li>
+<li>其他文件比如： .gitignore , README.md ，应用配置文件等项目相关文件</li>
+</ul>
+<p>最后目录大概如下：</p>
+<pre tabindex="0"><code>/home/user/Projects/qa-panel
+├── flaskr/
+│   ├── __init__.py
+│   ├── db.py
+│   ├── schema.sql
+│   ├── auth.py
+│   ├── blog.py
+│   ├── templates/
+│   │   ├── base.html
+│   │   ├── auth/
+│   │   │   ├── login.html
+│   │   │   └── register.html
+│   │   └── blog/
+│   │       ├── create.html
+│   │       ├── index.html
+│   │       └── update.html
+│   └── static/
+│       └── style.css
+├── tests/
+│   ├── conftest.py
+│   ├── data.sql
+│   ├── test_factory.py
+│   ├── test_db.py
+│   ├── test_auth.py
+│   └── test_blog.py
+├── .venv/
+├── pyproject.toml
+└── MANIFEST.in
+</code></pre><p>如果使用 git 进行代码管理，可以增加如下忽略文件配置：</p>
+<p>.gitignore</p>
+<pre tabindex="0"><code>.venv/
+
+*.pyc
+__pycache__/
+
+instance/
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+dist/
+build/
+*.egg-info/
+</code></pre><h1 id="应用配置">应用配置</h1>
+<p>Flask 应用就是一个 Flask 类的实例，应用的各种配置包含路由信息等都需要注册到该实例，因此这个对象是我们的核心，我们需要很容易的访问该对象，因此我们可以使用应用工厂来实现这个。通过在一个函数中完成我们需要对这个应用实例进行的各种配置，最后返回他。</p>
+<h2 id="创建我们的应用包">创建我们的应用包</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>mkdir flaskr 
+</span></span></code></pre></div><p>在包目录创建 <code>__init__.py</code>文件，编写工厂方法：</p>
+<p><code>flaskr/__init__.py</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">os</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">from</span> <span style="color:#0cf;font-weight:bold">flask</span> <span style="color:#069;font-weight:bold">import</span> Flask
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">create_app</span>(test_config<span style="color:#555">=</span><span style="color:#069;font-weight:bold">None</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#09f;font-style:italic"># 创建Flask对象，设置加载</span>
+</span></span><span style="display:flex;"><span>    app <span style="color:#555">=</span> Flask(__name__, instance_relative_config<span style="color:#555">=</span><span style="color:#069;font-weight:bold">True</span>)
+</span></span><span style="display:flex;"><span>    app<span style="color:#555">.</span>config<span style="color:#555">.</span>from_mapping(
+</span></span><span style="display:flex;"><span>        SECRET_KEY<span style="color:#555">=</span><span style="color:#c30">&#39;dev&#39;</span>,
+</span></span><span style="display:flex;"><span>        DATABASE<span style="color:#555">=</span>os<span style="color:#555">.</span>path<span style="color:#555">.</span>join(app<span style="color:#555">.</span>instance_path, <span style="color:#c30">&#39;flaskr.sqlite&#39;</span>),
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">if</span> test_config <span style="color:#000;font-weight:bold">is</span> <span style="color:#069;font-weight:bold">None</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#09f;font-style:italic"># 加载配置文件</span>
+</span></span><span style="display:flex;"><span>        app<span style="color:#555">.</span>config<span style="color:#555">.</span>from_pyfile(<span style="color:#c30">&#39;config.py&#39;</span>, silent<span style="color:#555">=</span><span style="color:#069;font-weight:bold">True</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#09f;font-style:italic"># 加载测试配置</span>
+</span></span><span style="display:flex;"><span>        app<span style="color:#555">.</span>config<span style="color:#555">.</span>from_mapping(test_config)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#09f;font-style:italic"># 创建必要的目录</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">try</span>:
+</span></span><span style="display:flex;"><span>        os<span style="color:#555">.</span>makedirs(app<span style="color:#555">.</span>instance_path)
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">except</span> <span style="color:#c00;font-weight:bold">OSError</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">pass</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#09f;font-style:italic"># 注册一个简单的路由</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#99f">@app.route</span>(<span style="color:#c30">&#39;/hello&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">hello</span>():
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">return</span> <span style="color:#c30">&#39;Hello, World!&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> app
+</span></span></code></pre></div><ul>
+<li>
+<p><code>app = Flask(__name__, instance_relative_config=True) </code>  创建Flask对象</p>
+</li>
+<li>
+<p><code>__name__</code> 是当前模块的名称，用于让App设置一些路径相关的内容</p>
+</li>
+<li>
+<p><code>instance_relative_config=True</code>  告诉应用从实例的相当路径加载配置文件，这样一些配置文件可以放置到外部，不用放入包中。也可以避免将配置文件放入到版本库中造成信息泄漏。</p>
+</li>
+<li>
+<p><code>app.config.from_mapping() </code> 设置一些默认配置</p>
+<ul>
+<li><code>SECRET_KEY</code> 用于加密的字符串 ，部署时需要更换成更安全的字符串，目前简单设置成<code>dev</code>.</li>
+<li><code>DATABASE</code> 使用sqlite 数据库，指定数据库文件的路径，通常正式点的项目我们会使用MySQL等数据库</li>
+</ul>
+</li>
+<li>
+<p><code>app.config.from_pyfile() </code> 从 <code>config.py</code>加载配置覆盖掉默认配置。</p>
+</li>
+<li>
+<p><code>os.makedirs()</code> 确保 <code>app.instance_path</code>文件夹存在， Flask 不会帮我们创建这个文件夹, 但是我们配置了SQLite 文件要存在这里，因此我们得自己创建目录。这一步并不是必须的，如果我们使用MySQL就没这个烦恼。这一步只是演示我们如果需要在应用中进行一些初始操作可以这样处理。</p>
+</li>
+<li>
+<p>@app.route() 创建了一个简单的路由 <code>/hello</code>，定义了一个函数返回了一些响应，这里是一个字符串   &lsquo;Hello, World!&rsquo;</p>
+</li>
+</ul>
+<h2 id="运行我们的程序">运行我们的程序</h2>
+<p>现在我们可以使用 <code>flask</code>命令来运行我们的应用。在终端进入我们项目的主目录执行以下命令：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>flask --app flaskr run --debug
+</span></span></code></pre></div><p>输出内容类似：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span> * Serving Flask app <span style="color:#c30">&#39;flaskr&#39;</span>
+</span></span><span style="display:flex;"><span> * Debug mode: on
+</span></span><span style="display:flex;"><span>WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+</span></span><span style="display:flex;"><span> * Running on http://127.0.0.1:5000
+</span></span><span style="display:flex;"><span>Press CTRL+C to quit
+</span></span><span style="display:flex;"><span> * Restarting with stat
+</span></span><span style="display:flex;"><span>flaskr
+</span></span><span style="display:flex;"><span> * Debugger is active!
+</span></span><span style="display:flex;"><span> * Debugger PIN: 354-025-273
+</span></span></code></pre></div><p>然后浏览器访问 <a href="http://127.0.0.1:5000">http://127.0.0.1:5000</a> 就可以看到你的大型Flask应用程序了。</p>
+<blockquote>
+<p>如果默认的 <code>5000</code> 端口被其他程序占用，会出现这个错误，<code>OSError: [Errno 98] or OSError: [WinError 10013]</code>
+此时你需要使用一些命令行的参数来修改运行的端口</p>
+</blockquote>
+<p>该命令还有一些有用的参数：</p>
+<ul>
+<li><code>--debug / --no-debug</code> 是否开启调试</li>
+<li><code> -p, --port INTEGER</code> 指定运行的端口号。</li>
+<li><code> -h, --host TEXT</code> 指定绑定网络接口，设置<code>0.0.0.0</code>是绑定到当前服务器的所有IP上。</li>
+</ul>
+<p>还有其他的 参数可以使用 <code>flask run --help</code>查看</p>
+<p>我们稍微修改下命令参数:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>flask --app flaskr  run -h 0.0.0.0 --debug   -p <span style="color:#f60">18622</span>
+</span></span></code></pre></div><p>输出内容如下：</p>
+<pre tabindex="0"><code>  * Serving Flask app &#39;flaskr&#39;
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:18622
+ * Running on http://10.12.4.55:18622
+Press CTRL+C to quit
+ * Restarting with stat
+flaskr
+ * Debugger is active!
+ * Debugger PIN: 354-025-273
+</code></pre><p>端口已经改变成我们设置的端口了。</p>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="/"><img src="/img/favicon.png" />我的乐与怒</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2023-07-21-build-application-with-flask-part2/" data-toggle="tooltip" data-placement="top" title="使用Flask开发应用程序（2）- 搭建博客网站"><i class="fa fa-angle-left fa-lg"></i>
+                            Previous</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2023-07-23-air-print-and-scan-with-raspberry-pi/" data-toggle="tooltip" data-placement="top" title="用树莓派实现局域网打印和扫描">Next
+                        <i class="fa fa-angle-right fa-lg"></i></a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">目录</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">标签</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/aframe" title="aframe">
+                            aframe
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/andrew-ng" title="andrew-ng">
+                            andrew-ng
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/arduino" title="arduino">
+                            arduino
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                            blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/cgi" title="cgi">
+                            cgi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/consul" title="consul">
+                            consul
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                            docker
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/eth" title="eth">
+                            eth
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ethereum" title="ethereum">
+                            ethereum
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/evm" title="evm">
+                            evm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/feign" title="feign">
+                            feign
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/flask" title="flask">
+                            flask
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                            golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/hw" title="hw">
+                            hw
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/jpa" title="jpa">
+                            jpa
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/js" title="js">
+                            js
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/k8s" title="k8s">
+                            k8s
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                            kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/linux" title="linux">
+                            linux
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mac" title="mac">
+                            mac
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/machine-learning" title="machine-learning">
+                            machine-learning
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/math" title="math">
+                            math
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mysql" title="mysql">
+                            mysql
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/nginx" title="nginx">
+                            nginx
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/op" title="op">
+                            op
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/opentcv" title="opentcv">
+                            opentcv
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ops" title="ops">
+                            ops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/poco" title="poco">
+                            poco
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/pptp" title="pptp">
+                            pptp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/python" title="python">
+                            python
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/rd" title="rd">
+                            rd
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/spring" title="spring">
+                            spring
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/springboot" title="springboot">
+                            springboot
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ssl" title="ssl">
+                            ssl
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/thymeleaf" title="thymeleaf">
+                            thymeleaf
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/type" title="type">
+                            type
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vagrant" title="vagrant">
+                            vagrant
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vpn" title="vpn">
+                            vpn
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/vue" title="vue">
+                            vue
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/webrtc" title="webrtc">
+                            webrtc
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/workflow" title="workflow">
+                            workflow
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0" title="技术文章">
+                            技术文章
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2" title="新浪博客">
+                            新浪博客
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%97%A0%E8%81%8A" title="无聊">
+                            无聊
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB" title="生活">
+                            生活
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95" title="生活记录">
+                            生活记录
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E8%82%A1%E7%A5%A8" title="股票">
+                            股票
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E8%BF%90%E7%BB%B4" title="运维">
+                            运维
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>链接</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/vegas">青鸟的翅膀</a></li>
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/yoshikilau">Caffeine Park</a></li>
+                        
+                        <li><a target="_blank" href="http://huxpro.github.io">Theme From Hux</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/vincentz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/img/icwt.jpg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/vincentmi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/5311815/vincent-mi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="我的乐与怒" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; 我的乐与怒 2024 | <a href="http://www.beian.miit.gov.cn" style="text-decoration: none;"> 蜀ICP备17040089号-2</a>
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https'){
+       bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else{
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+<script>
+    
+    var _baId = '2b745fdb2d90955bdfb8ad1194277073';
+
+    
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-78738242-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

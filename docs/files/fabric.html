@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>fabric</title>
+    </head>
+    <body style="background:#ffffff">
+        <canvas id="canvas" width="800" height="800" style="border:2px solid gray;width:100vh;height:800px"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/fabric"></script>
+<script>
+  const canvas = new fabric.Canvas('canvas');
+  
+  canvas.selectionColor = 'green';
+canvas.selectionBorderColor = 'red';
+canvas.selectionLineWidth = 5;
+
+  const rect = new fabric.Rect({
+    top: 100,
+    left: 100,
+    width: 60,
+    height: 70,
+    fill: 'red',
+  });
+  canvas.add(rect);
+  canvas.add(new fabric.Circle({
+    radius: 20, fill: 'green', left: 100, top: 100
+  }))
+</script>
+    </body>
+</html>

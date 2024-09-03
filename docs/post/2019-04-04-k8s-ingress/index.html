@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="我的乐与怒">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//img/car2.jpg">
+    <meta property="twitter:image" content="//img/car2.jpg" />
+    
+
+    
+    <meta name="title" content="搭建Kubernetes集群(2) - Ingress" />
+    <meta property="og:title" content="搭建Kubernetes集群(2) - Ingress" />
+    <meta property="twitter:title" content="搭建Kubernetes集群(2) - Ingress" />
+    
+
+    
+    <meta name="description" content="In code we trust">
+    <meta property="og:description" content="In code we trust" />
+    <meta property="twitter:description" content="In code we trust" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="我的乐与怒,vincent mi, miwenshu, 电商,  博客, 个人网站, 互联网, Web, 云原生, PaaS, Java, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>搭建Kubernetes集群(2) - Ingress | 我的乐与怒 | Vincent&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/2019-04-04-k8s-ingress/">
+
+    
+
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">我的乐与怒</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/about/">我</a></li>
+                    
+                        <li><a href="/archive/">归档</a></li>
+                    
+                        <li><a href="/search/">搜索</a></li>
+                    
+                        <li><a href="/codesketch/">CodeSketch</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/post-bg-engine.jpg')
+    }
+    
+    .titleColor {
+        text-align: center;font-size:80px;
+        color: #FFFFFF;
+    }
+   
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/kubernetes" title="kubernetes">
+                            kubernetes
+                        </a>
+                        
+                        <a class="tag" href="/tags/k8s" title="k8s">
+                            k8s
+                        </a>
+                        
+                        <a class="tag" href="/tags/ingress" title="ingress">
+                            ingress
+                        </a>
+                        
+                    </div>
+                    <h1 class="titleColor">搭建Kubernetes集群(2) - Ingress</h1>
+                    <h2 class="subheading titleColor"></h2>
+                    <span class="meta titleColor">
+                        
+                            Posted by 
+                            
+                                Vincent
+                             
+                            on 
+                            Thursday, April 4, 2019
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <h2 id="ingress">Ingress</h2>
+<p>Ingress允许你配置运行于K8S上的HTTP负载均衡器对服务进行负载均衡.
+Ingress支持以下功能</p>
+<ul>
+<li>基于内容的路由
+<ul>
+<li>基于主机名的路由</li>
+<li>基于路径的路由</li>
+</ul>
+</li>
+<li>支持TLS/SSL请求</li>
+</ul>
+<p><a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">查看官网对Ingress简介</a></p>
+<h2 id="ingress-控制器">Ingress 控制器</h2>
+<p>Ingress控制器是运行在集群中根据Ingress资源进行配置的HTTP负载均衡器应用.这个均衡器可以是运行在集群上的软件负载均衡也可以是运行在外部的硬件设备.不同的均衡器必须实现不同的Ingress控制器.</p>
+<p>对于Nginx而言,Ingress控制器和负载均衡运行于Pod中.</p>
+<h2 id="nginx-ingress控制器">Nginx Ingress控制器</h2>
+<p>Nginx Ingress控制器支持标准的Ingress功能,基于内容的内容和SSL.</p>
+<p>另外可以通过增加 annotation 和 ConfigMap 资源到Ingress资源来适应一些扩展功能.除HTTP外 NGINX Ingress控制器还支持 WebSocket , gRPC,TCP ,UDP 应用的负载均衡(<a href="https://github.com/nginxinc/kubernetes-ingress/blob/master/docs/configmap-and-annotations.md">点此查看详细文档</a>).查看文档了解支持的功能和定制的选项.</p>
+<h2 id="安装ingress-控制器">安装Ingress 控制器</h2>
+<h3 id="1创建namespace一个-sa-秘钥和定制的configmap">1.创建Namespace,一个 SA ,秘钥和定制的ConfigMap</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># ns-and-sa.yaml</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">apiVersion</span>:<span style="color:#bbb"> </span>v1<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">kind</span>:<span style="color:#bbb"> </span>Namespace<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">metadata</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>nginx-ingress <span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#0cf;font-weight:bold">---</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">apiVersion</span>:<span style="color:#bbb"> </span>v1<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">kind</span>:<span style="color:#bbb"> </span>ServiceAccount<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">metadata</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>nginx-ingress <span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">namespace</span>:<span style="color:#bbb"> </span>nginx-ingress<span style="color:#bbb">
+</span></span></span></code></pre></div><p><code>kubectl apply -f ns-and-sa.yaml</code>  创建一个命名空间和服务账户.</p>
+<p>创建一个秘钥</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#09f;font-style:italic">#default-server-secret.yaml</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">apiVersion</span>:<span style="color:#bbb"> </span>v1<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">kind</span>:<span style="color:#bbb"> </span>Secret<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">metadata</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>default-server-secret<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">namespace</span>:<span style="color:#bbb"> </span>nginx-ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">type</span>:<span style="color:#bbb"> </span>Opaque<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">data</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">tls.crt</span>:<span style="color:#bbb"> </span>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN2akNDQWFZQ0NRREFPRjl0THNhWFhEQU5CZ2txaGtpRzl3MEJBUXNGQURBaE1SOHdIUVlEVlFRRERCWk8KUjBsT1dFbHVaM0psYzNORGIyNTBjbTlzYkdWeU1CNFhEVEU0TURreE1qRTRNRE16TlZvWERUSXpNRGt4TVRFNApNRE16TlZvd0lURWZNQjBHQTFVRUF3d1dUa2RKVGxoSmJtZHlaWE56UTI5dWRISnZiR3hsY2pDQ0FTSXdEUVlKCktvWklodmNOQVFFQkJRQURnZ0VQQURDQ0FRb0NnZ0VCQUwvN2hIUEtFWGRMdjNyaUM3QlBrMTNpWkt5eTlyQ08KR2xZUXYyK2EzUDF0azIrS3YwVGF5aGRCbDRrcnNUcTZzZm8vWUk1Y2Vhbkw4WGM3U1pyQkVRYm9EN2REbWs1Qgo4eDZLS2xHWU5IWlg0Rm5UZ0VPaStlM2ptTFFxRlBSY1kzVnNPazFFeUZBL0JnWlJVbkNHZUtGeERSN0tQdGhyCmtqSXVuektURXUyaDU4Tlp0S21ScUJHdDEwcTNRYzhZT3ExM2FnbmovUWRjc0ZYYTJnMjB1K1lYZDdoZ3krZksKWk4vVUkxQUQ0YzZyM1lma1ZWUmVHd1lxQVp1WXN2V0RKbW1GNWRwdEMzN011cDBPRUxVTExSakZJOTZXNXIwSAo1TmdPc25NWFJNV1hYVlpiNWRxT3R0SmRtS3FhZ25TZ1JQQVpQN2MwQjFQU2FqYzZjNGZRVXpNQ0F3RUFBVEFOCkJna3Foa2lHOXcwQkFRc0ZBQU9DQVFFQWpLb2tRdGRPcEsrTzhibWVPc3lySmdJSXJycVFVY2ZOUitjb0hZVUoKdGhrYnhITFMzR3VBTWI5dm15VExPY2xxeC9aYzJPblEwMEJCLzlTb0swcitFZ1U2UlVrRWtWcitTTFA3NTdUWgozZWI4dmdPdEduMS9ienM3bzNBaS9kclkrcUI5Q2k1S3lPc3FHTG1US2xFaUtOYkcyR1ZyTWxjS0ZYQU80YTY3Cklnc1hzYktNbTQwV1U3cG9mcGltU1ZmaXFSdkV5YmN3N0NYODF6cFErUyt1eHRYK2VBZ3V0NHh3VlI5d2IyVXYKelhuZk9HbWhWNThDd1dIQnNKa0kxNXhaa2VUWXdSN0diaEFMSkZUUkk3dkhvQXprTWIzbjAxQjQyWjNrN3RXNQpJUDFmTlpIOFUvOWxiUHNoT21FRFZkdjF5ZytVRVJxbStGSis2R0oxeFJGcGZnPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">tls.key</span>:<span style="color:#bbb"> </span>LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcEFJQkFBS0NBUUVBdi91RWM4b1JkMHUvZXVJTHNFK1RYZUprckxMMnNJNGFWaEMvYjVyYy9XMlRiNHEvClJOcktGMEdYaVN1eE9ycXgrajlnamx4NXFjdnhkenRKbXNFUkJ1Z1B0ME9hVGtIekhvb3FVWmcwZGxmZ1dkT0EKUTZMNTdlT1l0Q29VOUZ4amRXdzZUVVRJVUQ4R0JsRlNjSVo0b1hFTkhzbysyR3VTTWk2Zk1wTVM3YUhudzFtMApxWkdvRWEzWFNyZEJ6eGc2clhkcUNlUDlCMXl3VmRyYURiUzc1aGQzdUdETDU4cGszOVFqVUFQaHpxdmRoK1JWClZGNGJCaW9CbTVpeTlZTW1hWVhsMm0wTGZzeTZuUTRRdFFzdEdNVWozcGJtdlFmazJBNnljeGRFeFpkZFZsdmwKMm82MjBsMllxcHFDZEtCRThCay90elFIVTlKcU56cHpoOUJUTXdJREFRQUJBb0lCQVFDZklHbXowOHhRVmorNwpLZnZJUXQwQ0YzR2MxNld6eDhVNml4MHg4Mm15d1kxUUNlL3BzWE9LZlRxT1h1SENyUlp5TnUvZ2IvUUQ4bUFOCmxOMjRZTWl0TWRJODg5TEZoTkp3QU5OODJDeTczckM5bzVvUDlkazAvYzRIbjAzSkVYNzZ5QjgzQm9rR1FvYksKMjhMNk0rdHUzUmFqNjd6Vmc2d2szaEhrU0pXSzBwV1YrSjdrUkRWYmhDYUZhNk5nMUZNRWxhTlozVDhhUUtyQgpDUDNDeEFTdjYxWTk5TEI4KzNXWVFIK3NYaTVGM01pYVNBZ1BkQUk3WEh1dXFET1lvMU5PL0JoSGt1aVg2QnRtCnorNTZud2pZMy8yUytSRmNBc3JMTnIwMDJZZi9oY0IraVlDNzVWYmcydVd6WTY3TWdOTGQ5VW9RU3BDRkYrVm4KM0cyUnhybnhBb0dCQU40U3M0ZVlPU2huMVpQQjdhTUZsY0k2RHR2S2ErTGZTTXFyY2pOZjJlSEpZNnhubmxKdgpGenpGL2RiVWVTbWxSekR0WkdlcXZXaHFISy9iTjIyeWJhOU1WMDlRQ0JFTk5jNmtWajJTVHpUWkJVbEx4QzYrCk93Z0wyZHhKendWelU0VC84ajdHalRUN05BZVpFS2FvRHFyRG5BYWkyaW5oZU1JVWZHRXFGKzJyQW9HQkFOMVAKK0tZL0lsS3RWRzRKSklQNzBjUis3RmpyeXJpY05iWCtQVzUvOXFHaWxnY2grZ3l4b25BWlBpd2NpeDN3QVpGdwpaZC96ZFB2aTBkWEppc1BSZjRMazg5b2pCUmpiRmRmc2l5UmJYbyt3TFU4NUhRU2NGMnN5aUFPaTVBRHdVU0FkCm45YWFweUNweEFkREtERHdObit3ZFhtaTZ0OHRpSFRkK3RoVDhkaVpBb0dCQUt6Wis1bG9OOTBtYlF4VVh5YUwKMjFSUm9tMGJjcndsTmVCaWNFSmlzaEhYa2xpSVVxZ3hSZklNM2hhUVRUcklKZENFaHFsV01aV0xPb2I2NTNyZgo3aFlMSXM1ZUtka3o0aFRVdnpldm9TMHVXcm9CV2xOVHlGanIrSWhKZnZUc0hpOGdsU3FkbXgySkJhZUFVWUNXCndNdlQ4NmNLclNyNkQrZG8wS05FZzFsL0FvR0FlMkFVdHVFbFNqLzBmRzgrV3hHc1RFV1JqclRNUzRSUjhRWXQKeXdjdFA4aDZxTGxKUTRCWGxQU05rMXZLTmtOUkxIb2pZT2pCQTViYjhibXNVU1BlV09NNENoaFJ4QnlHbmR2eAphYkJDRkFwY0IvbEg4d1R0alVZYlN5T294ZGt5OEp0ek90ajJhS0FiZHd6NlArWDZDODhjZmxYVFo5MWpYL3RMCjF3TmRKS2tDZ1lCbyt0UzB5TzJ2SWFmK2UwSkN5TGhzVDQ5cTN3Zis2QWVqWGx2WDJ1VnRYejN5QTZnbXo5aCsKcDNlK2JMRUxwb3B0WFhNdUFRR0xhUkcrYlNNcjR5dERYbE5ZSndUeThXczNKY3dlSTdqZVp2b0ZpbmNvVlVIMwphdmxoTUVCRGYxSjltSDB5cDBwWUNaS2ROdHNvZEZtQktzVEtQMjJhTmtsVVhCS3gyZzR6cFE9PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=<span style="color:#bbb">
+</span></span></span></code></pre></div><p>创建 <code>kubectl apply -f default-server-secret.yaml</code></p>
+<blockquote>
+<p>默认服务器对没有匹配到Ingress规则的请求返回一个 404 页面. 测试时我们
+使用了一个自签名的SSL证书.可以替换成正式的证书</p>
+</blockquote>
+<p>创建用于NGINX的配置</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># nginx-config.yaml</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">kind</span>:<span style="color:#bbb"> </span>ConfigMap<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">apiVersion</span>:<span style="color:#bbb"> </span>v1<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">metadata</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>nginx-config<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">namespace</span>:<span style="color:#bbb"> </span>nginx-ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">data</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">client-max-body-size</span>:<span style="color:#bbb"> </span><span style="color:#c30">&#34;8m&#34;</span><span style="color:#bbb">
+</span></span></span></code></pre></div><p>应用 <code>kubectl apply -f nginx-config.yaml</code>,<a href="https://github.com/nginxinc/kubernetes-ingress/blob/master/docs/configmap-and-annotations.md">看看更多选项
+</a></p>
+<h3 id="2配置rbac">2.配置RBAC</h3>
+<p>如果你的集群启用了RBAC.创建一个集群角色并绑定到上一步创建的服务账户.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#09f;font-style:italic">#rbac.yaml</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">kind</span>:<span style="color:#bbb"> </span>ClusterRole<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">apiVersion</span>:<span style="color:#bbb"> </span>rbac.authorization.k8s.io/v1beta1<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">metadata</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>nginx-ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">rules</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>- <span style="color:#309;font-weight:bold">apiGroups</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- <span style="color:#c30">&#34;&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">resources</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- services<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- endpoints<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">verbs</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- get<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- list<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- watch<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>- <span style="color:#309;font-weight:bold">apiGroups</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- <span style="color:#c30">&#34;&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">resources</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- secrets<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">verbs</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- get<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- list<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- watch<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>- <span style="color:#309;font-weight:bold">apiGroups</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- <span style="color:#c30">&#34;&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">resources</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- configmaps<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">verbs</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- get<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- list<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- watch<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- update<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- create<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>- <span style="color:#309;font-weight:bold">apiGroups</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- <span style="color:#c30">&#34;&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">resources</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- pods<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">verbs</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- list<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>- <span style="color:#309;font-weight:bold">apiGroups</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- <span style="color:#c30">&#34;&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">resources</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- events<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">verbs</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- create<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- patch<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>- <span style="color:#309;font-weight:bold">apiGroups</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- extensions<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">resources</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- ingresses<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">verbs</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- list<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- watch<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- get<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>- <span style="color:#309;font-weight:bold">apiGroups</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- <span style="color:#c30">&#34;extensions&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">resources</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- ingresses/status<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">verbs</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- update<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#0cf;font-weight:bold">---</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">kind</span>:<span style="color:#bbb"> </span>ClusterRoleBinding<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">apiVersion</span>:<span style="color:#bbb"> </span>rbac.authorization.k8s.io/v1beta1<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">metadata</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>nginx-ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">subjects</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>- <span style="color:#309;font-weight:bold">kind</span>:<span style="color:#bbb"> </span>ServiceAccount<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>nginx-ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">namespace</span>:<span style="color:#bbb"> </span>nginx-ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">roleRef</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">kind</span>:<span style="color:#bbb"> </span>ClusterRole<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>nginx-ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">apiGroup</span>:<span style="color:#bbb"> </span>rbac.authorization.k8s.io<span style="color:#bbb">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl apply -f rbac.yaml
+</span></span></code></pre></div><blockquote>
+<p>执行以上步骤你需要是管理员账户</p>
+</blockquote>
+<h3 id="3部署ingress控制器">3.部署Ingress控制器</h3>
+<p>我们有两种方式来部署Ingress控制器.</p>
+<ul>
+<li>Deployment.如果你希望动态改变Ingress控制器的实例数量,选用该模式</li>
+<li>DaementSet.该模式在每个节点和子节部署Ingress控制器</li>
+</ul>
+<h4 id="创建deployment">创建Deployment</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#09f;font-style:italic">#nginx-ingress.yaml</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">apiVersion</span>:<span style="color:#bbb"> </span>extensions/v1beta1<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">kind</span>:<span style="color:#bbb"> </span>Deployment<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">metadata</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>nginx-ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">namespace</span>:<span style="color:#bbb"> </span>nginx-ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">spec</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">replicas</span>:<span style="color:#bbb"> </span><span style="color:#f60">1</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">selector</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">matchLabels</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#309;font-weight:bold">app</span>:<span style="color:#bbb"> </span>nginx-ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">template</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">metadata</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#309;font-weight:bold">labels</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#309;font-weight:bold">app</span>:<span style="color:#bbb"> </span>nginx-ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">     </span><span style="color:#09f;font-style:italic">#annotations:</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">       </span><span style="color:#09f;font-style:italic">#prometheus.io/scrape: &#34;true&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">       </span><span style="color:#09f;font-style:italic">#prometheus.io/port: &#34;9113&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">spec</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#309;font-weight:bold">serviceAccountName</span>:<span style="color:#bbb"> </span>nginx-ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#309;font-weight:bold">containers</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- <span style="color:#309;font-weight:bold">image</span>:<span style="color:#bbb"> </span>nginx/nginx-ingress:edge<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#309;font-weight:bold">imagePullPolicy</span>:<span style="color:#bbb"> </span>Always<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>nginx-ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#309;font-weight:bold">ports</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>- <span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>http<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span><span style="color:#309;font-weight:bold">containerPort</span>:<span style="color:#bbb"> </span><span style="color:#f60">80</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>- <span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>https<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span><span style="color:#309;font-weight:bold">containerPort</span>:<span style="color:#bbb"> </span><span style="color:#f60">443</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">       </span><span style="color:#09f;font-style:italic">#- name: prometheus</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">         </span><span style="color:#09f;font-style:italic">#containerPort: 9113</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#309;font-weight:bold">env</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>- <span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>POD_NAMESPACE<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span><span style="color:#309;font-weight:bold">valueFrom</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span><span style="color:#309;font-weight:bold">fieldRef</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">              </span><span style="color:#309;font-weight:bold">fieldPath</span>:<span style="color:#bbb"> </span>metadata.namespace<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>- <span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>POD_NAME<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span><span style="color:#309;font-weight:bold">valueFrom</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span><span style="color:#309;font-weight:bold">fieldRef</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">              </span><span style="color:#309;font-weight:bold">fieldPath</span>:<span style="color:#bbb"> </span>metadata.name<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#309;font-weight:bold">args</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span>- -nginx-configmaps=$(POD_NAMESPACE)/nginx-config<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span>- -default-server-tls-secret=$(POD_NAMESPACE)/default-server-secret<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">         </span><span style="color:#09f;font-style:italic">#- -v=3 # Enables extensive logging. Useful for troubleshooting.</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">         </span><span style="color:#09f;font-style:italic">#- -report-ingress-status</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">         </span><span style="color:#09f;font-style:italic">#- -external-service=nginx-ingress</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">         </span><span style="color:#09f;font-style:italic">#- -enable-leader-election</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">         </span><span style="color:#09f;font-style:italic">#- -enable-prometheus-metrics</span><span style="color:#bbb">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl apply -f nginx-ingress.yaml
+</span></span></code></pre></div><p>执行后K8S 将会创建一个Ingress 控制器的POD.</p>
+<h4 id="创建daemonset">创建DaemonSet</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#09f;font-style:italic">#nginx-ingress.yaml</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">apiVersion</span>:<span style="color:#bbb"> </span>extensions/v1beta1<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">kind</span>:<span style="color:#bbb"> </span>DaemonSet<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">metadata</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>nginx-ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">namespace</span>:<span style="color:#bbb"> </span>nginx-ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">spec</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">selector</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">matchLabels</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#309;font-weight:bold">app</span>:<span style="color:#bbb"> </span>nginx-ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">template</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">metadata</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#309;font-weight:bold">labels</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#309;font-weight:bold">app</span>:<span style="color:#bbb"> </span>nginx-ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">     </span><span style="color:#09f;font-style:italic">#annotations:</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">       </span><span style="color:#09f;font-style:italic">#prometheus.io/scrape: &#34;true&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">       </span><span style="color:#09f;font-style:italic">#prometheus.io/port: &#34;9113&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">spec</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#309;font-weight:bold">serviceAccountName</span>:<span style="color:#bbb"> </span>nginx-ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#309;font-weight:bold">containers</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- <span style="color:#309;font-weight:bold">image</span>:<span style="color:#bbb"> </span>nginx/nginx-ingress:edge<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#309;font-weight:bold">imagePullPolicy</span>:<span style="color:#bbb"> </span>Always<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>nginx-ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#309;font-weight:bold">ports</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>- <span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>http<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span><span style="color:#309;font-weight:bold">containerPort</span>:<span style="color:#bbb"> </span><span style="color:#f60">80</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span><span style="color:#309;font-weight:bold">hostPort</span>:<span style="color:#bbb"> </span><span style="color:#f60">80</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>- <span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>https<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span><span style="color:#309;font-weight:bold">containerPort</span>:<span style="color:#bbb"> </span><span style="color:#f60">443</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span><span style="color:#309;font-weight:bold">hostPort</span>:<span style="color:#bbb"> </span><span style="color:#f60">443</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">       </span><span style="color:#09f;font-style:italic">#- name: prometheus</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">         </span><span style="color:#09f;font-style:italic">#containerPort: 9113</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#309;font-weight:bold">env</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>- <span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>POD_NAMESPACE<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span><span style="color:#309;font-weight:bold">valueFrom</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span><span style="color:#309;font-weight:bold">fieldRef</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">              </span><span style="color:#309;font-weight:bold">fieldPath</span>:<span style="color:#bbb"> </span>metadata.namespace<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>- <span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>POD_NAME<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span><span style="color:#309;font-weight:bold">valueFrom</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span><span style="color:#309;font-weight:bold">fieldRef</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">              </span><span style="color:#309;font-weight:bold">fieldPath</span>:<span style="color:#bbb"> </span>metadata.name<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#309;font-weight:bold">args</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span>- -nginx-configmaps=$(POD_NAMESPACE)/nginx-config<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span>- -default-server-tls-secret=$(POD_NAMESPACE)/default-server-secret<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">         </span><span style="color:#09f;font-style:italic">#- -v=3 # Enables extensive logging. Useful for troubleshooting.</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">         </span><span style="color:#09f;font-style:italic">#- -report-ingress-status</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">         </span><span style="color:#09f;font-style:italic">#- -external-service=nginx-ingress</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">         </span><span style="color:#09f;font-style:italic">#- -enable-leader-election</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">         </span><span style="color:#09f;font-style:italic">#- -enable-prometheus-metrics</span><span style="color:#bbb">
+</span></span></span></code></pre></div><p>执行</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl apply -f daemon-set/nginx-ingress.yaml
+</span></span></code></pre></div><p>K8S会在集群的每个节点创建POD.<a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">查看K8S的相关说明</a>.</p>
+<p><code>kubectl get pods --namespace=nginx-ingress</code> 可以看到每个节点都运行了一个POD .</p>
+<h3 id="4-访问ingress-controller">4 访问Ingress Controller</h3>
+<p><strong>DaemonSet</strong> 模式部署,在每个节点都会部署一个Ingress控制器.所以你可以访问任意一个节点的443和80端口.目前会得到一个404页面.</p>
+<p><strong>Deployment</strong>模式可以通过暴露NodePort的方式来进行访问.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#09f;font-style:italic">#nodeport.yaml</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">apiVersion</span>:<span style="color:#bbb"> </span>v1<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">kind</span>:<span style="color:#bbb"> </span>Service<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">metadata</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>nginx-ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">namespace</span>:<span style="color:#bbb"> </span>nginx-ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">spec</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">type</span>:<span style="color:#bbb"> </span>NodePort <span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">ports</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- <span style="color:#309;font-weight:bold">port</span>:<span style="color:#bbb"> </span><span style="color:#f60">80</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">targetPort</span>:<span style="color:#bbb"> </span><span style="color:#f60">80</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">protocol</span>:<span style="color:#bbb"> </span>TCP<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>http<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- <span style="color:#309;font-weight:bold">port</span>:<span style="color:#bbb"> </span><span style="color:#f60">443</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">targetPort</span>:<span style="color:#bbb"> </span><span style="color:#f60">443</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">protocol</span>:<span style="color:#bbb"> </span>TCP<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>https<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">selector</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">app</span>:<span style="color:#bbb"> </span>nginx-ingress<span style="color:#bbb">
+</span></span></span></code></pre></div><p>创建一个NodePort类型的服务</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span> kubectl create -f nodeport.yaml
+</span></span></code></pre></div><p>也可以使用负载均衡服务,参考<a href="https://github.com/nginxinc/kubernetes-ingress/blob/master/docs/installation.md#42-service-with-the-type-loadbalancer">这里</a>.</p>
+<h3 id="5-访问试试监控面板-stub_status页面">5 访问试试监控面板 Stub_status页面</h3>
+<ul>
+<li>Stub_status 默认是开启的.确定<code>nginx-status</code>不要设置<code>false</code>.</li>
+<li>Stub_status 默认使用8080端口.可以使用 <code>nginx-status-port</code>参数设置.如果你不是8080,在下面的参数下修改.</li>
+<li>用kubectl port-forward 功能来访问.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl port-forward &lt;nginx-ingress-pod&gt; 8080:8080 --namespace<span style="color:#555">=</span>nginx-ingress
+</span></span></code></pre></div><h3 id="6-prometheus-监控支持">6 Prometheus 监控支持</h3>
+<p>你可以使用Promethus收集NGINX的指标.</p>
+<ul>
+<li>运行Ingress控制器时,加上 <code>-enable-prometheus-metrics</code> <a href="https://github.com/nginxinc/kubernetes-ingress/blob/master/docs/cli-arguments.md">命令行参数</a>. 这样NGINX将会再通过路径 <code>9113</code> 端口 在<code>/metrics</code>路径暴露Prometheus格式的指标参数.你也可以用个<code>-prometheus-metrics-listen-port</code>修改端口号.</li>
+<li>添加Prometheus端口到Ingress控制器的容器.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>prometheus<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">containerPort</span>:<span style="color:#bbb"> </span><span style="color:#f60">9113</span><span style="color:#bbb">
+</span></span></span></code></pre></div><ul>
+<li>增加注解到POD模板,让Promethus发现POD</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#309;font-weight:bold">annotations</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">prometheus.io/scrape</span>:<span style="color:#bbb"> </span><span style="color:#c30">&#34;true&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">prometheus.io/port</span>:<span style="color:#bbb"> </span><span style="color:#f60">9113</span><span style="color:#bbb">
+</span></span></span></code></pre></div><h3 id="7-卸载">7 卸载</h3>
+<p>直接删除命名空间即可</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>kubectl delete namespace nginx-ingress
+</span></span></code></pre></div><h2 id="部署和配置应用程序的负载均衡">部署和配置应用程序的负载均衡</h2>
+<h3 id="1-创建development和service">1 .创建development和Service</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#309;font-weight:bold">apiVersion</span>:<span style="color:#bbb"> </span>extensions/v1beta1<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">kind</span>:<span style="color:#bbb"> </span>Deployment<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">metadata</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>echo<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">spec</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">replicas</span>:<span style="color:#bbb"> </span><span style="color:#f60">2</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">selector</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">matchLabels</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#309;font-weight:bold">app</span>:<span style="color:#bbb"> </span>echo<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">template</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">metadata</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#309;font-weight:bold">labels</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#309;font-weight:bold">app</span>:<span style="color:#bbb"> </span>echo<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">spec</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#309;font-weight:bold">containers</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- <span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>echo<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#309;font-weight:bold">image</span>:<span style="color:#bbb"> </span>vincentmi/ng<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#309;font-weight:bold">ports</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>- <span style="color:#309;font-weight:bold">containerPort</span>:<span style="color:#bbb"> </span><span style="color:#f60">80</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#0cf;font-weight:bold">---</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">apiVersion</span>:<span style="color:#bbb"> </span>v1<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">kind</span>:<span style="color:#bbb"> </span>Service<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">metadata</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>echo-svc<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">spec</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">ports</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- <span style="color:#309;font-weight:bold">port</span>:<span style="color:#bbb"> </span><span style="color:#f60">80</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">targetPort</span>:<span style="color:#bbb"> </span><span style="color:#f60">80</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">protocol</span>:<span style="color:#bbb"> </span>TCP<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>http<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">selector</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">app</span>:<span style="color:#bbb"> </span>echo<span style="color:#bbb">
+</span></span></span></code></pre></div><h3 id="2建立ingress资源">2.建立Ingress资源</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#309;font-weight:bold">apiVersion</span>:<span style="color:#bbb"> </span>extensions/v1beta1<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">kind</span>:<span style="color:#bbb"> </span>Ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">metadata</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>echo-ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">spec</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">rules</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- <span style="color:#309;font-weight:bold">host</span>:<span style="color:#bbb"> </span>echo.local.vnzmi.com<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">http</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#309;font-weight:bold">paths</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- <span style="color:#309;font-weight:bold">backend</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span><span style="color:#309;font-weight:bold">serviceName</span>:<span style="color:#bbb"> </span>echo-svc<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span><span style="color:#309;font-weight:bold">servicePort</span>:<span style="color:#bbb"> </span><span style="color:#f60">80</span><span style="color:#bbb">
+</span></span></span></code></pre></div><p>修改HOST 之后进行访问即可看到页面了.</p>
+<p>
+  <img src="/img/in-post/ingress.png" alt="/img/in-post/ingress.png">
+
+</p>
+<h1 id="应用部署模板">应用部署模板</h1>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#0cf;font-weight:bold">---</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#09f;font-style:italic"># developement</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">apiVersion</span>:<span style="color:#bbb"> </span>apps/v1beta1<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">kind</span>:<span style="color:#bbb"> </span>Deployment<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">metadata</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>philo-screening-svc<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">spec</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">replicas</span>:<span style="color:#bbb"> </span><span style="color:#f60">2</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">template</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">metadata</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#309;font-weight:bold">labels</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#309;font-weight:bold">app</span>:<span style="color:#bbb"> </span>philo-screening-svc<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#309;font-weight:bold">domain</span>:<span style="color:#bbb"> </span>com.philo.office.screening<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">spec</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#309;font-weight:bold">containers</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>- <span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>philo-screening-svc<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span><span style="color:#309;font-weight:bold">image</span>:<span style="color:#bbb"> </span>vincentmi/screening<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span><span style="color:#309;font-weight:bold">ports</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>- <span style="color:#309;font-weight:bold">containerPort</span>:<span style="color:#bbb"> </span><span style="color:#f60">80</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#0cf;font-weight:bold">---</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">kind</span>:<span style="color:#bbb"> </span>Service<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">apiVersion</span>:<span style="color:#bbb"> </span>v1<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">metadata</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">labels</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">app</span>:<span style="color:#bbb"> </span>philo-screening-svc<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">domain</span>:<span style="color:#bbb"> </span>com.philo.office.screening<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>philo-screening-svc<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">namespace</span>:<span style="color:#bbb"> </span>default<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">spec</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">ports</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>- <span style="color:#309;font-weight:bold">port</span>:<span style="color:#bbb"> </span><span style="color:#f60">80</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#309;font-weight:bold">targetPort</span>:<span style="color:#bbb"> </span><span style="color:#f60">80</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>http<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">selector</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#309;font-weight:bold">app</span>:<span style="color:#bbb"> </span>philo-screening-svc<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#0cf;font-weight:bold">---</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#09f;font-style:italic">#--- ingress</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">apiVersion</span>:<span style="color:#bbb"> </span>extensions/v1beta1<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">kind</span>:<span style="color:#bbb"> </span>Ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">metadata</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">name</span>:<span style="color:#bbb"> </span>philo-screening-svc-ingress<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#309;font-weight:bold">spec</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#309;font-weight:bold">rules</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>- <span style="color:#309;font-weight:bold">host</span>:<span style="color:#bbb"> </span>screening.philowork.com<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#309;font-weight:bold">http</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#309;font-weight:bold">paths</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span>- <span style="color:#309;font-weight:bold">backend</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">              </span><span style="color:#309;font-weight:bold">serviceName</span>:<span style="color:#bbb"> </span>philo-screening-svc<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">              </span><span style="color:#309;font-weight:bold">servicePort</span>:<span style="color:#bbb"> </span><span style="color:#f60">80</span><span style="color:#bbb">
+</span></span></span></code></pre></div>
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="/"><img src="/img/favicon.png" />我的乐与怒</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2019-03-23-install-kubernetes/" data-toggle="tooltip" data-placement="top" title="搭建Kubernetes集群(1) - 安装集群"><i class="fa fa-angle-left fa-lg"></i>
+                            Previous</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2019-04-10-k8s-prometheus/" data-toggle="tooltip" data-placement="top" title="安装Kubernetes集群(3) - Prometheus">Next
+                        <i class="fa fa-angle-right fa-lg"></i></a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">目录</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">标签</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/aframe" title="aframe">
+                            aframe
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/andrew-ng" title="andrew-ng">
+                            andrew-ng
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/arduino" title="arduino">
+                            arduino
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                            blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/cgi" title="cgi">
+                            cgi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/consul" title="consul">
+                            consul
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                            docker
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/eth" title="eth">
+                            eth
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ethereum" title="ethereum">
+                            ethereum
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/evm" title="evm">
+                            evm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/feign" title="feign">
+                            feign
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/flask" title="flask">
+                            flask
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                            golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/hw" title="hw">
+                            hw
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/jpa" title="jpa">
+                            jpa
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/js" title="js">
+                            js
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/k8s" title="k8s">
+                            k8s
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                            kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/linux" title="linux">
+                            linux
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mac" title="mac">
+                            mac
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/machine-learning" title="machine-learning">
+                            machine-learning
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/math" title="math">
+                            math
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mysql" title="mysql">
+                            mysql
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/nginx" title="nginx">
+                            nginx
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/op" title="op">
+                            op
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/opentcv" title="opentcv">
+                            opentcv
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ops" title="ops">
+                            ops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/poco" title="poco">
+                            poco
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/pptp" title="pptp">
+                            pptp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/python" title="python">
+                            python
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/rd" title="rd">
+                            rd
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/spring" title="spring">
+                            spring
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/springboot" title="springboot">
+                            springboot
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ssl" title="ssl">
+                            ssl
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/thymeleaf" title="thymeleaf">
+                            thymeleaf
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/type" title="type">
+                            type
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vagrant" title="vagrant">
+                            vagrant
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vpn" title="vpn">
+                            vpn
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/vue" title="vue">
+                            vue
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/webrtc" title="webrtc">
+                            webrtc
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/workflow" title="workflow">
+                            workflow
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0" title="技术文章">
+                            技术文章
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2" title="新浪博客">
+                            新浪博客
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%97%A0%E8%81%8A" title="无聊">
+                            无聊
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB" title="生活">
+                            生活
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95" title="生活记录">
+                            生活记录
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E8%82%A1%E7%A5%A8" title="股票">
+                            股票
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E8%BF%90%E7%BB%B4" title="运维">
+                            运维
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>链接</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/vegas">青鸟的翅膀</a></li>
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/yoshikilau">Caffeine Park</a></li>
+                        
+                        <li><a target="_blank" href="http://huxpro.github.io">Theme From Hux</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/vincentz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/img/icwt.jpg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/vincentmi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/5311815/vincent-mi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="我的乐与怒" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; 我的乐与怒 2024 | <a href="http://www.beian.miit.gov.cn" style="text-decoration: none;"> 蜀ICP备17040089号-2</a>
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https'){
+       bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else{
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+<script>
+    
+    var _baId = '2b745fdb2d90955bdfb8ad1194277073';
+
+    
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-78738242-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="我的乐与怒">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//img/car2.jpg">
+    <meta property="twitter:image" content="//img/car2.jpg" />
+    
+
+    
+    <meta name="title" content="使用Flask开发应用程序（3）- 测试和部署" />
+    <meta property="og:title" content="使用Flask开发应用程序（3）- 测试和部署" />
+    <meta property="twitter:title" content="使用Flask开发应用程序（3）- 测试和部署" />
+    
+
+    
+    <meta name="description" content="In code we trust">
+    <meta property="og:description" content="In code we trust" />
+    <meta property="twitter:description" content="In code we trust" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="我的乐与怒,vincent mi, miwenshu, 电商,  博客, 个人网站, 互联网, Web, 云原生, PaaS, Java, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>使用Flask开发应用程序（3）- 测试和部署 | 我的乐与怒 | Vincent&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/2023-07-21-build-application-with-flask-part3/">
+
+    
+
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">我的乐与怒</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/about/">我</a></li>
+                    
+                        <li><a href="/archive/">归档</a></li>
+                    
+                        <li><a href="/search/">搜索</a></li>
+                    
+                        <li><a href="/codesketch/">CodeSketch</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/post-bg-python.png')
+    }
+    
+    .titleColor {
+        text-align: center;font-size:80px;
+        color: #FFFFFF;
+    }
+   
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/python" title="python">
+                            python
+                        </a>
+                        
+                        <a class="tag" href="/tags/flask" title="flask">
+                            flask
+                        </a>
+                        
+                    </div>
+                    <h1 class="titleColor">使用Flask开发应用程序（3）- 测试和部署</h1>
+                    <h2 class="subheading titleColor"></h2>
+                    <span class="meta titleColor">
+                        
+                            Posted by 
+                            
+                                Vincent
+                             
+                            on 
+                            Friday, July 21, 2023
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <h1 id="让应用可安装">让应用可安装</h1>
+<p>让应用可安装可以让我们很方便的在不同环境快速部署我们的应用，让应用能像Flask一样进行安装和测试</p>
+<h2 id="pyprojecttoml-项目描述文件">pyproject.toml 项目描述文件</h2>
+<p><code>pyproject.toml </code> 用于描述项目如果运行和安装</p>
+<p><code>pyproject.toml</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[project]
+</span></span><span style="display:flex;"><span>name = <span style="color:#c30">&#34;flaskr&#34;</span>
+</span></span><span style="display:flex;"><span>version = <span style="color:#c30">&#34;1.0.0&#34;</span>
+</span></span><span style="display:flex;"><span>description = <span style="color:#c30">&#34;简单的博客系统&#34;</span>
+</span></span><span style="display:flex;"><span>dependencies = [
+</span></span><span style="display:flex;"><span>    <span style="color:#c30">&#34;flask&#34;</span>,
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[build-system]
+</span></span><span style="display:flex;"><span>requires = [<span style="color:#c30">&#34;flit_core&lt;4&#34;</span>]
+</span></span><span style="display:flex;"><span>build-backend = <span style="color:#c30">&#34;flit_core.buildapi&#34;</span>
+</span></span></code></pre></div><p><a href="https://packaging.python.org/en/latest/tutorials/packaging-projects/#creating-the-package-files">查看pyproject.toml详细说明</a></p>
+<h2 id="安装测试">安装测试</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>pip install -e .
+</span></span></code></pre></div><p>使用该命令会在当前目录查询 <code>pyproject.toml</code>并将应用安装为可编辑的项目。我们可以对项目进行修改。但是我们可以在任何地方使用 <code>flask --app flask run </code> 而不用一定要到该目录才能执行。我们的修改也会影响到所有运行的应用。你可以使用 <code>pip list</code> 列出所有已经安装的应用。</p>
+<h1 id="单元测试">单元测试</h1>
+<p>我们将使用 <code>pytest</code>和<code>coverage</code>进行单元测试和测试覆盖计算。通过pip进行安装</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>pip install pytest coverage
+</span></span></code></pre></div><h2 id="测试准备">测试准备</h2>
+<p>测试代码放在项目根目录的 <code>tests</code>文件夹。<code>tests/conftest.py</code> 包含测试的配置函数。所有测试都以 <code>test_</code> 作为模块的前缀。每个测试都需要初始数据。初始数据通过SQL来进行初始化。</p>
+<p><code>tests/data.sql</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">INTO</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">user</span><span style="color:#bbb"> </span>(username,<span style="color:#bbb"> </span>password)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#069;font-weight:bold">VALUES</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>(<span style="color:#c30">&#39;test&#39;</span>,<span style="color:#bbb"> </span><span style="color:#c30">&#39;pbkdf2:sha256:50000$TCI4GzcX$0de171a4f4dac32e3364c7ddc7c14f3e2fa61f2d17574483f7ffbb431b4acb2f&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>(<span style="color:#c30">&#39;other&#39;</span>,<span style="color:#bbb"> </span><span style="color:#c30">&#39;pbkdf2:sha256:50000$kJPKsz6N$d2d4784f1b030a9761f5ccaeeaca413f27f2ecb76d6168407af962ddce849f79&#39;</span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#069;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">INTO</span><span style="color:#bbb"> </span>post<span style="color:#bbb"> </span>(title,<span style="color:#bbb"> </span>body,<span style="color:#bbb"> </span>author_id,<span style="color:#bbb"> </span>created)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#069;font-weight:bold">VALUES</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>(<span style="color:#c30">&#39;test title&#39;</span>,<span style="color:#bbb"> </span><span style="color:#c30">&#39;test&#39;</span><span style="color:#bbb"> </span><span style="color:#555">||</span><span style="color:#bbb"> </span>x<span style="color:#c30">&#39;0a&#39;</span><span style="color:#bbb"> </span><span style="color:#555">||</span><span style="color:#bbb"> </span><span style="color:#c30">&#39;body&#39;</span>,<span style="color:#bbb"> </span><span style="color:#f60">1</span>,<span style="color:#bbb"> </span><span style="color:#c30">&#39;2018-01-01 00:00:00&#39;</span>);<span style="color:#bbb">
+</span></span></span></code></pre></div><p><code>tests/conftest.py</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">os</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">tempfile</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">pytest</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">from</span> <span style="color:#0cf;font-weight:bold">flaskr</span> <span style="color:#069;font-weight:bold">import</span> create_app
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">from</span> <span style="color:#0cf;font-weight:bold">flaskr.db</span> <span style="color:#069;font-weight:bold">import</span> get_db, init_db
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">#打开初始化数据文件读取到变量</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">with</span> <span style="color:#366">open</span>(os<span style="color:#555">.</span>path<span style="color:#555">.</span>join(os<span style="color:#555">.</span>path<span style="color:#555">.</span>dirname(__file__), <span style="color:#c30">&#39;data.sql&#39;</span>), <span style="color:#c30">&#39;rb&#39;</span>) <span style="color:#069;font-weight:bold">as</span> f:
+</span></span><span style="display:flex;"><span>    _data_sql <span style="color:#555">=</span> f<span style="color:#555">.</span>read()<span style="color:#555">.</span>decode(<span style="color:#c30">&#39;utf8&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">#初始化APP对象</span>
+</span></span><span style="display:flex;"><span><span style="color:#99f">@pytest.fixture</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">app</span>():
+</span></span><span style="display:flex;"><span>    db_fd, db_path <span style="color:#555">=</span> tempfile<span style="color:#555">.</span>mkstemp()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    app <span style="color:#555">=</span> create_app({
+</span></span><span style="display:flex;"><span>        <span style="color:#c30">&#39;TESTING&#39;</span>: <span style="color:#069;font-weight:bold">True</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#c30">&#39;DATABASE&#39;</span>: db_path,
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">with</span> app<span style="color:#555">.</span>app_context():
+</span></span><span style="display:flex;"><span>        init_db()
+</span></span><span style="display:flex;"><span>        get_db()<span style="color:#555">.</span>executescript(_data_sql)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">yield</span> app
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    os<span style="color:#555">.</span>close(db_fd)
+</span></span><span style="display:flex;"><span>    os<span style="color:#555">.</span>unlink(db_path)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#99f">@pytest.fixture</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">client</span>(app):
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> app<span style="color:#555">.</span>test_client()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#99f">@pytest.fixture</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">runner</span>(app):
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> app<span style="color:#555">.</span>test_cli_runner()
+</span></span></code></pre></div><ul>
+<li>
+<p><code>db_fd, db_path = tempfile.mkstemp()</code> 创建一个临时文件，返回文件资源描述符和路径。用这个文件来存放测试的数据。<code>os.unlink(db_path)</code> 测试运行完后该文件被删除了。保证每次测试都是干净的数据。</p>
+</li>
+<li>
+<p><code>TESTING</code> 配置 Flask 当前应用是在测试模式. Flask 会针对测试进行内部行为的修改。其他扩展也使用该标识来修改自己的行为。</p>
+</li>
+</ul>
+<p><code>app.test_client()</code>使用应用对象创建一个测试架，测试时会使用这个对象在创建客户端请求，而不用启动一个服务器。</p>
+<p><code>test_cli_runner()</code> 和 <code>app.test_client()</code> 类似，只是调用的是命令行应用程序。</p>
+<p><code>Pytest</code>通过匹配测试函数中参数的名字来匹配 fixture 的名字，从而调用到合适的客户端。例如：<code>test_hello(client,name=&quot;Vincent&quot;)</code>,他有一个 <code>client</code>参数，那么他就会匹配到 <code>client</code> fixture. 调用他并返回给测试函数作为参数。</p>
+<h2 id="测试工厂函数">测试工厂函数</h2>
+<p>工厂函数的没有太大必要进行单独测试，因为会被很多测试调用，最多测试下一些加载了的不同配置。</p>
+<p><code>tests/test_factory.py</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">from</span> <span style="color:#0cf;font-weight:bold">flaskr</span> <span style="color:#069;font-weight:bold">import</span> create_app
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">test_config</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> <span style="color:#000;font-weight:bold">not</span> create_app()<span style="color:#555">.</span>testing
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> create_app({<span style="color:#c30">&#39;TESTING&#39;</span>: <span style="color:#069;font-weight:bold">True</span>})<span style="color:#555">.</span>testing
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">test_hello</span>(client):
+</span></span><span style="display:flex;"><span>    response <span style="color:#555">=</span> client<span style="color:#555">.</span>get(<span style="color:#c30">&#39;/hello&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> response<span style="color:#555">.</span>data <span style="color:#555">==</span> <span style="color:#c30">b</span><span style="color:#c30">&#39;Hello, World!&#39;</span>
+</span></span></code></pre></div><p><code>test_hello</code> 测试函数使用<code>client</code>发送了一个请求，检查请求与期望的结果是否相同。</p>
+<h2 id="测试数据库">测试数据库</h2>
+<p>数据库函数在应用的每次调用中应该返回同一个连接。应用执行完成后应该进行关闭。</p>
+<p><code>tests/test_db.py</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">sqlite3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">pytest</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">from</span> <span style="color:#0cf;font-weight:bold">flaskr.db</span> <span style="color:#069;font-weight:bold">import</span> get_db
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">test_get_close_db</span>(app):
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">with</span> app<span style="color:#555">.</span>app_context():
+</span></span><span style="display:flex;"><span>        db <span style="color:#555">=</span> get_db()
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">assert</span> db <span style="color:#000;font-weight:bold">is</span> get_db()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">with</span> pytest<span style="color:#555">.</span>raises(sqlite3<span style="color:#555">.</span>ProgrammingError) <span style="color:#069;font-weight:bold">as</span> e:
+</span></span><span style="display:flex;"><span>        db<span style="color:#555">.</span>execute(<span style="color:#c30">&#39;SELECT 1&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> <span style="color:#c30">&#39;closed&#39;</span> <span style="color:#000;font-weight:bold">in</span> <span style="color:#366">str</span>(e<span style="color:#555">.</span>value)
+</span></span></code></pre></div><p><code>init-db</code>命令应该调用<code>init_db</code>函数并输出一些内容。</p>
+<p><code>tests/test_db.py</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">test_init_db_command</span>(runner, monkeypatch):
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">class</span> <span style="color:#0a8;font-weight:bold">Recorder</span>(<span style="color:#366">object</span>):
+</span></span><span style="display:flex;"><span>        called <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">fake_init_db</span>():
+</span></span><span style="display:flex;"><span>        Recorder<span style="color:#555">.</span>called <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">True</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    monkeypatch<span style="color:#555">.</span>setattr(<span style="color:#c30">&#39;flaskr.db.init_db&#39;</span>, fake_init_db)
+</span></span><span style="display:flex;"><span>    result <span style="color:#555">=</span> runner<span style="color:#555">.</span>invoke(args<span style="color:#555">=</span>[<span style="color:#c30">&#39;init-db&#39;</span>])
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> <span style="color:#c30">&#39;Initialized&#39;</span> <span style="color:#000;font-weight:bold">in</span> result<span style="color:#555">.</span>output
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> Recorder<span style="color:#555">.</span>called
+</span></span></code></pre></div><p><code>monkeypatch.setattr</code> 设置了一个伪造的函数来代替<code>init_db</code>函数。通过这个测试我们可以了解到<code>init_db</code>命令调用后正常的调用了 <code>init_db</code>函数。</p>
+<h2 id="测试授权">测试授权</h2>
+<p>大部分的视图我们都会要求用户登录后才能访问。我们手动发送一个请求进行登录就可以实现，我们可以编写这个函数然后通过 fixturec传递到每个测试。</p>
+<p><code>tests/conftest.py</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">class</span> <span style="color:#0a8;font-weight:bold">AuthActions</span>(<span style="color:#366">object</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">def</span> __init__(self, client):
+</span></span><span style="display:flex;"><span>        self<span style="color:#555">.</span>_client <span style="color:#555">=</span> client
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">login</span>(self, username<span style="color:#555">=</span><span style="color:#c30">&#39;test&#39;</span>, password<span style="color:#555">=</span><span style="color:#c30">&#39;test&#39;</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">return</span> self<span style="color:#555">.</span>_client<span style="color:#555">.</span>post(
+</span></span><span style="display:flex;"><span>            <span style="color:#c30">&#39;/auth/login&#39;</span>,
+</span></span><span style="display:flex;"><span>            data<span style="color:#555">=</span>{<span style="color:#c30">&#39;username&#39;</span>: username, <span style="color:#c30">&#39;password&#39;</span>: password}
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">logout</span>(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">return</span> self<span style="color:#555">.</span>_client<span style="color:#555">.</span>get(<span style="color:#c30">&#39;/auth/logout&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#99f">@pytest.fixture</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">auth</span>(client):
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> AuthActions(client)
+</span></span></code></pre></div><h4 id="测试注册">测试注册</h4>
+<p><code>tests/test_auth.py</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">pytest</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">from</span> <span style="color:#0cf;font-weight:bold">flask</span> <span style="color:#069;font-weight:bold">import</span> g, session
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">from</span> <span style="color:#0cf;font-weight:bold">flaskr.db</span> <span style="color:#069;font-weight:bold">import</span> get_db
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">test_register</span>(client, app):
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> client<span style="color:#555">.</span>get(<span style="color:#c30">&#39;/auth/register&#39;</span>)<span style="color:#555">.</span>status_code <span style="color:#555">==</span> <span style="color:#f60">200</span>
+</span></span><span style="display:flex;"><span>    response <span style="color:#555">=</span> client<span style="color:#555">.</span>post(
+</span></span><span style="display:flex;"><span>        <span style="color:#c30">&#39;/auth/register&#39;</span>, data<span style="color:#555">=</span>{<span style="color:#c30">&#39;username&#39;</span>: <span style="color:#c30">&#39;a&#39;</span>, <span style="color:#c30">&#39;password&#39;</span>: <span style="color:#c30">&#39;a&#39;</span>}
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> response<span style="color:#555">.</span>headers[<span style="color:#c30">&#34;Location&#34;</span>] <span style="color:#555">==</span> <span style="color:#c30">&#34;/auth/login&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">with</span> app<span style="color:#555">.</span>app_context():
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">assert</span> get_db()<span style="color:#555">.</span>execute(
+</span></span><span style="display:flex;"><span>            <span style="color:#c30">&#34;SELECT * FROM user WHERE username = &#39;a&#39;&#34;</span>,
+</span></span><span style="display:flex;"><span>        )<span style="color:#555">.</span>fetchone() <span style="color:#000;font-weight:bold">is</span> <span style="color:#000;font-weight:bold">not</span> <span style="color:#069;font-weight:bold">None</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#99f">@pytest.mark.parametrize</span>((<span style="color:#c30">&#39;username&#39;</span>, <span style="color:#c30">&#39;password&#39;</span>, <span style="color:#c30">&#39;message&#39;</span>), (
+</span></span><span style="display:flex;"><span>    (<span style="color:#c30">&#39;&#39;</span>, <span style="color:#c30">&#39;&#39;</span>, <span style="color:#c30">b</span><span style="color:#c30">&#39;Username is required.&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#c30">&#39;a&#39;</span>, <span style="color:#c30">&#39;&#39;</span>, <span style="color:#c30">b</span><span style="color:#c30">&#39;Password is required.&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#c30">&#39;test&#39;</span>, <span style="color:#c30">&#39;test&#39;</span>, <span style="color:#c30">b</span><span style="color:#c30">&#39;already registered&#39;</span>),
+</span></span><span style="display:flex;"><span>))
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">test_register_validate_input</span>(client, username, password, message):
+</span></span><span style="display:flex;"><span>    response <span style="color:#555">=</span> client<span style="color:#555">.</span>post(
+</span></span><span style="display:flex;"><span>        <span style="color:#c30">&#39;/auth/register&#39;</span>,
+</span></span><span style="display:flex;"><span>        data<span style="color:#555">=</span>{<span style="color:#c30">&#39;username&#39;</span>: username, <span style="color:#c30">&#39;password&#39;</span>: password}
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> message <span style="color:#000;font-weight:bold">in</span> response<span style="color:#555">.</span>data
+</span></span></code></pre></div><p><code>client.post</code>发送一个POST请求，<code>client.get</code>发送一个GET类型的请求。如果要检查一个请求是否成功，只需要检查响应的<code>status_code</code>是不是``‵200```。</p>
+<p><code>response.headers</code> 返回响应的头信息，测试中我们判断了头的<code>Location</code>字段是否和我们期望的一致。</p>
+<p><code>response.data</code> 包含了字节类型的响应内容，如果你要获取文本进行比较，使用 <code>get_data(as_text=True)</code></p>
+<p><code>pytest.mark.parametrize</code> 告诉<code>Pytest</code>使用不同参数调用这个测试函数，这样就不用写多几次了。</p>
+<h4 id="测试登录">测试登录</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">test_login</span>(client, auth):
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> client<span style="color:#555">.</span>get(<span style="color:#c30">&#39;/auth/login&#39;</span>)<span style="color:#555">.</span>status_code <span style="color:#555">==</span> <span style="color:#f60">200</span>
+</span></span><span style="display:flex;"><span>    response <span style="color:#555">=</span> auth<span style="color:#555">.</span>login()
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> response<span style="color:#555">.</span>headers[<span style="color:#c30">&#34;Location&#34;</span>] <span style="color:#555">==</span> <span style="color:#c30">&#34;/&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">with</span> client:
+</span></span><span style="display:flex;"><span>        client<span style="color:#555">.</span>get(<span style="color:#c30">&#39;/&#39;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">assert</span> session[<span style="color:#c30">&#39;user_id&#39;</span>] <span style="color:#555">==</span> <span style="color:#f60">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">assert</span> g<span style="color:#555">.</span>user[<span style="color:#c30">&#39;username&#39;</span>] <span style="color:#555">==</span> <span style="color:#c30">&#39;test&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#99f">@pytest.mark.parametrize</span>((<span style="color:#c30">&#39;username&#39;</span>, <span style="color:#c30">&#39;password&#39;</span>, <span style="color:#c30">&#39;message&#39;</span>), (
+</span></span><span style="display:flex;"><span>    (<span style="color:#c30">&#39;a&#39;</span>, <span style="color:#c30">&#39;test&#39;</span>, <span style="color:#c30">b</span><span style="color:#c30">&#39;Incorrect username.&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#c30">&#39;test&#39;</span>, <span style="color:#c30">&#39;a&#39;</span>, <span style="color:#c30">b</span><span style="color:#c30">&#39;Incorrect password.&#39;</span>),
+</span></span><span style="display:flex;"><span>))
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">test_login_validate_input</span>(auth, username, password, message):
+</span></span><span style="display:flex;"><span>    response <span style="color:#555">=</span> auth<span style="color:#555">.</span>login(username, password)
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> message <span style="color:#000;font-weight:bold">in</span> response<span style="color:#555">.</span>data
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">test_logout</span>(client, auth):
+</span></span><span style="display:flex;"><span>    auth<span style="color:#555">.</span>login()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">with</span> client:
+</span></span><span style="display:flex;"><span>        auth<span style="color:#555">.</span>logout()
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">assert</span> <span style="color:#c30">&#39;user_id&#39;</span> <span style="color:#000;font-weight:bold">not</span> <span style="color:#000;font-weight:bold">in</span> session
+</span></span></code></pre></div><p>登出执行后检查Session来确定是否成功登出。</p>
+<h2 id="测试文章">测试文章</h2>
+<p>文章的测试因为涉及到登录后操作，因此我们要使用之前编写的 <code>auth</code> fixture.</p>
+<p><code>test_post.py</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">pytest</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">from</span> <span style="color:#0cf;font-weight:bold">flaskr.db</span> <span style="color:#069;font-weight:bold">import</span> get_db
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">test_index</span>(client, auth):
+</span></span><span style="display:flex;"><span>    response <span style="color:#555">=</span> client<span style="color:#555">.</span>get(<span style="color:#c30">&#39;/&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> <span style="color:#c30">b</span><span style="color:#c30">&#34;Log In&#34;</span> <span style="color:#000;font-weight:bold">in</span> response<span style="color:#555">.</span>data
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> <span style="color:#c30">b</span><span style="color:#c30">&#34;Register&#34;</span> <span style="color:#000;font-weight:bold">in</span> response<span style="color:#555">.</span>data
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    auth<span style="color:#555">.</span>login()
+</span></span><span style="display:flex;"><span>    response <span style="color:#555">=</span> client<span style="color:#555">.</span>get(<span style="color:#c30">&#39;/&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> <span style="color:#c30">b</span><span style="color:#c30">&#39;Log Out&#39;</span> <span style="color:#000;font-weight:bold">in</span> response<span style="color:#555">.</span>data
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> <span style="color:#c30">b</span><span style="color:#c30">&#39;test title&#39;</span> <span style="color:#000;font-weight:bold">in</span> response<span style="color:#555">.</span>data
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> <span style="color:#c30">b</span><span style="color:#c30">&#39;by test on 2018-01-01&#39;</span> <span style="color:#000;font-weight:bold">in</span> response<span style="color:#555">.</span>data
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> <span style="color:#c30">b</span><span style="color:#c30">&#39;test</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">body&#39;</span> <span style="color:#000;font-weight:bold">in</span> response<span style="color:#555">.</span>data
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> <span style="color:#c30">b</span><span style="color:#c30">&#39;href=&#34;/1/update&#34;&#39;</span> <span style="color:#000;font-weight:bold">in</span> response<span style="color:#555">.</span>data
+</span></span></code></pre></div><p>如果用户没有登录去访问某些功能会报404或者403错误，这些情况我们也要进行测试。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#99f">@pytest.mark.parametrize</span>(<span style="color:#c30">&#39;path&#39;</span>, (
+</span></span><span style="display:flex;"><span>    <span style="color:#c30">&#39;/create&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#c30">&#39;/1/update&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#c30">&#39;/1/delete&#39;</span>,
+</span></span><span style="display:flex;"><span>))
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">test_login_required</span>(client, path):
+</span></span><span style="display:flex;"><span>    response <span style="color:#555">=</span> client<span style="color:#555">.</span>post(path)
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> response<span style="color:#555">.</span>headers[<span style="color:#c30">&#34;Location&#34;</span>] <span style="color:#555">==</span> <span style="color:#c30">&#34;/auth/login&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">test_author_required</span>(app, client, auth):
+</span></span><span style="display:flex;"><span>    <span style="color:#09f;font-style:italic"># change the post author to another user</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">with</span> app<span style="color:#555">.</span>app_context():
+</span></span><span style="display:flex;"><span>        db <span style="color:#555">=</span> get_db()
+</span></span><span style="display:flex;"><span>        db<span style="color:#555">.</span>execute(<span style="color:#c30">&#39;UPDATE post SET author_id = 2 WHERE id = 1&#39;</span>)
+</span></span><span style="display:flex;"><span>        db<span style="color:#555">.</span>commit()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    auth<span style="color:#555">.</span>login()
+</span></span><span style="display:flex;"><span>    <span style="color:#09f;font-style:italic"># current user can&#39;t modify other user&#39;s post</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> client<span style="color:#555">.</span>post(<span style="color:#c30">&#39;/1/update&#39;</span>)<span style="color:#555">.</span>status_code <span style="color:#555">==</span> <span style="color:#f60">403</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> client<span style="color:#555">.</span>post(<span style="color:#c30">&#39;/1/delete&#39;</span>)<span style="color:#555">.</span>status_code <span style="color:#555">==</span> <span style="color:#f60">403</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#09f;font-style:italic"># current user doesn&#39;t see edit link</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> <span style="color:#c30">b</span><span style="color:#c30">&#39;href=&#34;/1/update&#34;&#39;</span> <span style="color:#000;font-weight:bold">not</span> <span style="color:#000;font-weight:bold">in</span> client<span style="color:#555">.</span>get(<span style="color:#c30">&#39;/&#39;</span>)<span style="color:#555">.</span>data
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#99f">@pytest.mark.parametrize</span>(<span style="color:#c30">&#39;path&#39;</span>, (
+</span></span><span style="display:flex;"><span>    <span style="color:#c30">&#39;/2/update&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#c30">&#39;/2/delete&#39;</span>,
+</span></span><span style="display:flex;"><span>))
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">test_exists_required</span>(client, auth, path):
+</span></span><span style="display:flex;"><span>    auth<span style="color:#555">.</span>login()
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">assert</span> client<span style="color:#555">.</span>post(path)<span style="color:#555">.</span>status_code <span style="color:#555">==</span> <span style="color:#f60">404</span>
+</span></span></code></pre></div><p>其他的大同小异。</p>
+<p>参见 <a href="https://github.com/vincentmi/qa-panel/blob/main/tests/test_post.py">https://github.com/vincentmi/qa-panel/blob/main/tests/test_post.py</a></p>
+<h2 id="运行测试">运行测试</h2>
+<p>针对测试的配置项，定义一些目录的信息</p>
+<p><code>pyproject.toml</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[tool.pytest.ini_options]
+</span></span><span style="display:flex;"><span>testpaths = [<span style="color:#c30">&#34;tests&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[tool.coverage.run]
+</span></span><span style="display:flex;"><span>branch = <span style="color:#069;font-weight:bold">true</span>
+</span></span></code></pre></div><p>在项目根目录执行</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>pytest
+</span></span></code></pre></div><p>来运行单元测试。</p>
+<p>计算测试覆盖</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>coverage run -m pytest
+</span></span></code></pre></div><p>计算测试覆盖</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># 展示简单的报告</span>
+</span></span><span style="display:flex;"><span>coverage report
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># 生成HTML报告</span>
+</span></span><span style="display:flex;"><span>coverage html
+</span></span></code></pre></div><p>生成的报告在 <code>./htmlcov/index.html </code></p>
+<h1 id="部署到生产环境">部署到生产环境</h1>
+<p>现在我们的应用已经开发完成可以部署到生产环境。</p>
+<h2 id="构建">构建</h2>
+<p>为了更方便的部署我们将应用打包成 wheel文件包。安装打包工具<code>pip install build</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ python3 -m build --wheel
+</span></span><span style="display:flex;"><span>* Creating venv isolated environment...
+</span></span><span style="display:flex;"><span>* Installing packages in isolated environment... <span style="color:#555">(</span>flit_core&lt;4<span style="color:#555">)</span>
+</span></span><span style="display:flex;"><span>* Getting build dependencies <span style="color:#069;font-weight:bold">for</span> wheel...
+</span></span><span style="display:flex;"><span>* Building wheel...
+</span></span><span style="display:flex;"><span>Successfully built flaskr-1.0.0-py2.py3-none-any.whl
+</span></span></code></pre></div><p>打包好的文件在<code>./dist/flaskr-1.0.0-py2.py3-none-any.whl</code> ，文件名格式为 <code> {project name}-{version}-{python tag} -{abi tag}-{platform tag}</code></p>
+<p>在新的机器上创建虚拟环境，然后执行
+<code>pip install flaskr-1.0.0-py3-none-any.whl</code>安装应用，
+执行 <code>flask --app flaskr init-db</code>初始化数据库。</p>
+<p>执行成功后会在虚拟环境产生一个目录 <code>.venv/var/flaskr-instance </code> 用于存储数据。</p>
+<p>生成环境我们需要配置足够复杂的Secert避免加密数据被破解。增加一个配置文件</p>
+<p><code>config.py</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>SECRET_KEY <span style="color:#555">=</span> <span style="color:#c30">&#39;192b9bdd22ab9ed4d12e236c78afcb9a393ec15f71bbf5dc987d54727823bcbf&#39;</span>
+</span></span></code></pre></div><blockquote>
+<p>使用python命令可以生成一个随机字符串 <code>$ python -c 'import secrets; print(secrets.token_hex())'</code>
+&lsquo;192b9bdd22ab9ed4d12e236c78afcb9a393ec15f71bbf5dc987d54727823bcbf&rsquo;</p>
+</blockquote>
+<h2 id="部署到生产型webserver">部署到生产型WebServer</h2>
+<p><code>flask run</code>命令启动的WebServer仅仅用于方便开发时进行调试和预览。对于生产环境的高吞吐量和大流量访问是无法稳定支持的。因此我们需要选择专业WSGI应用服务来部署我们的应用。有很多用于生产的WSGI服务器，<a href="https://flask.palletsprojects.com/en/2.3.x/deploying/">https://flask.palletsprojects.com/en/2.3.x/deploying/</a>,我们目前选择<code>waitress</code></p>
+<p>先安装</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>pip install waitress
+</span></span></code></pre></div><p>然后部署：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>waitress-serve --call <span style="color:#c30">&#39;flaskr:create_app&#39;</span>
+</span></span></code></pre></div>
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="/"><img src="/img/favicon.png" />我的乐与怒</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2023-07-08-use-tileserver-to-server-offline-map/" data-toggle="tooltip" data-placement="top" title="使用tile-server搭建离线地图服务"><i class="fa fa-angle-left fa-lg"></i>
+                            Previous</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2023-07-21-build-application-with-flask-part2/" data-toggle="tooltip" data-placement="top" title="使用Flask开发应用程序（2）- 搭建博客网站">Next
+                        <i class="fa fa-angle-right fa-lg"></i></a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">目录</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">标签</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/aframe" title="aframe">
+                            aframe
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/andrew-ng" title="andrew-ng">
+                            andrew-ng
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/arduino" title="arduino">
+                            arduino
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                            blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/cgi" title="cgi">
+                            cgi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/consul" title="consul">
+                            consul
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                            docker
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/eth" title="eth">
+                            eth
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ethereum" title="ethereum">
+                            ethereum
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/evm" title="evm">
+                            evm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/feign" title="feign">
+                            feign
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/flask" title="flask">
+                            flask
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                            golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/hw" title="hw">
+                            hw
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/jpa" title="jpa">
+                            jpa
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/js" title="js">
+                            js
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/k8s" title="k8s">
+                            k8s
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                            kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/linux" title="linux">
+                            linux
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mac" title="mac">
+                            mac
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/machine-learning" title="machine-learning">
+                            machine-learning
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/math" title="math">
+                            math
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mysql" title="mysql">
+                            mysql
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/nginx" title="nginx">
+                            nginx
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/op" title="op">
+                            op
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/opentcv" title="opentcv">
+                            opentcv
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ops" title="ops">
+                            ops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/poco" title="poco">
+                            poco
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/pptp" title="pptp">
+                            pptp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/python" title="python">
+                            python
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/rd" title="rd">
+                            rd
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/spring" title="spring">
+                            spring
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/springboot" title="springboot">
+                            springboot
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ssl" title="ssl">
+                            ssl
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/thymeleaf" title="thymeleaf">
+                            thymeleaf
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/type" title="type">
+                            type
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vagrant" title="vagrant">
+                            vagrant
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vpn" title="vpn">
+                            vpn
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/vue" title="vue">
+                            vue
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/webrtc" title="webrtc">
+                            webrtc
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/workflow" title="workflow">
+                            workflow
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0" title="技术文章">
+                            技术文章
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2" title="新浪博客">
+                            新浪博客
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%97%A0%E8%81%8A" title="无聊">
+                            无聊
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB" title="生活">
+                            生活
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95" title="生活记录">
+                            生活记录
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E8%82%A1%E7%A5%A8" title="股票">
+                            股票
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E8%BF%90%E7%BB%B4" title="运维">
+                            运维
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>链接</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/vegas">青鸟的翅膀</a></li>
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/yoshikilau">Caffeine Park</a></li>
+                        
+                        <li><a target="_blank" href="http://huxpro.github.io">Theme From Hux</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/vincentz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/img/icwt.jpg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/vincentmi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/5311815/vincent-mi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="我的乐与怒" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; 我的乐与怒 2024 | <a href="http://www.beian.miit.gov.cn" style="text-decoration: none;"> 蜀ICP备17040089号-2</a>
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https'){
+       bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else{
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+<script>
+    
+    var _baId = '2b745fdb2d90955bdfb8ad1194277073';
+
+    
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-78738242-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

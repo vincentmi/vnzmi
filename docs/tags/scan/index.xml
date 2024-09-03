@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>scan on 我的乐与怒</title>
+    <link>/tags/scan/</link>
+    <description>Recent content in scan on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 23 Jul 2023 21:44:00 +0000</lastBuildDate><atom:link href="/tags/scan/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>用树莓派实现局域网打印和扫描</title>
+      <link>/post/2023-07-23-air-print-and-scan-with-raspberry-pi/</link>
+      <pubDate>Sun, 23 Jul 2023 21:44:00 +0000</pubDate>
+      
+      <guid>/post/2023-07-23-air-print-and-scan-with-raspberry-pi/</guid>
+      <description>准备 买了个树莓派一没怎么用，现在家里有2台打印机，太占用桌面了，用树莓派给他们加上远程。这样可以搬远点。 选择系统 首先给树莓派烧录一个系统，我选择的是debian.可以从这里 https://www.raspberrypi.com/software/ 下载。 我选择的Debian uname -a Linux raspberrypi 4.14.98-v7+ #1200 SMP Tue Feb 12 20:27:48 GMT 2019 armv7l GNU/Linux 打开相关的一些服务ssh,vnc打开可以远程操作，</description>
+    </item>
+    
+  </channel>
+</rss>

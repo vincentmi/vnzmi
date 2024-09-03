@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="我的乐与怒">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//img/car2.jpg">
+    <meta property="twitter:image" content="//img/car2.jpg" />
+    
+
+    
+    <meta name="title" content="使用Flask开发应用程序（2）- 搭建博客网站" />
+    <meta property="og:title" content="使用Flask开发应用程序（2）- 搭建博客网站" />
+    <meta property="twitter:title" content="使用Flask开发应用程序（2）- 搭建博客网站" />
+    
+
+    
+    <meta name="description" content="In code we trust">
+    <meta property="og:description" content="In code we trust" />
+    <meta property="twitter:description" content="In code we trust" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="我的乐与怒,vincent mi, miwenshu, 电商,  博客, 个人网站, 互联网, Web, 云原生, PaaS, Java, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>使用Flask开发应用程序（2）- 搭建博客网站 | 我的乐与怒 | Vincent&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/2023-07-21-build-application-with-flask-part2/">
+
+    
+
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">我的乐与怒</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/about/">我</a></li>
+                    
+                        <li><a href="/archive/">归档</a></li>
+                    
+                        <li><a href="/search/">搜索</a></li>
+                    
+                        <li><a href="/codesketch/">CodeSketch</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/post-bg-python.png')
+    }
+    
+    .titleColor {
+        text-align: center;font-size:80px;
+        color: #FFFFFF;
+    }
+   
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/python" title="python">
+                            python
+                        </a>
+                        
+                        <a class="tag" href="/tags/flask" title="flask">
+                            flask
+                        </a>
+                        
+                    </div>
+                    <h1 class="titleColor">使用Flask开发应用程序（2）- 搭建博客网站</h1>
+                    <h2 class="subheading titleColor"></h2>
+                    <span class="meta titleColor">
+                        
+                            Posted by 
+                            
+                                Vincent
+                             
+                            on 
+                            Friday, July 21, 2023
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <h1 id="数据库访问">数据库访问</h1>
+<p>我们先使用SQLlite数据库来看看如何初始化一些资源。python内建了sqlite3 模块。我们使用这个模块来进行一些数据的保存。使用SQLite 可以不用启动独立的数据库服务器，比较适合小型的应用和嵌入式设备等。</p>
+<h2 id="连接数据库">连接数据库</h2>
+<p><code>flaskr/db.py</code>文件</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">sqlite3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">click</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">from</span> <span style="color:#0cf;font-weight:bold">flask</span> <span style="color:#069;font-weight:bold">import</span> current_app, g
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">get_db</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">if</span> <span style="color:#c30">&#39;db&#39;</span> <span style="color:#000;font-weight:bold">not</span> <span style="color:#000;font-weight:bold">in</span> g:
+</span></span><span style="display:flex;"><span>        g<span style="color:#555">.</span>db <span style="color:#555">=</span> sqlite3<span style="color:#555">.</span>connect(
+</span></span><span style="display:flex;"><span>            current_app<span style="color:#555">.</span>config[<span style="color:#c30">&#39;DATABASE&#39;</span>],
+</span></span><span style="display:flex;"><span>            detect_types<span style="color:#555">=</span>sqlite3<span style="color:#555">.</span>PARSE_DECLTYPES
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>        g<span style="color:#555">.</span>db<span style="color:#555">.</span>row_factory <span style="color:#555">=</span> sqlite3<span style="color:#555">.</span>Row
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> g<span style="color:#555">.</span>db
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">close_db</span>(e<span style="color:#555">=</span><span style="color:#069;font-weight:bold">None</span>):
+</span></span><span style="display:flex;"><span>    db <span style="color:#555">=</span> g<span style="color:#555">.</span>pop(<span style="color:#c30">&#39;db&#39;</span>, <span style="color:#069;font-weight:bold">None</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">if</span> db <span style="color:#000;font-weight:bold">is</span> <span style="color:#000;font-weight:bold">not</span> <span style="color:#069;font-weight:bold">None</span>:
+</span></span><span style="display:flex;"><span>        db<span style="color:#555">.</span>close()
+</span></span></code></pre></div><ul>
+<li><code>g</code> 是一个特殊对象，每一次请求会初始化一次。我们使用<code>g</code> 对象在一次访问中存储了数据库连接。当一个请求中多次调用 <code>get_db</code>的时候就不用重复创建 数据库连接了。</li>
+<li><code>current_app</code> 是另一个特殊对象，指向当前正在处理该请求的Flask应用程序。可以理解这是本次请求的上下文。因为我们使用了应用工厂模式，所以现在并没有一个应用对象。<code>get_db</code>将在应用被创建的时候调用，所以我们使用这个对象.</li>
+<li><code>sqlite3.connect() </code>  使用 <code>DATABASE</code> 设置的路径，简历数据库连接. 稍后我们会初始化这个数据文件。</li>
+<li><code>sqlite3.Row</code> 设置查询结果返回的类型，我们设置返回Dict，可以使用栏位名访问列内容。</li>
+</ul>
+<h2 id="创建数据表">创建数据表</h2>
+<p>为我们的博客创建两个表，一个保存用户信息，一个保存我们的文章</p>
+<p><code>flaskr/schema.sql</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">DROP</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">TABLE</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">IF</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">EXISTS</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">user</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#069;font-weight:bold">DROP</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">TABLE</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">IF</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">EXISTS</span><span style="color:#bbb"> </span>post;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#069;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">TABLE</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">user</span><span style="color:#bbb"> </span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>id<span style="color:#bbb"> </span><span style="color:#366">INTEGER</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">PRIMARY</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">KEY</span><span style="color:#bbb"> </span>AUTOINCREMENT,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>username<span style="color:#bbb"> </span><span style="color:#366">TEXT</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">UNIQUE</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>password<span style="color:#bbb"> </span><span style="color:#366">TEXT</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">NULL</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#069;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">TABLE</span><span style="color:#bbb"> </span>post<span style="color:#bbb"> </span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>id<span style="color:#bbb"> </span><span style="color:#366">INTEGER</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">PRIMARY</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">KEY</span><span style="color:#bbb"> </span>AUTOINCREMENT,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>author_id<span style="color:#bbb"> </span><span style="color:#366">INTEGER</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>created<span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">TIMESTAMP</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">DEFAULT</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">CURRENT_TIMESTAMP</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>title<span style="color:#bbb"> </span><span style="color:#366">TEXT</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>body<span style="color:#bbb"> </span><span style="color:#366">TEXT</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#069;font-weight:bold">FOREIGN</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">KEY</span><span style="color:#bbb"> </span>(author_id)<span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">REFERENCES</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">user</span><span style="color:#bbb"> </span>(id)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>);<span style="color:#bbb">
+</span></span></span></code></pre></div><p>在 <code>db.py</code> 中增加初始化数据库的代码，我们在命令行执行命令来初始化数据库文件。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># 初始化数据库，创建表</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">init_db</span>():
+</span></span><span style="display:flex;"><span>    db <span style="color:#555">=</span> get_db()
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">with</span> current_app<span style="color:#555">.</span>open_resource(<span style="color:#c30">&#39;schema.sql&#39;</span>) <span style="color:#069;font-weight:bold">as</span> f:
+</span></span><span style="display:flex;"><span>        db<span style="color:#555">.</span>executescript(f<span style="color:#555">.</span>read()<span style="color:#555">.</span>decode(<span style="color:#c30">&#39;utf-8&#39;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># 定义命令行工具</span>
+</span></span><span style="display:flex;"><span><span style="color:#99f">@click.command</span>(<span style="color:#c30">&#39;init-db&#39;</span>)        
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">init_db_command</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#c30">&#34;&#34;&#34;Clear the existing data and create new tables.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    init_db()
+</span></span><span style="display:flex;"><span>    click<span style="color:#555">.</span>echo(<span style="color:#c30">&#34;完成数据库初始化&#34;</span>)
+</span></span></code></pre></div><ul>
+<li><code>current_app.open_resource('schema.sql')</code> 利用当前应用上下文，打开相当应用所在包中的文件。</li>
+<li><code>click.command()</code> 定义了一个 <code>init-db</code> 命令行命令，使用该命令来调用指定的函数</li>
+</ul>
+<h2 id="自定于命令">自定于命令</h2>
+<p>flask 内建了 click 扩展用于执行命令行：使用 <code>flask [command] [param ...] </code> 来执行你的自定于命令</p>
+<p><code>@app.cli.command(&quot;create-user&quot;) </code> 定义命令<br>
+<code>@click.argument(&quot;name&quot;)</code>定义参数</p>
+<p>定义一组命令</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>user_cli <span style="color:#555">=</span> AppGroup(<span style="color:#c30">&#39;user&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#99f">@user_cli.command</span>(<span style="color:#c30">&#39;create&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#99f">@user_cli.argument</span>(<span style="color:#c30">&#39;name&#39;</span>)
+</span></span><span style="display:flex;"><span> <span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">user_create</span>(name):
+</span></span><span style="display:flex;"><span>   <span style="color:#366">print</span>(<span style="color:#c30">&#34;user_create&#34;</span>)
+</span></span></code></pre></div><h2 id="注册到应用上下文">注册到应用上下文</h2>
+<p><code>flaskr/db.py</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">init_app</span>(app):
+</span></span><span style="display:flex;"><span>    <span style="color:#09f;font-style:italic"># 注册数据连接关闭函数</span>
+</span></span><span style="display:flex;"><span>    app<span style="color:#555">.</span>teardown_appcontext(close_db)
+</span></span><span style="display:flex;"><span>    <span style="color:#09f;font-style:italic"># 注册命令行</span>
+</span></span><span style="display:flex;"><span>    app<span style="color:#555">.</span>cli<span style="color:#555">.</span>add_command(init_db_command)
+</span></span></code></pre></div><p>在数据库初始化的时候执行该操作</p>
+<p><code>flaskr/__init__.py</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">create_app</span>():
+</span></span><span style="display:flex;"><span>    app <span style="color:#555">=</span> <span style="color:#555">...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#09f;font-style:italic"># 其他代码。。。</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">from</span> <span style="color:#0cf;font-weight:bold">.</span> <span style="color:#069;font-weight:bold">import</span> db
+</span></span><span style="display:flex;"><span>    db<span style="color:#555">.</span>init_app(app)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> app
+</span></span></code></pre></div><h2 id="执行初始化">执行初始化</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>flask --app flaskr init-db
+</span></span></code></pre></div><p>执行成功后生成了<code> instance/flaskr.sqlite</code> 文件</p>
+<h1 id="蓝图blueprint和视图view">蓝图(blueprint)和视图(view)</h1>
+<p>视图函数包含我们写的业务代码，用于处理进入的请求，返回响应。Flask使用正则进行请求URL的匹配，来找到他对应的应该进行处理的视图函数。视图函数返回数据Flask将他转化成响应。Flask也可以根据视图函数的名称和参数来生成对应URL。</p>
+<blockquote>
+<p>视图函数有点别扭，如果了解其他框架，视图函数就是action,而blueprint就是 controller .</p>
+</blockquote>
+<h2 id="创建blueprint">创建blueprint</h2>
+<p>Blueprint 用于组织一组相关联的视图和其他代码。相对直接将视图一个个注册到应用中,blueprint进行修改和维护会方便很多。</p>
+<p>教程里我们会创建两个blueprint ,一个用于权限控制，一个用于管理文章。每个blueprint将构建为模块。</p>
+<p><code>flaskr/auth.py</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">functools</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">from</span> <span style="color:#0cf;font-weight:bold">flask</span> <span style="color:#069;font-weight:bold">import</span> (
+</span></span><span style="display:flex;"><span>    Blueprint, flash, g, redirect, render_template, request, session, url_for
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">from</span> <span style="color:#0cf;font-weight:bold">werkzeug.security</span> <span style="color:#069;font-weight:bold">import</span> check_password_hash, generate_password_hash
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">from</span> <span style="color:#0cf;font-weight:bold">flaskr.db</span> <span style="color:#069;font-weight:bold">import</span> get_db
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bp <span style="color:#555">=</span> Blueprint(<span style="color:#c30">&#39;auth&#39;</span>, __name__, url_prefix<span style="color:#555">=</span><span style="color:#c30">&#39;/auth&#39;</span>)
+</span></span></code></pre></div><p>Blueprint 命名为 <code>'auth'.</code>第二个参数<code>__name__</code> 用于查询如果加载内容.<code> url_prefix</code>注册了该蓝图的URL前缀.</p>
+<p>使用 <code>app.register_blueprint()</code> 将蓝图注册到应用中</p>
+<p><code>flaskr/__init__.py</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">create_app</span>():
+</span></span><span style="display:flex;"><span>    app <span style="color:#555">=</span> <span style="color:#555">...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#09f;font-style:italic"># existing code omitted</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">from</span> <span style="color:#0cf;font-weight:bold">.</span> <span style="color:#069;font-weight:bold">import</span> auth
+</span></span><span style="display:flex;"><span>    app<span style="color:#555">.</span>register_blueprint(auth<span style="color:#555">.</span>bp)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> app
+</span></span></code></pre></div><h2 id="用户注册">用户注册</h2>
+<p>当前我们先使用前后端不分离的方式来开发我们的业务。下面我们来设计我们的业务，</p>
+<p>用户注册，当用户访问 <code>/auth/register</code>时我们展示给用户一个表单，用户提交后我们给用户注册到我们系统中，并展示一条成个的信息给用户。</p>
+<p><code>flaskr/auth.py</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#99f">@bp.route</span>(<span style="color:#c30">&#39;/register&#39;</span>, methods<span style="color:#555">=</span>(<span style="color:#c30">&#39;GET&#39;</span>, <span style="color:#c30">&#39;POST&#39;</span>))
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">register</span>():
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">if</span> request<span style="color:#555">.</span>method <span style="color:#555">==</span> <span style="color:#c30">&#39;POST&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#09f;font-style:italic"># 用户POST提交了表单</span>
+</span></span><span style="display:flex;"><span>        username <span style="color:#555">=</span> request<span style="color:#555">.</span>form[<span style="color:#c30">&#39;username&#39;</span>]
+</span></span><span style="display:flex;"><span>        password <span style="color:#555">=</span> request<span style="color:#555">.</span>form[<span style="color:#c30">&#39;password&#39;</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#09f;font-style:italic"># 获取数据库连接</span>
+</span></span><span style="display:flex;"><span>        db <span style="color:#555">=</span> get_db()
+</span></span><span style="display:flex;"><span>        error <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">None</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#09f;font-style:italic">#进行基础的数据检查</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> username:
+</span></span><span style="display:flex;"><span>            error <span style="color:#555">=</span> <span style="color:#c30">&#39;必须设置用户名.&#39;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">elif</span> <span style="color:#000;font-weight:bold">not</span> password:
+</span></span><span style="display:flex;"><span>            error <span style="color:#555">=</span> <span style="color:#c30">&#39;必须设置密码.&#39;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#09f;font-style:italic">#如果没有错误写入数据库</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">if</span> error <span style="color:#000;font-weight:bold">is</span> <span style="color:#069;font-weight:bold">None</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">try</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#09f;font-style:italic"># 执行SQL INSERT操作</span>
+</span></span><span style="display:flex;"><span>                db<span style="color:#555">.</span>execute(
+</span></span><span style="display:flex;"><span>                    <span style="color:#c30">&#34;INSERT INTO user (username, password) VALUES (?, ?)&#34;</span>,
+</span></span><span style="display:flex;"><span>                    (username, generate_password_hash(password)),
+</span></span><span style="display:flex;"><span>                )
+</span></span><span style="display:flex;"><span>                <span style="color:#09f;font-style:italic"># 提交事务</span>
+</span></span><span style="display:flex;"><span>                db<span style="color:#555">.</span>commit()
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">except</span> db<span style="color:#555">.</span>IntegrityError:
+</span></span><span style="display:flex;"><span>                <span style="color:#09f;font-style:italic"># 我们在创建数据库的时候加了唯一性检测，因此报出此异常</span>
+</span></span><span style="display:flex;"><span>                error <span style="color:#555">=</span> <span style="color:#c30">f</span><span style="color:#c30">&#34;用户 </span><span style="color:#a00">{</span>username<span style="color:#a00">}</span><span style="color:#c30"> 已经注册了.&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#09f;font-style:italic">#跳转到登录页</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#069;font-weight:bold">return</span> redirect(url_for(<span style="color:#c30">&#34;auth.login&#34;</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#09f;font-style:italic">#如果有错误则展示错误</span>
+</span></span><span style="display:flex;"><span>        flash(error)
+</span></span><span style="display:flex;"><span>    <span style="color:#09f;font-style:italic"># 如果是GET方式则渲染表单给用户</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> render_template(<span style="color:#c30">&#39;auth/register.html&#39;</span>)
+</span></span></code></pre></div><ul>
+<li><code>@bp.route('/register', methods=('GET', 'POST'))</code> 注册路径，设置了匹配的请求方式为GET 和POST。</li>
+<li><code>request.form</code> 是一个保存了表单内容的dict类型变量。直接读取获得用户提交的表单内容。</li>
+<li><code>db.execute </code> 用于执行一个 INSERT UPDATE 类SQL操作，返回</li>
+<li><code>werkzeug.security</code> 提供了一些密码加密和检查的库，我们将使用<code>generate_password_hash</code>哈希过的密码存入数据库</li>
+</ul>
+<h2 id="用户登录">用户登录</h2>
+<p>登录和注册类似</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#99f">@bp.route</span>(<span style="color:#c30">&#39;/login&#39;</span>, methods<span style="color:#555">=</span>(<span style="color:#c30">&#39;GET&#39;</span>, <span style="color:#c30">&#39;POST&#39;</span>))
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">login</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">if</span> request<span style="color:#555">.</span>method <span style="color:#555">==</span> <span style="color:#c30">&#39;POST&#39;</span>:
+</span></span><span style="display:flex;"><span>        username <span style="color:#555">=</span> request<span style="color:#555">.</span>form[<span style="color:#c30">&#39;username&#39;</span>]
+</span></span><span style="display:flex;"><span>        password <span style="color:#555">=</span> request<span style="color:#555">.</span>form[<span style="color:#c30">&#39;password&#39;</span>]
+</span></span><span style="display:flex;"><span>        db <span style="color:#555">=</span> get_db()
+</span></span><span style="display:flex;"><span>        error <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">None</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#09f;font-style:italic">#查询用户</span>
+</span></span><span style="display:flex;"><span>        user <span style="color:#555">=</span> db<span style="color:#555">.</span>execute(
+</span></span><span style="display:flex;"><span>            <span style="color:#c30">&#39;SELECT * FROM user WHERE username = ?&#39;</span>, (username,)
+</span></span><span style="display:flex;"><span>        )<span style="color:#555">.</span>fetchone()
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">if</span> user <span style="color:#000;font-weight:bold">is</span> <span style="color:#069;font-weight:bold">None</span>:
+</span></span><span style="display:flex;"><span>            error <span style="color:#555">=</span> <span style="color:#c30">&#39;无效的用户名或者密码.&#39;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">elif</span> <span style="color:#000;font-weight:bold">not</span> check_password_hash(user[<span style="color:#c30">&#39;password&#39;</span>], password):
+</span></span><span style="display:flex;"><span>            error <span style="color:#555">=</span> <span style="color:#c30">&#39;密码错误.&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">if</span> error <span style="color:#000;font-weight:bold">is</span> <span style="color:#069;font-weight:bold">None</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#09f;font-style:italic"># 设置Session</span>
+</span></span><span style="display:flex;"><span>            session<span style="color:#555">.</span>clear()
+</span></span><span style="display:flex;"><span>            session[<span style="color:#c30">&#39;user_id&#39;</span>] <span style="color:#555">=</span> user[<span style="color:#c30">&#39;id&#39;</span>]
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">return</span> redirect(url_for(<span style="color:#c30">&#39;index&#39;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        flash(error)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> render_template(<span style="color:#c30">&#39;auth/login.html&#39;</span>)
+</span></span></code></pre></div><ul>
+<li><code> fetchone()</code> 获取查询到的第一条记录</li>
+<li><code>check_password_hash</code> 对用户输入的密码和数据库存储的hash进行比较</li>
+<li><code>session</code> 对象是一个跨请求的变量，用于存储用户的一些信息。就是传统的session。</li>
+</ul>
+<p>如果用户登录，设置user对象</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#99f">@bp.before_app_request</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">load_logged_in_user</span>():
+</span></span><span style="display:flex;"><span>    user_id <span style="color:#555">=</span> session<span style="color:#555">.</span>get(<span style="color:#c30">&#39;user_id&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">if</span> user_id <span style="color:#000;font-weight:bold">is</span> <span style="color:#069;font-weight:bold">None</span>:
+</span></span><span style="display:flex;"><span>        g<span style="color:#555">.</span>user <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">None</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>        g<span style="color:#555">.</span>user <span style="color:#555">=</span> get_db()<span style="color:#555">.</span>execute(
+</span></span><span style="display:flex;"><span>            <span style="color:#c30">&#39;SELECT * FROM user WHERE id = ?&#39;</span>, (user_id,)
+</span></span><span style="display:flex;"><span>        )<span style="color:#555">.</span>fetchone()
+</span></span></code></pre></div><p><code>bp.before_app_request()</code> 注册了请求执行前执行的代码段。</p>
+<h2 id="登出系统">登出系统</h2>
+<p><code>flaskr/auth.py</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#99f">@bp.route</span>(<span style="color:#c30">&#39;/logout&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">logout</span>():
+</span></span><span style="display:flex;"><span>    session<span style="color:#555">.</span>clear()
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> redirect(url_for(<span style="color:#c30">&#39;index&#39;</span>))
+</span></span></code></pre></div><p>登出比较简单。我们就简单的清除掉session即可。</p>
+<h2 id="检查用户登录">检查用户登录</h2>
+<p>在其他模块我们需要检查用户是否已经登录，阻止未登录用户对我们的资源的访问。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">login_required</span>(view):
+</span></span><span style="display:flex;"><span>    <span style="color:#99f">@functools.wraps</span>(view)
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">wrapped_view</span>(<span style="color:#555">**</span>kwargs):
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">if</span> g<span style="color:#555">.</span>user <span style="color:#000;font-weight:bold">is</span> <span style="color:#069;font-weight:bold">None</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">return</span> redirect(url_for(<span style="color:#c30">&#39;auth.login&#39;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">return</span> view(<span style="color:#555">**</span>kwargs)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> wrapped_view
+</span></span><span style="display:flex;"><span>    
+</span></span></code></pre></div><p>该函数对视图进行了一个装饰，在外层进行检查，如果用户不存在则重定向到登录页。</p>
+<h2 id="生成url">生成URL</h2>
+<p><code>url_for()</code>函数用于生成URL，比如 <code>url_for(&quot;hello&quot;,param=xxxx)</code> , <code>url_for(&quot;auth.login&quot;)</code></p>
+<h1 id="模板">模板</h1>
+<blockquote>
+<p>现在前后端分离，模板使用率已经很少，但是模板我们页可以用在其他方面，比如 生成代码 等等。</p>
+</blockquote>
+<p>现在我们访问注册页面会报一个 模板找不到的错误。</p>
+<p>
+  <img src="/img/in-post/flask_template_not_found.jpg" alt="flask_template_not_found.jpg">
+
+</p>
+<p>flask 使用 <a href="https://jinja.palletsprojects.com/en/3.1.x/">Jinja</a> 来进行模板渲染。相关语法可以查看文档。</p>
+<p>Jinja 使用 <code>{{</code>和 <code>}}</code> 来输出变量的值 ，使用  <code>{%</code>和 <code>%}</code> 来进行流程控制，比如 for,if 等。</p>
+<h2 id="布局">布局</h2>
+<p>通常我们一个网站会有个类似的结构或者样式。比如 页头 页脚 导航烂等。我们使用布局来进行设置。</p>
+<p><code>flaskr/templates/base.html</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#099">&lt;!doctype html&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">title</span>&gt;{% block title %}{% endblock %} - Flaskr&lt;/<span style="color:#309;font-weight:bold">title</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">link</span> <span style="color:#309">rel</span><span style="color:#555">=</span><span style="color:#c30">&#34;stylesheet&#34;</span> <span style="color:#309">href</span><span style="color:#555">=</span><span style="color:#c30">&#34;{{ url_for(&#39;static&#39;, filename=&#39;style.css&#39;) }}&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">nav</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">h1</span>&gt;Flaskr&lt;/<span style="color:#309;font-weight:bold">h1</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">ul</span>&gt;
+</span></span><span style="display:flex;"><span>    {% if g.user %}
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#309;font-weight:bold">li</span>&gt;&lt;<span style="color:#309;font-weight:bold">span</span>&gt;{{ g.user[&#39;username&#39;] }}&lt;/<span style="color:#309;font-weight:bold">span</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#309;font-weight:bold">li</span>&gt;&lt;<span style="color:#309;font-weight:bold">a</span> <span style="color:#309">href</span><span style="color:#555">=</span><span style="color:#c30">&#34;{{ url_for(&#39;auth.logout&#39;) }}&#34;</span>&gt;退出&lt;/<span style="color:#309;font-weight:bold">a</span>&gt;
+</span></span><span style="display:flex;"><span>    {% else %}
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#309;font-weight:bold">li</span>&gt;&lt;<span style="color:#309;font-weight:bold">a</span> <span style="color:#309">href</span><span style="color:#555">=</span><span style="color:#c30">&#34;{{ url_for(&#39;auth.register&#39;) }}&#34;</span>&gt;注册&lt;/<span style="color:#309;font-weight:bold">a</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#309;font-weight:bold">li</span>&gt;&lt;<span style="color:#309;font-weight:bold">a</span> <span style="color:#309">href</span><span style="color:#555">=</span><span style="color:#c30">&#34;{{ url_for(&#39;auth.login&#39;) }}&#34;</span>&gt;登录&lt;/<span style="color:#309;font-weight:bold">a</span>&gt;
+</span></span><span style="display:flex;"><span>    {% endif %}
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#309;font-weight:bold">ul</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">nav</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">section</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;content&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">header</span>&gt;
+</span></span><span style="display:flex;"><span>    {% block header %}{% endblock %}
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#309;font-weight:bold">header</span>&gt;
+</span></span><span style="display:flex;"><span>  {% for message in get_flashed_messages() %}
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">div</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;flash&#34;</span>&gt;{{ message }}&lt;/<span style="color:#309;font-weight:bold">div</span>&gt;
+</span></span><span style="display:flex;"><span>  {% endfor %}
+</span></span><span style="display:flex;"><span>  {% block content %}{% endblock %}
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">section</span>&gt;
+</span></span></code></pre></div><p><code>g</code> 变量和 <code>url_for</code>默认可以在模板中使用。
+<code>get_flashed_messages()</code>函数用于取得你在 视图函数中调用<code>flash</code>函数发送的内容。</p>
+<p>我们在基础模板中定义了3个块</p>
+<p><code>{% block title %}  </code> 用于修改标题</p>
+<p><code>{% block header %} </code>  修改页头</p>
+<p><code>{% block content %} </code>  主要页面内容</p>
+<h2 id="注册页模板">注册页模板</h2>
+<p><code>flaskr/templates/auth/register.html</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{% extends &#39;base.html&#39; %}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{% block header %}
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">h1</span>&gt;{% block title %}注册{% endblock %}&lt;/<span style="color:#309;font-weight:bold">h1</span>&gt;
+</span></span><span style="display:flex;"><span>{% endblock %}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{% block content %}
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">form</span> <span style="color:#309">method</span><span style="color:#555">=</span><span style="color:#c30">&#34;post&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">label</span> <span style="color:#309">for</span><span style="color:#555">=</span><span style="color:#c30">&#34;username&#34;</span>&gt;用户名&lt;/<span style="color:#309;font-weight:bold">label</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">input</span> <span style="color:#309">name</span><span style="color:#555">=</span><span style="color:#c30">&#34;username&#34;</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;username&#34;</span> <span style="color:#309">required</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">label</span> <span style="color:#309">for</span><span style="color:#555">=</span><span style="color:#c30">&#34;password&#34;</span>&gt;密码&lt;/<span style="color:#309;font-weight:bold">label</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">input</span> <span style="color:#309">type</span><span style="color:#555">=</span><span style="color:#c30">&#34;password&#34;</span> <span style="color:#309">name</span><span style="color:#555">=</span><span style="color:#c30">&#34;password&#34;</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;password&#34;</span> <span style="color:#309">required</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">input</span> <span style="color:#309">type</span><span style="color:#555">=</span><span style="color:#c30">&#34;submit&#34;</span> <span style="color:#309">value</span><span style="color:#555">=</span><span style="color:#c30">&#34;Register&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#309;font-weight:bold">form</span>&gt;
+</span></span><span style="display:flex;"><span>{% endblock %}
+</span></span></code></pre></div><p><code>{% extends 'base.html' %}</code> 告诉模板引擎，当前模板要替换基础模板的区块。</p>
+<h2 id="登录模板">登录模板</h2>
+<p><code> flaskr/templates/auth/login.html</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{% extends &#39;base.html&#39; %}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{% block header %}
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">h1</span>&gt;{% block title %}Log In{% endblock %}&lt;/<span style="color:#309;font-weight:bold">h1</span>&gt;
+</span></span><span style="display:flex;"><span>{% endblock %}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{% block content %}
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">form</span> <span style="color:#309">method</span><span style="color:#555">=</span><span style="color:#c30">&#34;post&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">label</span> <span style="color:#309">for</span><span style="color:#555">=</span><span style="color:#c30">&#34;username&#34;</span>&gt;用户名&lt;/<span style="color:#309;font-weight:bold">label</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">input</span> <span style="color:#309">name</span><span style="color:#555">=</span><span style="color:#c30">&#34;username&#34;</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;username&#34;</span> <span style="color:#309">required</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">label</span> <span style="color:#309">for</span><span style="color:#555">=</span><span style="color:#c30">&#34;password&#34;</span>&gt;密码&lt;/<span style="color:#309;font-weight:bold">label</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">input</span> <span style="color:#309">type</span><span style="color:#555">=</span><span style="color:#c30">&#34;password&#34;</span> <span style="color:#309">name</span><span style="color:#555">=</span><span style="color:#c30">&#34;password&#34;</span> <span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;password&#34;</span> <span style="color:#309">required</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">input</span> <span style="color:#309">type</span><span style="color:#555">=</span><span style="color:#c30">&#34;submit&#34;</span> <span style="color:#309">value</span><span style="color:#555">=</span><span style="color:#c30">&#34;登录&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#309;font-weight:bold">form</span>&gt;
+</span></span><span style="display:flex;"><span>{% endblock %}
+</span></span></code></pre></div><h1 id="静态文件">静态文件</h1>
+<p>现在页面有点丑，需要加载css来修改页面样式。</p>
+<p><code>{{ url_for('static', filename='style.css') }}</code></p>
+<p>生成静态文件的URL ， Flaskh自动到 <code>flaskr</code> 目录中找<code>static</code>目录里的<code>style.css</code>文件.</p>
+<p><code>/flaskr/static/style.css</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#309;font-weight:bold">html</span> { <span style="color:#069;font-weight:bold">font-family</span>: <span style="color:#069;font-weight:bold">sans-serif</span>; <span style="color:#069;font-weight:bold">background</span>: <span style="color:#f60">#eee</span>; <span style="color:#069;font-weight:bold">padding</span>: <span style="color:#f60">1</span><span style="color:#078;font-weight:bold">rem</span>; }
+</span></span><span style="display:flex;"><span><span style="color:#309;font-weight:bold">body</span> { <span style="color:#069;font-weight:bold">max-width</span>: <span style="color:#f60">960</span><span style="color:#078;font-weight:bold">px</span>; <span style="color:#069;font-weight:bold">margin</span>: <span style="color:#f60">0</span> <span style="color:#069;font-weight:bold">auto</span>; <span style="color:#069;font-weight:bold">background</span>: <span style="color:#069;font-weight:bold">white</span>; }
+</span></span><span style="display:flex;"><span><span style="color:#309;font-weight:bold">h1</span> { <span style="color:#069;font-weight:bold">font-family</span>: <span style="color:#069;font-weight:bold">serif</span>; <span style="color:#069;font-weight:bold">color</span>: <span style="color:#f60">#377ba8</span>; <span style="color:#069;font-weight:bold">margin</span>: <span style="color:#f60">1</span><span style="color:#078;font-weight:bold">rem</span> <span style="color:#f60">0</span>; }
+</span></span><span style="display:flex;"><span><span style="color:#309;font-weight:bold">a</span> { <span style="color:#069;font-weight:bold">color</span>: <span style="color:#f60">#377ba8</span>; }
+</span></span><span style="display:flex;"><span><span style="color:#309;font-weight:bold">hr</span> { <span style="color:#069;font-weight:bold">border</span>: <span style="color:#069;font-weight:bold">none</span>; <span style="color:#069;font-weight:bold">border-top</span>: <span style="color:#f60">1</span><span style="color:#078;font-weight:bold">px</span> <span style="color:#069;font-weight:bold">solid</span> <span style="color:#069;font-weight:bold">lightgray</span>; }
+</span></span><span style="display:flex;"><span><span style="color:#309;font-weight:bold">nav</span> { <span style="color:#069;font-weight:bold">background</span>: <span style="color:#069;font-weight:bold">lightgray</span>; <span style="color:#069;font-weight:bold">display</span>: <span style="color:#069;font-weight:bold">flex</span>; <span style="color:#069;font-weight:bold">align-items</span>: <span style="color:#069;font-weight:bold">center</span>; <span style="color:#069;font-weight:bold">padding</span>: <span style="color:#f60">0</span> <span style="color:#f60">0.5</span><span style="color:#078;font-weight:bold">rem</span>; }
+</span></span><span style="display:flex;"><span><span style="color:#309;font-weight:bold">nav</span> <span style="color:#309;font-weight:bold">h1</span> { <span style="color:#069;font-weight:bold">flex</span>: <span style="color:#069;font-weight:bold">auto</span>; <span style="color:#069;font-weight:bold">margin</span>: <span style="color:#f60">0</span>; }
+</span></span><span style="display:flex;"><span><span style="color:#309;font-weight:bold">nav</span> <span style="color:#309;font-weight:bold">h1</span> <span style="color:#309;font-weight:bold">a</span> { <span style="color:#069;font-weight:bold">text-decoration</span>: <span style="color:#069;font-weight:bold">none</span>; <span style="color:#069;font-weight:bold">padding</span>: <span style="color:#f60">0.25</span><span style="color:#078;font-weight:bold">rem</span> <span style="color:#f60">0.5</span><span style="color:#078;font-weight:bold">rem</span>; }
+</span></span><span style="display:flex;"><span><span style="color:#309;font-weight:bold">nav</span> <span style="color:#309;font-weight:bold">ul</span>  { <span style="color:#069;font-weight:bold">display</span>: <span style="color:#069;font-weight:bold">flex</span>; <span style="color:#069;font-weight:bold">list-style</span>: <span style="color:#069;font-weight:bold">none</span>; <span style="color:#069;font-weight:bold">margin</span>: <span style="color:#f60">0</span>; <span style="color:#069;font-weight:bold">padding</span>: <span style="color:#f60">0</span>; }
+</span></span><span style="display:flex;"><span><span style="color:#309;font-weight:bold">nav</span> <span style="color:#309;font-weight:bold">ul</span> <span style="color:#309;font-weight:bold">li</span> <span style="color:#309;font-weight:bold">a</span><span style="color:#555">,</span> <span style="color:#309;font-weight:bold">nav</span> <span style="color:#309;font-weight:bold">ul</span> <span style="color:#309;font-weight:bold">li</span> <span style="color:#309;font-weight:bold">span</span><span style="color:#555">,</span> <span style="color:#309;font-weight:bold">header</span> .<span style="color:#0a8;font-weight:bold">action</span> { <span style="color:#069;font-weight:bold">display</span>: <span style="color:#069;font-weight:bold">block</span>; <span style="color:#069;font-weight:bold">padding</span>: <span style="color:#f60">0.5</span><span style="color:#078;font-weight:bold">rem</span>; }
+</span></span><span style="display:flex;"><span>.<span style="color:#0a8;font-weight:bold">content</span> { <span style="color:#069;font-weight:bold">padding</span>: <span style="color:#f60">0</span> <span style="color:#f60">1</span><span style="color:#078;font-weight:bold">rem</span> <span style="color:#f60">1</span><span style="color:#078;font-weight:bold">rem</span>; }
+</span></span><span style="display:flex;"><span>.<span style="color:#0a8;font-weight:bold">content</span> <span style="color:#555">&gt;</span> <span style="color:#309;font-weight:bold">header</span> { <span style="color:#069;font-weight:bold">border-bottom</span>: <span style="color:#f60">1</span><span style="color:#078;font-weight:bold">px</span> <span style="color:#069;font-weight:bold">solid</span> <span style="color:#069;font-weight:bold">lightgray</span>; <span style="color:#069;font-weight:bold">display</span>: <span style="color:#069;font-weight:bold">flex</span>; <span style="color:#069;font-weight:bold">align-items</span>: <span style="color:#069;font-weight:bold">flex-end</span>; }
+</span></span><span style="display:flex;"><span>.<span style="color:#0a8;font-weight:bold">content</span> <span style="color:#555">&gt;</span> <span style="color:#309;font-weight:bold">header</span> <span style="color:#309;font-weight:bold">h1</span> { <span style="color:#069;font-weight:bold">flex</span>: <span style="color:#069;font-weight:bold">auto</span>; <span style="color:#069;font-weight:bold">margin</span>: <span style="color:#f60">1</span><span style="color:#078;font-weight:bold">rem</span> <span style="color:#f60">0</span> <span style="color:#f60">0.25</span><span style="color:#078;font-weight:bold">rem</span> <span style="color:#f60">0</span>; }
+</span></span><span style="display:flex;"><span>.<span style="color:#0a8;font-weight:bold">flash</span> { <span style="color:#069;font-weight:bold">margin</span>: <span style="color:#f60">1</span><span style="color:#078;font-weight:bold">em</span> <span style="color:#f60">0</span>; <span style="color:#069;font-weight:bold">padding</span>: <span style="color:#f60">1</span><span style="color:#078;font-weight:bold">em</span>; <span style="color:#069;font-weight:bold">background</span>: <span style="color:#f60">#cae6f6</span>; <span style="color:#069;font-weight:bold">border</span>: <span style="color:#f60">1</span><span style="color:#078;font-weight:bold">px</span> <span style="color:#069;font-weight:bold">solid</span> <span style="color:#f60">#377ba8</span>; }
+</span></span><span style="display:flex;"><span>.<span style="color:#0a8;font-weight:bold">post</span> <span style="color:#555">&gt;</span> <span style="color:#309;font-weight:bold">header</span> { <span style="color:#069;font-weight:bold">display</span>: <span style="color:#069;font-weight:bold">flex</span>; <span style="color:#069;font-weight:bold">align-items</span>: <span style="color:#069;font-weight:bold">flex-end</span>; <span style="color:#069;font-weight:bold">font-size</span>: <span style="color:#f60">0.85</span><span style="color:#078;font-weight:bold">em</span>; }
+</span></span><span style="display:flex;"><span>.<span style="color:#0a8;font-weight:bold">post</span> <span style="color:#555">&gt;</span> <span style="color:#309;font-weight:bold">header</span> <span style="color:#555">&gt;</span> <span style="color:#309;font-weight:bold">div</span>:<span style="color:#99f">first-of-type</span> { <span style="color:#069;font-weight:bold">flex</span>: <span style="color:#069;font-weight:bold">auto</span>; }
+</span></span><span style="display:flex;"><span>.<span style="color:#0a8;font-weight:bold">post</span> <span style="color:#555">&gt;</span> <span style="color:#309;font-weight:bold">header</span> <span style="color:#309;font-weight:bold">h1</span> { <span style="color:#069;font-weight:bold">font-size</span>: <span style="color:#f60">1.5</span><span style="color:#078;font-weight:bold">em</span>; <span style="color:#069;font-weight:bold">margin-bottom</span>: <span style="color:#f60">0</span>; }
+</span></span><span style="display:flex;"><span>.<span style="color:#0a8;font-weight:bold">post</span> .<span style="color:#0a8;font-weight:bold">about</span> { <span style="color:#069;font-weight:bold">color</span>: <span style="color:#069;font-weight:bold">slategray</span>; <span style="color:#069;font-weight:bold">font-style</span>: <span style="color:#069;font-weight:bold">italic</span>; }
+</span></span><span style="display:flex;"><span>.<span style="color:#0a8;font-weight:bold">post</span> .<span style="color:#0a8;font-weight:bold">body</span> { <span style="color:#069;font-weight:bold">white-space</span>: <span style="color:#069;font-weight:bold">pre-line</span>; }
+</span></span><span style="display:flex;"><span>.<span style="color:#0a8;font-weight:bold">content</span>:<span style="color:#99f">last-child</span> { <span style="color:#069;font-weight:bold">margin-bottom</span>: <span style="color:#f60">0</span>; }
+</span></span><span style="display:flex;"><span>.<span style="color:#0a8;font-weight:bold">content</span> <span style="color:#309;font-weight:bold">form</span> { <span style="color:#069;font-weight:bold">margin</span>: <span style="color:#f60">1</span><span style="color:#078;font-weight:bold">em</span> <span style="color:#f60">0</span>; <span style="color:#069;font-weight:bold">display</span>: <span style="color:#069;font-weight:bold">flex</span>; <span style="color:#069;font-weight:bold">flex-direction</span>: <span style="color:#069;font-weight:bold">column</span>; }
+</span></span><span style="display:flex;"><span>.<span style="color:#0a8;font-weight:bold">content</span> <span style="color:#309;font-weight:bold">label</span> { <span style="color:#069;font-weight:bold">font-weight</span>: <span style="color:#069;font-weight:bold">bold</span>; <span style="color:#069;font-weight:bold">margin-bottom</span>: <span style="color:#f60">0.5</span><span style="color:#078;font-weight:bold">em</span>; }
+</span></span><span style="display:flex;"><span>.<span style="color:#0a8;font-weight:bold">content</span> <span style="color:#309;font-weight:bold">input</span><span style="color:#555">,</span> .<span style="color:#0a8;font-weight:bold">content</span> <span style="color:#309;font-weight:bold">textarea</span> { <span style="color:#069;font-weight:bold">margin-bottom</span>: <span style="color:#f60">1</span><span style="color:#078;font-weight:bold">em</span>; }
+</span></span><span style="display:flex;"><span>.<span style="color:#0a8;font-weight:bold">content</span> <span style="color:#309;font-weight:bold">textarea</span> { <span style="color:#069;font-weight:bold">min-height</span>: <span style="color:#f60">12</span><span style="color:#078;font-weight:bold">em</span>; <span style="color:#069;font-weight:bold">resize</span>: <span style="color:#069;font-weight:bold">vertical</span>; }
+</span></span><span style="display:flex;"><span><span style="color:#309;font-weight:bold">input</span>.<span style="color:#0a8;font-weight:bold">danger</span> { <span style="color:#069;font-weight:bold">color</span>: <span style="color:#f60">#cc2f2e</span>; }
+</span></span><span style="display:flex;"><span><span style="color:#309;font-weight:bold">input</span><span style="color:#555">[</span><span style="color:#309;font-weight:bold">type</span><span style="color:#555">=</span><span style="color:#309;font-weight:bold">submit</span><span style="color:#555">]</span> { <span style="color:#069;font-weight:bold">align-self</span>: <span style="color:#069;font-weight:bold">start</span>; <span style="color:#069;font-weight:bold">min-width</span>: <span style="color:#f60">10</span><span style="color:#078;font-weight:bold">em</span>; }
+</span></span></code></pre></div><h1 id="创建文章的蓝图">创建文章的蓝图</h1>
+<p><code>flaskr/blog.py</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">from</span> <span style="color:#0cf;font-weight:bold">flask</span> <span style="color:#069;font-weight:bold">import</span> (
+</span></span><span style="display:flex;"><span>    Blueprint, flash, g, redirect, render_template, request, url_for
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">from</span> <span style="color:#0cf;font-weight:bold">werkzeug.exceptions</span> <span style="color:#069;font-weight:bold">import</span> abort
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">from</span> <span style="color:#0cf;font-weight:bold">flaskr.auth</span> <span style="color:#069;font-weight:bold">import</span> login_required
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">from</span> <span style="color:#0cf;font-weight:bold">flaskr.db</span> <span style="color:#069;font-weight:bold">import</span> get_db
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bp <span style="color:#555">=</span> Blueprint(<span style="color:#c30">&#39;blog&#39;</span>, __name__)
+</span></span></code></pre></div><p>注册蓝图</p>
+<p><code>flaskr/__init__.py</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>app<span style="color:#555">.</span>register_blueprint(blog<span style="color:#555">.</span>bp)
+</span></span><span style="display:flex;"><span>app<span style="color:#555">.</span>add_url_rule(<span style="color:#c30">&#39;/&#39;</span>, endpoint<span style="color:#555">=</span><span style="color:#c30">&#39;index&#39;</span>)
+</span></span></code></pre></div><p><code> app.add_url_rule('/', endpoint='index')</code> 设置名称 <code>&quot;index&quot;</code>对应的 URL规则。</p>
+<h2 id="首页">首页</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#99f">@bp.route</span>(<span style="color:#c30">&#39;/&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">index</span>():
+</span></span><span style="display:flex;"><span>    db <span style="color:#555">=</span> get_db()
+</span></span><span style="display:flex;"><span>    posts <span style="color:#555">=</span> db<span style="color:#555">.</span>execute(
+</span></span><span style="display:flex;"><span>        <span style="color:#c30">&#39;SELECT p.id, title, body, created, author_id, username&#39;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c30">&#39; FROM post p JOIN user u ON p.author_id = u.id&#39;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c30">&#39; ORDER BY created DESC&#39;</span>
+</span></span><span style="display:flex;"><span>    )<span style="color:#555">.</span>fetchall()
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> render_template(<span style="color:#c30">&#39;blog/index.html&#39;</span>, posts<span style="color:#555">=</span>posts)
+</span></span></code></pre></div><ul>
+<li><code>fetchall()</code>函数获取了查询到的全部数据。传递到模板进行显示</li>
+</ul>
+<p><code>flaskr/templates/blog/index.html</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{% extends &#39;base.html&#39; %}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{% block header %}
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#309;font-weight:bold">h1</span>&gt;{% block title %}Posts{% endblock %}&lt;/<span style="color:#309;font-weight:bold">h1</span>&gt;
+</span></span><span style="display:flex;"><span>  {% if g.user %}
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">a</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;action&#34;</span> <span style="color:#309">href</span><span style="color:#555">=</span><span style="color:#c30">&#34;{{ url_for(&#39;blog.create&#39;) }}&#34;</span>&gt;发表&lt;/<span style="color:#309;font-weight:bold">a</span>&gt;
+</span></span><span style="display:flex;"><span>  {% endif %}
+</span></span><span style="display:flex;"><span>{% endblock %}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{% block content %}
+</span></span><span style="display:flex;"><span>  {% for post in posts %}
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#309;font-weight:bold">article</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;post&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#309;font-weight:bold">header</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#309;font-weight:bold">div</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#309;font-weight:bold">h1</span>&gt;{{ post[&#39;title&#39;] }}&lt;/<span style="color:#309;font-weight:bold">h1</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#309;font-weight:bold">div</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;about&#34;</span>&gt;作者: {{ post[&#39;username&#39;] }} 发布时间： {{ post[&#39;created&#39;].strftime(&#39;%Y-%m-%d&#39;) }}&lt;/<span style="color:#309;font-weight:bold">div</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#309;font-weight:bold">div</span>&gt;
+</span></span><span style="display:flex;"><span>        {% if g.user[&#39;id&#39;] == post[&#39;author_id&#39;] %}
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#309;font-weight:bold">a</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;action&#34;</span> <span style="color:#309">href</span><span style="color:#555">=</span><span style="color:#c30">&#34;{{ url_for(&#39;blog.update&#39;, id=post[&#39;id&#39;]) }}&#34;</span>&gt;编辑&lt;/<span style="color:#309;font-weight:bold">a</span>&gt;
+</span></span><span style="display:flex;"><span>        {% endif %}
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#309;font-weight:bold">header</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#309;font-weight:bold">p</span> <span style="color:#309">class</span><span style="color:#555">=</span><span style="color:#c30">&#34;body&#34;</span>&gt;{{ post[&#39;body&#39;] }}&lt;/<span style="color:#309;font-weight:bold">p</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#309;font-weight:bold">article</span>&gt;
+</span></span><span style="display:flex;"><span>    {% if not loop.last %}
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#309;font-weight:bold">hr</span>&gt;
+</span></span><span style="display:flex;"><span>    {% endif %}
+</span></span><span style="display:flex;"><span>  {% endfor %}
+</span></span><span style="display:flex;"><span>{% endblock %}
+</span></span></code></pre></div><ul>
+<li>首页通过 <code>{% if g.user %}</code> 判断用户的登录状态展示不同的按钮以便用户进行文章的编辑。</li>
+<li><code>{% for post in posts %}</code> 在模板中对<code>posts</code>变量进行循环输出。他包含的区块会不断的迭代<code>posts</code>变量中的值进行输出。</li>
+</ul>
+<h2 id="创建文章">创建文章</h2>
+<p>创建和注册类似，用户提交一个表单我们将表单内容检查后保存到数据库，唯一不同点在于我们增加了 <code>@login_required</code> ，用于检查必须是登录用户才能发布文章。</p>
+<p><code>flaskr/blog.py</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#99f">@bp.route</span>(<span style="color:#c30">&#39;/create&#39;</span>, methods<span style="color:#555">=</span>(<span style="color:#c30">&#39;GET&#39;</span>, <span style="color:#c30">&#39;POST&#39;</span>))
+</span></span><span style="display:flex;"><span><span style="color:#99f">@login_required</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">create</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">if</span> request<span style="color:#555">.</span>method <span style="color:#555">==</span> <span style="color:#c30">&#39;POST&#39;</span>:
+</span></span><span style="display:flex;"><span>        title <span style="color:#555">=</span> request<span style="color:#555">.</span>form[<span style="color:#c30">&#39;title&#39;</span>]
+</span></span><span style="display:flex;"><span>        body <span style="color:#555">=</span> request<span style="color:#555">.</span>form[<span style="color:#c30">&#39;body&#39;</span>]
+</span></span><span style="display:flex;"><span>        error <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">None</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> title:
+</span></span><span style="display:flex;"><span>            error <span style="color:#555">=</span> <span style="color:#c30">&#39;标题必填.&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">if</span> error <span style="color:#000;font-weight:bold">is</span> <span style="color:#000;font-weight:bold">not</span> <span style="color:#069;font-weight:bold">None</span>:
+</span></span><span style="display:flex;"><span>            flash(error)
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>            db <span style="color:#555">=</span> get_db()
+</span></span><span style="display:flex;"><span>            db<span style="color:#555">.</span>execute(
+</span></span><span style="display:flex;"><span>                <span style="color:#c30">&#39;INSERT INTO post (title, body, author_id)&#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#c30">&#39; VALUES (?, ?, ?)&#39;</span>,
+</span></span><span style="display:flex;"><span>                (title, body, g<span style="color:#555">.</span>user[<span style="color:#c30">&#39;id&#39;</span>])
+</span></span><span style="display:flex;"><span>            )
+</span></span><span style="display:flex;"><span>            db<span style="color:#555">.</span>commit()
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">return</span> redirect(url_for(<span style="color:#c30">&#39;blog.index&#39;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> render_template(<span style="color:#c30">&#39;blog/create.html&#39;</span>)
+</span></span></code></pre></div><p>模板文件 <code>flaskr/templates/blog/create.html</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>{<span style="color:#555">%</span> extends <span style="color:#c30">&#39;base.html&#39;</span> <span style="color:#555">%</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{<span style="color:#555">%</span> block header <span style="color:#555">%</span>}
+</span></span><span style="display:flex;"><span>  <span style="color:#555">&lt;</span>h1<span style="color:#555">&gt;</span>{<span style="color:#555">%</span> block title <span style="color:#555">%</span>}发布文章{<span style="color:#555">%</span> endblock <span style="color:#555">%</span>}<span style="color:#555">&lt;/</span>h1<span style="color:#555">&gt;</span>
+</span></span><span style="display:flex;"><span>{<span style="color:#555">%</span> endblock <span style="color:#555">%</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{<span style="color:#555">%</span> block content <span style="color:#555">%</span>}
+</span></span><span style="display:flex;"><span>  <span style="color:#555">&lt;</span>form method<span style="color:#555">=</span><span style="color:#c30">&#34;post&#34;</span><span style="color:#555">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">&lt;</span>label <span style="color:#069;font-weight:bold">for</span><span style="color:#555">=</span><span style="color:#c30">&#34;title&#34;</span><span style="color:#555">&gt;</span>标题<span style="color:#555">&lt;/</span>label<span style="color:#555">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">&lt;</span><span style="color:#366">input</span> name<span style="color:#555">=</span><span style="color:#c30">&#34;title&#34;</span> <span style="color:#366">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;title&#34;</span> value<span style="color:#555">=</span><span style="color:#c30">&#34;{{ request.form[&#39;title&#39;] }}&#34;</span> required<span style="color:#555">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">&lt;</span>label <span style="color:#069;font-weight:bold">for</span><span style="color:#555">=</span><span style="color:#c30">&#34;body&#34;</span><span style="color:#555">&gt;</span>内容<span style="color:#555">&lt;/</span>label<span style="color:#555">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">&lt;</span>textarea name<span style="color:#555">=</span><span style="color:#c30">&#34;body&#34;</span> <span style="color:#366">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;body&#34;</span><span style="color:#555">&gt;</span>{{ request<span style="color:#555">.</span>form[<span style="color:#c30">&#39;body&#39;</span>] }}<span style="color:#555">&lt;/</span>textarea<span style="color:#555">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">&lt;</span><span style="color:#366">input</span> <span style="color:#366">type</span><span style="color:#555">=</span><span style="color:#c30">&#34;submit&#34;</span> value<span style="color:#555">=</span><span style="color:#c30">&#34;保存&#34;</span><span style="color:#555">&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#555">&lt;/</span>form<span style="color:#555">&gt;</span>
+</span></span><span style="display:flex;"><span>{<span style="color:#555">%</span> endblock <span style="color:#555">%</span>}
+</span></span></code></pre></div><h2 id="编辑和删除">编辑和删除</h2>
+<p>编辑和删除我们合并到一个界面，我们都需要根据ID读取文章，然后检查是否是登录用户。然后才能执行该操作。因为两个视图方法都要根据ID来获取文章内容，我们可以将他包装成一个函数。</p>
+<p><code>flaskr/blog.py</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#09f;font-style:italic">#根据ID获取文章</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">get_post</span>(<span style="color:#366">id</span>, check_author<span style="color:#555">=</span><span style="color:#069;font-weight:bold">True</span>):
+</span></span><span style="display:flex;"><span>    post <span style="color:#555">=</span> get_db()<span style="color:#555">.</span>execute(
+</span></span><span style="display:flex;"><span>        <span style="color:#c30">&#39;SELECT p.id, title, body, created, author_id, username&#39;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c30">&#39; FROM post p JOIN user u ON p.author_id = u.id&#39;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c30">&#39; WHERE p.id = ?&#39;</span>,
+</span></span><span style="display:flex;"><span>        (<span style="color:#366">id</span>,)
+</span></span><span style="display:flex;"><span>    )<span style="color:#555">.</span>fetchone()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">if</span> post <span style="color:#000;font-weight:bold">is</span> <span style="color:#069;font-weight:bold">None</span>:
+</span></span><span style="display:flex;"><span>        abort(<span style="color:#f60">404</span>, <span style="color:#c30">f</span><span style="color:#c30">&#34;文章[</span><span style="color:#a00">{</span><span style="color:#366">id</span><span style="color:#a00">}</span><span style="color:#c30">]不存在.&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">if</span> check_author <span style="color:#000;font-weight:bold">and</span> post[<span style="color:#c30">&#39;author_id&#39;</span>] <span style="color:#555">!=</span> g<span style="color:#555">.</span>user[<span style="color:#c30">&#39;id&#39;</span>]:
+</span></span><span style="display:flex;"><span>        abort(<span style="color:#f60">403</span>,<span style="color:#c30">&#34;你不是作者，无法查看该文章&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> post
+</span></span></code></pre></div><ul>
+<li><code>abort()</code> 函数会返回HTTP 错误码，如果指定了第二个参数提醒内容，则会同时展示你提供的内容，否则会展示默认内容，比如 404-&gt;Not Found ,403-&gt;Forbidden</li>
+<li><code>check_author</code> 参数定义了是否要检查取出来的文章是不是当前用户。只需要比对<code>g.user[id]</code>和文章创建时记录的作者是否一致即可。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#99f">@bp.route</span>(<span style="color:#c30">&#39;/&lt;int:id&gt;/update&#39;</span>, methods<span style="color:#555">=</span>(<span style="color:#c30">&#39;GET&#39;</span>, <span style="color:#c30">&#39;POST&#39;</span>))
+</span></span><span style="display:flex;"><span><span style="color:#99f">@login_required</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">update</span>(<span style="color:#366">id</span>):
+</span></span><span style="display:flex;"><span>    post <span style="color:#555">=</span> get_post(<span style="color:#366">id</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">if</span> request<span style="color:#555">.</span>method <span style="color:#555">==</span> <span style="color:#c30">&#39;POST&#39;</span>:
+</span></span><span style="display:flex;"><span>        title <span style="color:#555">=</span> request<span style="color:#555">.</span>form[<span style="color:#c30">&#39;title&#39;</span>]
+</span></span><span style="display:flex;"><span>        body <span style="color:#555">=</span> request<span style="color:#555">.</span>form[<span style="color:#c30">&#39;body&#39;</span>]
+</span></span><span style="display:flex;"><span>        error <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">None</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> title:
+</span></span><span style="display:flex;"><span>            error <span style="color:#555">=</span> <span style="color:#c30">&#39;标题必填.&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">if</span> error <span style="color:#000;font-weight:bold">is</span> <span style="color:#000;font-weight:bold">not</span> <span style="color:#069;font-weight:bold">None</span>:
+</span></span><span style="display:flex;"><span>            flash(error)
+</span></span><span style="display:flex;"><span>        <span style="color:#069;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>            db <span style="color:#555">=</span> get_db()
+</span></span><span style="display:flex;"><span>            db<span style="color:#555">.</span>execute(
+</span></span><span style="display:flex;"><span>                <span style="color:#c30">&#39;UPDATE post SET title = ?, body = ?&#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#c30">&#39; WHERE id = ?&#39;</span>,
+</span></span><span style="display:flex;"><span>                (title, body, <span style="color:#366">id</span>)
+</span></span><span style="display:flex;"><span>            )
+</span></span><span style="display:flex;"><span>            db<span style="color:#555">.</span>commit()
+</span></span><span style="display:flex;"><span>            <span style="color:#069;font-weight:bold">return</span> redirect(url_for(<span style="color:#c30">&#39;blog.index&#39;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> render_template(<span style="color:#c30">&#39;blog/update.html&#39;</span>, post<span style="color:#555">=</span>post)
+</span></span></code></pre></div><ul>
+<li>和之前的视图函数不同，update函数增加了一个 <code>id</code>参数。通过路由上定义的 <code>&lt;int:id&gt;</code>来进行匹配获取，实际的uRL 会类似 : <code>/post/1/update</code>. 如果路由定义时不指定类型,定义为<code>&lt;id&gt;</code>,则会匹配为字符串。使用<code>url_for</code>函数时也需要加上参数 : <code>url_for(&quot;post.update&quot;,id=1)</code></li>
+</ul>
+<p>他们的视图差不太远，合并到了一个里面。</p>
+<p><code>flaskr/templates/blog/update.html</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>{<span style="color:#555">%</span> extends <span style="color:#c30">&#39;base.html&#39;</span> <span style="color:#555">%</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{<span style="color:#555">%</span> block header <span style="color:#555">%</span>}
+</span></span><span style="display:flex;"><span>  <span style="color:#555">&lt;</span>h1<span style="color:#555">&gt;</span>{<span style="color:#555">%</span> block title <span style="color:#555">%</span>}编辑<span style="color:#a00;background-color:#faa">：</span> <span style="color:#c30">&#34;{{ post[&#39;title&#39;] }}&#34;</span>{<span style="color:#555">%</span> endblock <span style="color:#555">%</span>}<span style="color:#555">&lt;/</span>h1<span style="color:#555">&gt;</span>
+</span></span><span style="display:flex;"><span>{<span style="color:#555">%</span> endblock <span style="color:#555">%</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{<span style="color:#555">%</span> block content <span style="color:#555">%</span>}
+</span></span><span style="display:flex;"><span>  <span style="color:#555">&lt;</span>form method<span style="color:#555">=</span><span style="color:#c30">&#34;post&#34;</span><span style="color:#555">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">&lt;</span>label <span style="color:#069;font-weight:bold">for</span><span style="color:#555">=</span><span style="color:#c30">&#34;title&#34;</span><span style="color:#555">&gt;</span>标题<span style="color:#555">&lt;/</span>label<span style="color:#555">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">&lt;</span><span style="color:#366">input</span> name<span style="color:#555">=</span><span style="color:#c30">&#34;title&#34;</span> <span style="color:#366">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;title&#34;</span>
+</span></span><span style="display:flex;"><span>      value<span style="color:#555">=</span><span style="color:#c30">&#34;{{ request.form[&#39;title&#39;] or post[&#39;title&#39;] }}&#34;</span> required<span style="color:#555">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">&lt;</span>label <span style="color:#069;font-weight:bold">for</span><span style="color:#555">=</span><span style="color:#c30">&#34;body&#34;</span><span style="color:#555">&gt;</span>内容<span style="color:#555">&lt;/</span>label<span style="color:#555">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">&lt;</span>textarea name<span style="color:#555">=</span><span style="color:#c30">&#34;body&#34;</span> <span style="color:#366">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;body&#34;</span><span style="color:#555">&gt;</span>{{ request<span style="color:#555">.</span>form[<span style="color:#c30">&#39;body&#39;</span>] <span style="color:#000;font-weight:bold">or</span> post[<span style="color:#c30">&#39;body&#39;</span>] }}<span style="color:#555">&lt;/</span>textarea<span style="color:#555">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">&lt;</span><span style="color:#366">input</span> <span style="color:#366">type</span><span style="color:#555">=</span><span style="color:#c30">&#34;submit&#34;</span> value<span style="color:#555">=</span><span style="color:#c30">&#34;保存&#34;</span><span style="color:#555">&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#555">&lt;/</span>form<span style="color:#555">&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#555">&lt;</span>hr<span style="color:#555">&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#555">&lt;</span>form action<span style="color:#555">=</span><span style="color:#c30">&#34;{{ url_for(&#39;blog.delete&#39;, id=post[&#39;id&#39;]) }}&#34;</span> method<span style="color:#555">=</span><span style="color:#c30">&#34;post&#34;</span><span style="color:#555">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#555">&lt;</span><span style="color:#366">input</span> class<span style="color:#555">=</span><span style="color:#c30">&#34;danger&#34;</span> <span style="color:#366">type</span><span style="color:#555">=</span><span style="color:#c30">&#34;submit&#34;</span> value<span style="color:#555">=</span><span style="color:#c30">&#34;删除&#34;</span> onclick<span style="color:#555">=</span><span style="color:#c30">&#34;return confirm(&#39;您确定要删除吗? 删除后无法恢复。&#39;);&#34;</span><span style="color:#555">&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#555">&lt;/</span>form<span style="color:#555">&gt;</span>
+</span></span><span style="display:flex;"><span>{<span style="color:#555">%</span> endblock <span style="color:#555">%</span>}
+</span></span></code></pre></div><p>删除操作比较简单</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#99f">@bp.route</span>(<span style="color:#c30">&#39;/&lt;int:id&gt;/delete&#39;</span>, methods<span style="color:#555">=</span>(<span style="color:#c30">&#39;POST&#39;</span>,))
+</span></span><span style="display:flex;"><span><span style="color:#99f">@login_required</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">delete</span>(<span style="color:#366">id</span>):
+</span></span><span style="display:flex;"><span>    get_post(<span style="color:#366">id</span>)
+</span></span><span style="display:flex;"><span>    db <span style="color:#555">=</span> get_db()
+</span></span><span style="display:flex;"><span>    db<span style="color:#555">.</span>execute(<span style="color:#c30">&#39;DELETE FROM post WHERE id = ?&#39;</span>, (<span style="color:#366">id</span>,))
+</span></span><span style="display:flex;"><span>    db<span style="color:#555">.</span>commit()
+</span></span><span style="display:flex;"><span>    <span style="color:#069;font-weight:bold">return</span> redirect(url_for(<span style="color:#c30">&#39;blog.index&#39;</span>))
+</span></span></code></pre></div><h1 id="运行一下">运行一下</h1>
+<p>这样我们就完成了一个有基本功能的博客，可以运行一下看看</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>flask --app flaskr  run -h 0.0.0.0 --debug   -p <span style="color:#f60">18622</span>
+</span></span></code></pre></div><p>打开浏览器查看 <a href="http://127.0.0.1:18622">http://127.0.0.1:18622</a></p>
+<p>
+  <img src="/img/in-post/flask_running.jpg" alt="大功告成">
+
+</p>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="/"><img src="/img/favicon.png" />我的乐与怒</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2023-07-21-build-application-with-flask-part3/" data-toggle="tooltip" data-placement="top" title="使用Flask开发应用程序（3）- 测试和部署"><i class="fa fa-angle-left fa-lg"></i>
+                            Previous</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2023-07-21-build-application-with-flask-part1/" data-toggle="tooltip" data-placement="top" title="使用Flask开发应用程序(1) - 基础">Next
+                        <i class="fa fa-angle-right fa-lg"></i></a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">目录</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">标签</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/aframe" title="aframe">
+                            aframe
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/andrew-ng" title="andrew-ng">
+                            andrew-ng
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/arduino" title="arduino">
+                            arduino
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                            blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/cgi" title="cgi">
+                            cgi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/consul" title="consul">
+                            consul
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                            docker
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/eth" title="eth">
+                            eth
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ethereum" title="ethereum">
+                            ethereum
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/evm" title="evm">
+                            evm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/feign" title="feign">
+                            feign
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/flask" title="flask">
+                            flask
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                            golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/hw" title="hw">
+                            hw
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/jpa" title="jpa">
+                            jpa
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/js" title="js">
+                            js
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/k8s" title="k8s">
+                            k8s
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                            kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/linux" title="linux">
+                            linux
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mac" title="mac">
+                            mac
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/machine-learning" title="machine-learning">
+                            machine-learning
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/math" title="math">
+                            math
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mysql" title="mysql">
+                            mysql
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/nginx" title="nginx">
+                            nginx
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/op" title="op">
+                            op
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/opentcv" title="opentcv">
+                            opentcv
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ops" title="ops">
+                            ops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/poco" title="poco">
+                            poco
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/pptp" title="pptp">
+                            pptp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/python" title="python">
+                            python
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/rd" title="rd">
+                            rd
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/spring" title="spring">
+                            spring
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/springboot" title="springboot">
+                            springboot
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ssl" title="ssl">
+                            ssl
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/thymeleaf" title="thymeleaf">
+                            thymeleaf
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/type" title="type">
+                            type
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vagrant" title="vagrant">
+                            vagrant
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vpn" title="vpn">
+                            vpn
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/vue" title="vue">
+                            vue
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/webrtc" title="webrtc">
+                            webrtc
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/workflow" title="workflow">
+                            workflow
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0" title="技术文章">
+                            技术文章
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2" title="新浪博客">
+                            新浪博客
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%97%A0%E8%81%8A" title="无聊">
+                            无聊
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB" title="生活">
+                            生活
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95" title="生活记录">
+                            生活记录
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E8%82%A1%E7%A5%A8" title="股票">
+                            股票
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E8%BF%90%E7%BB%B4" title="运维">
+                            运维
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>链接</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/vegas">青鸟的翅膀</a></li>
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/yoshikilau">Caffeine Park</a></li>
+                        
+                        <li><a target="_blank" href="http://huxpro.github.io">Theme From Hux</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/vincentz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/img/icwt.jpg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/vincentmi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/5311815/vincent-mi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="我的乐与怒" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; 我的乐与怒 2024 | <a href="http://www.beian.miit.gov.cn" style="text-decoration: none;"> 蜀ICP备17040089号-2</a>
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https'){
+       bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else{
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+<script>
+    
+    var _baId = '2b745fdb2d90955bdfb8ad1194277073';
+
+    
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-78738242-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

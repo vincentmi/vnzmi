@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Arduino on 我的乐与怒</title>
+    <link>/tags/arduino/</link>
+    <description>Recent content in Arduino on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 10 May 2015 23:16:00 +0000</lastBuildDate><atom:link href="/tags/arduino/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>用RF24创建无线传感器网络</title>
+      <link>/post/2015-05-10-rf24network-for-wireless-sensor-networking/</link>
+      <pubDate>Sun, 10 May 2015 23:16:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-10-rf24network-for-wireless-sensor-networking/</guid>
+      <description>&lt;p&gt;英文原版 &lt;a href=&#34;https://maniacbug.wordpress.com/2012/03/30/rf24network/&#34;&gt;https://maniacbug.wordpress.com/2012/03/30/rf24network/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;翻译: Vincent Mi &lt;a href=&#34;http://vnzmi.com/rf24network-for-wireless-sensor-networking.html&#34;&gt;http://vnzmi.com/rf24network-for-wireless-sensor-networking.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;
+  &lt;img src=&#34;/img/in-post/3153790176.jpg&#34; alt=&#34;7013108743_416996c44c_z.jpg&#34;&gt;
+
+&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://maniacbug.github.io/RF24Network/&#34;&gt;RF24Network&lt;/a&gt;网络是一个使用Nordic nRF24L01+ 无线，运行在Arduino兼容硬件的网络层。他的目标是成为Arduino单元通信的除Xbee外的另外一个选择。他提供一个主机地址空间和消息路由最高支持6000个节点，形成一个有能力和可扩展的无线传感器网络系统。 同时让两个节点之间的通讯更加简单。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>ENC28J60接线</title>
+      <link>/post/2015-05-08-enc28j60/</link>
+      <pubDate>Fri, 08 May 2015 23:16:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-08-enc28j60/</guid>
+      <description>drivers.rar HanRun HR911105A 14/20 CLKOUT INT WOL SO SI SCK CS RESET VCC GND 接线 ENC28J60 Arduino Due/UNO Arduino Mega VCC 3V3 3V3 CLKOUT ENC-WOL RESET RESET RESET ENC-INT 2 2 GND GND GND SCK 13 52 MISO 12 50 MOSI 11 51 CS 10 53 另外一个库的接法 https://github.com/jcw/ethercard 该库支持DNS,DHCP 测试可用。 &amp;ndash; &amp;ndash; VCC 3.3V GND GND SCK Pin 13 SO Pin 12 SI Pin 11 CS Pin 8 # Selectable with the ether.begin() function</description>
+    </item>
+    
+    <item>
+      <title>外置采集温度_让arduino用2颗5号电池运行1年以上 </title>
+      <link>/post/2015-05-08-arduino-power-save/</link>
+      <pubDate>Fri, 08 May 2015 14:16:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-08-arduino-power-save/</guid>
+      <description>&lt;p&gt;文章来自极客工坊，因此加密了只自己能看纯收藏
+&lt;a href=&#34;http://www.geek-workshop.com/thread-12261-1-1.html&#34;&gt;http://www.geek-workshop.com/thread-12261-1-1.html&lt;/a&gt;
+作者：mylife1213&lt;/p&gt;
+&lt;p&gt;这次讲功耗.&lt;/p&gt;
+&lt;p&gt;如果你想把arduino avr类的开发项目用来便携式设置上,不管商业还是个人DIY,那么你头一个要对付的问题就是设备功耗!&lt;/p&gt;
+&lt;p&gt;我测试atmega328p(大部分arduino 都是基于这个处理器) 最小系统下(16Mhz)运行功耗是10ma,那么如果不对处理器进行任何节电处理的话一块手机1500mah的电池只能不间断运行  1500/10/24=6.5天 ,这个还是在没有任何外围元器件的情况下的运行时间!&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rpc on 我的乐与怒</title>
+    <link>/tags/rpc/</link>
+    <description>Recent content in rpc on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 17 Apr 2017 16:01:00 +0000</lastBuildDate><atom:link href="/tags/rpc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Golang net/rpc 开发jsonrpc服务</title>
+      <link>/post/2017-04-17-golang-json-rpc/</link>
+      <pubDate>Mon, 17 Apr 2017 16:01:00 +0000</pubDate>
+      
+      <guid>/post/2017-04-17-golang-json-rpc/</guid>
+      <description>RPC RPC作为微服务框架下的各个模块的通讯协议进行系统内部各个服务之间的沟通。随着业务量的增大和系统的复杂度增加，可能还需要使用系统总线对各个消息进行路由、异步调用以及流量控制。Go提供了net/rpc包来实现对RPC的支持,通过启动一个服务器，注册一个对象暴露他的公共方法来允许远</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="我的乐与怒">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//img/car2.jpg">
+    <meta property="twitter:image" content="//img/car2.jpg" />
+    
+
+    
+    <meta name="title" content="JavaScript的9个陷阱及评点" />
+    <meta property="og:title" content="JavaScript的9个陷阱及评点" />
+    <meta property="twitter:title" content="JavaScript的9个陷阱及评点" />
+    
+
+    
+    <meta name="description" content="In code we trust">
+    <meta property="og:description" content="In code we trust" />
+    <meta property="twitter:description" content="In code we trust" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="我的乐与怒,vincent mi, miwenshu, 电商,  博客, 个人网站, 互联网, Web, 云原生, PaaS, Java, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>JavaScript的9个陷阱及评点 | 我的乐与怒 | Vincent&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/2007-09-21-javascript-traps/">
+
+    
+
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">我的乐与怒</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/about/">我</a></li>
+                    
+                        <li><a href="/archive/">归档</a></li>
+                    
+                        <li><a href="/search/">搜索</a></li>
+                    
+                        <li><a href="/codesketch/">CodeSketch</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/spectrum-gradient.svg')
+    }
+    
+    .titleColor {
+        text-align: center;font-size:80px;
+        color: #FFFFFF;
+    }
+   
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2" title="新浪博客">
+                            新浪博客
+                        </a>
+                        
+                        <a class="tag" href="/tags/javascript" title="Javascript">
+                            Javascript
+                        </a>
+                        
+                    </div>
+                    <h1 class="titleColor">JavaScript的9个陷阱及评点</h1>
+                    <h2 class="subheading titleColor"></h2>
+                    <span class="meta titleColor">
+                        
+                            Posted by 
+                            
+                                Vincent
+                             
+                            on 
+                            Friday, September 21, 2007
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <p> </p>
+<blockquote>
+<p>来自 Nine Javascript Gotchas ,</p>
+</blockquote>
+<p>以下是JavaScript容易犯错的九个陷阱。虽然不是什么很高深的技术问题，但注意一下，会使您的编程轻松些，即所谓make
+life easier. 笔者对某些陷阱会混杂一些评点。</p>
+<h3 id="1最后一个逗号">1.　最后一个逗号</h3>
+<p>如这段代码，注意最后一个逗号，按语言学角度来说应该是不错的（python的类似数据类型辞典dictionary就允许如此）。IE会报语法错误，但语焉不详，你只能用人眼从几千行代码中扫描。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a00;background-color:#faa"> </span> <span style="color:#069;font-weight:bold">var</span> theObj <span style="color:#555">=</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a00;background-color:#faa">       </span>
+</span></span><span style="display:flex;"><span>city <span style="color:#555">:</span> <span style="color:#c30">&#34;Boston&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#a00;background-color:#faa">       </span>
+</span></span><span style="display:flex;"><span>state <span style="color:#555">:</span> <span style="color:#c30">&#34;MA&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#a00;background-color:#faa"> </span> }
+</span></span></code></pre></div><h3 id="2this的引用会改变">2.　this的引用会改变</h3>
+<p>如这段代码：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">input</span> <span style="color:#309">type</span><span style="color:#555">=</span><span style="color:#c30">&#34;button&#34;</span> <span style="color:#309">value</span><span style="color:#555">=</span><span style="color:#c30">&#34;Gotcha!&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;MyButton&#34;</span> /&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">script</span>&gt;
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">var</span> MyObject <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">function</span> () {
+</span></span><span style="display:flex;"><span><span style="color:#a00;background-color:#faa">   </span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">this</span>.alertMessage <span style="color:#555">=</span> <span style="color:#c30">&#34;Javascript rules&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a00;background-color:#faa">   </span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">this</span>.ClickHandler <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">function</span>() {
+</span></span><span style="display:flex;"><span><span style="color:#a00;background-color:#faa">       </span>
+</span></span><span style="display:flex;"><span>alert(<span style="color:#069;font-weight:bold">this</span>.alertMessage );
+</span></span><span style="display:flex;"><span><span style="color:#a00;background-color:#faa"> </span> }
+</span></span><span style="display:flex;"><span>}();
+</span></span><span style="display:flex;"><span><span style="color:#366">document</span>.getElementByIdx(<span style="color:#a00;background-color:#faa">”</span>theText<span style="color:#a00;background-color:#faa">”</span>).onclick <span style="color:#555">=</span><span style="color:#a00;background-color:#faa"> </span>
+</span></span><span style="display:flex;"><span>MyObject.ClickHandler
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">script</span>&gt;
+</span></span></code></pre></div><p>并不如你所愿，答案并不是”JavaScript
+rules”。在执行<code>MyObject.ClickHandler</code>时，代码中红色这行，this的引用实际上指向的是<code>document.getElementByIdx(&quot;theText&quot;)</code>的引用。可以这么解决：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">input</span> <span style="color:#309">type</span><span style="color:#555">=</span><span style="color:#c30">&#34;button&#34;</span> <span style="color:#309">value</span><span style="color:#555">=</span><span style="color:#c30">&#34;Gotcha!&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;theText&#34;</span> &gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">script</span>&gt;
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">var</span> MyObject <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">function</span> () {
+</span></span><span style="display:flex;"><span><span style="color:#a00;background-color:#faa">   </span> <span style="color:#069;font-weight:bold">var</span> self <span style="color:#555">=</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">this</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a00;background-color:#faa">   </span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">this</span>.alertMessage <span style="color:#555">=</span> <span style="color:#a00;background-color:#faa">“</span>Javascript rules<span style="color:#a00;background-color:#faa">”</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a00;background-color:#faa">   </span> <span style="color:#069;font-weight:bold">this</span>.OnClick
+</span></span><span style="display:flex;"><span><span style="color:#555">=</span> <span style="color:#069;font-weight:bold">function</span>() {
+</span></span><span style="display:flex;"><span><span style="color:#a00;background-color:#faa">       </span>
+</span></span><span style="display:flex;"><span>alert(self.value);
+</span></span><span style="display:flex;"><span><span style="color:#a00;background-color:#faa">   </span> }
+</span></span><span style="display:flex;"><span>}();
+</span></span><span style="display:flex;"><span><span style="color:#366">document</span>.getElementByIdx(<span style="color:#a00;background-color:#faa">”</span>theText<span style="color:#a00;background-color:#faa">”</span>).onclick <span style="color:#555">=</span><span style="color:#a00;background-color:#faa"> </span>
+</span></span><span style="display:flex;"><span>MyObject.OnClick
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">script</span>&gt;
+</span></span></code></pre></div><p>实质上，这就是JavaScript作用域的问题。如果你看过，你会发现解决方案不止一种。</p>
+<h3 id="3标识盗贼">3.　标识盗贼</h3>
+<p>在JavaScript中不要使用跟HTML的id一样的变量名。如下代码：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">input</span> <span style="color:#309">type</span><span style="color:#555">=</span><span style="color:#c30">&#34;button&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#309">id</span><span style="color:#555">=</span><span style="color:#c30">&#34;TheButton&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">script</span>&gt;
+</span></span><span style="display:flex;"><span><span style="color:#a00;background-color:#faa">   </span> TheButton <span style="color:#555">=</span>
+</span></span><span style="display:flex;"><span>get(<span style="color:#c30">&#34;TheButton&#34;</span>);
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">script</span>&gt;
+</span></span></code></pre></div><p>IE会报对象未定义的错误。我只能说：IE sucks.</p>
+<h3 id="4字符串只替换第一个匹配">4.　字符串只替换第一个匹配</h3>
+<p>如下代码：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#309;font-weight:bold">script</span>&gt;
+</span></span><span style="display:flex;"><span><span style="color:#a00;background-color:#faa">   </span> <span style="color:#069;font-weight:bold">var</span> fileName<span style="color:#555">=</span> <span style="color:#c30">&#34;This is a title&#34;</span>.replace(<span style="color:#c30">&#34; &#34;</span>,<span style="color:#c30">&#34;_&#34;</span>);
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#309;font-weight:bold">script</span>&gt;
+</span></span></code></pre></div><p>而实际上，结果是”This_is a title“.
+在JavaScript中，String.replace的第一个参数应该是正则表达式。所以，正确的做法是这样：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">var</span> fileName <span style="color:#555">=</span> <span style="color:#c30">&#34;This is a title&#34;</span>.replace(<span style="color:#a00;background-color:#faa">/</span>
+</span></span><span style="display:flex;"><span><span style="color:#a00;background-color:#faa">/g,&#34;_&#34;);</span>
+</span></span></code></pre></div><h3 id="5mouseout意味着mousein">5.　mouseout意味着mousein</h3>
+<p>事实上，这是由于事件冒泡导致的。IE中有mouseenter和mouseleave，但不是标准的。作者在此建议大家使用库比如YUI来解决问题。</p>
+<h3 id="6parseint是基于进制体系的">6.　parseInt是基于进制体系的</h3>
+<p>这个是常识，可是很多人给忽略了parseInt还有第二个参数，用以指明进制。比如，parseInt(&ldquo;09&rdquo;)，如果你认为答案是9，那就错了。因为，在此，字符串以0开头，parseInt以八进制来处理它，在八进制中，09是非法，返回false，布尔值false转化成数值就是0.
+因此，正确的做法是parseInt(&ldquo;09&rdquo;, 10).</p>
+<h3 id="7forin会遍历所有的东西">`7.　for&hellip;in&hellip;会遍历所有的东西</h3>
+<p>有一段这样的代码：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">var</span> arr <span style="color:#555">=</span> [<span style="color:#f60">5</span>,<span style="color:#f60">10</span>,<span style="color:#f60">15</span>]
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">var</span> total <span style="color:#555">=</span> <span style="color:#f60">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">for</span> ( <span style="color:#069;font-weight:bold">var</span> x <span style="color:#069;font-weight:bold">in</span> arr) {
+</span></span><span style="display:flex;"><span><span style="color:#a00;background-color:#faa">   </span> total <span style="color:#555">=</span>
+</span></span><span style="display:flex;"><span>total <span style="color:#555">*</span> arr[x];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>运行得好好的，不是吗？但是有一天它不干了，给我返回的值变成了NaN,
+晕。我只不过引入了一个库而已啊。原来是这个库改写了Array的prototype，这样，我们的arr平白无过多出了一个属性（方法），而for&hellip;in&hellip;会把它给遍历出来。所以这样做才是比较安全的：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">for</span> ( <span style="color:#069;font-weight:bold">var</span> x <span style="color:#555">=</span> <span style="color:#f60">0</span>; x <span style="color:#555">&lt;</span> arr.length; x<span style="color:#555">++</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#a00;background-color:#faa">   </span> total <span style="color:#555">=</span>
+</span></span><span style="display:flex;"><span>total <span style="color:#555">*</span> arr[x];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>其实，这也是污染基本类的prototype会带来危害的一个例证。</p>
+<h3 id="8事件处理器的陷阱">8.　事件处理器的陷阱</h3>
+<p>这其实只会存在使用作为对象属性的事件处理器才会存在的问题。比如<code>window.onclick=MyOnClickMethod</code>这样的代码，这会复写掉之前的window.onclick事件，还可能导致IE的内容泄露（sucks
+again）。在IE还没有支持DOM
+2的事件注册之前，作者建议使用库来解决问题，比如使用YUI:
+YAHOO.util.Event.addListener(window, &ldquo;click&rdquo;,
+MyOnClickMethod);
+这应该也属于常识问题，但新手可能容易犯错。</p>
+<h3 id="9focus-pocus">9.　Focus Pocus</h3>
+<p>新建一个input文本元素，然后把焦点挪到它上面，按理说，这样的代码应该很自然：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#069;font-weight:bold">var</span> newInput <span style="color:#555">=</span>
+</span></span><span style="display:flex;"><span><span style="color:#366">document</span>.createElement(<span style="color:#c30">&#34;input&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#366">document</span>.body.appendChild(newInput);
+</span></span><span style="display:flex;"><span>newInput.focus();
+</span></span><span style="display:flex;"><span>newInput.select();
+</span></span><span style="display:flex;"><span>但是IE会报错<span style="color:#a00;background-color:#faa">（</span>sucks again and
+</span></span><span style="display:flex;"><span>again<span style="color:#a00;background-color:#faa">）。</span>理由可能是当你执行fouce()的时候<span style="color:#a00;background-color:#faa">，</span>元素尚未可用<span style="color:#a00;background-color:#faa">。</span>因此<span style="color:#a00;background-color:#faa">，</span>我们可以延迟执行<span style="color:#a00;background-color:#faa">：</span>
+</span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">var</span> newInput <span style="color:#555">=</span>
+</span></span><span style="display:flex;"><span><span style="color:#366">document</span>.createElement(<span style="color:#c30">&#34;input&#34;</span>);
+</span></span><span style="display:flex;"><span>newInput.id <span style="color:#555">=</span> <span style="color:#c30">&#34;TheNewInput&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#366">document</span>.body.appendChild(newInput);
+</span></span><span style="display:flex;"><span>setTimeout(<span style="color:#069;font-weight:bold">function</span>(){
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">//这里我使用闭包改写过，若有兴趣可以对比原文
+</span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"></span><span style="color:#a00;background-color:#faa"> </span><span style="color:#366">document</span>.getElementByIdx(<span style="color:#c30">&#39;TheNewInput&#39;</span>).focus();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a00;background-color:#faa"> </span><span style="color:#366">document</span>.getElementByIdx(<span style="color:#c30">&#39;TheNewInput&#39;</span>).select();},
+</span></span><span style="display:flex;"><span><span style="color:#f60">10</span>);
+</span></span></code></pre></div><p>在实践中，JavaScript的陷阱还有很多很多，大多是由于解析器的实现不到位而引起。这些东西一般都不会在教科书中出现，只能靠开发者之间的经验分享。谢天谢地，我们生活在网络时代，很多碰到的问题，一般都可以在Google中找到答案。</p>
+<p>本文链接：http://www.blueidea.com/tech/web/2007/4919.asp</p>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="/"><img src="/img/favicon.png" />我的乐与怒</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2007-09-21-lilei-hanmeimei-jim-the-love-story/" data-toggle="tooltip" data-placement="top" title="Li Lei，Han Meimei，和Jim Green缠绵悱恻的爱情故事"><i class="fa fa-angle-left fa-lg"></i>
+                            Previous</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2007-09-22-invest-books/" data-toggle="tooltip" data-placement="top" title="一个成功投资者必看的20本书">Next
+                        <i class="fa fa-angle-right fa-lg"></i></a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">目录</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">标签</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/aframe" title="aframe">
+                            aframe
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/andrew-ng" title="andrew-ng">
+                            andrew-ng
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/arduino" title="arduino">
+                            arduino
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                            blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/cgi" title="cgi">
+                            cgi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/consul" title="consul">
+                            consul
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                            docker
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/eth" title="eth">
+                            eth
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ethereum" title="ethereum">
+                            ethereum
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/evm" title="evm">
+                            evm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/feign" title="feign">
+                            feign
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/flask" title="flask">
+                            flask
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                            golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/hw" title="hw">
+                            hw
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/jpa" title="jpa">
+                            jpa
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/js" title="js">
+                            js
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/k8s" title="k8s">
+                            k8s
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                            kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/linux" title="linux">
+                            linux
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mac" title="mac">
+                            mac
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/machine-learning" title="machine-learning">
+                            machine-learning
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/math" title="math">
+                            math
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mysql" title="mysql">
+                            mysql
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/nginx" title="nginx">
+                            nginx
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/op" title="op">
+                            op
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/opentcv" title="opentcv">
+                            opentcv
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ops" title="ops">
+                            ops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/poco" title="poco">
+                            poco
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/pptp" title="pptp">
+                            pptp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/python" title="python">
+                            python
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/rd" title="rd">
+                            rd
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/spring" title="spring">
+                            spring
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/springboot" title="springboot">
+                            springboot
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ssl" title="ssl">
+                            ssl
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/thymeleaf" title="thymeleaf">
+                            thymeleaf
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/type" title="type">
+                            type
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vagrant" title="vagrant">
+                            vagrant
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vpn" title="vpn">
+                            vpn
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/vue" title="vue">
+                            vue
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/webrtc" title="webrtc">
+                            webrtc
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/workflow" title="workflow">
+                            workflow
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0" title="技术文章">
+                            技术文章
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2" title="新浪博客">
+                            新浪博客
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%97%A0%E8%81%8A" title="无聊">
+                            无聊
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB" title="生活">
+                            生活
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95" title="生活记录">
+                            生活记录
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E8%82%A1%E7%A5%A8" title="股票">
+                            股票
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E8%BF%90%E7%BB%B4" title="运维">
+                            运维
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>链接</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/vegas">青鸟的翅膀</a></li>
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/yoshikilau">Caffeine Park</a></li>
+                        
+                        <li><a target="_blank" href="http://huxpro.github.io">Theme From Hux</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/vincentz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/img/icwt.jpg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/vincentmi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/5311815/vincent-mi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="我的乐与怒" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; 我的乐与怒 2024 | <a href="http://www.beian.miit.gov.cn" style="text-decoration: none;"> 蜀ICP备17040089号-2</a>
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https'){
+       bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else{
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+<script>
+    
+    var _baId = '2b745fdb2d90955bdfb8ad1194277073';
+
+    
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-78738242-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

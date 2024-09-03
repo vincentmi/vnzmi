@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker on 我的乐与怒</title>
+    <link>/tags/docker/</link>
+    <description>Recent content in Docker on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 19 May 2023 23:48:00 +0000</lastBuildDate><atom:link href="/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>一些运维脚本</title>
+      <link>/post/2023-05-19-ops-scripts/</link>
+      <pubDate>Fri, 19 May 2023 23:48:00 +0000</pubDate>
+      
+      <guid>/post/2023-05-19-ops-scripts/</guid>
+      <description>Yearning SQL审核平台 拉代码 git clone git@github.com:cookieY/Yearning.git 打包镜像 cd Yearning.git &amp;amp;&amp;amp; docker build -t yearning . docker run -it --rm -e MYSQL_USER=root -e MYSQL_ADDR=172.17.0.1:3307 -e MYSQL_PASSWORD=root -e MYSQL_DB=yearning yearning /opt/Yearning install docker run --restart=always -d --name yearning -p 9001:8000 -e MYSQL_USER=root -e MYSQL_ADDR=172.17.0.1:3307 -e MYSQL_PASSWORD=root -e SECRET_KEY=mws1118888888888 -e MYSQL_DB=yearning yearning Docker #查询当前容器状态 docker stats --no-stream docker stats $(docker ps --format={{.Names}}) #只输出指定容器 docker stats --no-stream registry mysql #格式化输出结果 docker stats --format &amp;#34;table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}&amp;#34; 变量 说明 .Container 根据用户指定的名称显示容器的名称或 ID .Name 容器名称 .ID 容器 ID .CPUPerc CPU 使用</description>
+    </item>
+    
+    <item>
+      <title>VUE项目读取Docker环境变量</title>
+      <link>/post/2020-07-23-vue-docker-run-with-env/</link>
+      <pubDate>Thu, 23 Jul 2020 23:15:00 +0000</pubDate>
+      
+      <guid>/post/2020-07-23-vue-docker-run-with-env/</guid>
+      <description>使用场景 前端项目通常编译的时候会配置多个环境的参数,根据环境参数编译不同的文件.无法做到在各个环境使用同一个版本的镜像.使用环境变量可以在创建镜像的时候传递基础参数减少编译确保测试的有效性. 方案 通过将环境变量传递到DOM,在VUE项目中读取DOM来进行使用环境变量. 读取环境变量 const</description>
+    </item>
+    
+    <item>
+      <title>Docker&#43;Consul&#43;Ngxin配置脚本</title>
+      <link>/post/2018-04-13-server-setup-scripts/</link>
+      <pubDate>Fri, 13 Apr 2018 11:20:00 +0000</pubDate>
+      
+      <guid>/post/2018-04-13-server-setup-scripts/</guid>
+      <description>Docker #!/bin/sh sudo apt-get remove docker docker-engine docker.io sudo apt-get update sudo apt-get install \ apt-transport-https \ ca-certificates \ curl \ software-properties-common curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - sudo apt-key fingerprint 0EBFCD88 sudo add-apt-repository \ &amp;#34;deb [arch=amd64] https://download.docker.com/linux/ubuntu \ $(lsb_release -cs) \ stable&amp;#34; sudo apt-get update sudo apt-get -y install docker-ce apt-cache madison docker-ce sudo apt-get install docker-ce=&amp;lt;VERSION&amp;gt; NGINX server { listen 80 default_server; listen [::]:80 default_server ipv6only=on; root /usr/share/nginx/html; index index.html index.htm; server_name localhost; location / { proxy_pass http://127.0.0.1:8009; proxy_redirect off; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504; proxy_max_temp_file_size 0; proxy_connect_timeout 90; proxy_send_timeout 90; proxy_read_timeout 90; proxy_buffer_size 4k; proxy_buffers 4 32k; proxy_busy_buffers_size 64k; proxy_temp_file_write_size 64k; } } 容器 #mysql docker run \ --name mysql-primary \ -v /alidata/mysqldb:/var/lib/mysql \ -p 3306:3306 \ -e MYSQL_ROOT_PASSWORD=xxxx \ -e &amp;#34;SERVICE_NAME=mysql_promary&amp;#34;</description>
+    </item>
+    
+    <item>
+      <title>使用Consul Docker微服务平台实践</title>
+      <link>/post/2017-03-24-consul-and-docker-service-discover/</link>
+      <pubDate>Fri, 24 Mar 2017 10:26:00 +0000</pubDate>
+      
+      <guid>/post/2017-03-24-consul-and-docker-service-discover/</guid>
+      <description>基础环境 - CentOS6.6 内核升级 因为虚拟机的centos内核无法达到docker稳定运行，因此升级到3.1,执行 #导入key rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org #安装ELRepo到CentOS 6.6中 rpm -Uvh http://www.elrepo.org/elrepo-release-6-6.el6.elrepo.noarch.rpm #安装长期支持版本kernel yum --enablerepo=elrepo-kernel install kernel-lt -y #编辑grub.conf文件，修改Grub引导顺序,选择3.1版本的内容(一</description>
+    </item>
+    
+    <item>
+      <title>安装生成环境的Swarm集群</title>
+      <link>/post/2016-08-03-install-swarm-for-prodduction/</link>
+      <pubDate>Wed, 03 Aug 2016 14:03:00 +0000</pubDate>
+      
+      <guid>/post/2016-08-03-install-swarm-for-prodduction/</guid>
+      <description>参考 : https://docs.docker.com/swarm/install-manual/ 网络规划 规划如下 节点描述 名称 Swarm 主机和备份机 p4 , hdp1 Swarm 节点 hdp2,hdp3 发现后台 p4</description>
+    </item>
+    
+    <item>
+      <title>dockerpool CA 证书错误</title>
+      <link>/post/2015-06-14-docker-pool-ca-issue/</link>
+      <pubDate>Sun, 14 Jun 2015 09:13:00 +0000</pubDate>
+      
+      <guid>/post/2015-06-14-docker-pool-ca-issue/</guid>
+      <description>docker被墙后用，拉dockerpool的镜像会出现这个错误 &amp;gt; sudo docker pull dl.dockerpool.com:5000/centos:7 FATA[0000] Error response from daemon: v1 ping attempt failed with error: Get https://dl.dockerpool.com:5000/v1/_ping: tls: oversized record received with length 28012. If this private registry supports only HTTP or HTTPS with an unknown CA certificate, please add `--insecure-registry dl.dockerpool.com:5000` to the daemon&amp;#39;s arguments. In the case of HTTPS, if you have access to the registry&amp;#39;s CA certificate, no need for the flag; simply place the CA certificate at /etc/docker/certs.d/dl.dockerpool.com:5000/ca.crt 解决方法，在/etc/sysconfig/docker添加 INSECURE_REGISTRY=&amp;#39;--insecure-registry dl.dockerpool.com:5000&amp;#39; 版本如下</description>
+    </item>
+    
+    <item>
+      <title>使用Mesos和Docker构建你的私有云平台</title>
+      <link>/post/2015-06-12-use-mesos-and-docker-build-paas/</link>
+      <pubDate>Fri, 12 Jun 2015 23:11:00 +0000</pubDate>
+      
+      <guid>/post/2015-06-12-use-mesos-and-docker-build-paas/</guid>
+      <description>&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+&lt;p&gt;如果没有安装epel源先安装&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum install epel-release
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;先添加mesosphere源&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo rpm -Uvh http://repos.mesosphere.io/el/7/noarch/RPMS/mesosphere-el-repo-7-1.noarch.rpm
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;安装mesos 以及运算框架marathon&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum install mesos 
+yum install marathon 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;安装zookeeper&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum install mesosphere-zookeeper
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>CentOS 6.5 docker 错误</title>
+      <link>/post/2015-06-10-docker-issue/</link>
+      <pubDate>Wed, 10 Jun 2015 17:16:00 +0000</pubDate>
+      
+      <guid>/post/2015-06-10-docker-issue/</guid>
+      <description>Docker 在centos6.5中安装因为 device-mapper 不正确会报这个错 \n三 6月 10 16:46:56 CST 2015\n time=&amp;#34;2015-06-10T16:46:56+08:00&amp;#34; level=&amp;#34;info&amp;#34; msg=&amp;#34;+job serveapi(unix:///var/run/docker.sock)&amp;#34; time=&amp;#34;2015-06-10T16:46:56+08:00&amp;#34; level=&amp;#34;info&amp;#34; msg=&amp;#34;WARNING: You are running linux kernel version 2.6.32-431.el6.x86_64, which might be unstable running docker. Please upgrade your kernel to 3.8.0.&amp;#34; time=&amp;#34;2015-06-10T16:46:56+08:00&amp;#34; level=&amp;#34;info&amp;#34; msg=&amp;#34;Listening for HTTP on unix (/var/run/docker.sock)&amp;#34; /usr/bin/docker: relocation error: /usr/bin/docker: symbol dm_task_get_info_with_deferred_remove, version Base not defined in file libdevmapper.so.1.02 with link time reference 解决方法 sudo yum install device-mapper-event-libs sudo yum reinstall docker</description>
+    </item>
+    
+  </channel>
+</rss>

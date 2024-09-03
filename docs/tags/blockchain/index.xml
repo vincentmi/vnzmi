@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blockchain on 我的乐与怒</title>
+    <link>/tags/blockchain/</link>
+    <description>Recent content in blockchain on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 06 Jul 2022 00:36:00 +0000</lastBuildDate><atom:link href="/tags/blockchain/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>以太坊开发入门 - 实现ERC20合约</title>
+      <link>/post/2022-07-06-develop-with-ethereum-erc20-copy/</link>
+      <pubDate>Wed, 06 Jul 2022 00:36:00 +0000</pubDate>
+      
+      <guid>/post/2022-07-06-develop-with-ethereum-erc20-copy/</guid>
+      <description>Truffle和ganache Truffle提供一个集成环境以简化合约的开发以及进行工程化.genache-cli则提供一个模拟的链上环境以便我们可以方便的进行测试.测试完成后再部署到私链或者测试链进行真正的测试和验证.提高我们的开发效率 安装 开始之前请升级到较新的node版本 npm install</description>
+    </item>
+    
+    <item>
+      <title>以太坊开发入门 - EVM</title>
+      <link>/post/2022-07-05-develop-with-ethereum-evm/</link>
+      <pubDate>Tue, 05 Jul 2022 18:12:00 +0000</pubDate>
+      
+      <guid>/post/2022-07-05-develop-with-ethereum-evm/</guid>
+      <description>简介 在以太坊上最重要的活动除了转账以外，就是编译、运行智能合约(Smart Contract)。 智能合约代表了一个以太坊世界里的独立管家。它按照自身代码指示进行以太币的收入，支出活动，也具有一定存储空间可以存储一些数据。 而智能合约就是运行于以太坊虚拟机 (Ethereum Virtual Machine, EVM) 之上. 虚拟机上执行的操</description>
+    </item>
+    
+    <item>
+      <title>以太坊开发入门 - 智能合约</title>
+      <link>/post/2022-07-02-develop-with-ethereum-contract/</link>
+      <pubDate>Sat, 02 Jul 2022 09:46:00 +0000</pubDate>
+      
+      <guid>/post/2022-07-02-develop-with-ethereum-contract/</guid>
+      <description>Solidity 语言 智能合约使用Solidity语言进行开发, Solidity语法参考 Solidity 语言的一些特点: 没有浮点数 使用${wei}$来规避浮点运算. $ 1 \times {ether} = 1 \times 10^{18}{wei} $ 指数运算符 10**18 = 10^18 函数权限关键字在最后 函数默认是public 约定 private修饰的函数名字前缀加上下划线 _ internal 修饰符可以让合约继承</description>
+    </item>
+    
+    <item>
+      <title>以太坊开发入门 - 搭建私链</title>
+      <link>/post/2022-07-01-develop-with-ethereum-private-chain/</link>
+      <pubDate>Fri, 01 Jul 2022 09:46:00 +0000</pubDate>
+      
+      <guid>/post/2022-07-01-develop-with-ethereum-private-chain/</guid>
+      <description>背景 以太坊，英文全称 Ethereum，是一个全球协作的开源区块链项目。 该项目流通的加密货币称为以太币 (Ether)，是全球仅次于比特币的第二大流通加密货币。 它最大的特色是具有一个运行时环境：以太坊虚拟机 (Ethereum Virtual Machine,简称 EVM)， 为大规模分布式开放应用提供了运行的平台。我们</description>
+    </item>
+    
+  </channel>
+</rss>

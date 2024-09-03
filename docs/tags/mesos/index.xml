@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mesos on 我的乐与怒</title>
+    <link>/tags/mesos/</link>
+    <description>Recent content in Mesos on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 12 Jun 2015 23:11:00 +0000</lastBuildDate><atom:link href="/tags/mesos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用Mesos和Docker构建你的私有云平台</title>
+      <link>/post/2015-06-12-use-mesos-and-docker-build-paas/</link>
+      <pubDate>Fri, 12 Jun 2015 23:11:00 +0000</pubDate>
+      
+      <guid>/post/2015-06-12-use-mesos-and-docker-build-paas/</guid>
+      <description>&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+&lt;p&gt;如果没有安装epel源先安装&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum install epel-release
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;先添加mesosphere源&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo rpm -Uvh http://repos.mesosphere.io/el/7/noarch/RPMS/mesosphere-el-repo-7-1.noarch.rpm
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;安装mesos 以及运算框架marathon&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum install mesos 
+yum install marathon 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;安装zookeeper&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum install mesosphere-zookeeper
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

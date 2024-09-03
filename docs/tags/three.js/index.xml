@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>three.js on 我的乐与怒</title>
+    <link>/tags/three.js/</link>
+    <description>Recent content in three.js on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 29 Jul 2021 17:53:00 +0000</lastBuildDate><atom:link href="/tags/three.js/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用A-Frame搭建360VR</title>
+      <link>/post/2021-07-29-use-aframe/</link>
+      <pubDate>Thu, 29 Jul 2021 17:53:00 +0000</pubDate>
+      
+      <guid>/post/2021-07-29-use-aframe/</guid>
+      <description>简介 A-Frame是一个用于构建虚拟现实(VR)体验的Web框架。 A-Frame基于HTML之上，使其更加易于上手。但是A-Frame不仅仅是3D场景图或标记语言；他的核心是一个强大的实体组件框架，它对three.js进行扩展,提供了一个声明性的、可扩展的和可组合的结构。A-Fr</description>
+    </item>
+    
+  </channel>
+</rss>

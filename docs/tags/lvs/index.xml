@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>LVS on 我的乐与怒</title>
+    <link>/tags/lvs/</link>
+    <description>Recent content in LVS on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 02 May 2015 23:36:00 +0000</lastBuildDate><atom:link href="/tags/lvs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LVS配置命令</title>
+      <link>/post/2015-05-02-lvs-network/</link>
+      <pubDate>Sat, 02 May 2015 23:36:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-02-lvs-network/</guid>
+      <description>DirectorServer ifconfig eth0:0 192.168.0.251 broadcast 192.168.0.251 netmask 255.255.255.255 up route add -host 192.168.0.251 dev eth0:0 echo &amp;#34;1&amp;#34; &amp;gt;/proc/sys/net/ipv4/ip_forward realserver ifconfig lo:0 192.168.0.251 broadcast 192.168.0.251 netmask 255.255.255.255 up vi /etc/sysctl.conf net.ipv4.conf.all.arp_ignore = 1 net.ipv4.conf.all.arp_announce = 2 net.ipv4.conf.tunl0.arp_ignore = 1 net.ipv4.conf.tunl0.arp_announce = 2 2014-02-21</description>
+    </item>
+    
+  </channel>
+</rss>

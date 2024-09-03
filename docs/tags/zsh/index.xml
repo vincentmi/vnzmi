@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>zsh on 我的乐与怒</title>
+    <link>/tags/zsh/</link>
+    <description>Recent content in zsh on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 07 Apr 2024 16:26:00 +0000</lastBuildDate><atom:link href="/tags/zsh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>修改Items2的Tab颜色</title>
+      <link>/post/2024-04-07-change-items-tab-color/</link>
+      <pubDate>Sun, 07 Apr 2024 16:26:00 +0000</pubDate>
+      
+      <guid>/post/2024-04-07-change-items-tab-color/</guid>
+      <description>增加一个items插件 # /Users/vincentmi/.oh-my-zsh-custom if [[ -n &amp;#34;$ITERM_SESSION_ID&amp;#34; ]]; then tab-color() { echo -ne &amp;#34;\033]6;1;bg;red;brightness;$1\a&amp;#34; echo -ne &amp;#34;\033]6;1;bg;green;brightness;$2\a&amp;#34; echo -ne &amp;#34;\033]6;1;bg;blue;brightness;$3\a&amp;#34; } tab-red() { tab-color 255 0 0 } tab-green() { tab-color 0 255 0 } tab-blue() { tab-color 0 0 255 } tab-reset() { echo -ne &amp;#34;\033]6;1;bg;*;default\a&amp;#34; } function iterm2_tab_precmd() { tab-reset } # function iterm2_tab_preexec() { # if [[ &amp;#34;$1&amp;#34; =~ &amp;#34;^ssh &amp;#34; ]]; then # if [[ &amp;#34;$1&amp;#34; =~ &amp;#34;prod&amp;#34; ]]; then # tab-color 255 160 160 # else # tab-color 160 255 160 # fi # else # tab-color 160 160 255 # fi # } function iterm2_tab_preexec() { if [[ &amp;#34;$1&amp;#34; =~ &amp;#34;^ssh &amp;#34; ]]; then if [[ &amp;#34;$1&amp;#34; =~ &amp;#34;prod&amp;#34; || &amp;#34;$1&amp;#34; =~ &amp;#34;live&amp;#34; ]]; then tab-color 220 20 60 else if [[ &amp;#34;$1&amp;#34; =~</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>运维 on 我的乐与怒</title>
+    <link>/tags/%E8%BF%90%E7%BB%B4/</link>
+    <description>Recent content in 运维 on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 14 Jun 2015 09:13:00 +0000</lastBuildDate><atom:link href="/tags/%E8%BF%90%E7%BB%B4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>dockerpool CA 证书错误</title>
+      <link>/post/2015-06-14-docker-pool-ca-issue/</link>
+      <pubDate>Sun, 14 Jun 2015 09:13:00 +0000</pubDate>
+      
+      <guid>/post/2015-06-14-docker-pool-ca-issue/</guid>
+      <description>docker被墙后用，拉dockerpool的镜像会出现这个错误 &amp;gt; sudo docker pull dl.dockerpool.com:5000/centos:7 FATA[0000] Error response from daemon: v1 ping attempt failed with error: Get https://dl.dockerpool.com:5000/v1/_ping: tls: oversized record received with length 28012. If this private registry supports only HTTP or HTTPS with an unknown CA certificate, please add `--insecure-registry dl.dockerpool.com:5000` to the daemon&amp;#39;s arguments. In the case of HTTPS, if you have access to the registry&amp;#39;s CA certificate, no need for the flag; simply place the CA certificate at /etc/docker/certs.d/dl.dockerpool.com:5000/ca.crt 解决方法，在/etc/sysconfig/docker添加 INSECURE_REGISTRY=&amp;#39;--insecure-registry dl.dockerpool.com:5000&amp;#39; 版本如下</description>
+    </item>
+    
+    <item>
+      <title>使用Mesos和Docker构建你的私有云平台</title>
+      <link>/post/2015-06-12-use-mesos-and-docker-build-paas/</link>
+      <pubDate>Fri, 12 Jun 2015 23:11:00 +0000</pubDate>
+      
+      <guid>/post/2015-06-12-use-mesos-and-docker-build-paas/</guid>
+      <description>&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+&lt;p&gt;如果没有安装epel源先安装&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum install epel-release
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;先添加mesosphere源&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo rpm -Uvh http://repos.mesosphere.io/el/7/noarch/RPMS/mesosphere-el-repo-7-1.noarch.rpm
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;安装mesos 以及运算框架marathon&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum install mesos 
+yum install marathon 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;安装zookeeper&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum install mesosphere-zookeeper
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>CentOS 6.5 docker 错误</title>
+      <link>/post/2015-06-10-docker-issue/</link>
+      <pubDate>Wed, 10 Jun 2015 17:16:00 +0000</pubDate>
+      
+      <guid>/post/2015-06-10-docker-issue/</guid>
+      <description>Docker 在centos6.5中安装因为 device-mapper 不正确会报这个错 \n三 6月 10 16:46:56 CST 2015\n time=&amp;#34;2015-06-10T16:46:56+08:00&amp;#34; level=&amp;#34;info&amp;#34; msg=&amp;#34;+job serveapi(unix:///var/run/docker.sock)&amp;#34; time=&amp;#34;2015-06-10T16:46:56+08:00&amp;#34; level=&amp;#34;info&amp;#34; msg=&amp;#34;WARNING: You are running linux kernel version 2.6.32-431.el6.x86_64, which might be unstable running docker. Please upgrade your kernel to 3.8.0.&amp;#34; time=&amp;#34;2015-06-10T16:46:56+08:00&amp;#34; level=&amp;#34;info&amp;#34; msg=&amp;#34;Listening for HTTP on unix (/var/run/docker.sock)&amp;#34; /usr/bin/docker: relocation error: /usr/bin/docker: symbol dm_task_get_info_with_deferred_remove, version Base not defined in file libdevmapper.so.1.02 with link time reference 解决方法 sudo yum install device-mapper-event-libs sudo yum reinstall docker</description>
+    </item>
+    
+    <item>
+      <title>Apache option选项</title>
+      <link>/post/2015-05-03-httpd-option/</link>
+      <pubDate>Sun, 03 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-03-httpd-option/</guid>
+      <description>Options指令控制了在特定目录中将使用哪些服务器特性。 option可以为None，在这种情况下，将不启用任何额外特性。或设置为以下选项中的一个或多个： All除MultiViews之外的所有特性。这是默认设置。ExecCGI允许使用 mod_cgi执行CGI脚本。FollowSy</description>
+    </item>
+    
+    <item>
+      <title>MySQL Featured</title>
+      <link>/post/2015-05-03-mysql-featured/</link>
+      <pubDate>Sun, 03 May 2015 08:36:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-03-mysql-featured/</guid>
+      <description>今天又经历了一起MYSQL错误，系统日志中是“服务 mysql 意外停止” Mysql日志中则是：“Plugin &amp;lsquo;FEDERATED&amp;rsquo; is disabled” 网站找到第一条解决方案： 1、在MY.INI文件中的 [mysqld] 中增加一行 tmpdir=&amp;quot;D:/MySQL/data/&amp;quot; 修改后，还是启动不了，接着我做了第二步，重启正常。 2、删除DATA目录下除数据库文件夹外的其他文</description>
+    </item>
+    
+    <item>
+      <title>LVS配置命令</title>
+      <link>/post/2015-05-02-lvs-network/</link>
+      <pubDate>Sat, 02 May 2015 23:36:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-02-lvs-network/</guid>
+      <description>DirectorServer ifconfig eth0:0 192.168.0.251 broadcast 192.168.0.251 netmask 255.255.255.255 up route add -host 192.168.0.251 dev eth0:0 echo &amp;#34;1&amp;#34; &amp;gt;/proc/sys/net/ipv4/ip_forward realserver ifconfig lo:0 192.168.0.251 broadcast 192.168.0.251 netmask 255.255.255.255 up vi /etc/sysctl.conf net.ipv4.conf.all.arp_ignore = 1 net.ipv4.conf.all.arp_announce = 2 net.ipv4.conf.tunl0.arp_ignore = 1 net.ipv4.conf.tunl0.arp_announce = 2 2014-02-21</description>
+    </item>
+    
+    <item>
+      <title>Vagrant JS文件乱码</title>
+      <link>/post/2015-05-02-vagrant-issue/</link>
+      <pubDate>Sat, 02 May 2015 23:36:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-02-vagrant-issue/</guid>
+      <description>修改虚拟机中的Apache httpd.conf文件 EnableSendfile off</description>
+    </item>
+    
+    <item>
+      <title>SElinux 又蛋疼</title>
+      <link>/post/2015-05-02-selinux-folder-permissions/</link>
+      <pubDate>Sat, 02 May 2015 22:36:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-02-selinux-folder-permissions/</guid>
+      <description>(13) Permission Denied https://wiki.apache.org/httpd/13PermissionDenied Apache一直报这个错误。权限都是对的。原来是SElinux的问题 增加该目录即可 chcon -R -h -t httpd_sys_content_t /home/folder/ 这个是解决socket无法连接 setsebool -P httpd_can_network_connect 1 SELinux 详解 http://wiki.centos.org/zh/HowTos/SELinux PHP fsocketopen permission denied 该问题是因为SElinux引起 使用 getsebool -a 获取当前的selinux设置状态 setsebool -P httpd_can_network_connect on 设置运行创建网络连接 这个命令执行会花一些时间请</description>
+    </item>
+    
+    <item>
+      <title>MemCache : could not compress错误</title>
+      <link>/post/2015-05-02-memcache-could-not-uncompress/</link>
+      <pubDate>Sat, 02 May 2015 22:35:00 +0000</pubDate>
+      
+      <guid>/post/2015-05-02-memcache-could-not-uncompress/</guid>
+      <description>问题 今天遇到这个坑爹的问题。产生问题的原因是不同版本的memcache客户端，PHP会报这个警告。 原因 集群里有一台5.5的机器 没有在LVS里，其他机器都是5.3。但是有job 因此关闭nginx 关闭yii的schema cache重启memcache和备份机恢复正常。</description>
+    </item>
+    
+  </channel>
+</rss>

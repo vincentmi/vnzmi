@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Recommand System on 我的乐与怒</title>
+    <link>/tags/recommand-system/</link>
+    <description>Recent content in Recommand System on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 14 Feb 2023 16:01:00 +0000</lastBuildDate><atom:link href="/tags/recommand-system/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>搭建一个推荐系统</title>
+      <link>/post/2023-02-14-build-a-recommand-system/</link>
+      <pubDate>Tue, 14 Feb 2023 16:01:00 +0000</pubDate>
+      
+      <guid>/post/2023-02-14-build-a-recommand-system/</guid>
+      <description>准备 公司需要针对网站搭建一个基于用户反馈的推荐系统。重温下吴恩达大佬的课程。使用Python来个实战。 文章将会讲解基于内容的推荐以及协同过滤算法的原理，并使用Python和Pandas库来实现一个简单的推荐系统。 您需要有基础的数学和Pyhton知识。 基础知识 线性回归（Linear</description>
+    </item>
+    
+  </channel>
+</rss>

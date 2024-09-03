@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>k8s on 我的乐与怒</title>
+    <link>/tags/k8s/</link>
+    <description>Recent content in k8s on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 28 May 2024 15:13:00 +0000</lastBuildDate><atom:link href="/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在k8s中使用configmap保存配置文件</title>
+      <link>/post/2024-05-28-k8s-use-configmap/</link>
+      <pubDate>Tue, 28 May 2024 15:13:00 +0000</pubDate>
+      
+      <guid>/post/2024-05-28-k8s-use-configmap/</guid>
+      <description>简介 ConfigMap 是一种API 对象，用来将非机密性的数据保存到键值对中。 使用时， Pod 可以将其用作环境变量、命令行参数或者存储卷中的配置文件。 ConfigMap 将你的环境配置信息和容器镜像解耦，便于应用配置的修改和复用。在不同命名空间或不同环境中可以方便的切换配置，并且对开发透明，可以实时更新。 创建config</description>
+    </item>
+    
+    <item>
+      <title>使用Kind搭建K8S学习环境</title>
+      <link>/post/2022-05-27-use-kind/</link>
+      <pubDate>Fri, 27 May 2022 10:46:00 +0000</pubDate>
+      
+      <guid>/post/2022-05-27-use-kind/</guid>
+      <description>背景 K8S集群的搭建由于墙的存在比较麻烦而且也比较占用资源,个人学习搭建K8S学习使用和做一些测试推荐使用Kind来在本地搭建. 安装 前置条件需要先安装golang 1.16 或更新的版本. 低版本需要加上 GO111MODULE=&amp;quot;on&amp;quot; 如果包无法下载,因为墙可以添加Go package的国内镜像, 设置阿里的镜像 go env -w GOPROXY=https://mirrors.aliyun.com/goproxy/,direct go install</description>
+    </item>
+    
+    <item>
+      <title>Ingress添加权限验证</title>
+      <link>/post/2020-04-30-ingress-tips/</link>
+      <pubDate>Thu, 30 Apr 2020 14:20:00 +0000</pubDate>
+      
+      <guid>/post/2020-04-30-ingress-tips/</guid>
+      <description>生成密码文件 ~ htpasswd -c httpauth admin New password: Re-type new password: Adding password for user admin 添加密文 apiVersion: v1 kind: Secret metadata: name: httpauth data: auth: admin:$apr1$RjgQNPDx$e9htPYO4fELnCxOb07GIK0 配置 对你需要增加权限验证的INgress设置注释 nginx.ingress.kubernetes.io/auth-realm: &amp;#39;&amp;#34;Authentication Required - admin&amp;#34;&amp;#39; nginx.ingress.kubernetes.io/auth-secret: httpauth nginx.ingress.kubernetes.io/auth-type: basic INgress YAML如下 apiVersion: extensions/v1beta1 kind: Ingress metadata: annotations: field.cattle.io/creatorId: user-ng7cm field.cattle.io/ingressState: &amp;#39;{&amp;#34;Y29uc3VsL2xvY2FsL2NvbnN1bC5sb2NhbC5waGlsby5pbi8vaHR0cA==&amp;#34;:&amp;#34;&amp;#34;}&amp;#39; field.cattle.io/publicEndpoints: &amp;#39;[{&amp;#34;addresses&amp;#34;:[&amp;#34;10.10.0.31&amp;#34;],&amp;#34;port&amp;#34;:80,&amp;#34;protocol&amp;#34;:&amp;#34;HTTP&amp;#34;,&amp;#34;serviceName&amp;#34;:&amp;#34;local:consul&amp;#34;,&amp;#34;ingressName&amp;#34;:&amp;#34;local:consul&amp;#34;,&amp;#34;hostname&amp;#34;:&amp;#34;consul.local.philo.in&amp;#34;,&amp;#34;allNodes&amp;#34;:true}]&amp;#39; nginx.ingress.kubernetes.io/auth-realm: &amp;#39;&amp;#34;Authentication Required - admin&amp;#34;&amp;#39; nginx.ingress.kubernetes.io/auth-secret: httpauth nginx.ingress.kubernetes.io/auth-type: basic creationTimestamp: &amp;#34;2020-04-23T05:52:00Z&amp;#34; generation: 2 labels: cattle.io/creator: norman name: consul namespace: local resourceVersion: &amp;#34;1102762&amp;#34; selfLink: /apis/extensions/v1beta1/namespaces/local/ingresses/consul uid: a55e4299-2552-401b-91a8-a595fd3ff7e3 spec: rules: - host: consul.local.philo.in http: paths: - backend: serviceName: consul servicePort: http status: loadBalancer: ingress: - ip: 10.10.0.31 - ip: 10.10.0.32 - ip: 10.10.0.41 - ip:</description>
+    </item>
+    
+    <item>
+      <title>搭建本地KVM和K8S集群</title>
+      <link>/post/2020-01-09-local-kvm-cluster/</link>
+      <pubDate>Thu, 09 Jan 2020 18:24:00 +0000</pubDate>
+      
+      <guid>/post/2020-01-09-local-kvm-cluster/</guid>
+      <description>准备工作 版本 Ubuntu 16.04.6 LTS Linux version 4.4.0-142-generic qemu-img version 2.5.0 (Debian 1:2.5+dfsg-5ubuntu10.42) 检查 检查是否支持虚拟化 egrep -c &amp;#39;(svm|vmx)&amp;#39; /proc/cpuinfo 返回 0 则不支持,需要看下BIOS里是否没有打开虚拟化支持. 安装KVM sudo apt update sudo apt install qemu qemu-kvm libvirt-bin bridge-utils virt-manager virt-sysperp 配置自启动 sudo systemctl start libvirtd.service sudo systemctl enable libvirtd.service 配置桥接网络 修改 /etc/network/interfaces # The loopback network interface auto lo iface lo inet loopback # The bridge interface auto br0 iface br0 inet static address 10.10.0.3 netmask 255.255.255.0 network 10.10.0.1 broadcast 10.10.0.255 gateway 10.10.0.1 dns-nameservers 10.10.0.1 bridge_ports enp1s0 bridge_stp off bridge_fd 0 ubuntu</description>
+    </item>
+    
+    <item>
+      <title>安装Kubernetes集群(3) - Prometheus</title>
+      <link>/post/2019-04-10-k8s-prometheus/</link>
+      <pubDate>Wed, 10 Apr 2019 15:31:00 +0000</pubDate>
+      
+      <guid>/post/2019-04-10-k8s-prometheus/</guid>
+      <description>Prometheus 可以原生监控K8s ,节点和它本身.Prometheus Operator 可以简化Prometheus在K8S 中的安装.使用Prometheus adapter 可以使用自定义指标参数. Prometheus 也提供内建的控制台和查询语言来查询数据和可视化.Prometheus也可以做为Grafana的数据源. 安装Prometheu</description>
+    </item>
+    
+    <item>
+      <title>搭建Kubernetes集群(2) - Ingress</title>
+      <link>/post/2019-04-04-k8s-ingress/</link>
+      <pubDate>Thu, 04 Apr 2019 15:31:00 +0000</pubDate>
+      
+      <guid>/post/2019-04-04-k8s-ingress/</guid>
+      <description>Ingress Ingress允许你配置运行于K8S上的HTTP负载均衡器对服务进行负载均衡. Ingress支持以下功能 基于内容的路由 基于主机名的路由 基于路径的路由 支持TLS/SSL请求 查看官网对Ingress简介 Ingress 控制器 Ingress控制器是运行在集群中根据Ingress资源进行配置的HTT</description>
+    </item>
+    
+    <item>
+      <title>搭建Kubernetes集群(1) - 安装集群</title>
+      <link>/post/2019-03-23-install-kubernetes/</link>
+      <pubDate>Sun, 24 Mar 2019 15:31:00 +0000</pubDate>
+      
+      <guid>/post/2019-03-23-install-kubernetes/</guid>
+      <description>1.准备 环境 Ubuntu 16.04 Docker CE 18.09.3 安装Kubeadm,Kubelet,Kubectl 使用 kubeadm config images list 命令.列出当前版本中用到的镜像. 输入如下 k8s.gcr.io/kube-apiserver:v1.13.4 k8s.gcr.io/kube-controller-manager:v1.13.4 k8s.gcr.io/kube-scheduler:v1.13.4 k8s.gcr.io/kube-proxy:v1.13.4 k8s.gcr.io/pause:3.1 k8s.gcr.io/etcd:3.2.24 k8s.gcr.io/coredns:1.2.6 使用脚本拉取国内镜像 #!/bin/bash images=( kube-apiserver:v1.13.4 kube-controller-manager:v1.13.4 kube-scheduler:v1.13.4 kube-proxy:v1.13.4 pause:3.1 etcd:3.2.24 coredns:1.2.6 ) for imageName in ${images[@]} ; do docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName k8s.gcr.io/$imageName done 重新载入服务 systemctl daemon-reload systemctl restart kubelet 安装flannel插件 安装 ETCD 配置网络: /coreos.com/network/config 写入flan</description>
+    </item>
+    
+  </channel>
+</rss>

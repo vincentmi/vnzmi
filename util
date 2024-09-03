@@ -61,7 +61,7 @@ doBuild(){
         --name=${CONTINER_NAME}_builder  \
         --volume="$DIR:/app" \
         ${NAME} \
-        hugo --source /app
+        hugo --source /app --destination /app/docs
      echo -e "\033[32m site build success \033[0m"
 }
 
@@ -71,7 +71,7 @@ doIndex() {
         --name=${CONTINER_NAME}  \
         --volume="$DIR:/app" \
         ${NAME} \
-        pagefind --source public
+        pagefind --source docs
      echo -e "\033[32m pagefind index success \033[0m"
 }
 

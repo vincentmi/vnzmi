@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>map on 我的乐与怒</title>
+    <link>/tags/map/</link>
+    <description>Recent content in map on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 08 Jul 2023 09:44:00 +0000</lastBuildDate><atom:link href="/tags/map/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用tile-server搭建离线地图服务</title>
+      <link>/post/2023-07-08-use-tileserver-to-server-offline-map/</link>
+      <pubDate>Sat, 08 Jul 2023 09:44:00 +0000</pubDate>
+      
+      <guid>/post/2023-07-08-use-tileserver-to-server-offline-map/</guid>
+      <description>1 获取地图数据 1.1 从Maptiler下载 下载地址 https://data.maptiler.com/downloads/planet/ 直接下载你需要的地图数据，其中各类数据包含数据如下： OpenStreetMap ： 包含建筑，道路，自然景观，行政边界 Contour lines ： 矢量等高线 hillshading ： 山体阴影 Satellite ： 卫星地图 另外一些数据 Satellite 2021, Terrain RGB, Terrain 3D - Cesium quantized mesh, MapTiler Planet Lite, or Landcover 只能下载星球层级的数据. 1.2 下载PBF文件进行转换 PBF文件可</description>
+    </item>
+    
+  </channel>
+</rss>

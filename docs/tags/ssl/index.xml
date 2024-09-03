@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SSL on 我的乐与怒</title>
+    <link>/tags/ssl/</link>
+    <description>Recent content in SSL on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 08 Apr 2020 21:48:00 +0000</lastBuildDate><atom:link href="/tags/ssl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lets Encrypt 申请免费SSL证书</title>
+      <link>/post/2020-04-08-lets_encrypt/</link>
+      <pubDate>Wed, 08 Apr 2020 21:48:00 +0000</pubDate>
+      
+      <guid>/post/2020-04-08-lets_encrypt/</guid>
+      <description>申请SSL docker run -it --rm -v /Users/vincentmi/cert:/etc/letsencrypt certbot/certbot certonly --manual --preferred-challenges dns 路径 SSL保存路径为 /Users/vincentmi/cert/live/philo.in NGINX 配置 server { listen 443 ssl http2; server_name *.dev.philo.in; ssl_certificate /Users/vincentmi/cert/live/philo.in/fullchain.pem; ssl_certificate_key /Users/vincentmi/cert/live/philo.in/privkey.pem; } 更新SSL docker run -it --rm -v /Users/vincentmi/cert:/etc/letsencrypt certbot/certbot renew</description>
+    </item>
+    
+    <item>
+      <title>使用OkHttp进行HTTPS连接</title>
+      <link>/post/2020-03-11-okhttp-ssl-support/</link>
+      <pubDate>Wed, 11 Mar 2020 11:31:00 +0000</pubDate>
+      
+      <guid>/post/2020-03-11-okhttp-ssl-support/</guid>
+      <description>背景 Java 搞个SSL居然还这么麻烦,翻了下官方文档.翻译下HTTPS 相关章节 OkHttp努力平滑下面的两个点 连接性 尽可能的连接各种主机.这包含运行 boringssl 最新版本的高级主机以及运行OpenSSL的旧主机. 连接的安全性 这包括使用证书验证远程web服务器，以及使用强密码交换数据的隐私。 当协商连</description>
+    </item>
+    
+  </channel>
+</rss>

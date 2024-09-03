@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta name="generator" content="Hugo 0.115.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="我的乐与怒">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//img/car2.jpg">
+    <meta property="twitter:image" content="//img/car2.jpg" />
+    
+
+    
+    <meta name="title" content="" />
+    <meta property="og:title" content="" />
+    <meta property="twitter:title" content="" />
+    
+
+    
+    <meta name="description" content="In code we trust">
+    <meta property="og:description" content="In code we trust" />
+    <meta property="twitter:description" content="In code we trust" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="我的乐与怒,vincent mi, miwenshu, 电商,  博客, 个人网站, 互联网, Web, 云原生, PaaS, Java, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>我的乐与怒 | 我的乐与怒 | Vincent&#39;s Blog</title>
+
+    <link rel="canonical" href="/">
+
+    
+
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">我的乐与怒</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/about/">我</a></li>
+                    
+                        <li><a href="/archive/">归档</a></li>
+                    
+                        <li><a href="/search/">搜索</a></li>
+                    
+                        <li><a href="/codesketch/">CodeSketch</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+<header class="intro-header" style="background-image: url('/img/car2.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
+                <div class="site-heading">
+                    <h1>我的乐与怒 </h1>
+                    
+		    <span class="subheading">Life, thoughts, stories and ideas.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+  
+<div class="container">
+    <div class="row">
+        
+        
+   	    <div class="
+            col-lg-8 col-lg-offset-1
+            col-md-8 col-md-offset-1
+            col-sm-12
+            col-xs-12
+            post-container
+        ">
+            
+
+<div class="post-preview">
+    <a href="/post/2015-05-03-matrix/">
+        <h2 class="post-title">
+            关于矩阵
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            <p><strong>转的啊</strong></p>
+<p>人总是会为自己找捷径，而往往捷径是要付出不一般的代价。
+呵呵&mdash;说说矩阵的事：
+通过坐标变换将3D空间的图元转换成2D图元的过程：主要为世界变换-&gt;视图变换-&gt;投影变换-&gt;视口变换
+3D场景中的任何物体，都是由一个一个三角形组成的。而三角形位置信息的就是其各个顶点的三维坐标。这是用来在模型中存储的，而要把物体显示在屏幕上，还需要将它们转换成显示器上的二维坐标。这就需要对每个点实施一套 3 to 2 的转换公式，在Direct3D中叫做“几何流水线”（Geometry Pipeline)。
+一般创建的mesh处于自己的局部坐标系。基本是屏幕正中放置。</p>
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Vincent on Monday, May 4, 2015
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/post/2015-05-03-speech-signal-processing/">
+        <h2 class="post-title">
+            几个常见的语音交互平台的简介和比较
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            <p>转自 <a href="http://ibillxia.github.io/blog/2012/11/24/several-plantforms-on-audio-and-speech-signal-processing/">http://ibillxia.github.io/blog/2012/11/24/several-plantforms-on-audio-and-speech-signal-processing/</a></p>
+<p>1.概述
+最近做了两个与语音识别相关的项目，两个项目的主要任务虽然都是语音识别，或者更确切的说是关键字识别，但开发的平台不同， 一个是windows下的，另一个是android平台的，于是也就选用了不同的语音识别平台，前者选的是微软的Speech API开发的，后者则选用 的是CMU的pocketsphinx，本文主要将一些常见的语音交互平台进行简单的介绍和对比。</p>
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Vincent on Monday, May 4, 2015
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/post/2015-05-03-httpd-option/">
+        <h2 class="post-title">
+            Apache option选项
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            Options指令控制了在特定目录中将使用哪些服务器特性。 option可以为None，在这种情况下，将不启用任何额外特性。或设置为以下选项中的一个或多个： All除MultiViews之外的所有特性。这是默认设置。ExecCGI允许使用 mod_cgi执行CGI脚本。FollowSy
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Vincent on Sunday, May 3, 2015
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/post/2015-05-03-clayman-3d-guide/">
+        <h2 class="post-title">
+            Clayman的3D学习指南
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            <p><a href="http://www.cnblogs.com/clayman/archive/2009/05/17/1459001.html">http://www.cnblogs.com/clayman/archive/2009/05/17/1459001.html</a>
+仅供个人学习使用，请勿转载，勿用于任何商业用途。
+作者：Clayman
+与玩游戏相比,写游戏要复杂上千万倍,除了需要掌握通用的编程技巧以外，还要有相当的图形学，物理，数学基础，特别是在国内，由于相关资料的缺乏，更是让初学者无从下手。下面总结了一些入门方法和比较容易入手的资料。
+首先你要精通一门高级语言，比如C++或者C#，其次，要有良好的英文阅读能力。对游戏开发者来说英文阅读能力是最重要也是最基本的工具之一，因为你遇到的大部分资源都将是英文的，不要总等着别人为你翻译。慢慢尝试着阅读英文资料，你会发现其实也并没有那么难:)</p>
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Vincent on Sunday, May 3, 2015
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/post/2015-05-03-mysql-featured/">
+        <h2 class="post-title">
+            MySQL Featured
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            今天又经历了一起MYSQL错误，系统日志中是“服务 mysql 意外停止” Mysql日志中则是：“Plugin &lsquo;FEDERATED&rsquo; is disabled” 网站找到第一条解决方案： 1、在MY.INI文件中的 [mysqld] 中增加一行 tmpdir=&quot;D:/MySQL/data/&quot; 修改后，还是启动不了，接着我做了第二步，重启正常。 2、删除DATA目录下除数据库文件夹外的其他文
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Vincent on Sunday, May 3, 2015
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/post/2015-05-03-mysql-mssql-compare/">
+        <h2 class="post-title">
+            MySQL和MSSQL 查询比较
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            Current Date and Time MS: SELECT GETDATE() MY: SELECT NOW() Optionally: Use CURDATE() for the date only.Limiting Results MS: SELECT TOP 10 * FROM table WHERE id = 1 MY: SELECT * FROM table WHERE id = 1 LIMIT 10Date Field Default Value MS: DATETIME DEFAULT GETDATE() MY: DATETIME fields cannot have a default value, i.e. &ldquo;GETDATE()&rdquo; You must use your INSERT statement to specify CURDATE() for the field. Optionally: Use datatype TIMESTAMP DEFAULT CURRENT_TIMESTAMPCharacter Length MS: LEN() MY: CHARACTER_LENGTH() Aliases: CHAR_LENGTH(), LENGTH()Character Replace MS: REPLACE() works case insensitively MY: REPLACE() works case sensitivelyTrim Functions MS: LTRIM() and RTRIM() MY: TRIM()String Concatenation MS: CONCATENATION USING + (Does not automatically cast operands to compatible types) MY: CONCAT(string, string), which accepts two or more arguments. (Automatically casts values into types which can be concatenated)Auto Increment Field Definition MS: tablename_id INT IDENTITY PRIMARY
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Vincent on Sunday, May 3, 2015
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/post/2015-05-03-chinese-encoding/">
+        <h2 class="post-title">
+            Unicode、GB2312、GBK和GB18030中的汉字
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            来源 http://www.fmddlmyy.cn/text24.html Unicode、GB2312、GBK和GB18030中的汉字GB18030有两个版本：GB18030-2000和GB18030-2005。GB18030-2000是GBK的取代版本，它的主要特点是在GBK 基础上增加了CJK统一汉字扩充A的汉字。GB18030-2005的主要
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Vincent on Sunday, May 3, 2015
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/post/2015-05-03-chinese-utf8-simp-trad-translate/">
+        <h2 class="post-title">
+            UTF8 简体繁体转换字库2561
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            繁体 &#39;醃錒愛礙藹皚嬡璦曖噯鎄靄剴靉磑閡廠廣銨諳鵪垵幹鉗陰頇襖奧囂媼驁鼇嶴澆磽罷壩鮁鈀鮊擺敗唄韝辦頒絆阪鈑並辯幫綁鎊謗崗紡報飽寶剝鮑齙鴇備貝輩鋇狽憊鵯錛賁體繃鏰筆閉畢幣斃篳蓽鉍蹕潷嗶複紕慮詖費贔閈鰏邊變編貶辮鯿籩緶標颮飆鰾飆鑣驃鏢驫別鱉癟賓瀕擯濱臏殯繽髕儐檳鬢鑌贇頻餅稟綆撥
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Vincent on Sunday, May 3, 2015
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/post/2015-05-02-lvs-network/">
+        <h2 class="post-title">
+            LVS配置命令
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            DirectorServer ifconfig eth0:0 192.168.0.251 broadcast 192.168.0.251 netmask 255.255.255.255 up route add -host 192.168.0.251 dev eth0:0 echo &#34;1&#34; &gt;/proc/sys/net/ipv4/ip_forward realserver ifconfig lo:0 192.168.0.251 broadcast 192.168.0.251 netmask 255.255.255.255 up vi /etc/sysctl.conf net.ipv4.conf.all.arp_ignore = 1 net.ipv4.conf.all.arp_announce = 2 net.ipv4.conf.tunl0.arp_ignore = 1 net.ipv4.conf.tunl0.arp_announce = 2 2014-02-21
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Vincent on Saturday, May 2, 2015
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/post/2015-05-02-vagrant-issue/">
+        <h2 class="post-title">
+            Vagrant JS文件乱码
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            修改虚拟机中的Apache httpd.conf文件 EnableSendfile off
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Vincent on Saturday, May 2, 2015
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
+
+            
+
+
+<ul class="pager">
+    
+    <li class="previous">
+        <a href="/page/9/" ><i class="fa fa-angle-left fa-lg"></i> PREV</a>
+    </li>
+    
+    
+    <li class="next">
+        <a href="/page/11/">NEXT <i class="fa fa-angle-right fa-lg"></i></a>
+    </li>
+    
+</ul>
+
+
+       	</div>
+        
+
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+	
+    <section class="visible-md visible-lg">
+	
+        <div class="short-about">
+            
+            <a href="/about">
+               <img src="/img/avatar.png" alt="avatar" style="cursor: pointer" />
+            </a>
+            
+            
+                <p>In Code We Trust</p>
+            
+           
+           <ul class="list-inline">
+               
+               
+               <li>
+                   <a href="https://twitter.com/miwenshu">
+                       <span class="fa-stack fa-lg">
+                           <i class="fas fa-circle fa-stack-2x"></i>
+                           <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                       </span>
+                   </a>
+               </li>
+               
+               
+               <li>
+                   <a target="_blank" href="https://www.zhihu.com/people/vincentz">
+                       <span class="fa-stack fa-lg">
+                           <i class="fas fa-circle fa-stack-2x"></i>
+                           <i class="fab fa-stack-1x fa-inverse">知</i>
+                       </span>
+                   </a>
+               </li>
+               
+               
+               
+               
+               <li>
+                   <a target="_blank" href="/img/icwt.jpg">
+                       <span class="fa-stack fa-lg">
+                           <i class="fas fa-circle fa-stack-2x"></i>
+                           <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                       </span>
+                   </a>
+               </li>
+               
+               
+               <li>
+                   <a target="_blank" href="https://github.com/vincentmi">
+                       <span class="fa-stack fa-lg">
+                           <i class="fas fa-circle fa-stack-2x"></i>
+                           <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                       </span>
+                   </a>
+               </li>
+               
+               
+               
+               
+               <li>
+                   <a target="_blank" href="https://www.linkedin.com/in/miwenshu">
+                       <span class="fa-stack fa-lg">
+                           <i class="fas fa-circle fa-stack-2x"></i>
+                           <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                       </span>
+                   </a>
+               </li>
+               
+               
+               
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/5311815/vincent-mi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+            
+            
+            
+               
+               
+               
+               
+                </ul>
+            </div>
+    </section>
+	
+    
+    
+     
+     <section>
+        <hr>
+        
+        <h5>公众号</h5>
+           <img src="/img/icwt.jpg" alt="avatar" style="cursor: pointer" />
+           <div style="text-align:center">InCodeWeTrust</div>
+        
+    </section>
+    
+
+
+
+    
+
+
+    
+    
+    
+    <section>
+        <hr class="hidden-sm hidden-xs">
+        <h5>标签</h5>
+        <div class="tags">
+            
+            
+               
+            
+               
+                    <a href="/tags/aframe" title="aframe">
+                        aframe
+                    </a>
+               
+            
+               
+            
+               
+                    <a href="/tags/andrew-ng" title="andrew-ng">
+                        andrew-ng
+                    </a>
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+                    <a href="/tags/arduino" title="arduino">
+                        arduino
+                    </a>
+               
+            
+               
+            
+               
+                    <a href="/tags/blockchain" title="blockchain">
+                        blockchain
+                    </a>
+               
+            
+               
+            
+               
+            
+               
+                    <a href="/tags/cgi" title="cgi">
+                        cgi
+                    </a>
+               
+            
+               
+            
+               
+                    <a href="/tags/consul" title="consul">
+                        consul
+                    </a>
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+                    <a href="/tags/docker" title="docker">
+                        docker
+                    </a>
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+                    <a href="/tags/eth" title="eth">
+                        eth
+                    </a>
+               
+            
+               
+                    <a href="/tags/ethereum" title="ethereum">
+                        ethereum
+                    </a>
+               
+            
+               
+                    <a href="/tags/evm" title="evm">
+                        evm
+                    </a>
+               
+            
+               
+                    <a href="/tags/feign" title="feign">
+                        feign
+                    </a>
+               
+            
+               
+                    <a href="/tags/flask" title="flask">
+                        flask
+                    </a>
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+                    <a href="/tags/golang" title="golang">
+                        golang
+                    </a>
+               
+            
+               
+            
+               
+            
+               
+            
+               
+                    <a href="/tags/hw" title="hw">
+                        hw
+                    </a>
+               
+            
+               
+            
+               
+            
+               
+            
+               
+                    <a href="/tags/java" title="java">
+                        java
+                    </a>
+               
+            
+               
+                    <a href="/tags/javascript" title="javascript">
+                        javascript
+                    </a>
+               
+            
+               
+            
+               
+            
+               
+                    <a href="/tags/jpa" title="jpa">
+                        jpa
+                    </a>
+               
+            
+               
+                    <a href="/tags/js" title="js">
+                        js
+                    </a>
+               
+            
+               
+                    <a href="/tags/k8s" title="k8s">
+                        k8s
+                    </a>
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+                    <a href="/tags/kubernetes" title="kubernetes">
+                        kubernetes
+                    </a>
+               
+            
+               
+            
+               
+            
+               
+            
+               
+                    <a href="/tags/linux" title="linux">
+                        linux
+                    </a>
+               
+            
+               
+            
+               
+            
+               
+                    <a href="/tags/mac" title="mac">
+                        mac
+                    </a>
+               
+            
+               
+                    <a href="/tags/machine-learning" title="machine-learning">
+                        machine-learning
+                    </a>
+               
+            
+               
+            
+               
+            
+               
+                    <a href="/tags/math" title="math">
+                        math
+                    </a>
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+                    <a href="/tags/mysql" title="mysql">
+                        mysql
+                    </a>
+               
+            
+               
+            
+               
+                    <a href="/tags/nginx" title="nginx">
+                        nginx
+                    </a>
+               
+            
+               
+            
+               
+            
+               
+                    <a href="/tags/op" title="op">
+                        op
+                    </a>
+               
+            
+               
+            
+               
+                    <a href="/tags/opentcv" title="opentcv">
+                        opentcv
+                    </a>
+               
+            
+               
+                    <a href="/tags/ops" title="ops">
+                        ops
+                    </a>
+               
+            
+               
+            
+               
+            
+               
+                    <a href="/tags/poco" title="poco">
+                        poco
+                    </a>
+               
+            
+               
+            
+               
+                    <a href="/tags/pptp" title="pptp">
+                        pptp
+                    </a>
+               
+            
+               
+            
+               
+            
+               
+                    <a href="/tags/python" title="python">
+                        python
+                    </a>
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+                    <a href="/tags/rd" title="rd">
+                        rd
+                    </a>
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+                    <a href="/tags/spring" title="spring">
+                        spring
+                    </a>
+               
+            
+               
+            
+               
+                    <a href="/tags/springboot" title="springboot">
+                        springboot
+                    </a>
+               
+            
+               
+            
+               
+                    <a href="/tags/ssl" title="ssl">
+                        ssl
+                    </a>
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+                    <a href="/tags/thymeleaf" title="thymeleaf">
+                        thymeleaf
+                    </a>
+               
+            
+               
+            
+               
+                    <a href="/tags/type" title="type">
+                        type
+                    </a>
+               
+            
+               
+            
+               
+                    <a href="/tags/vagrant" title="vagrant">
+                        vagrant
+                    </a>
+               
+            
+               
+            
+               
+            
+               
+            
+               
+                    <a href="/tags/vpn" title="vpn">
+                        vpn
+                    </a>
+               
+            
+               
+                    <a href="/tags/vue" title="vue">
+                        vue
+                    </a>
+               
+            
+               
+            
+               
+                    <a href="/tags/webrtc" title="webrtc">
+                        webrtc
+                    </a>
+               
+            
+               
+                    <a href="/tags/workflow" title="workflow">
+                        workflow
+                    </a>
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+            
+               
+                    <a href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0" title="技术文章">
+                        技术文章
+                    </a>
+               
+            
+               
+                    <a href="/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2" title="新浪博客">
+                        新浪博客
+                    </a>
+               
+            
+               
+                    <a href="/tags/%E6%97%A0%E8%81%8A" title="无聊">
+                        无聊
+                    </a>
+               
+            
+               
+                    <a href="/tags/%E7%94%9F%E6%B4%BB" title="生活">
+                        生活
+                    </a>
+               
+            
+               
+                    <a href="/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95" title="生活记录">
+                        生活记录
+                    </a>
+               
+            
+               
+            
+               
+            
+               
+                    <a href="/tags/%E8%82%A1%E7%A5%A8" title="股票">
+                        股票
+                    </a>
+               
+            
+               
+                    <a href="/tags/%E8%BF%90%E7%BB%B4" title="运维">
+                        运维
+                    </a>
+               
+            
+        </div>
+    </section>
+    
+
+    
+    
+    <section>
+        <hr class="hidden-sm hidden-xs">
+        <h5>链接</h5>
+        <ul class="list-inline">
+            
+            <li><a target="_blank" href="http://blog.sina.com.cn/vegas">青鸟的翅膀</a></li>
+            
+            <li><a target="_blank" href="http://blog.sina.com.cn/yoshikilau">Caffeine Park</a></li>
+            
+            <li><a target="_blank" href="http://huxpro.github.io">Theme From Hux</a></li>
+            
+        </ul>
+    </section>
+    
+    
+
+
+
+    
+    
+    <section>
+        <hr>
+        <h5>书签</h5>
+        <ul class="list-inline">
+            
+            <li><a target="_blank" href="https://martinfowler.com">Martin Fowler</a></li>
+            
+            <li><a target="_blank" href="https://github.com/vincentmi/vnzmi/tree/gh-pages/attach/region.sql">中国省市区数据库</a></li>
+            
+            <li><a target="_blank" href="https://www.gitbook.com/book/vincentmi/spring-security-reference-zh/details">spring-security-reference</a></li>
+            
+            <li><a target="_blank" href="https://unsplash.com">unsplash</a></li>
+            
+            <li><a target="_blank" href="https://vincentmi.github.io/json2swg/">json2swg</a></li>
+            
+        </ul>
+    </section>
+    
+</div>
+
+	</div>
+</div>
+
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/vincentz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/img/icwt.jpg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/vincentmi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/5311815/vincent-mi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='/index.xml' rel="alternate" type="application/rss+xml" title="我的乐与怒" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; 我的乐与怒 2024 | <a href="http://www.beian.miit.gov.cn" style="text-decoration: none;"> 蜀ICP备17040089号-2</a>
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https'){
+       bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else{
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+<script>
+    
+    var _baId = '2b745fdb2d90955bdfb8ad1194277073';
+
+    
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-78738242-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CXF on 我的乐与怒</title>
+    <link>/tags/cxf/</link>
+    <description>Recent content in CXF on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 10 May 2015 23:16:00 +0000</lastBuildDate><atom:link href="/tags/cxf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CXF添加Header</title>
+      <link>/post/2015-06-04-cxf-header/</link>
+      <pubDate>Sun, 10 May 2015 23:16:00 +0000</pubDate>
+      
+      <guid>/post/2015-06-04-cxf-header/</guid>
+      <description>CXF的header处理了半天。。。 添加拦截器 public class HotelHeaderInterceptor extends AbstractSoapInterceptor { public void handleMessage(SoapMessage message) throws Fault { List&amp;lt;Header&amp;gt; headers = message.getHeaders(); AuthenticationHeader aheader = new AuthenticationHeader(); aheader.setCulture(com.tourico.schemas.webservices.authentication.Culture.EN_US); aheader.setLoginName(username); aheader.setPassword(password); aheader.setVersion(new JAXBElement&amp;lt;String&amp;gt;(new QName(&amp;#34;&amp;#34;, &amp;#34;version&amp;#34;), String.class, version)); JAXBElement&amp;lt;AuthenticationHeader&amp;gt; authHeaders = new ObjectFactory().createAuthenticationHeader(aheader); Header header; try { header = new Header(authHeaders.getName(), aheader,new JAXBDataBinding(AuthenticationHeader.class)); headers.add(header); message.put(Header.HEADER_LIST, headers); } catch (JAXBException e) { e.printStackTrace(); } } 调用服务之前处理 IDestinationContracts port = service.getIISDestinationHosting() ; Client cxfClient = ClientProxy.getClient(port); cxfClient.getOutInterceptors().add(new HeaderInterceptor(Phase.WRITE));</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on 我的乐与怒</title>
+    <link>/tags/linux/</link>
+    <description>Recent content in Linux on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 19 May 2023 23:48:00 +0000</lastBuildDate><atom:link href="/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>一些运维脚本</title>
+      <link>/post/2023-05-19-ops-scripts/</link>
+      <pubDate>Fri, 19 May 2023 23:48:00 +0000</pubDate>
+      
+      <guid>/post/2023-05-19-ops-scripts/</guid>
+      <description>Yearning SQL审核平台 拉代码 git clone git@github.com:cookieY/Yearning.git 打包镜像 cd Yearning.git &amp;amp;&amp;amp; docker build -t yearning . docker run -it --rm -e MYSQL_USER=root -e MYSQL_ADDR=172.17.0.1:3307 -e MYSQL_PASSWORD=root -e MYSQL_DB=yearning yearning /opt/Yearning install docker run --restart=always -d --name yearning -p 9001:8000 -e MYSQL_USER=root -e MYSQL_ADDR=172.17.0.1:3307 -e MYSQL_PASSWORD=root -e SECRET_KEY=mws1118888888888 -e MYSQL_DB=yearning yearning Docker #查询当前容器状态 docker stats --no-stream docker stats $(docker ps --format={{.Names}}) #只输出指定容器 docker stats --no-stream registry mysql #格式化输出结果 docker stats --format &amp;#34;table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}&amp;#34; 变量 说明 .Container 根据用户指定的名称显示容器的名称或 ID .Name 容器名称 .ID 容器 ID .CPUPerc CPU 使用</description>
+    </item>
+    
+    <item>
+      <title>Linux 18.04 Tips</title>
+      <link>/post/2020-08-25-linux-tips/</link>
+      <pubDate>Wed, 26 Aug 2020 23:04:00 +0000</pubDate>
+      
+      <guid>/post/2020-08-25-linux-tips/</guid>
+      <description>1. 设置启动界面 网上很多文章都是旧的,18.04 使用下列命令生效/. 切换为图形启动 sudo systemctl set-default runlevel5.target 切换为文本命令模式 sudo systemctl set-default runlevel3.target 命令行启动图形界面 使用startx</description>
+    </item>
+    
+    <item>
+      <title>VirtualBox调整磁盘空间</title>
+      <link>/post/2017-03-29-vm-disk-resize/</link>
+      <pubDate>Wed, 29 Mar 2017 16:00:00 +0000</pubDate>
+      
+      <guid>/post/2017-03-29-vm-disk-resize/</guid>
+      <description>调整VM磁盘文件大小 vm 版本需要4.0以上 VBoxManage modifyhd you_disk_file –resize 40960 也可以使用 uuid 替换 you_disk_file , 使用VBoxManage list hdds可以列出你的当前磁盘。 建立物理分区 先查看当前分区情况 [root@p2 ~]# df -h Filesystem Size Used Avail Use% Mounted on /dev/mapper/VolGroup-lv_root 6.5G 5.0G 1.2G 81% / tmpfs 372M 12K 372M 1% /dev/shm /dev/sda1 477M 49M 399M 11% /boot 目前 /有6.5G 查看当前物理磁盘空间 [root@p2 ~]# fdisk -l /dev/sda Disk /dev/sda: 14.7 GB,</description>
+    </item>
+    
+    <item>
+      <title>使用Consul Docker微服务平台实践</title>
+      <link>/post/2017-03-24-consul-and-docker-service-discover/</link>
+      <pubDate>Fri, 24 Mar 2017 10:26:00 +0000</pubDate>
+      
+      <guid>/post/2017-03-24-consul-and-docker-service-discover/</guid>
+      <description>基础环境 - CentOS6.6 内核升级 因为虚拟机的centos内核无法达到docker稳定运行，因此升级到3.1,执行 #导入key rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org #安装ELRepo到CentOS 6.6中 rpm -Uvh http://www.elrepo.org/elrepo-release-6-6.el6.elrepo.noarch.rpm #安装长期支持版本kernel yum --enablerepo=elrepo-kernel install kernel-lt -y #编辑grub.conf文件，修改Grub引导顺序,选择3.1版本的内容(一</description>
+    </item>
+    
+  </channel>
+</rss>

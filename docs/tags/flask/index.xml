@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>flask on 我的乐与怒</title>
+    <link>/tags/flask/</link>
+    <description>Recent content in flask on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 29 Jul 2023 10:44:00 +0000</lastBuildDate><atom:link href="/tags/flask/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用Flask开发应用程序（4）- 使用SQLAlchemy </title>
+      <link>/post/2023-07-29-build-application-with-flask-part4/</link>
+      <pubDate>Sat, 29 Jul 2023 10:44:00 +0000</pubDate>
+      
+      <guid>/post/2023-07-29-build-application-with-flask-part4/</guid>
+      <description>ORM ORM 对象关系映射，通过将数据库映射到业务对象中，可以简化对数据库的操作，提高开发效率。我们把我们的应用改造成使用ORM来实现数据库交互。 SQLAlchemy https://www.sqlalchemy.org/ https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/ 安装 使用Flask-SQLAlchemy为Flask集成了SQLAlchemy. pip install -U Flask-SQLAlchemy 配置 SQLAlchemy 最少只需要一个配置项 SQLALCHEMY_D</description>
+    </item>
+    
+    <item>
+      <title>使用Flask开发应用程序(1) - 基础</title>
+      <link>/post/2023-07-21-build-application-with-flask-part1/</link>
+      <pubDate>Fri, 21 Jul 2023 10:44:00 +0000</pubDate>
+      
+      <guid>/post/2023-07-21-build-application-with-flask-part1/</guid>
+      <description>安装FLASK 先安装Pyhton，https://www.python.org/downloads/macos/ FLASK支持 3.8+版本的python 为啥不用Django ,由于目前前后端分离，Django的很多功能用不上，Flask更简单小巧一点。 配置虚拟环境 使用虚拟环境可以将</description>
+    </item>
+    
+    <item>
+      <title>使用Flask开发应用程序（2）- 搭建博客网站</title>
+      <link>/post/2023-07-21-build-application-with-flask-part2/</link>
+      <pubDate>Fri, 21 Jul 2023 10:44:00 +0000</pubDate>
+      
+      <guid>/post/2023-07-21-build-application-with-flask-part2/</guid>
+      <description>数据库访问 我们先使用SQLlite数据库来看看如何初始化一些资源。python内建了sqlite3 模块。我们使用这个模块来进行一些数据的保存。使用SQLite 可以不用启动独立的数据库服务器，比较适合小型的应用和嵌入式设备等。 连接数据库 flaskr/db.py文件 import sqlite3 import click from flask import current_app, g</description>
+    </item>
+    
+    <item>
+      <title>使用Flask开发应用程序（3）- 测试和部署</title>
+      <link>/post/2023-07-21-build-application-with-flask-part3/</link>
+      <pubDate>Fri, 21 Jul 2023 10:44:00 +0000</pubDate>
+      
+      <guid>/post/2023-07-21-build-application-with-flask-part3/</guid>
+      <description>让应用可安装 让应用可安装可以让我们很方便的在不同环境快速部署我们的应用，让应用能像Flask一样进行安装和测试 pyproject.toml 项目描述文件 pyproject.toml 用于描述项目如果运行和安装 pyproject.toml [project] name = &amp;#34;flaskr&amp;#34; version = &amp;#34;1.0.0&amp;#34; description = &amp;#34;简单的博客系统&amp;#34; dependencies = [ &amp;#34;flask&amp;#34;, ] [build-system] requires = [&amp;#34;flit_core&amp;lt;4&amp;#34;] build-backend = &amp;#34;flit_core.buildapi&amp;#34; 查看pyproject.toml详细说明 安装测试 pip</description>
+    </item>
+    
+  </channel>
+</rss>

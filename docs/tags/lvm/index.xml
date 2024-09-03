@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>LVM on 我的乐与怒</title>
+    <link>/tags/lvm/</link>
+    <description>Recent content in LVM on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 29 Mar 2017 16:00:00 +0000</lastBuildDate><atom:link href="/tags/lvm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VirtualBox调整磁盘空间</title>
+      <link>/post/2017-03-29-vm-disk-resize/</link>
+      <pubDate>Wed, 29 Mar 2017 16:00:00 +0000</pubDate>
+      
+      <guid>/post/2017-03-29-vm-disk-resize/</guid>
+      <description>调整VM磁盘文件大小 vm 版本需要4.0以上 VBoxManage modifyhd you_disk_file –resize 40960 也可以使用 uuid 替换 you_disk_file , 使用VBoxManage list hdds可以列出你的当前磁盘。 建立物理分区 先查看当前分区情况 [root@p2 ~]# df -h Filesystem Size Used Avail Use% Mounted on /dev/mapper/VolGroup-lv_root 6.5G 5.0G 1.2G 81% / tmpfs 372M 12K 372M 1% /dev/shm /dev/sda1 477M 49M 399M 11% /boot 目前 /有6.5G 查看当前物理磁盘空间 [root@p2 ~]# fdisk -l /dev/sda Disk /dev/sda: 14.7 GB,</description>
+    </item>
+    
+  </channel>
+</rss>

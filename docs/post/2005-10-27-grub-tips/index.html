@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="我的乐与怒">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//img/car2.jpg">
+    <meta property="twitter:image" content="//img/car2.jpg" />
+    
+
+    
+    <meta name="title" content="Grub安装,配置及使用汇总" />
+    <meta property="og:title" content="Grub安装,配置及使用汇总" />
+    <meta property="twitter:title" content="Grub安装,配置及使用汇总" />
+    
+
+    
+    <meta name="description" content="In code we trust">
+    <meta property="og:description" content="In code we trust" />
+    <meta property="twitter:description" content="In code we trust" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="我的乐与怒,vincent mi, miwenshu, 电商,  博客, 个人网站, 互联网, Web, 云原生, PaaS, Java, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Grub安装,配置及使用汇总 | 我的乐与怒 | Vincent&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/2005-10-27-grub-tips/">
+
+    
+
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">我的乐与怒</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/about/">我</a></li>
+                    
+                        <li><a href="/archive/">归档</a></li>
+                    
+                        <li><a href="/search/">搜索</a></li>
+                    
+                        <li><a href="/codesketch/">CodeSketch</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/bullseye-gradient_blue.svg')
+    }
+    
+    .titleColor {
+        text-align: center;font-size:80px;
+        color: #FFFFFF;
+    }
+   
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2" title="新浪博客">
+                            新浪博客
+                        </a>
+                        
+                    </div>
+                    <h1 class="titleColor">Grub安装,配置及使用汇总</h1>
+                    <h2 class="subheading titleColor"></h2>
+                    <span class="meta titleColor">
+                        
+                            Posted by 
+                            
+                                Vincent
+                             
+                            on 
+                            Thursday, October 27, 2005
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <h1 id="一安装linux时安装grub">(一)安装linux时安装grub.</h1>
+<p>安装redhat linux时会提示安装引导程序,如果选择grub为引导程序,建议把grub安装到硬盘的引导扇区MBR.grub
+还可以引导其它操作系统，如 FreeBSD、NetBSD、OpenBSD、GNU HURD 和 DOS，以及 Windows
+95、98、NT、2000、XP。</p>
+<h1 id="二grub的配置">(二)grub的配置</h1>
+<p>一旦选择了grub为引导程序,下面我们来了解一下它的配置.
+/boot/grub/grub.conf是grub产生一个引导选择菜单以及设置一些选项.下面是我的grub.conf:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#09f;font-style:italic">#==========例子开始==========</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># grub.conf generated by anaconda</span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># Note that you do not have to rerun grub after making changes to this file</span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># NOTICE: You have a /boot partition. This means that</span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># all kernel and initrd paths are relative to /boot/, eg.</span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># root (hd0,6)</span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># kernel /vmlinuz-version ro root=/dev/hda10</span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># initrd /initrd-version.img</span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">#boot=/dev/hda</span>
+</span></span><span style="display:flex;"><span><span style="color:#033">default</span><span style="color:#555">=</span><span style="color:#f60">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#033">timeout</span><span style="color:#555">=</span><span style="color:#f60">10</span>
+</span></span><span style="display:flex;"><span><span style="color:#033">splashimage</span><span style="color:#555">=(</span>hd0,6<span style="color:#555">)</span>/grub/splash.xpm.gz
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># --&amp;gt; Redhat Linux 8.0 &amp;lt;--</span>
+</span></span><span style="display:flex;"><span>title Red Hat Linux <span style="color:#555">(</span>2.4.18-14<span style="color:#555">)</span>
+</span></span><span style="display:flex;"><span>root <span style="color:#555">(</span>hd0,6<span style="color:#555">)</span>
+</span></span><span style="display:flex;"><span>kernel /vmlinuz-2.4.18-14 ro <span style="color:#033">root</span><span style="color:#555">=</span><span style="color:#033">LABEL</span><span style="color:#555">=</span>/
+</span></span><span style="display:flex;"><span>initrd /initrd-2.4.18-14.img
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># --&amp;gt; Microsoft Windows XP &amp;lt;--</span>
+</span></span><span style="display:flex;"><span>title Microsoft Windows XP
+</span></span><span style="display:flex;"><span>rootnoverify <span style="color:#555">(</span>hd0,0<span style="color:#555">)</span>
+</span></span><span style="display:flex;"><span>chainloader +1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic">#===========例子结束==========</span>
+</span></span></code></pre></div><p>配置选项解释:
+以&quot;#&ldquo;开头的是注释行.
+我这里有两个操作系统,分别是Red Hat Linux和Microsoft Windows XP.
+其中 timeout标识默认等待时间,我这设置为10秒,超过10秒用户还没作出选择的话,将自动选择默认的操作系统(我这里默认的是Redhat linux 8.0)
+默认的操作系统是由default一项来控制的,default后的数字表明第几个是默认的,这里0表示第一个,1表示第二个.所以如果你想修改默认的操作系统,就修改default后的数字.
+title一项是设置操作系统的名称,grub不支持中文(有点遗憾).
+splashimage一项指定grub界面的背景图片,有兴趣的朋友可以修改grub的背景哦!
+root
+(hd0,6)标识从第一个硬盘,第7个分区来启动搜索引导内核.注意这儿的root与linux的root分区不同,此root非彼root也!
+grub的硬盘标识方法与linux的有点不同.在linux中第一个主分区为hda1,第二个主分区为hda1,第一个逻辑分区为hda5,而在
+grub中是以(hdx,y)来标识的,如第一个主分区为(hd0,0)第一个逻辑分区为(hd0,1)依此类推.所以这儿root后面的是你的
+/boot所在分区标识.
+知道了内核在哪儿，还要具体指出哪个文件是内核文件，这就是kernel的工作。
+kernel /vmlinuz-2.2.18-14 ro root=LABEL=/.说明/boot/vmlinuz-2.2.18-14
+就是要载入的内核。后面的都是传递给内核的参数。ro是以readonly的意思。注意我这里内核前面的路径是&rdquo;/&quot;,因为我的boot单独分了一个区,
+如果你没有为boot单独分区,那么内核前面的路径就是&quot;/boot&quot;.
+initrd用来初始的linux image，并设置相应的参数
+再来看一看windows的定义段吧。
+这里，我添加了一项来引导 WindowsXP。要完成此操作，GRUB 使用了&quot;链式装入器&quot;(chainloader)。链式装入器从分区
+(hd0,0) 的引导记录中装入 winXP 自己的引导装入器，然后引导它。这就是这种技术叫做链式装入的原因 &ndash;
+它创建了一个从引导装入器到另一个的链。这种链式装入技术可以用于引导任何版本的 DOS 或
+Windows。如果你在计算机中装有win98,winme,win2k,winxp的话,chainloader会把引导权交与win的
+NTLoader来引导.</p>
+<h1 id="三grub启动盘的制作">(三)Grub启动盘的制作</h1>
+<p>要制作引导盘，需执行一些简单的步骤。首先，在新的软盘上创建 ext2 文件系统。然后，将其安装，并将一些 GRUB 文件复制到该文件系统，最后运行 &ldquo;grub&rdquo; 程序，它将负责设置软盘的引导扇区。</p>
+<p>将一张空盘插入 1.44MB 软驱，输入：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span> mke2fs /dev/fd0 
+</span></span></code></pre></div><p>创建了 ext2 文件系统后，需要安装该文件系统：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>mount /dev/fd0 /mnt/floppy 
+</span></span></code></pre></div><p>现在，需要创建一些目录，并将一些关键文件（原先安装 GRUB 时已安装了这些文件）复制到软盘：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># mkdir /mnt/floppy/boot </span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># mkdir /mnt/floppy/boot/grub </span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># cp /boot/grub/stage1 /mnt/floppy/boot/grub </span>
+</span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"># cp /boot/grub/stage2 /mnt/floppy/boot/grub </span>
+</span></span></code></pre></div><p>再有一个步骤，就能得到可用的引导盘。</p>
+<p>在linux bash中，从 root 用户运行&quot;grub&quot;，该程序非常有趣并值得注意，因为它实际上是 GRUB
+引导装入器的半功能性版本。尽管 Linux 已经启动并正在运行，您仍可以运行 GRUB 并执行某些任务，而且其界面与使用 GRUB 引导盘或将
+GRUB 安装到硬盘 MBR 时看到的界面(即GRUB控制台)完全相同。
+在 grub&gt; 提示符处，输入：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>grub&gt; root <span style="color:#555">(</span>fd0<span style="color:#555">)</span> 
+</span></span><span style="display:flex;"><span>grub&gt; setup <span style="color:#555">(</span>fd0<span style="color:#555">)</span> 
+</span></span><span style="display:flex;"><span>grub&gt; quit 
+</span></span></code></pre></div><p>现在，引导盘完成了。</p>
+<h1 id="四恢复被windows破坏的grub">(四).恢复被windows破坏的grub.</h1>
+<p>如果你用grub来引导linux和windows,当windows出毛病重新安装后,会破坏MBR中的grub,这时需要恢复grub.</p>
+<p>1.把linux安装光盘的第一张放到光驱，然后重新启动机器，在BOIS中把系统用光驱来引导。
+2.等安装界面出来后，按［F4］键，也就是linux rescue模式。
+3.一系列键盘以及几项简单的配制，过后就［继续］了。。。这个过程，我不说了，比较简单。
+4.然后会出现这样的提示符:</p>
+<p><code>sh# </code></p>
+<p>5.我们就可以操作GRUB了.输入grub:</p>
+<p><code>sh#grub </code></p>
+<p>会出现这样的提示符:</p>
+<pre tabindex="0"><code>grub&gt; 
+</code></pre><p>我们就可以在这样的字符后面，输入:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>grub&gt; root <span style="color:#555">(</span>hdX,Y<span style="color:#555">)</span> 
+</span></span><span style="display:flex;"><span>grub&gt;setup <span style="color:#555">(</span>hd0<span style="color:#555">)</span> 
+</span></span></code></pre></div><p>如果成功会有一个successful&hellip;&hellip;
+这里的X，如果是一个盘，就是0，如果你所安装的linux的根分区在第二个硬盘上，那X就是1了；Y，就是装有linux系统所在的根分区。 setup (hd0)就是把GRUB写到硬盘的MBR上。</p>
+<h1 id="五用ntloader来引导linux">(五).用NTLoader来引导linux.</h1>
+<p>如果你在安装linux时没有选择安装grub,不必着急,现在我们来看看如何在安装linux后安装grub.并用windows的NTLoader来引导linux.</p>
+<ol>
+<li>安装grub
+我用的grub是Redhat8.0带的grub安装包: grub-0.92-7.rpm
+安装: rpm -ivh grub-0.92-7.rpm</li>
+</ol>
+<p>其他安装方式也一样,只要你安装上grub就行了.RH8缺省用的grub, 1,2步骤可以
+省了.</p>
+<ol start="2">
+<li>建立grub的环境</li>
+</ol>
+<p><code>cp /usr/share/grub/i386-pc/* /boot/grub </code></p>
+<ol start="3">
+<li>
+<p>生成grub的配置文件/boot/grub/menu.conf
+按照上面所讲的grub.conf来生成一个配置文件.
+注意了, 这里我的linux在/dev/hda4,所以menu.conf那些分区位置为(hd0,3),
+你的可能不一样了,不能完全照着&quot;画瓢&quot;噢! 下面第3步install的中的分区位置也应该和你的系统一致.</p>
+</li>
+<li>
+<p>安装grub至Linux分区boot
+将grub的stage1安装到/dev/hda4的boot扇区(hd0,3). 过程如下:</p>
+</li>
+</ol>
+<p>/sbin/grub (运行grub)</p>
+<pre tabindex="0"><code>grub&gt; install (hd0,3)/boot/grub/stage1 d (hd0,3) (hd0,3)/boot/grub/stage2 p (hd0,3)/boot/grub/menu.conf   
+</code></pre><p>(注意,上面&quot;grub&gt;&ldquo;为grub的提示符,其后内容写在一行上.)</p>
+<ol start="4">
+<li>取得grub的boot信息
+过程如下:
+<code>dd if=/dev/hda4 of=/grub.lnx bs=512 count=1 </code></li>
+</ol>
+<p>这样得到grub的引导信息,只要用NT Loader来加载它就行了.</p>
+<ol start="5">
+<li>将上面得到的grub.lnx弄到Windows的C盘根目录下
+可以先把grub.lnx弄得软盘上,然后启动windows,拷贝到C:; 情况允许也可以直接在Linux下拷贝到C:了. 我的C盘(即设备/dev/hda1)为FAT32, 可以直接从Linux下弄过去了. 如下:</li>
+</ol>
+<pre tabindex="0"><code>mount -t vfat /dev/hda1 /mnt/c 
+cp /grub.lnx /mnt/c 
+umount /mnt/c 
+</code></pre><ol start="6">
+<li>修改NT Loader的boot.ini
+在其中加入一行: C:\grub.lnx=&ldquo;Redhat Linux - GRUB&rdquo;
+加入后boot.ini的内容如下:</li>
+</ol>
+<pre tabindex="0"><code>[boot loader]  
+timeout=15  
+default=C:\boot.lnx  
+[operating systems]   
+multi(0)disk(0)rdisk(0)partition(1)\WINDOWS=&#34;Microsoft Windows XP Professional&#34; /fastdetect 
+
+[VGA mode]&#34; /basevideo /sos 
+C:\grub.lnx=&#34;Redhat Linux - GRUB&#34; 
+</code></pre><p>OK. 可以用NT Loader加载Linux了, 其实上面过程基本上和用NT Loader加载LILO一样.其基本思想就是用NT Loader来加载LILO或grub的引导区(grub.lnx), 其中的关键就是LILO或grub的引导区的获取.</p>
+<p>(六)活用grub的交互功能
+grub具有强大的交互功能.学会了将会使你受益非浅!
+1.grub没有显示菜单怎么办?
+当开机后进入grub界面但没了菜单,只剩下一个grub&gt;提示符,怎么启动呢?别急,看下面:</p>
+<pre tabindex="0"><code>grub&gt; cat (hd0,6)/boot/grub/grub.conf (为了看参数)
+grub&gt; root (hd0,6)
+grub&gt; kernel (hd0,6)/vmlinuz-2.4.18-14 ro root=LABEL=/
+grub&gt; initrd (hd0,6)/initrd-2.4.18-14.img
+grub&gt; boot
+</code></pre><p>OK!启动了吧!以上有些数字要根据你的实际情况更改.
+以上这个方法也可以用于测试新编译的内核.</p>
+<p>2.进入单用户模式.
+有时不小心把root用户密码忘了,只能进入单用户模式来重新设置root密码.方法如下:
+开机进入grub界面,按C进入命令行模式,然后按照上面的方法进行,只是在第三步要在后面加入single参数.</p>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="/"><img src="/img/favicon.png" />我的乐与怒</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2005-10-27-grub/" data-toggle="tooltip" data-placement="top" title="Grub"><i class="fa fa-angle-left fa-lg"></i>
+                            Previous</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2005-11-01-structs-doc/" data-toggle="tooltip" data-placement="top" title="Struts中文文档">Next
+                        <i class="fa fa-angle-right fa-lg"></i></a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">目录</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">标签</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/aframe" title="aframe">
+                            aframe
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/andrew-ng" title="andrew-ng">
+                            andrew-ng
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/arduino" title="arduino">
+                            arduino
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                            blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/cgi" title="cgi">
+                            cgi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/consul" title="consul">
+                            consul
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                            docker
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/eth" title="eth">
+                            eth
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ethereum" title="ethereum">
+                            ethereum
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/evm" title="evm">
+                            evm
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/feign" title="feign">
+                            feign
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/flask" title="flask">
+                            flask
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                            golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/hw" title="hw">
+                            hw
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/javascript" title="javascript">
+                            javascript
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/jpa" title="jpa">
+                            jpa
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/js" title="js">
+                            js
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/k8s" title="k8s">
+                            k8s
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                            kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/linux" title="linux">
+                            linux
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mac" title="mac">
+                            mac
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/machine-learning" title="machine-learning">
+                            machine-learning
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/math" title="math">
+                            math
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mysql" title="mysql">
+                            mysql
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/nginx" title="nginx">
+                            nginx
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/op" title="op">
+                            op
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/opentcv" title="opentcv">
+                            opentcv
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ops" title="ops">
+                            ops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/poco" title="poco">
+                            poco
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/pptp" title="pptp">
+                            pptp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/python" title="python">
+                            python
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/rd" title="rd">
+                            rd
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/spring" title="spring">
+                            spring
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/springboot" title="springboot">
+                            springboot
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ssl" title="ssl">
+                            ssl
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/thymeleaf" title="thymeleaf">
+                            thymeleaf
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/type" title="type">
+                            type
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vagrant" title="vagrant">
+                            vagrant
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/vpn" title="vpn">
+                            vpn
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/vue" title="vue">
+                            vue
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/webrtc" title="webrtc">
+                            webrtc
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/workflow" title="workflow">
+                            workflow
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0" title="技术文章">
+                            技术文章
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%96%B0%E6%B5%AA%E5%8D%9A%E5%AE%A2" title="新浪博客">
+                            新浪博客
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E6%97%A0%E8%81%8A" title="无聊">
+                            无聊
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB" title="生活">
+                            生活
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95" title="生活记录">
+                            生活记录
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E8%82%A1%E7%A5%A8" title="股票">
+                            股票
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E8%BF%90%E7%BB%B4" title="运维">
+                            运维
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>链接</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/vegas">青鸟的翅膀</a></li>
+                        
+                        <li><a target="_blank" href="http://blog.sina.com.cn/yoshikilau">Caffeine Park</a></li>
+                        
+                        <li><a target="_blank" href="http://huxpro.github.io">Theme From Hux</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/vincentz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/img/icwt.jpg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/vincentmi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/miwenshu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/5311815/vincent-mi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="我的乐与怒" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; 我的乐与怒 2024 | <a href="http://www.beian.miit.gov.cn" style="text-decoration: none;"> 蜀ICP备17040089号-2</a>
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https'){
+       bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else{
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+<script>
+    
+    var _baId = '2b745fdb2d90955bdfb8ad1194277073';
+
+    
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-78738242-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

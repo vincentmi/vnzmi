@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java on 我的乐与怒</title>
+    <link>/tags/java/</link>
+    <description>Recent content in Java on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 26 Apr 2024 15:13:00 +0000</lastBuildDate><atom:link href="/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>工作流服务设计</title>
+      <link>/post/2024-04-26-workflow-design/</link>
+      <pubDate>Fri, 26 Apr 2024 15:13:00 +0000</pubDate>
+      
+      <guid>/post/2024-04-26-workflow-design/</guid>
+      <description>背景 企业和政府工作中很多业务都涉及到审批流或者工作流，在审批流或者工作流中完成各个部门的工作协调，任务指派，进度跟踪，公司现有审批设计的比较烂，计划重新进行审批的设计实现。目标覆盖OA审批和政府垮部门的工作流服务。 功能设计 审批人： 值审批任务指定的 人员，审批组，部门，角色 当审批人是</description>
+    </item>
+    
+    <item>
+      <title>深入使用Spring计划任务框架</title>
+      <link>/post/2022-11-18-use-spring-schedule/</link>
+      <pubDate>Fri, 18 Nov 2022 11:11:00 +0000</pubDate>
+      
+      <guid>/post/2022-11-18-use-spring-schedule/</guid>
+      <description>任务执行和计划 Spring框架提供TaskExecutor和TaskSchedule接口对异步任务和计划任务进行抽象。并支持很多框架的特性，比如线程池和委派等。这些接口在不同的运行环境背后通过不同的实现来进行支持。 Spring支持使用Timer和Quartz Scheduler ( https://w</description>
+    </item>
+    
+    <item>
+      <title>使用Querydsl简化Spring JPA的查询</title>
+      <link>/post/2022-04-29-use-query-dsl-in-spring/</link>
+      <pubDate>Fri, 29 Apr 2022 22:55:00 +0000</pubDate>
+      
+      <guid>/post/2022-04-29-use-query-dsl-in-spring/</guid>
+      <description>JPA的限制 一般项目中一定会使用到联表查询,使用JPA可以很方便的对单表进行CRUD操作,简单的关联操作通过设置关联关系也很容易实现.但是对于多表的联合查询就比较麻烦.使用Querydsl可以帮助我们很方便的构建复杂查询. MAVEN依赖 添加依赖 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.querydsl&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;querydsl-apt&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;${querydsl.version}&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;provided&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.querydsl&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;querydsl-jpa&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;${querydsl.version}&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 添加MAVEN</description>
+    </item>
+    
+    <item>
+      <title>Maven的POM文件</title>
+      <link>/post/2021-12-16-introduction-pom/</link>
+      <pubDate>Thu, 16 Dec 2021 17:36:00 +0000</pubDate>
+      
+      <guid>/post/2021-12-16-introduction-pom/</guid>
+      <description>根POM pom.xml文件包含了项目的信息和配置细节,指导Maven 如何进行构建.他通过继承根 pom来载入Maven的默认配置, 在这个文件中包含了大部分项目会使用到的默认值. 比如对target目录的定义,源文件src/main/java以及测试代码源文件src/test/java</description>
+    </item>
+    
+    <item>
+      <title>学习下Netty</title>
+      <link>/post/2021-07-15-use-netty/</link>
+      <pubDate>Thu, 15 Jul 2021 10:53:00 +0000</pubDate>
+      
+      <guid>/post/2021-07-15-use-netty/</guid>
+      <description>前言 很久以前跟电信对接短信和彩信,然后要跟移动同步订购关系,移动要访问我们的WEB服务器,当时struct一堆XML看得头大,就自己写了个WEBSERVER,当时是用的 ServerSocket加多线程,比较原始不过自己实现了部分HTTP协议,整个过程自己对网络通讯的技术有了很深刻</description>
+    </item>
+    
+    <item>
+      <title>制作自定义的Spring Starter</title>
+      <link>/post/2021-04-05-make-a-custom-spring-starter/</link>
+      <pubDate>Mon, 05 Apr 2021 10:53:00 +0000</pubDate>
+      
+      <guid>/post/2021-04-05-make-a-custom-spring-starter/</guid>
+      <description>国内很多文章讲的不详细 参考: https://www.baeldung.com/spring-boot-custom-starter Spring Boot 自动配置原理 Spring Boot启动时会查找classpath中是否存在一个 spring.factories的文件.这个文件保存在META-INF文件夹. spring-boot-autoconfigure 项目中该文件代码如下. org.springframework.boot.autoconfigure.EnableAutoConfiguration=\ org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration,\ org.springframework.boot.autoconfigure.cassandra.CassandraAutoConfiguration,\ org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration,\ org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration 这个文件配置了Spring Boot将尝试运行的不同配置类.因此上面的</description>
+    </item>
+    
+    <item>
+      <title>Feign自定义配置</title>
+      <link>/post/2020-03-25-feign-customize/</link>
+      <pubDate>Wed, 25 Mar 2020 23:31:00 +0000</pubDate>
+      
+      <guid>/post/2020-03-25-feign-customize/</guid>
+      <description>背景 微服务重构,使用Spring全家桶.JSON数据传输为了兼容接口规范对Feign进行了定制 启用Feign 加入Feign的Spring starter依赖 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-openfeign&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; Applicaiton中加上注解 @SpringBootApplication @EnableFeignClients public class Application { public static void main(String[] args) { SpringApplication.run(Application.class); } } 定义一个和使用客户端 package com.tourscool.passport; import org.springframework.cloud.openfeign.FeignClient; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RequestMethod; import org.springframework.web.bind.annotation.RequestParam; @FeignClient(name=&amp;#34;authorize&amp;#34; ,url=&amp;#34;http://authorize.dev.philo.in/api/v1/&amp;#34;,configuration = FeignConfiguration.class) public interface AuthorizeClient {</description>
+    </item>
+    
+    <item>
+      <title>使用OkHttp进行HTTPS连接</title>
+      <link>/post/2020-03-11-okhttp-ssl-support/</link>
+      <pubDate>Wed, 11 Mar 2020 11:31:00 +0000</pubDate>
+      
+      <guid>/post/2020-03-11-okhttp-ssl-support/</guid>
+      <description>背景 Java 搞个SSL居然还这么麻烦,翻了下官方文档.翻译下HTTPS 相关章节 OkHttp努力平滑下面的两个点 连接性 尽可能的连接各种主机.这包含运行 boringssl 最新版本的高级主机以及运行OpenSSL的旧主机. 连接的安全性 这包括使用证书验证远程web服务器，以及使用强密码交换数据的隐私。 当协商连</description>
+    </item>
+    
+    <item>
+      <title>JPA手册(2) -JPA 仓库</title>
+      <link>/post/2019-09-26-spring-jpa-repository/</link>
+      <pubDate>Thu, 26 Sep 2019 15:03:00 +0000</pubDate>
+      
+      <guid>/post/2019-09-26-spring-jpa-repository/</guid>
+      <description>5 JPA 仓库 本章指出JPA建立在上一章内容之上的专有的功能.请确保你对此有充分的了解. 5.1 简介 本节介绍通过以下任一方式配置Spring Data JPA的基础知识： “Spring Namespace” (XML configuration) “基于注解的配置” (Java configuration) 5.1.1. Spring 命名空间 Spring Data的JPA模块包含一个允许定义存储库bean的自定义</description>
+    </item>
+    
+    <item>
+      <title>JPA手册(1) - Spring Data Repository</title>
+      <link>/post/2019-09-26-spring-repository/</link>
+      <pubDate>Thu, 26 Sep 2019 10:16:00 +0000</pubDate>
+      
+      <guid>/post/2019-09-26-spring-repository/</guid>
+      <description>4 使用Spring Data 仓库 Spring Data 仓库抽象层的目标是为了显著的减少进行数据持久层访问的代码量. 4.1. 核心概念 Spring Data 仓库最重要的抽象接口是Repository,他使用领域类以及领域类的ID作为参数进行管理.这个接口主要扮演一个标记接口.用来捕捉要使用的类型和帮组发现扩展自该接口的接口.Crud</description>
+    </item>
+    
+    <item>
+      <title>Spring MVC 的错误处理</title>
+      <link>/post/2015-06-30-exception-handling-in-spring-mvc/</link>
+      <pubDate>Tue, 30 Jun 2015 17:18:00 +0000</pubDate>
+      
+      <guid>/post/2015-06-30-exception-handling-in-spring-mvc/</guid>
+      <description>&lt;p&gt;Spring MVC 提供多种异常处理方式，但是当我在进行Spring MVC培训时，我发现我的学院经常会感到困惑或者不太适应。&lt;/p&gt;
+&lt;p&gt;今天我将为你展示多种可能的选项。我们的目标是如果可能的话不在Controller的方法里显式的处理异常。作为横切关注点分别在专用代码里处理更好。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用Spring创建RESTful 服务</title>
+      <link>/post/2015-06-25-use-spring-create-a-restful-service/</link>
+      <pubDate>Thu, 25 Jun 2015 13:52:00 +0000</pubDate>
+      
+      <guid>/post/2015-06-25-use-spring-create-a-restful-service/</guid>
+      <description>&lt;p&gt;这个指南将引导你使用创建一个&amp;quot;hello world&amp;quot;&lt;a href=&#34;http://spring.io/understanding/REST&#34;&gt; RESTFul 服务&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

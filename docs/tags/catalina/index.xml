@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Catalina on 我的乐与怒</title>
+    <link>/tags/catalina/</link>
+    <description>Recent content in Catalina on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language><atom:link href="/tags/catalina/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>来挽救MBP</title>
+      <link>/post/2020-08-13-mbp-crash/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2020-08-13-mbp-crash/</guid>
+      <description>悲剧 离职公司电脑交了,自己买了个 MBP16,预装了 Catalina 10.15.6 .从此悲剧开始各种死机.休眠重启. 去售后查来查去也没啥问题. 随便搞个啥风扇就狂转.老版AIR 给我留下的安静坚挺的印象几乎要败光了. Twitter上联系了MAC售后也是各种提交问题.最后没有问题喊我查查软件. 知乎上说因为三哥程序</description>
+    </item>
+    
+  </channel>
+</rss>

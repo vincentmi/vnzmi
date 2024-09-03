@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kubernetes on 我的乐与怒</title>
+    <link>/tags/kubernetes/</link>
+    <description>Recent content in kubernetes on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 10 Apr 2019 15:31:00 +0000</lastBuildDate><atom:link href="/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>安装Kubernetes集群(3) - Prometheus</title>
+      <link>/post/2019-04-10-k8s-prometheus/</link>
+      <pubDate>Wed, 10 Apr 2019 15:31:00 +0000</pubDate>
+      
+      <guid>/post/2019-04-10-k8s-prometheus/</guid>
+      <description>Prometheus 可以原生监控K8s ,节点和它本身.Prometheus Operator 可以简化Prometheus在K8S 中的安装.使用Prometheus adapter 可以使用自定义指标参数. Prometheus 也提供内建的控制台和查询语言来查询数据和可视化.Prometheus也可以做为Grafana的数据源. 安装Prometheu</description>
+    </item>
+    
+    <item>
+      <title>搭建Kubernetes集群(2) - Ingress</title>
+      <link>/post/2019-04-04-k8s-ingress/</link>
+      <pubDate>Thu, 04 Apr 2019 15:31:00 +0000</pubDate>
+      
+      <guid>/post/2019-04-04-k8s-ingress/</guid>
+      <description>Ingress Ingress允许你配置运行于K8S上的HTTP负载均衡器对服务进行负载均衡. Ingress支持以下功能 基于内容的路由 基于主机名的路由 基于路径的路由 支持TLS/SSL请求 查看官网对Ingress简介 Ingress 控制器 Ingress控制器是运行在集群中根据Ingress资源进行配置的HTT</description>
+    </item>
+    
+    <item>
+      <title>搭建Kubernetes集群(1) - 安装集群</title>
+      <link>/post/2019-03-23-install-kubernetes/</link>
+      <pubDate>Sun, 24 Mar 2019 15:31:00 +0000</pubDate>
+      
+      <guid>/post/2019-03-23-install-kubernetes/</guid>
+      <description>1.准备 环境 Ubuntu 16.04 Docker CE 18.09.3 安装Kubeadm,Kubelet,Kubectl 使用 kubeadm config images list 命令.列出当前版本中用到的镜像. 输入如下 k8s.gcr.io/kube-apiserver:v1.13.4 k8s.gcr.io/kube-controller-manager:v1.13.4 k8s.gcr.io/kube-scheduler:v1.13.4 k8s.gcr.io/kube-proxy:v1.13.4 k8s.gcr.io/pause:3.1 k8s.gcr.io/etcd:3.2.24 k8s.gcr.io/coredns:1.2.6 使用脚本拉取国内镜像 #!/bin/bash images=( kube-apiserver:v1.13.4 kube-controller-manager:v1.13.4 kube-scheduler:v1.13.4 kube-proxy:v1.13.4 pause:3.1 etcd:3.2.24 coredns:1.2.6 ) for imageName in ${images[@]} ; do docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName k8s.gcr.io/$imageName done 重新载入服务 systemctl daemon-reload systemctl restart kubelet 安装flannel插件 安装 ETCD 配置网络: /coreos.com/network/config 写入flan</description>
+    </item>
+    
+  </channel>
+</rss>
