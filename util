@@ -10,7 +10,7 @@ DIR=$(cd "$(dirname "$0")";pwd)
 
 doHelp() {
     echo ""
-    echo "jekyll develop util by vincent_mi"
+    echo "hugo develop util by vincent_mi"
     echo "   { NAME=${NAME},PORT=${PORT},DIR=${DIR}}   "
     echo " "
     echo "Using : ./build [command1] [command2] ..."
@@ -71,7 +71,7 @@ doIndex() {
         --name=${CONTINER_NAME}  \
         --volume="$DIR:/app" \
         ${NAME} \
-        pagefind --source docs
+        pagefind --source docs --bundle-dir  pagefind
      echo -e "\033[32m pagefind index success \033[0m"
 }
 

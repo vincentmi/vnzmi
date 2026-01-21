@@ -184,6 +184,29 @@
             
 
 <div class="post-preview">
+    <a href="/post/2017-03-29-vm-disk-resize/">
+        <h2 class="post-title">
+            VirtualBox调整磁盘空间
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            调整VM磁盘文件大小 vm 版本需要4.0以上 VBoxManage modifyhd you_disk_file –resize 40960 也可以使用 uuid 替换 you_disk_file , 使用VBoxManage list hdds可以列出你的当前磁盘。 建立物理分区 先查看当前分区情况 [root@p2 ~]# df -h Filesystem Size Used Avail Use% Mounted on /dev/mapper/VolGroup-lv_root 6.5G 5.0G 1.2G 81% / tmpfs 372M 12K 372M 1% /dev/shm /dev/sda1 477M 49M 399M 11% /boot 目前 /有6.5G 查看当前物理磁盘空间 [root@p2 ~]# fdisk -l /dev/sda Disk /dev/sda: 14.7 GB,
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Vincent on Wednesday, March 29, 2017
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/post/2017-03-24-consul-and-docker-service-discover/">
         <h2 class="post-title">
             使用Consul Docker微服务平台实践
@@ -382,33 +405,6 @@
     <p class="post-meta">
     
         Posted by Vincent on Monday, July 11, 2016
-        
-        
-    
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/post/2016-06-22-golang-errors-are-values/">
-        <h2 class="post-title">
-            Golang:错误即值 Errors are values
-        </h2>
-	
-        <h3 class="post-subtitle">
-            来自Rob Pike的博客翻译
-        </h3>
-	
-        <div class="post-content-preview">
-	
-            英文原版见此 https://blog.golang.org/errors-are-values 作者 :Rob Pike 翻译 :Vincent Mi 前言 最近用Go写了一下程序,没有try-catch不太适应。因此翻到了这篇文章. 顺手翻译了过来.可能翻译不太好纯为了自己加深理解. 正文 如何进行错误处理,这是一个Go程序员之间,特别是一些新的Go程序员,会经常讨论的问题.讨论到最后往往由于以下代码的多
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    
-        Posted by Vincent on Wednesday, June 22, 2016
         
         
     
@@ -720,6 +716,10 @@
                
             
                
+                    <a href="/tags/jenkins" title="jenkins">
+                        jenkins
+                    </a>
+               
             
                
                     <a href="/tags/jpa" title="jpa">
@@ -841,6 +841,8 @@
                     <a href="/tags/ops" title="ops">
                         ops
                     </a>
+               
+            
                
             
                
@@ -1011,6 +1013,8 @@
                     <a href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0" title="技术文章">
                         技术文章
                     </a>
+               
+            
                
             
                
@@ -1198,7 +1202,7 @@
             
              </ul>
 		<p class="copyright text-muted">
-                    Copyright &copy; 我的乐与怒 2024 | <a href="http://www.beian.miit.gov.cn" style="text-decoration: none;"> 蜀ICP备17040089号-2</a>
+                    Copyright &copy; 我的乐与怒 2026 | <a href="http://www.beian.miit.gov.cn" style="text-decoration: none;"> 蜀ICP备17040089号-2</a>
                     <br>
                 </p>
             </div>

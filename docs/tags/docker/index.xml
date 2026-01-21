@@ -6,7 +6,16 @@
     <description>Recent content in Docker on 我的乐与怒</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 19 May 2023 23:48:00 +0000</lastBuildDate><atom:link href="/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 24 Jan 2025 17:43:00 +0000</lastBuildDate><atom:link href="/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用Jenkins Pipeline 持续集成</title>
+      <link>/post/2025-01-24-use-jenkins-pipeline-copy/</link>
+      <pubDate>Fri, 24 Jan 2025 17:43:00 +0000</pubDate>
+      
+      <guid>/post/2025-01-24-use-jenkins-pipeline-copy/</guid>
+      <description>创建Jenkins Docker镜像 FROM jenkins/jenkins:lts</description>
+    </item>
+    
     <item>
       <title>一些运维脚本</title>
       <link>/post/2023-05-19-ops-scripts/</link>

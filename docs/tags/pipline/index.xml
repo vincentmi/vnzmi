@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pipline on 我的乐与怒</title>
+    <link>/tags/pipline/</link>
+    <description>Recent content in pipline on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 24 Jan 2025 17:43:00 +0000</lastBuildDate><atom:link href="/tags/pipline/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用Jenkins Pipeline 持续集成</title>
+      <link>/post/2025-01-24-use-jenkins-pipeline-copy/</link>
+      <pubDate>Fri, 24 Jan 2025 17:43:00 +0000</pubDate>
+      
+      <guid>/post/2025-01-24-use-jenkins-pipeline-copy/</guid>
+      <description>创建Jenkins Docker镜像 FROM jenkins/jenkins:lts</description>
+    </item>
+    
+  </channel>
+</rss>

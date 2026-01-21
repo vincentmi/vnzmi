@@ -6,7 +6,43 @@
     <description>Recent content in Tags on 我的乐与怒</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 31 May 2024 15:13:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 24 Jan 2025 17:43:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker</title>
+      <link>/tags/docker/</link>
+      <pubDate>Fri, 24 Jan 2025 17:43:00 +0000</pubDate>
+      
+      <guid>/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jenkins</title>
+      <link>/tags/jenkins/</link>
+      <pubDate>Fri, 24 Jan 2025 17:43:00 +0000</pubDate>
+      
+      <guid>/tags/jenkins/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pipline</title>
+      <link>/tags/pipline/</link>
+      <pubDate>Fri, 24 Jan 2025 17:43:00 +0000</pubDate>
+      
+      <guid>/tags/pipline/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>持续集成</title>
+      <link>/tags/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/</link>
+      <pubDate>Fri, 24 Jan 2025 17:43:00 +0000</pubDate>
+      
+      <guid>/tags/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>app</title>
       <link>/tags/app/</link>
@@ -229,15 +265,6 @@
       <pubDate>Sat, 08 Jul 2023 09:44:00 +0000</pubDate>
       
       <guid>/tags/webgis/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Docker</title>
-      <link>/tags/docker/</link>
-      <pubDate>Fri, 19 May 2023 23:48:00 +0000</pubDate>
-      
-      <guid>/tags/docker/</guid>
       <description></description>
     </item>
     
@@ -1003,15 +1030,6 @@
       <pubDate>Thu, 21 Jul 2016 09:49:00 +0000</pubDate>
       
       <guid>/tags/jekyll/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Jenkins</title>
-      <link>/tags/jenkins/</link>
-      <pubDate>Thu, 21 Jul 2016 09:49:00 +0000</pubDate>
-      
-      <guid>/tags/jenkins/</guid>
       <description></description>
     </item>
     
