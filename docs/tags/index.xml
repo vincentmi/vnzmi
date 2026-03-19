@@ -6,7 +6,43 @@
     <description>Recent content in Tags on 我的乐与怒</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 24 Jan 2025 17:43:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Mar 2025 17:43:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>agent</title>
+      <link>/tags/agent/</link>
+      <pubDate>Wed, 19 Mar 2025 17:43:00 +0000</pubDate>
+      
+      <guid>/tags/agent/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>llama</title>
+      <link>/tags/llama/</link>
+      <pubDate>Wed, 19 Mar 2025 17:43:00 +0000</pubDate>
+      
+      <guid>/tags/llama/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>/tags/python/</link>
+      <pubDate>Wed, 19 Mar 2025 17:43:00 +0000</pubDate>
+      
+      <guid>/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>skill</title>
+      <link>/tags/skill/</link>
+      <pubDate>Wed, 19 Mar 2025 17:43:00 +0000</pubDate>
+      
+      <guid>/tags/skill/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Docker</title>
       <link>/tags/docker/</link>
@@ -40,42 +76,6 @@
       <pubDate>Fri, 24 Jan 2025 17:43:00 +0000</pubDate>
       
       <guid>/tags/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>app</title>
-      <link>/tags/app/</link>
-      <pubDate>Fri, 31 May 2024 15:13:00 +0000</pubDate>
-      
-      <guid>/tags/app/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>dart</title>
-      <link>/tags/dart/</link>
-      <pubDate>Fri, 31 May 2024 15:13:00 +0000</pubDate>
-      
-      <guid>/tags/dart/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>flutter</title>
-      <link>/tags/flutter/</link>
-      <pubDate>Fri, 31 May 2024 15:13:00 +0000</pubDate>
-      
-      <guid>/tags/flutter/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>响应式</title>
-      <link>/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/</link>
-      <pubDate>Fri, 31 May 2024 15:13:00 +0000</pubDate>
-      
-      <guid>/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/</guid>
       <description></description>
     </item>
     
@@ -148,15 +148,6 @@
       <pubDate>Tue, 26 Dec 2023 09:15:00 +0000</pubDate>
       
       <guid>/tags/opentcv/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>python</title>
-      <link>/tags/python/</link>
-      <pubDate>Tue, 26 Dec 2023 09:15:00 +0000</pubDate>
-      
-      <guid>/tags/python/</guid>
       <description></description>
     </item>
     

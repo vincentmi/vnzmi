@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>agent on 我的乐与怒</title>
+    <link>/tags/agent/</link>
+    <description>Recent content in agent on 我的乐与怒</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 19 Mar 2025 17:43:00 +0000</lastBuildDate><atom:link href="/tags/agent/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>每个开发人员都应该了解的5种Agent Skill的设计模式</title>
+      <link>/post/2026-03-19-5-agent-skill-design-pattrens/</link>
+      <pubDate>Wed, 19 Mar 2025 17:43:00 +0000</pubDate>
+      
+      <guid>/post/2026-03-19-5-agent-skill-design-pattrens/</guid>
+      <description>前言 谈到 𝚂𝙺𝙸𝙻𝙻.𝚖𝚍 文件，开发者往往过于关注格式——确保 YAML 代码正确、目录结构清晰、并严格遵循规范。但如今已有超过 30 种代理工具（例如 Claude Code、Gemini CLI 和 Cursor）采用相同的布局，格式问题实际上已经过时。 现在的挑战在于内容设计。规范解释了如何打包一个技能，但对于如何构</description>
+    </item>
+    
+  </channel>
+</rss>
