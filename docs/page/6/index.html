@@ -184,29 +184,6 @@
             
 
 <div class="post-preview">
-    <a href="/post/2019-04-04-k8s-ingress/">
-        <h2 class="post-title">
-            搭建Kubernetes集群(2) - Ingress
-        </h2>
-	
-        <div class="post-content-preview">
-	
-            Ingress Ingress允许你配置运行于K8S上的HTTP负载均衡器对服务进行负载均衡. Ingress支持以下功能 基于内容的路由 基于主机名的路由 基于路径的路由 支持TLS/SSL请求 查看官网对Ingress简介 Ingress 控制器 Ingress控制器是运行在集群中根据Ingress资源进行配置的HTT
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    
-        Posted by Vincent on Thursday, April 4, 2019
-        
-        
-    
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
     <a href="/post/2019-03-23-install-kubernetes/">
         <h2 class="post-title">
             搭建Kubernetes集群(1) - 安装集群
@@ -413,6 +390,29 @@
 </div>
 <hr>
 
+<div class="post-preview">
+    <a href="/post/2017-03-29-vm-disk-resize/">
+        <h2 class="post-title">
+            VirtualBox调整磁盘空间
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            调整VM磁盘文件大小 vm 版本需要4.0以上 VBoxManage modifyhd you_disk_file –resize 40960 也可以使用 uuid 替换 you_disk_file , 使用VBoxManage list hdds可以列出你的当前磁盘。 建立物理分区 先查看当前分区情况 [root@p2 ~]# df -h Filesystem Size Used Avail Use% Mounted on /dev/mapper/VolGroup-lv_root 6.5G 5.0G 1.2G 81% / tmpfs 372M 12K 372M 1% /dev/shm /dev/sda1 477M 49M 399M 11% /boot 目前 /有6.5G 查看当前物理磁盘空间 [root@p2 ~]# fdisk -l /dev/sda Disk /dev/sda: 14.7 GB,
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Vincent on Wednesday, March 29, 2017
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
 
             
 
@@ -565,8 +565,6 @@
                     <a href="/tags/aframe" title="aframe">
                         aframe
                     </a>
-               
-            
                
             
                
@@ -768,8 +766,6 @@
                
             
                
-            
-               
                     <a href="/tags/mac" title="mac">
                         mac
                     </a>
@@ -883,8 +879,6 @@
                     <a href="/tags/rd" title="rd">
                         rd
                     </a>
-               
-            
                
             
                

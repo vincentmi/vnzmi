@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "每个开发人员都应该了解的5种Agent Skill的设计模式"
-date:       "2025-03-19 17:43:00"
+date:       "2026-03-19 17:43:00"
 author:     "Vincent"
 image:      "/img/post-bg-dna.jpg"
 tags:
