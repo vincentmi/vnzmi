@@ -231,7 +231,8 @@
 <p>MCP JAVA SDK是MCP的JAVA实现，提供了MCP的JAVA SDK，可以让模型方便的使用MCP协议进行同步和异步的服务调用。</p>
 <p>Spring AI 提供 Starters和Java注解来提供对MCP的全面支持,可以很方便的构建MCP Server和client.</p>
 <h2 id="架构">架构</h2>
-<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">graph TD
+<pre class="mermaid">
+  graph TD
     %% 定义全局样式，保持技术文档的专业感
     classDef default fill:#ffffff,stroke:#d1d5db,stroke-width:1px,color:#111827,font-family:monospace;
     classDef title fill:#f8fafc,stroke-width:0px,font-weight:bold,font-size:14px,color:#111827,font-family:sans-serif;
@@ -271,7 +272,8 @@
     %% 子图背景样式
     style Client fill:transparent,stroke:#2563eb,stroke-width:1px,stroke-dasharray: 4 4;
     style Server fill:transparent,stroke:#0d9488,stroke-width:1px,stroke-dasharray: 4 4;
-</code></pre>
+</pre>
+
 
                 
                 
@@ -1146,6 +1148,11 @@
 
 
 
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@12/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 </body>
