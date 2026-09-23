@@ -53,7 +53,7 @@
     <link rel="stylesheet" href="/css/zanshang.css">
 
     
-    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/font/css/all.min.css" rel="stylesheet" type="text/css">
     
     
 
@@ -336,15 +336,9 @@ all systemctl restart marathon.service
 <pre><code>http://192.168.1.198:5050/
 </code></pre>
 <p>如下图,如果你不是访问的Leader会被自动跳转到其他Leader服务器。
-
-  <img src="/img/in-post/55670412.png" alt="/img/in-post/55670412.png">
-
-</p>
+<img src="/img/in-post/55670412.png" alt="/img/in-post/55670412.png"></p>
 <p>Marathon在8080端口
-
-  <img src="/img/in-post/1713485223.png" alt="2015-06-14_002056.png">
-
-</p>
+<img src="/img/in-post/1713485223.png" alt="2015-06-14_002056.png"></p>
 <h2 id="配置slave">配置Slave</h2>
 <p>先禁用掉Slave上的mesos-master服务</p>
 <pre><code>systemctl stop mesos-master.service
@@ -473,6 +467,10 @@ echo 192.168.1.201 &gt; /etc/mesos-slave/hostname
                         
                         
                         
+                        
+                        <a href="/tags/ai" title="ai">
+                            ai
+                        </a>
                         
                         
                         
@@ -693,6 +691,8 @@ echo 192.168.1.201 &gt; /etc/mesos-slave/hostname
                         <a href="/tags/math" title="math">
                             math
                         </a>
+                        
+                        
                         
                         
                         
@@ -1162,17 +1162,14 @@ echo 192.168.1.201 &gt; /etc/mesos-slave/hostname
 
 
 
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-78738242-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C8KXE0XX45"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-C8KXE0XX45');
+</script>
 
 
 
@@ -1234,6 +1231,9 @@ if (!doNotTrack) {
         });
     });
 </script>
+
+
+
 
 
 

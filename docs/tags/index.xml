@@ -6,7 +6,43 @@
     <description>Recent content in Tags on 我的乐与怒</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 19 Mar 2026 17:43:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 22 Sep 2026 15:19:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI</title>
+      <link>/tags/ai/</link>
+      <pubDate>Tue, 22 Sep 2026 15:19:00 +0000</pubDate>
+      
+      <guid>/tags/ai/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>/tags/java/</link>
+      <pubDate>Tue, 22 Sep 2026 15:19:00 +0000</pubDate>
+      
+      <guid>/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MCP</title>
+      <link>/tags/mcp/</link>
+      <pubDate>Tue, 22 Sep 2026 15:19:00 +0000</pubDate>
+      
+      <guid>/tags/mcp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spring</title>
+      <link>/tags/spring/</link>
+      <pubDate>Tue, 22 Sep 2026 15:19:00 +0000</pubDate>
+      
+      <guid>/tags/spring/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>agent</title>
       <link>/tags/agent/</link>
@@ -94,15 +130,6 @@
       <pubDate>Tue, 28 May 2024 15:13:00 +0000</pubDate>
       
       <guid>/tags/yaml/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Java</title>
-      <link>/tags/java/</link>
-      <pubDate>Fri, 26 Apr 2024 15:13:00 +0000</pubDate>
-      
-      <guid>/tags/java/</guid>
       <description></description>
     </item>
     
@@ -269,15 +296,6 @@
     </item>
     
     <item>
-      <title>AI</title>
-      <link>/tags/ai/</link>
-      <pubDate>Tue, 14 Feb 2023 16:01:00 +0000</pubDate>
-      
-      <guid>/tags/ai/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>MachineLearning</title>
       <link>/tags/machinelearning/</link>
       <pubDate>Tue, 14 Feb 2023 16:01:00 +0000</pubDate>
@@ -364,15 +382,6 @@
       <pubDate>Fri, 18 Nov 2022 11:11:00 +0000</pubDate>
       
       <guid>/tags/schedule/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Spring</title>
-      <link>/tags/spring/</link>
-      <pubDate>Fri, 18 Nov 2022 11:11:00 +0000</pubDate>
-      
-      <guid>/tags/spring/</guid>
       <description></description>
     </item>
     

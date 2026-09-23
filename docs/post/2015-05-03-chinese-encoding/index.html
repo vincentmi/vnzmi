@@ -53,7 +53,7 @@
     <link rel="stylesheet" href="/css/zanshang.css">
 
     
-    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/font/css/all.min.css" rel="stylesheet" type="text/css">
     
     
 
@@ -226,10 +226,7 @@ CJK兼容汉字FA30FA6A59
 CJK兼容汉字FA70FAD9106CJK兼容汉字补充2F8002FA1D542
 如果不算兼容汉字，Unicode目前支持的汉字总数是20924+6582+42711=70217。
 这里有一个细节。在早期的Unicode版本中，CJK统一汉字区的范围是0x4E00-0x9FA5，也就是我们经常提到的20902个汉字。当前版本的Unicode增加了22个字符，码位是0x9FA6-0x9FBB。它们是：</p>
-<p>
-  <img src="/img/in-post/1087098545.jpg" alt="图1">
-
-</p>
+<p><img src="/img/in-post/1087098545.jpg" alt="图1"></p>
 <p>那么GB18030是否支持这22个字符？后面还会讨论。</p>
 <h2 id="2-gb2312">2 GB2312</h2>
 <p>1980年的GB2312一共收录了7445个字符，包括6763个汉字和682个其它符号。汉字区的内码范围高字节从B0-F7，低字节从A1-FE，占用的码位是72*94=6768。其中有5个空位是D7FA-D7FE。
@@ -238,10 +235,7 @@ CJK兼容汉字FA70FAD9106CJK兼容汉字补充2F8002FA1D542
 <p>1995年的汉字扩展规范GBK1.0收录了21886个符号，包括21003个汉字和883个其它符号。
 这21003汉字包括CJK统一汉字区的20902个汉字。余下的101个汉字包括：
 增补汉字和部首80个，包括28个部首和52个汉字。GBK编码是从FE50-FE7E，FE80-FEA0。下图标注了Unicode编码。</p>
-<p>
-  <img src="/img/in-post/3188345090.jpg" alt="图2">
-
-</p>
+<p><img src="/img/in-post/3188345090.jpg" alt="图2"></p>
 <p>在制定GBK时，Unicode中还没有这些字符，所以使用了专用区的码位，这80个字符的码位是0xE815-0xE864。后 来，Unicode将52个汉字收录到“CJK统一汉字扩充A”。28个部首中有14个部首被收录到“CJK部首补充区”。所以在上图中，这些字符都有两 个Unicode编码。
 上图中淡黄色背景的8个部首被收录到“CJK统一汉字区”的新增区域，即前面提到的0x9FA6-0x9FBB。还有6个淡灰色背景的部首被Unicode收录到“CJK统一汉字扩充B”（网友slt指正）。
 请注意，淡黄色和淡灰色的14个字符按照GB18030还是应该映射到PUA码位。这14个字符与非PUA码位的映射关系只是网友找出来的， 不是标准规定的。如果按照GBK编码，这80个字符应该全部映射到PUA码位。GB18030将其中66个字符映射到了非PUA码位。不过在 Windows中，简体中文区域的默认代码页还是GBK，不是GB18030。
@@ -432,6 +426,10 @@ GB18030-2005Unicode 5.0对应的Unicode编码CJK统一汉字的20902汉字CJK统
                         
                         
                         
+                        
+                        <a href="/tags/ai" title="ai">
+                            ai
+                        </a>
                         
                         
                         
@@ -652,6 +650,8 @@ GB18030-2005Unicode 5.0对应的Unicode编码CJK统一汉字的20902汉字CJK统
                         <a href="/tags/math" title="math">
                             math
                         </a>
+                        
+                        
                         
                         
                         
@@ -1121,17 +1121,14 @@ GB18030-2005Unicode 5.0对应的Unicode编码CJK统一汉字的20902汉字CJK统
 
 
 
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-78738242-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C8KXE0XX45"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-C8KXE0XX45');
+</script>
 
 
 
@@ -1193,6 +1190,9 @@ if (!doNotTrack) {
         });
     });
 </script>
+
+
+
 
 
 

@@ -53,7 +53,7 @@
     <link rel="stylesheet" href="/css/zanshang.css">
 
     
-    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/font/css/all.min.css" rel="stylesheet" type="text/css">
     
     
 
@@ -224,10 +224,7 @@
                 
                 <p>英文原版 <a href="https://maniacbug.wordpress.com/2012/03/30/rf24network/">https://maniacbug.wordpress.com/2012/03/30/rf24network/</a></p>
 <p>翻译: Vincent Mi <a href="http://vnzmi.com/rf24network-for-wireless-sensor-networking.html">http://vnzmi.com/rf24network-for-wireless-sensor-networking.html</a></p>
-<p>
-  <img src="/img/in-post/3153790176.jpg" alt="7013108743_416996c44c_z.jpg">
-
-</p>
+<p><img src="/img/in-post/3153790176.jpg" alt="7013108743_416996c44c_z.jpg"></p>
 <p><a href="http://maniacbug.github.io/RF24Network/">RF24Network</a>网络是一个使用Nordic nRF24L01+ 无线，运行在Arduino兼容硬件的网络层。他的目标是成为Arduino单元通信的除Xbee外的另外一个选择。他提供一个主机地址空间和消息路由最高支持6000个节点，形成一个有能力和可扩展的无线传感器网络系统。 同时让两个节点之间的通讯更加简单。</p>
 <p>今天，我在一个单独的网络管理17个节点。现在我需要创建更多的节点，因为这个系统可以很好的工作在17个节点，也可以处理上千的节点。</p>
 <h2 id="硬件">硬件</h2>
@@ -321,16 +318,10 @@
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h3 id="地址分布">地址分布</h3>
-<p>
-  <img src="/img/in-post/2931979606.jpg" alt="7015275513_73663f8a74.jpg">
-
-</p>
+<p><img src="/img/in-post/2931979606.jpg" alt="7015275513_73663f8a74.jpg"></p>
 <p>RF24Network在节点少的时候工作的非常好，但是他是设计用于整个房间的节点。节点在树拓扑中根据节点地址自动配置。节点只能直接与他们的父节点和子节点进行通信。网络将自动发送消息到正确的地方。</p>
 <p><code>#00</code>是 基础节点，<code>#01-#05</code> 直接与<code>#00</code>通讯，但是互相之间不进行通讯。所以如果#01要发送消息到#02，他将通过#00的转发，<code>#011</code>,<code>#021</code>,<code>#031</code>等等是<code>#01</code>的子节点。所以<code>#011</code>发送到<code>#02</code>,他将发送到 <code>#01</code>然后<code>#00</code> 然后<code>#02</code>.因此，如果你放一个节点#011到你的网络，确定有节点#01在网络，并且是开启电源也在通讯范围内。</p>
-<p>
-  <img src="/img/in-post/2760920830.jpg" alt="6782822751_739036c12e.jpg">
-
-</p>
+<p><img src="/img/in-post/2760920830.jpg" alt="6782822751_739036c12e.jpg"></p>
 <p>在实践中，我设计了router(路由)节点 #01-#05到每一层，使用了外接天线和墙壁电源。然后本层的所有节点都与本层的父节点进行通讯。上面的图片是一个标准的V3节点，加上特别的电源模块。以便可以插入墙壁电源。无线单元被加上了天线。</p>
 <h3 id="创建无线传感器网络">创建无线传感器网络</h3>
 <p>sensornet（传感器网络）的例子是开始创建传感器网络的地方。这个例子演示如何从任意节点发送一对传感器读数到根节点。
@@ -368,10 +359,7 @@
 </span></span></code></pre></div><p>这个简单的包含了一个温度和电压读数。这个值是8.8位值，高位是数字低位是小数。例如 3.5V则为0x380.还包含一个方法转换成字符串用于输出。</p>
 <h3 id="电压传感器">电压传感器</h3>
 <p>我喜欢监控每个节点的电池的级别，这样我可以知道是否一个节点什么时候需要更换电池。因此我连接来自我们电池的正级到电压传感器的输入。通过一个分压器:</p>
-<p>
-  <img src="/img/in-post/706352279.jpg" alt="6046166167_fb49f479d2_n.jpg">
-
-</p>
+<p><img src="/img/in-post/706352279.jpg" alt="6046166167_fb49f479d2_n.jpg"></p>
 <p>我使用一个1M/479K 分频器电路。他将3.44V电压降低到1.1V,然后使用这个1.1V的电压做参考。这对于我的使用很完美，因为我不会使用超过3.44V的电压。当然如果你的电压超过了，你将需要一个大点的分压器。在我的这个示例中，当analogRead(A3)返回1024，我的电压是3.44V.代码如下：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#09f;font-style:italic">// What voltage is a reading of 1023?
 </span></span></span><span style="display:flex;"><span><span style="color:#09f;font-style:italic"></span><span style="color:#069;font-weight:bold">const</span> <span style="color:#078;font-weight:bold">unsigned</span> voltage_reference <span style="color:#555">=</span> <span style="color:#f60">5</span> <span style="color:#555">*</span> <span style="color:#f60">256</span>; <span style="color:#09f;font-style:italic">// 5.0V
@@ -579,6 +567,10 @@ MISO	12
                         
                         
                         
+                        
+                        <a href="/tags/ai" title="ai">
+                            ai
+                        </a>
                         
                         
                         
@@ -799,6 +791,8 @@ MISO	12
                         <a href="/tags/math" title="math">
                             math
                         </a>
+                        
+                        
                         
                         
                         
@@ -1268,17 +1262,14 @@ MISO	12
 
 
 
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-78738242-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C8KXE0XX45"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-C8KXE0XX45');
+</script>
 
 
 
@@ -1340,6 +1331,9 @@ if (!doNotTrack) {
         });
     });
 </script>
+
+
+
 
 
 

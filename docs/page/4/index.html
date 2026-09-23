@@ -54,7 +54,7 @@
     <link rel="stylesheet" href="/css/zanshang.css">
 
     
-    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/font/css/all.min.css" rel="stylesheet" type="text/css">
     
     
 
@@ -182,6 +182,29 @@
             post-container
         ">
             
+
+<div class="post-preview">
+    <a href="/post/2021-11-04-use-channel/">
+        <h2 class="post-title">
+            golang协程和channel使用
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            简介 协程是golang的一大特色和卖点. 协程(goroutine) 是轻量级的执行线程,使用go关键字到函数或者lamba表达式可以快速启动协程.协程函数的返回值会被抛弃.线程的调度由操作系统来管理，是抢占式调度。而协程不同，协程需要互相配合，主动交出执行权。 配置 GOMAXPROCS 设置逻辑CPU数
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Vincent on Thursday, November 4, 2021
+        
+        
+    
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
     <a href="/post/2021-07-29-use-aframe/">
@@ -390,29 +413,6 @@
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/post/2020-07-31-antdv-set-validate-error/">
-        <h2 class="post-title">
-            Antd-v读取和设置后端的错误信息
-        </h2>
-	
-        <div class="post-content-preview">
-	
-            场景 最近用Antd-v做后台,自带的验证框架.提供了很多的前台验证方法,找了一圈没有找到结合后端验证的,比较纳闷现在前端同学都自己验证不用后端的验证信息了吗?最终的数据验证应该还是以后端为准.自己写了几个函数. 使用 后端返回数据结构 { code: 600412, msg: &#34;数据验证失败&#34;, data: { userName: &
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    
-        Posted by Vincent on Friday, July 31, 2020
-        
-        
-    
-    </p>
-
-</div>
-<hr>
-
 
             
 
@@ -569,6 +569,10 @@
             
                
             
+               
+                    <a href="/tags/ai" title="ai">
+                        ai
+                    </a>
                
             
                
@@ -789,6 +793,8 @@
                     <a href="/tags/math" title="math">
                         math
                     </a>
+               
+            
                
             
                
@@ -1283,17 +1289,14 @@
 
 
 
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-78738242-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C8KXE0XX45"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-C8KXE0XX45');
+</script>
 
 
 
@@ -1355,6 +1358,9 @@ if (!doNotTrack) {
         });
     });
 </script>
+
+
+
 
 
 

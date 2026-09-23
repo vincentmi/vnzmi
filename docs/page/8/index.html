@@ -54,7 +54,7 @@
     <link rel="stylesheet" href="/css/zanshang.css">
 
     
-    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/font/css/all.min.css" rel="stylesheet" type="text/css">
     
     
 
@@ -182,6 +182,29 @@
             post-container
         ">
             
+
+<div class="post-preview">
+    <a href="/post/2016-07-11-install-hadoop-hbase-kafka/">
+        <h2 class="post-title">
+            集群安装Hadoop系列组件
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            公司日志系统扩容,考虑到后续数据暴增,选用HBase来进行存储,在本地VM进行一下演练 记录下安装过程备查 配置之前请查阅兼容列表 目前安装的版本 HADOOP-2.5.2 HBASE-1.1.5 Hadoop 安装 1.配置 选择4台虚拟机作整个集群,配置如下 hdp1 10.0.0.30 #master hdp2 10.0.0.31 #datanode hdp3 10.0.0.32 #datanode hdp4 10.0.0.33 #datanode 2.工具 远程执行命令 #!/bin/sh #/opt/hdp/hdp_ssh for i in 31 32 33 41 42 43; do echo -e &#34;\033[33m - 10.0.0.${i} - \033[0m&#34; ssh root@10.0.0.$i $*
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Vincent on Monday, July 11, 2016
+        
+        
+    
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
     <a href="/post/2016-06-22-golang-errors-are-values/">
@@ -412,30 +435,6 @@
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/post/2015-07-23-extending-thymeleaf-part-1/">
-        <h2 class="post-title">
-            扩展Thymeleaf-1 为什么需要扩展Thymeleaf
-        </h2>
-	
-        <div class="post-content-preview">
-	
-            <p>gitbook [http://vincentmi.gitbooks.io/extendingthymeleaf/content/][http://vincentmi.gitbooks.io/extendingthymeleaf/content/]</p>
-<p>Thymeleaf是一个很容易扩展的库。他的关键在于，大部分面向用户的功能不是直接构建在他的核心中，而是通过打包和组件化到一个称为Dialects(方言)的功能集合中。</p>
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    
-        Posted by Vincent on Thursday, July 23, 2015
-        
-        
-    
-    </p>
-
-</div>
-<hr>
-
 
             
 
@@ -592,6 +591,10 @@
             
                
             
+               
+                    <a href="/tags/ai" title="ai">
+                        ai
+                    </a>
                
             
                
@@ -812,6 +815,8 @@
                     <a href="/tags/math" title="math">
                         math
                     </a>
+               
+            
                
             
                
@@ -1306,17 +1311,14 @@
 
 
 
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-78738242-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C8KXE0XX45"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-C8KXE0XX45');
+</script>
 
 
 
@@ -1378,6 +1380,9 @@ if (!doNotTrack) {
         });
     });
 </script>
+
+
+
 
 
 

@@ -6,7 +6,16 @@
     <description>Recent content in AI on 我的乐与怒</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 14 Feb 2023 16:01:00 +0000</lastBuildDate><atom:link href="/tags/ai/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 22 Sep 2026 15:19:00 +0000</lastBuildDate><atom:link href="/tags/ai/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用JAVA SpringBoot 构建MCP服务</title>
+      <link>/post/2026-09-22-use-java-to-build-a-mcp-server/</link>
+      <pubDate>Tue, 22 Sep 2026 15:19:00 +0000</pubDate>
+      
+      <guid>/post/2026-09-22-use-java-to-build-a-mcp-server/</guid>
+      <description>模型上下文协议（MCP, Model Context Protocol） 模型上下文协议（MCP, Model Context Protocol） 是一种为 AI 模型设计的通用上下文通信协议。它让模型与外部工具、数据资源和运行环境之间建立一个统一、安全、可扩展的接口。你可以把 MCP 理解为“AI 世界的 USB-C” —— 用一条标准化通道，让模型与一</description>
+    </item>
+    
     <item>
       <title>搭建一个推荐系统</title>
       <link>/post/2023-02-14-build-a-recommand-system/</link>

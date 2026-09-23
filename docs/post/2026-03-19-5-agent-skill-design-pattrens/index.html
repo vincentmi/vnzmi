@@ -53,7 +53,7 @@
     <link rel="stylesheet" href="/css/zanshang.css">
 
     
-    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/font/css/all.min.css" rel="stylesheet" type="text/css">
     
     
 
@@ -226,10 +226,7 @@
                 post-container">
 
                 
-                <p>
-  <img src="/img/in-post/20260319-image.png" alt="alt text">
-
-</p>
+                <p><img src="/img/in-post/20260319-image.png" alt="alt text"></p>
 <h2 id="前言">前言</h2>
 <blockquote>
 <p>谈到 𝚂𝙺𝙸𝙻𝙻.𝚖𝚍 文件，开发者往往过于关注格式——确保 YAML 代码正确、目录结构清晰、并严格遵循规范。但如今已有超过 30 种代理工具（例如 Claude Code、Gemini CLI 和 Cursor）采用相同的布局，格式问题实际上已经过时。
@@ -250,10 +247,7 @@
 <a href="https://google.github.io/adk-docs/">https://google.github.io/adk-docs/</a>
 智能体开发工具包 (ADK) 是一个灵活且模块化的框架，用于开发和部署 AI 智能体。ADK 针对 Gemini 和 Google 生态系统进行了优化，但它与模型和部署方式无关，并且与其他框架兼容。ADK 的设计宗旨是让智能体开发更像软件开发，使开发人员能够更轻松地创建、部署和编排从简单任务到复杂工作流的各种智能体架构。</p>
 </blockquote>
-<p>
-  <img src="/img/in-post/20260319-image-1.png" alt="alt text">
-
-</p>
+<p><img src="/img/in-post/20260319-image-1.png" alt="alt text"></p>
 <h2 id="模式-1工具封装器">模式 1：工具封装器</h2>
 <p>工具封装器可让您的智能体按需获取特定库的上下文。它无需将 API 约定硬编码到系统提示中，而是将其打包成一个技能。智能体仅在实际使用该技术时才会加载此上下文。</p>
 <p>这是最容易实现的模式。<code>𝚂𝙺𝙸𝙻𝙻.𝚖𝚍</code> 文件监听用户提示中的特定库关键字，从 <code>𝚛𝚎𝚏𝚎𝚛𝚎𝚗𝚌𝚎𝚜/</code> 目录动态加载内部文档，并将这些规则作为绝对真理应用。这正是您将团队内部编码规范或特定框架最佳实践直接融入开发人员工作流程的机制。</p>
@@ -283,10 +277,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">2.</span> Follow every convention exactly
 </span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">3.</span> Add type annotations to all function signatures
 </span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">4.</span> Use Annotated style for dependency injection
-</span></span></code></pre></div><p>
-  <img src="/img/in-post/20260319-image-2.png" alt="alt text">
-
-</p>
+</span></span></code></pre></div><p><img src="/img/in-post/20260319-image-2.png" alt="alt text"></p>
 <h2 id="模式-2生成器">模式 2：生成器</h2>
 <p>工具包装器应用知识，而生成器则确保输出的一致性。如果您遇到代理每次运行生成不同文档结构的问题，生成器可以通过协调填空过程来解决这个问题。</p>
 <p>它利用了两个可选目录：<code>𝚊𝚜𝚜𝚎𝚝𝚜/</code> 存放输出模板，<code>𝚛𝚎𝚏𝚎𝚛𝚎𝚗𝚌𝚎𝚜/</code> 存放样式指南。指令集充当项目管理器，指示代理加载模板、读取样式指南、询问用户缺失的变量并填充文档。这对于生成可预测的 API 文档、标准化提交消息或搭建项目架构非常实用。</p>
@@ -314,10 +305,7 @@
 </span></span><span style="display:flex;"><span>Step 4: Fill the template following the style guide rules. Every section in the template must be present in the output.
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Step 5: Return the completed report as a single Markdown document.
-</span></span></code></pre></div><p>
-  <img src="/img/in-post/20260319-image-3.png" alt="alt text">
-
-</p>
+</span></span></code></pre></div><p><img src="/img/in-post/20260319-image-3.png" alt="alt text"></p>
 <h2 id="模式-3审阅器">模式 3：审阅器</h2>
 <p>审阅器模式将检查内容与检查方法分开。与其编写冗长的系统提示来详细说明每个代码问题，不如将模块化的评分标准存储在 <code>𝚛𝚎𝚏𝚎𝚛𝚎𝚗𝚌𝚎𝚜/𝚛𝚎𝚟𝚒𝚎𝚠-𝚌𝚑𝚎𝚌𝚔𝚕𝚒𝚜𝚝.𝚖𝚍</code> 文件中。</p>
 <p>当用户提交代码时，代理会加载此检查清单，并系统地对提交的代码进行评分，根据严重程度对结果进行分组。如果将 Python 风格的检查清单替换为 OWASP 安全检查清单，您将获得完全不同的、更专业的审计，但使用的却是完全相同的技能基础架构。这是一种高效的自动化 PR 审查或在人工查看代码之前发现漏洞的方法。</p>
@@ -348,10 +336,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">-</span> **Findings**: Grouped by severity (errors first, then warnings, then info)
 </span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">-</span> **Score**: Rate 1-10 with brief justification
 </span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">-</span> **Top 3 Recommendations**: The most impactful improvements
-</span></span></code></pre></div><p>
-  <img src="/img/in-post/20260319-image-4.png" alt="alt text">
-
-</p>
+</span></span></code></pre></div><p><img src="/img/in-post/20260319-image-4.png" alt="alt text"></p>
 <h2 id="模式-4反向操作">模式 4：反向操作</h2>
 <p>智能体天生倾向于猜测并立即生成答案。反转模式颠覆了这种动态。用户不再提出问题，智能体也不再执行，而是由智能体扮演面试官的角色。</p>
 <p>逆向工程依赖于明确且不可协商的门控指令（例如“所有阶段完成后方可开始构建”），强制智能体首先收集上下文信息。它会按顺序提出结构化问题，并在获得您的答案后才进入下一阶段。智能体只有在全面了解您的需求和部署限制后才会生成最终输出。</p>
@@ -388,10 +373,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">3.</span> Present the completed plan to the user
 </span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">4.</span> Ask: &#34;Does this plan accurately capture your requirements? What would you change?&#34;
 </span></span><span style="display:flex;"><span><span style="color:#069;font-weight:bold">5.</span> Iterate on feedback until the user confirms
-</span></span></code></pre></div><p>
-  <img src="/img/in-post/20260319-image-5.png" alt="alt text">
-
-</p>
+</span></span></code></pre></div><p><img src="/img/in-post/20260319-image-5.png" alt="alt text"></p>
 <h2 id="模式-5流水线模式">模式 5：流水线模式</h2>
 <p>对于复杂任务，您不能容忍跳过任何步骤或忽略任何指令。流水线模式强制执行严格的顺序工作流程，并设置了硬性检查点。</p>
 <p>指令本身即构成工作流程的定义。通过实现明确的菱形门条件（例如，在从文档字符串生成到最终组装之前需要用户批准），流水线模式确保代理无法绕过复杂任务并呈现未经验证的最终结果。</p>
@@ -429,10 +411,7 @@
 </span></span><span style="display:flex;"><span>Report results. Fix issues before presenting the final document.
 </span></span></code></pre></div><h2 id="选择合适的代理技能模式">选择合适的代理技能模式</h2>
 <p>每种模式都回答不同的问题。请使用此决策树找到适合您用例的模式：</p>
-<p>
-  <img src="/img/in-post/20260319-image-6.png" alt="alt text">
-
-</p>
+<p><img src="/img/in-post/20260319-image-6.png" alt="alt text"></p>
 <h2 id="最后模式可以组合">最后，模式可以组合。</h2>
 <p>这些模式并非互斥，而是可以组合。</p>
 <p>管道技能可以在最后添加一个审核步骤，以再次检查自身的工作。生成器可以在最开始依赖反转来收集必要的变量，然后再填充其模板。得益于 ADK 的 𝚂𝚔𝚒𝚕𝚕𝚃𝚘𝚘𝚕𝚜𝚎𝚝 和渐进式披露，您的代理仅在运行时使用所需的精确模式来分配上下文令牌。</p>
@@ -493,6 +472,11 @@
                     </li>
                     
                     
+                    <li class="next">
+                        <a href="/post/2026-09-22-use-java-to-build-a-mcp-server/" data-toggle="tooltip" data-placement="top" title="使用JAVA SpringBoot 构建MCP服务">Next
+                        <i class="fa fa-angle-right fa-lg"></i></a>
+                    </li>
+                    
                 </ul>
                 
 
@@ -543,6 +527,10 @@
                         
                         
                         
+                        
+                        <a href="/tags/ai" title="ai">
+                            ai
+                        </a>
                         
                         
                         
@@ -763,6 +751,8 @@
                         <a href="/tags/math" title="math">
                             math
                         </a>
+                        
+                        
                         
                         
                         
@@ -1232,17 +1222,14 @@
 
 
 
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-78738242-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C8KXE0XX45"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-C8KXE0XX45');
+</script>
 
 
 
@@ -1304,6 +1291,9 @@ if (!doNotTrack) {
         });
     });
 </script>
+
+
+
 
 
 

@@ -53,7 +53,7 @@
     <link rel="stylesheet" href="/css/zanshang.css">
 
     
-    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/font/css/all.min.css" rel="stylesheet" type="text/css">
     
     
 
@@ -249,10 +249,7 @@
 </span></span></code></pre></div><p>因为默认的<code>camera</code>组件是摆放到了 0 ,0,0 位置,所以我们并不能看到这个元件.</p>
 <h4 id="3d坐标系">3D坐标系</h4>
 <p>A-Frame使用右手坐标系,x轴的正方形指向我们的右手边,y轴正方向指向上方,Z轴的正方向为从屏幕向外指向我们的方向.坐标的单位为米.因为WebVR API 是使用的米作为单位.在我们的电脑和VR设置中尺寸的感觉会有点不一样如果是做VR 开发要特别感受下.WEB上的10米在VR里会显得特别大.</p>
-<p>
-  <img src="/img/in-post/right_hand_rule.jpg" alt="右手坐标系">
-
-</p>
+<p><img src="/img/in-post/right_hand_rule.jpg" alt="右手坐标系"></p>
 <p>坐标的旋转使用角度作为单位.内部 three.js进行转换时会替换为弧度.旋转的正方向均为右手坐标系中手指卷曲的方向.</p>
 <p>x轴旋转,正方向为z轴正方方向,即从屏幕向我们眼睛延伸的方向</p>
 <p>y轴旋转,正方向为z轴的负方向,即从屏幕往我们眼睛相反的方向,往屏幕内旋转</p>
@@ -716,6 +713,10 @@
                         
                         
                         
+                        <a href="/tags/ai" title="ai">
+                            ai
+                        </a>
+                        
                         
                         
                         <a href="/tags/andrew-ng" title="andrew-ng">
@@ -935,6 +936,8 @@
                         <a href="/tags/math" title="math">
                             math
                         </a>
+                        
+                        
                         
                         
                         
@@ -1404,17 +1407,14 @@
 
 
 
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-78738242-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C8KXE0XX45"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-C8KXE0XX45');
+</script>
 
 
 
@@ -1476,6 +1476,9 @@ if (!doNotTrack) {
         });
     });
 </script>
+
+
+
 
 
 

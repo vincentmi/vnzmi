@@ -80,13 +80,16 @@ h4{
     font-size:21px
 }
 a{
-    color:#404040
+    color:#404040;
+    outline:none;
 }
 a:hover,a:focus{
-    color:#0085a1
+    color:#535353;
+    outline:none;
 }
 a img:hover,a img:focus{
-    cursor:zoom-in
+    cursor:zoom-in;
+    outline:none;
 }
 article{
     overflow:hidden;
@@ -627,7 +630,6 @@ form .row:first-child .floating-label-form-group{
 }
 .btn-default:hover,.btn-default:focus{
     background-color:#0085a1;
-    border:1px solid #0085a1;
     color:#fff
 }
 .pager{
@@ -658,7 +660,6 @@ form .row:first-child .floating-label-form-group{
 .pager li>a:hover,.pager li>a:focus{
     color:#fff;
     background-color:#0085a1;
-    border:1px solid #0085a1
 }
 .pager .disabled>a,.pager .disabled>a:hover,.pager .disabled>a:focus,.pager .disabled>span{
     color:gray;

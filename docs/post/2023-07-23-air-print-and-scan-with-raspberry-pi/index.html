@@ -53,7 +53,7 @@
     <link rel="stylesheet" href="/css/zanshang.css">
 
     
-    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/font/css/all.min.css" rel="stylesheet" type="text/css">
     
     
 
@@ -238,10 +238,7 @@
 <div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>uname -a
 </span></span><span style="display:flex;"><span>Linux raspberrypi 4.14.98-v7+ <span style="color:#09f;font-style:italic">#1200 SMP Tue Feb 12 20:27:48 GMT 2019 armv7l GNU/Linux</span>
 </span></span></code></pre></div><p>打开相关的一些服务<code>ssh</code>,<code>vnc</code>打开可以远程操作，方便一点。</p>
-<p>
-  <img src="/img/in-post/raspi_setting.png" alt="/img/in-post/raspi_setting.png">
-
-</p>
+<p><img src="/img/in-post/raspi_setting.png" alt="/img/in-post/raspi_setting.png"></p>
 <h2 id="配置网络">配置网络</h2>
 <p>先连接上WIFI，然后。</p>
 <p>打开编辑器编辑网络</p>
@@ -306,27 +303,15 @@ Listen 0.0.0.0:631
 </span></span><span style="display:flex;"><span>hplip-gui/oldoldstable,now 3.16.11+repack0-3 all <span style="color:#555">[</span>已安装<span style="color:#555">]</span>
 </span></span></code></pre></div><h1 id="添加打印机">添加打印机</h1>
 <p>CUPS安装好之后可以通过  <code>http://192.168.199.191:631</code>端口进行访问</p>
-<p>
-  <img src="/img/in-post/rapi_cups.jpg" alt="rapi_cups.jpg">
-
-</p>
+<p><img src="/img/in-post/rapi_cups.jpg" alt="rapi_cups.jpg"></p>
 <p>添加打印机得登录 <code>https://192.168.199.191:631/admin/</code> 使用<code>root</code>登录后进行添加</p>
 <h2 id="选择打印机">选择打印机</h2>
-<p>
-  <img src="/img/in-post/raspi_add_printer.png" alt="raspi_add_printer.png">
-
-</p>
+<p><img src="/img/in-post/raspi_add_printer.png" alt="raspi_add_printer.png"></p>
 <h2 id="选择共享">选择共享</h2>
-<p>
-  <img src="/img/in-post/raspi_add_printer2.png" alt="raspi_add_printer2.png">
-
-</p>
+<p><img src="/img/in-post/raspi_add_printer2.png" alt="raspi_add_printer2.png"></p>
 <h2 id="选择驱动">选择驱动</h2>
 <p>如果你的型号不在列表中，选择同一系列理论上应该都可以
-
-  <img src="/img/in-post/raspi_add_printer3.png" alt="raspi_add_printer.png">
-
-</p>
+<img src="/img/in-post/raspi_add_printer3.png" alt="raspi_add_printer.png"></p>
 <h1 id="扫描仪">扫描仪</h1>
 <h2 id="安装-sane">安装 <code>sane</code></h2>
 <div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo apt-get install -y sane
@@ -334,25 +319,16 @@ Listen 0.0.0.0:631
 <div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>pi@raspberrypi:~ $ scanimage -L
 </span></span><span style="display:flex;"><span>device <span style="color:#c30">`</span>hpaio:/usb/HP_LaserJet_Professional_M1136_MFP?serial<span style="color:#555">=</span>000000000QHCMMPKPR1a<span style="color:#a00;background-color:#faa">&#39;</span> is a Hewlett-Packard HP_LaserJet_Professional_M1136_MFP all-in-one
 </span></span></code></pre></div><h2 id="使用扫描仪">使用扫描仪</h2>
-<p>
-  <img src="/img/in-post/raspi_xsane.png" alt="raspi_xsane.png">
-
-</p>
+<p><img src="/img/in-post/raspi_xsane.png" alt="raspi_xsane.png"></p>
 <h2 id="扫描结果">扫描结果</h2>
-<p>
-  <img src="/img/in-post/raspi_scan.png" alt="raspi_scan.png">
-
-</p>
+<p><img src="/img/in-post/raspi_scan.png" alt="raspi_scan.png"></p>
 <h1 id="scanserv">ScanServ</h1>
 <p>写了一个小服务器用于局域网进行扫描，在Web端操作扫描仪进行扫描。</p>
 <p>Python版本
 <code>https://github.com/vincentmi/scanserv</code></p>
 <p>Golang 版本（树莓派python版本比较低Flask运行不了。还是golang方便点）</p>
 <p><code>https://github.com/vincentmi/scanserv-go</code></p>
-<p>
-  <img src="/img/in-post/raspi_scanserv.jpg" alt="raspi_scanserv.jpg">
-
-</p>
+<p><img src="/img/in-post/raspi_scanserv.jpg" alt="raspi_scanserv.jpg"></p>
 <h2 id="使用">使用</h2>
 <div class="highlight"><pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span> ./scanserv -h
 </span></span><span style="display:flex;"><span>Usage of ./scanserv:
@@ -471,6 +447,10 @@ Listen 0.0.0.0:631
                         
                         
                         
+                        
+                        <a href="/tags/ai" title="ai">
+                            ai
+                        </a>
                         
                         
                         
@@ -691,6 +671,8 @@ Listen 0.0.0.0:631
                         <a href="/tags/math" title="math">
                             math
                         </a>
+                        
+                        
                         
                         
                         
@@ -1160,17 +1142,14 @@ Listen 0.0.0.0:631
 
 
 
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-78738242-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C8KXE0XX45"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-C8KXE0XX45');
+</script>
 
 
 
@@ -1232,6 +1211,9 @@ if (!doNotTrack) {
         });
     });
 </script>
+
+
+
 
 
 

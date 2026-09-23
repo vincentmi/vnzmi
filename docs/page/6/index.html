@@ -54,7 +54,7 @@
     <link rel="stylesheet" href="/css/zanshang.css">
 
     
-    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/font/css/all.min.css" rel="stylesheet" type="text/css">
     
     
 
@@ -182,6 +182,29 @@
             post-container
         ">
             
+
+<div class="post-preview">
+    <a href="/post/2019-04-10-k8s-prometheus/">
+        <h2 class="post-title">
+            安装Kubernetes集群(3) - Prometheus
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            Prometheus 可以原生监控K8s ,节点和它本身.Prometheus Operator 可以简化Prometheus在K8S 中的安装.使用Prometheus adapter 可以使用自定义指标参数. Prometheus 也提供内建的控制台和查询语言来查询数据和可视化.Prometheus也可以做为Grafana的数据源. 安装Prometheu
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Vincent on Wednesday, April 10, 2019
+        
+        
+    
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
     <a href="/post/2019-04-04-k8s-ingress/">
@@ -390,29 +413,6 @@
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/post/2017-04-17-golang-json-rpc/">
-        <h2 class="post-title">
-            Golang net/rpc 开发jsonrpc服务
-        </h2>
-	
-        <div class="post-content-preview">
-	
-            RPC RPC作为微服务框架下的各个模块的通讯协议进行系统内部各个服务之间的沟通。随着业务量的增大和系统的复杂度增加，可能还需要使用系统总线对各个消息进行路由、异步调用以及流量控制。Go提供了net/rpc包来实现对RPC的支持,通过启动一个服务器，注册一个对象暴露他的公共方法来允许远
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    
-        Posted by Vincent on Monday, April 17, 2017
-        
-        
-    
-    </p>
-
-</div>
-<hr>
-
 
             
 
@@ -569,6 +569,10 @@
             
                
             
+               
+                    <a href="/tags/ai" title="ai">
+                        ai
+                    </a>
                
             
                
@@ -789,6 +793,8 @@
                     <a href="/tags/math" title="math">
                         math
                     </a>
+               
+            
                
             
                
@@ -1283,17 +1289,14 @@
 
 
 
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-78738242-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C8KXE0XX45"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-C8KXE0XX45');
+</script>
 
 
 
@@ -1355,6 +1358,9 @@ if (!doNotTrack) {
         });
     });
 </script>
+
+
+
 
 
 

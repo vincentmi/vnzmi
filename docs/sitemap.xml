@@ -2,25 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>/tags/ai/</loc>
+    <lastmod>2026-09-22T15:19:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/java/</loc>
+    <lastmod>2026-09-22T15:19:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/mcp/</loc>
+    <lastmod>2026-09-22T15:19:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/</loc>
+    <lastmod>2026-09-22T15:19:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/spring/</loc>
+    <lastmod>2026-09-22T15:19:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2026-09-22T15:19:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/2026-09-22-use-java-to-build-a-mcp-server/</loc>
+    <lastmod>2026-09-22T15:19:00+00:00</lastmod>
+  </url><url>
+    <loc>/</loc>
+    <lastmod>2026-09-22T15:19:00+00:00</lastmod>
+  </url><url>
     <loc>/tags/agent/</loc>
     <lastmod>2026-03-19T17:43:00+00:00</lastmod>
   </url><url>
     <loc>/tags/llama/</loc>
     <lastmod>2026-03-19T17:43:00+00:00</lastmod>
   </url><url>
-    <loc>/post/</loc>
-    <lastmod>2026-03-19T17:43:00+00:00</lastmod>
-  </url><url>
     <loc>/tags/python/</loc>
     <lastmod>2026-03-19T17:43:00+00:00</lastmod>
   </url><url>
     <loc>/tags/skill/</loc>
-    <lastmod>2026-03-19T17:43:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/</loc>
-    <lastmod>2026-03-19T17:43:00+00:00</lastmod>
-  </url><url>
-    <loc>/</loc>
     <lastmod>2026-03-19T17:43:00+00:00</lastmod>
   </url><url>
     <loc>/post/2026-03-19-5-agent-skill-design-pattrens/</loc>
@@ -49,9 +64,6 @@
   </url><url>
     <loc>/post/2024-05-28-k8s-use-configmap/</loc>
     <lastmod>2024-05-28T15:13:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/java/</loc>
-    <lastmod>2024-04-26T15:13:00+00:00</lastmod>
   </url><url>
     <loc>/tags/workflow/</loc>
     <lastmod>2024-04-26T15:13:00+00:00</lastmod>
@@ -143,9 +155,6 @@
     <loc>/post/2023-05-19-ops-scripts/</loc>
     <lastmod>2023-05-19T23:48:00+00:00</lastmod>
   </url><url>
-    <loc>/tags/ai/</loc>
-    <lastmod>2023-02-14T16:01:00+00:00</lastmod>
-  </url><url>
     <loc>/tags/machinelearning/</loc>
     <lastmod>2023-02-14T16:01:00+00:00</lastmod>
   </url><url>
@@ -183,9 +192,6 @@
     <lastmod>2022-12-01T10:00:00+00:00</lastmod>
   </url><url>
     <loc>/tags/schedule/</loc>
-    <lastmod>2022-11-18T11:11:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/spring/</loc>
     <lastmod>2022-11-18T11:11:00+00:00</lastmod>
   </url><url>
     <loc>/tags/springboot/</loc>

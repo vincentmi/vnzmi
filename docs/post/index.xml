@@ -6,7 +6,16 @@
     <description>Recent content in Posts on 我的乐与怒</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 19 Mar 2026 17:43:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 22 Sep 2026 15:19:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用JAVA SpringBoot 构建MCP服务</title>
+      <link>/post/2026-09-22-use-java-to-build-a-mcp-server/</link>
+      <pubDate>Tue, 22 Sep 2026 15:19:00 +0000</pubDate>
+      
+      <guid>/post/2026-09-22-use-java-to-build-a-mcp-server/</guid>
+      <description>模型上下文协议（MCP, Model Context Protocol） 模型上下文协议（MCP, Model Context Protocol） 是一种为 AI 模型设计的通用上下文通信协议。它让模型与外部工具、数据资源和运行环境之间建立一个统一、安全、可扩展的接口。你可以把 MCP 理解为“AI 世界的 USB-C” —— 用一条标准化通道，让模型与一</description>
+    </item>
+    
     <item>
       <title>每个开发人员都应该了解的5种Agent Skill的设计模式</title>
       <link>/post/2026-03-19-5-agent-skill-design-pattrens/</link>
@@ -827,10 +836,7 @@ yum install marathon
       <guid>/post/2015-05-10-rf24network-for-wireless-sensor-networking/</guid>
       <description>&lt;p&gt;英文原版 &lt;a href=&#34;https://maniacbug.wordpress.com/2012/03/30/rf24network/&#34;&gt;https://maniacbug.wordpress.com/2012/03/30/rf24network/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;翻译: Vincent Mi &lt;a href=&#34;http://vnzmi.com/rf24network-for-wireless-sensor-networking.html&#34;&gt;http://vnzmi.com/rf24network-for-wireless-sensor-networking.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;
-  &lt;img src=&#34;/img/in-post/3153790176.jpg&#34; alt=&#34;7013108743_416996c44c_z.jpg&#34;&gt;
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/in-post/3153790176.jpg&#34; alt=&#34;7013108743_416996c44c_z.jpg&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;http://maniacbug.github.io/RF24Network/&#34;&gt;RF24Network&lt;/a&gt;网络是一个使用Nordic nRF24L01+ 无线，运行在Arduino兼容硬件的网络层。他的目标是成为Arduino单元通信的除Xbee外的另外一个选择。他提供一个主机地址空间和消息路由最高支持6000个节点，形成一个有能力和可扩展的无线传感器网络系统。 同时让两个节点之间的通讯更加简单。&lt;/p&gt;</description>
     </item>
     

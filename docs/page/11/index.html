@@ -54,7 +54,7 @@
     <link rel="stylesheet" href="/css/zanshang.css">
 
     
-    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/font/css/all.min.css" rel="stylesheet" type="text/css">
     
     
 
@@ -182,6 +182,29 @@
             post-container
         ">
             
+
+<div class="post-preview">
+    <a href="/post/2015-05-02-lvs-network/">
+        <h2 class="post-title">
+            LVS配置命令
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            DirectorServer ifconfig eth0:0 192.168.0.251 broadcast 192.168.0.251 netmask 255.255.255.255 up route add -host 192.168.0.251 dev eth0:0 echo &#34;1&#34; &gt;/proc/sys/net/ipv4/ip_forward realserver ifconfig lo:0 192.168.0.251 broadcast 192.168.0.251 netmask 255.255.255.255 up vi /etc/sysctl.conf net.ipv4.conf.all.arp_ignore = 1 net.ipv4.conf.all.arp_announce = 2 net.ipv4.conf.tunl0.arp_ignore = 1 net.ipv4.conf.tunl0.arp_announce = 2 2014-02-21
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by Vincent on Saturday, May 2, 2015
+        
+        
+    
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
     <a href="/post/2015-05-02-vagrant-issue/">
@@ -390,29 +413,6 @@
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/post/2010-12-12-my-baby/">
-        <h2 class="post-title">
-            我家光头仔
-        </h2>
-	
-        <div class="post-content-preview">
-	
-            出生才没多久 好小好小啊！ super baby ..没牙齿的 小弟 露点了 马赛克是必须的 光头仔困了
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    
-        Posted by Vincent on Sunday, December 12, 2010
-        
-        
-    
-    </p>
-
-</div>
-<hr>
-
 
             
 
@@ -569,6 +569,10 @@
             
                
             
+               
+                    <a href="/tags/ai" title="ai">
+                        ai
+                    </a>
                
             
                
@@ -789,6 +793,8 @@
                     <a href="/tags/math" title="math">
                         math
                     </a>
+               
+            
                
             
                
@@ -1283,17 +1289,14 @@
 
 
 
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-78738242-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C8KXE0XX45"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-C8KXE0XX45');
+</script>
 
 
 
@@ -1355,6 +1358,9 @@ if (!doNotTrack) {
         });
     });
 </script>
+
+
+
 
 
 
