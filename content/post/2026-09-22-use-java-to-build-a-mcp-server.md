@@ -21,46 +21,25 @@ Spring AI 提供 Starters和Java注解来提供对MCP的全面支持,可以很�
 ## MCP架构
 
 ```mermaid
-graph TD
-    %% 定义全局样式，保持技术文档的专业感
-    classDef default fill:#ffffff,stroke:#d1d5db,stroke-width:1px,color:#111827,font-family:monospace;
-    classDef title fill:#f8fafc,stroke-width:0px,font-weight:bold,font-size:14px,color:#111827,font-family:sans-serif;
-    classDef clientAccent fill:#f8fafc,stroke:#2563eb,stroke-width:1px,color:#1e293b;
-    classDef serverAccent fill:#f8fafc,stroke:#0d9488,stroke-width:1px,color:#1e293b;
-    classDef transportNode fill:#f3f4f6,stroke:#9ca3af,stroke-width:1px,color:#374151,font-weight:bold;
 
-    %% MCP Client 子图
+graph TD
     subgraph Client ["MCP Client"]
         C_Session["MCP Session"]
         C_Transport["MCP Transport (Client)"]
     end
 
-    %% MCP Server 子图
     subgraph Server ["MCP Server"]
         S_Session["MCP Session"]
         S_Transport["MCP Transport (Server)"]
     end
 
-    %% 底部传输层 (作为一个独立的节点)
     Transport["Stdio | SSE | ..."]
 
-    %% 建立连接关系 (隐藏线条，仅用于布局)
     C_Session --- C_Transport
     S_Session --- S_Transport
     
-    %% 将上下连接起来 (使用虚线表示底层通信)
     C_Transport -.-> Transport
     S_Transport -.-> Transport
-
-    %% 应用样式
-    class Client,Server title;
-    class C_Session,C_Transport clientAccent;
-    class S_Session,S_Transport serverAccent;
-    class Transport transportNode;
-    
-    %% 子图背景样式
-    style Client fill:transparent,stroke:#2563eb,stroke-width:1px,stroke-dasharray: 4 4;
-    style Server fill:transparent,stroke:#0d9488,stroke-width:1px,stroke-dasharray: 4 4;
 ```
 
 #### 客户端/服务器层（顶部）
@@ -83,6 +62,9 @@ graph TD
 - 为所有高层次沟通提供基础服务
 
 ### MCP 客户端
+
+
+
 
 ```mermaid
 flowchart TB
@@ -139,7 +121,108 @@ flowchart TB
 
 ### MCP服务器
 
- ![java-mcp-server-architecture.jpg](/img/in-post/java-mcp-server-architecture.jpg)
+**MCP Server SSE** 
+
+```mermaid
+graph TB
+    subgraph CLIENT_PROCESSES["Client Processes"]
+        direction TB
+
+        subgraph CP1["Client Process"]
+            CP1_APP["Java LLM Application"]
+            CP1_CLIENT["Java MCP Client<br/>SSE Client Transports<br/>HttpClient | WebFlux"]
+            CP1_APP --> CP1_CLIENT
+        end
+
+        subgraph CP2["Client Process"]
+            CP2_APP["LLM Application"]
+            CP2_CLIENT["Python MCP Client"]
+            CP2_APP --> CP2_CLIENT
+        end
+
+        subgraph CP3["Client Process"]
+            CP3_APP["LLM Application"]
+            CP3_CLIENT["JavaScript MCP Client"]
+            CP3_APP --> CP3_CLIENT
+        end
+    end
+
+    CP1_CLIENT -. "MCP Client API" .-> CP1_APP
+    CP2_CLIENT -. "MCP Client API" .-> CP2_APP
+    CP3_CLIENT -. "MCP Client API" .-> CP3_APP
+
+    subgraph SERVER_PROCESS["Server Process"]
+        direction TB
+        subgraph WEB_CONTAINER["Web Container"]
+            MCP_SERVER["Java MCP Server<br/>SSE Server Transports<br/>WebMVC | WebFlux | Servlet"]
+        end
+        DBS[("DBs")]
+        BACKEND["You Backend Applications"]
+        MCP_SERVER --> DBS
+        MCP_SERVER --> BACKEND
+    end
+
+    CP1_CLIENT -- "MCP Protocol (SSE)" --> MCP_SERVER
+    CP2_CLIENT -- "MCP Protocol (SSE)" --> MCP_SERVER
+    CP3_CLIENT -- "MCP Protocol (SSE)" --> MCP_SERVER
+
+    style CLIENT_PROCESSES fill:#f5f5ff,stroke:#888
+    style SERVER_PROCESS fill:#f5f5ff,stroke:#888
+    style CP1_CLIENT fill:#5aa02c,color:#fff
+    style CP2_CLIENT fill:#4a4ad4,color:#fff
+    style CP3_CLIENT fill:#4a4ad4,color:#fff
+    style MCP_SERVER fill:#5aa02c,color:#fff
+    style DBS fill:#4a4ad4,color:#fff
+    style BACKEND fill:#4a4ad4,color:#fff
+```
+
+**MCP Server Stdio**
+
+```mermaid
+graph TB
+    subgraph SP1["Single Process"]
+        direction TB
+        APP1["LLM Application"]
+        CLIENT1["Java MCP Client<br/>StdioClientTransport"]
+        SERVER1["StdioServerTransport<br/>Java MCP Server"]
+        BACKEND1["You Backend Applications"]
+        APP1 -. "MCP Client API" .-> CLIENT1
+        CLIENT1 -- "MCP Protocol<br/>(STDIO)" --> SERVER1
+        SERVER1 --> BACKEND1
+    end
+
+    subgraph SP2["Single Process"]
+        direction TB
+        APP2["LLM Application"]
+        CLIENT2["Python MCP Client"]
+        SERVER2["StdioServerTransport<br/>Java MCP Server"]
+        BACKEND2["You Backend Applications"]
+        APP2 -. "MCP Client API" .-> CLIENT2
+        CLIENT2 -- "MCP Protocol<br/>(STDIO)" --> SERVER2
+        SERVER2 --> BACKEND2
+    end
+
+    subgraph SP3["Single Process"]
+        direction TB
+        APP3["LLM Application"]
+        CLIENT3["JavaScript MCP Client"]
+        SERVER3["StdioServerTransport<br/>Java MCP Server"]
+        BACKEND3["You Backend Applications"]
+        APP3 -. "MCP Client API" .-> CLIENT3
+        CLIENT3 -- "MCP Protocol<br/>(STDIO)" --> SERVER3
+        SERVER3 --> BACKEND3
+    end
+
+    style CLIENT1 fill:#5aa02c,color:#fff
+    style SERVER1 fill:#5aa02c,color:#fff
+    style CLIENT2 fill:#4a4ad4,color:#fff
+    style SERVER2 fill:#5aa02c,color:#fff
+    style CLIENT3 fill:#4a4ad4,color:#fff
+    style SERVER3 fill:#5aa02c,color:#fff
+    style BACKEND1 fill:#4a4ad4,color:#fff
+    style BACKEND2 fill:#4a4ad4,color:#fff
+    style BACKEND3 fill:#4a4ad4,color:#fff
+```
  
 MCP服务器是模型上下文协议（MCP）架构中的基础组件，为客户端提供工具、资源和能力。它实现了协议的服务器端，负责：
 - 服务器端协议操作实现
@@ -235,4 +318,4 @@ MCP 注释模块使开发者能够：
 - MetaProvider- 实现了为工具、提示符和资源提供```_meta``` 字段数据的接口。通过```@McpTool ```  ```@McpPrompt``` ```@McpResource```的```metaProvider ```属性和来引用。 
 
 
-
+## 搭建MCP天气服务
